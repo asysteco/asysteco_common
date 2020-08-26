@@ -1499,7 +1499,7 @@ if(isset($_GET['ACTION']))
             </script>
             ";
             $style = "
-            input[type=text], #select_admon_marcajes {
+            input[type=text], #select_admon_marcajes, #select_admon_asistencias, #select_admon_horarios {
               width: 25%;
               display: inline-block;
             }
