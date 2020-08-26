@@ -749,7 +749,7 @@ if(isset($_GET['ACTION']))
             }";
             if (isset($_POST["import"]))
             {
-				require_once($dirs['inc'] . 'import-mysql-profesorado.php');
+				      require_once($dirs['inc'] . 'import-mysql-profesorado.php');
             }
             include_once($dirs['inc'] . 'top-nav.php');
             include_once($dirs['inc'] . 'contenido-import-profesorado.php');
