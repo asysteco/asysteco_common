@@ -9,9 +9,9 @@ $subroot = '/' . $subrootsplit[1];
 preg_match('/^\/[A-Z]+$/i', $subroot) ? $subroot = $subroot : $subroot = '' ;
 require_once(dirname($_SERVER['DOCUMENT_ROOT']) . $subroot . '/inc/dir_config.php');
 require_once($basedir . $subdir . '/config_instituto.php');
-require_once($dirs['class'] . 'Netasys.php');
+require_once($dirs['class'] . 'Asysteco.php');
 // iniciamos las clases y las guardamos en variables
-$class = new Netasys;
+$class = new Asysteco;
 $class->bdConex($insti_host, $insti_user, $insti_pass, $insti_db);
 // Comprobamos si existen horarios para actualizar
 
@@ -163,7 +163,7 @@ if(isset($_GET['ACTION']))
             }
             else
             {
-              $ERR_MSG = $class->ERR_NETASYS;
+              $ERR_MSG = $class->ERR_ASYSTECO;
             }
           }
           else
