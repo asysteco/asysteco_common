@@ -1,0 +1,125 @@
+h3 {
+    text-decoration: underline;
+}
+h4 {
+    margin: 5px 0 0 0;
+    display: inline-block;
+    width: 15%;
+}
+input[type=button], input[type=submit], input[type=reset]  {
+    background-color: #56baed;
+    border: none;
+    color: white;
+    padding: 15px 40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 13px;
+    -webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+    box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+    margin: 5px 5px 5px 5px;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    }
+    
+    input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
+    background-color: #39ace7;
+    }
+    
+    input[type=button]:active, input[type=submit]:active, input[type=reset]:active  {
+    -moz-transform: scale(0.95);
+    -webkit-transform: scale(0.95);
+    -o-transform: scale(0.95);
+    -ms-transform: scale(0.95);
+    transform: scale(0.95);
+    }
+
+input[type=text], input[type=password] {
+    background-color: #f6f6f6;
+    border: none;
+    color: #0d0d0d;
+    padding: 10px 22px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px 0 0 0;
+    width: 74%;
+    border: 2px solid #f6f6f6;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+    right: 0;
+    clear: both;
+}
+
+input[type=text]:focus {
+    background-color: #fff;
+    border-bottom: 2px solid #5fbae9;
+}
+
+input[type=text]:placeholder {
+    color: #cccccc;
+}
+
+.calendario {
+    display: inline-block;
+    margin-right: 17px;
+    zoom: 0.75;
+    background-color: #329dd3;
+    padding: 10px;
+    border-radius: 15px;
+    color: white;
+    margin-top: 25px;
+    font-weight: bolder;
+    box-shadow: 4px 4px 12px grey;
+}
+
+.calendario h2 {
+    font-weight: bolder;
+    text-align: center;
+    padding: 10px 5px 10px 5px;
+    border-radius: 10px;
+    color: white;
+}
+
+.calendario table tbody tr td {
+    text-align: center;
+    padding: 8px;
+    border: 2px solid transparent;
+    border-radius: 50px;
+    transition-duration: 0.1s;
+}
+
+.calendario table thead {
+    background-color: #329dd3;
+    border-radius: 25px;
+}
+
+.calendario table thead tr th{
+    text-align: center;
+    padding: 18px;
+}
+
+.calendario table tbody tr td:hover{
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+.festivo {
+    background-color: #2980ac;
+    color: white;
+    border-radius: 20px;
+    transition-duration: 0.1s;
+}
