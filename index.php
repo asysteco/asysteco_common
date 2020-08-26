@@ -4,9 +4,14 @@
 
 // Requerimos el fichero de configuración de directorios
 // Requerimos los ficheros de las clases que hemos creado
+
 $subrootsplit = preg_split('/\//', $_SERVER['REQUEST_URI']);
 $subroot = '/' . $subrootsplit[1];
 preg_match('/^\/[A-Z]+$/i', $subroot) ? $subroot = $subroot : $subroot = '' ;
+
+$Titulo = preg_split('/\//', $subroot);
+$Titulo = $Titulo[1];
+
 require_once(dirname($_SERVER['DOCUMENT_ROOT']) . $subroot . '/inc/dir_config.php');
 require_once($basedir . $subdir . '/config_instituto.php');
 require_once($dirs['class'] . 'Asysteco.php');
@@ -16,7 +21,6 @@ $class->bdConex($insti_host, $insti_user, $insti_pass, $insti_db);
 // Comprobamos si existen horarios para actualizar
 
 $class->tempToValid();
-
 // Comprobamos si está seteada la variable ACTION en la URL (Método GET)
 // Si no es así, procedemos a validar el login, si este es correcto cargamos el fichero home.php
 // En su defecto cargaremos el formulario de login
