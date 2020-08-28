@@ -1,3 +1,6 @@
+html {
+    scroll-behavior: smooth;
+}
 .flecha_div {
     position: fixed;
     visibility: visible;
