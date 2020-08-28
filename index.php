@@ -554,6 +554,65 @@ if(isset($_GET['ACTION']))
         }
       break;
     
+      case 'import-horario':
+        if($class->isLogged())
+        {
+          if($class->compruebaCambioPass())
+          {
+            $act_horario = 'active';
+            $extras = "<script>
+            $.datepicker.regional['es'] = {
+            closeText: 'Cerrar',
+            prevText: '< Ant',
+            nextText: 'Sig >',
+            currentText: 'Hoy',
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+            dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+            weekHeader: 'Sm',
+            dateFormat: 'dd/mm/yy',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: ''
+            };
+            $.datepicker.setDefaults($.datepicker.regional['es']);
+        
+            $(function (){
+                $('#fecha_incorpora').datepicker({minDate: +1});
+            });
+            </script>";
+            $style = "
+            input[type=file] {
+              display: inline-block;
+              padding: 6px 12px 6px 0;
+            }";
+            if (isset($_POST["import"]))
+            {
+                require_once($dirs['inc'] . 'import-mysql-horario.php');
+                require_once($dirs['inc'] . 'actualiza_horas.php');
+            }
+            include_once($dirs['inc'] . 'top-nav.php');
+            include_once($dirs['inc'] . 'contenido-import-horario.php');
+            include_once($dirs['inc'] . 'errors.php');
+            include_once($dirs['inc'] . 'footer.php');
+          }
+          else
+          {
+            header('Location: index.php?ACTION=primer_cambio');
+          }
+        }
+        else
+        {
+          $MSG = "Debes iniciar sesión para realizar esta acción.";
+          header("Refresh:2; url=index.php");
+          include_once($dirs['inc'] . 'msg_modal.php');
+        }
+
+      break;
+    
       case 'asistencias':
         if($class->isLogged())
         {
@@ -634,65 +693,6 @@ if(isset($_GET['ACTION']))
         
       break;
     
-      case 'import-horario':
-        if($class->isLogged())
-        {
-          if($class->compruebaCambioPass())
-          {
-            $act_horario = 'active';
-            $extras = "<script>
-            $.datepicker.regional['es'] = {
-            closeText: 'Cerrar',
-            prevText: '< Ant',
-            nextText: 'Sig >',
-            currentText: 'Hoy',
-            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-            monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
-            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-            dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
-            dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
-            weekHeader: 'Sm',
-            dateFormat: 'dd/mm/yy',
-            firstDay: 1,
-            isRTL: false,
-            showMonthAfterYear: false,
-            yearSuffix: ''
-            };
-            $.datepicker.setDefaults($.datepicker.regional['es']);
-        
-            $(function (){
-                $('#fecha_incorpora').datepicker({minDate: +1});
-            });
-            </script>";
-            $style = "
-            input[type=file] {
-              display: inline-block;
-              padding: 6px 12px 6px 0;
-            }";
-            if (isset($_POST["import"]))
-            {
-                require_once($dirs['inc'] . 'import-mysql-horario.php');
-                require_once($dirs['inc'] . 'actualiza_horas.php');
-            }
-            include_once($dirs['inc'] . 'top-nav.php');
-            include_once($dirs['inc'] . 'contenido-import-horario.php');
-            include_once($dirs['inc'] . 'errors.php');
-            include_once($dirs['inc'] . 'footer.php');
-          }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
-        }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
-
-      break;
-    
       case 'muestra-registros-horarios':
         if($class->isLogged())
         {
@@ -719,28 +719,6 @@ if(isset($_GET['ACTION']))
           if($class->compruebaCambioPass())
           {
             include_once($dirs['inc'] . 'muestra-registros-profesores.php');
-          }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
-        }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
-      break;
-
-      case 'Agregar-registro-horario':
-        if($class->isLogged())
-        {
-          if($class->compruebaCambioPass())
-          {
-            header("Refresh:0; url=index.php?ACTION=profesores");
-            include_once($dirs['inc'] . 'agregar-registro-horario.php');
-            include_once($dirs['inc'] . 'msg_modal.php');
           }
           else
           {
@@ -794,27 +772,27 @@ if(isset($_GET['ACTION']))
           if($class->compruebaCambioPass())
           {
             $act_profesores = 'active';
-			$extras = "
-				<script>
-				$.datepicker.regional['es'] = {
-					closeText: 'Cerrar',
-					prevText: '< Ant',
-					nextText: 'Sig >',
-					currentText: 'Hoy',
-					monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-					monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
-					dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-					dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
-					dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
-					weekHeader: 'Sm',
-					dateFormat: 'dd/mm/yy',
-					firstDay: 1,
-					isRTL: false,
-					showMonthAfterYear: false,
-					yearSuffix: ''
-				};
-				$.datepicker.setDefaults($.datepicker.regional['es']);
-			</script>";
+            $extras = "
+              <script>
+              $.datepicker.regional['es'] = {
+                closeText: 'Cerrar',
+                prevText: '< Ant',
+                nextText: 'Sig >',
+                currentText: 'Hoy',
+                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+                dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+                weekHeader: 'Sm',
+                dateFormat: 'dd/mm/yy',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: ''
+              };
+              $.datepicker.setDefaults($.datepicker.regional['es']);
+            </script>";
             $style = "
             .reset_icon {
               transition-duration: 0.4s;
@@ -887,26 +865,6 @@ if(isset($_GET['ACTION']))
           {
             header('Location: index.php?ACTION=primer_cambio');
           }   
-        }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
-      break;
-
-      case 'select_celda_horario';
-        if($class->isLogged() && $_SESSION['Perfil'] == 'Admin')
-        {
-          if($class->compruebaCambioPass())
-          {
-            include_once($dirs['inc'] . 'select-celdas-horario.php');
-          }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
         }
         else
         {
