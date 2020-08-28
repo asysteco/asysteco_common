@@ -27,7 +27,7 @@ if(! $class->tempToValid())
     <br>
     <span class='glyphicon glyphicon-warning-sign'> </span> Contacta urgentemente con los administradores de la plataforma.
     <br>
-    <a href='mailto:admin@asysteco.com?subject=Urgente%20ASYSTECO%20Horarios_Temporales&body=Ha%20surgido%20un%20problema%20al%20generar%20los%20horarios%20desde%20temporales.'>Enviar correo urgente</a>";
+    <a href='mailto:admin@asysteco.com?subject=Urgente%20ASYSTECO%20Horarios_Temporales&body=Ha%20surgido%20un%20problema%20al%20generar%20los%20horarios%20desde%20temporales%20en%20$Titulo.'>Enviar correo urgente</a>";
 }
 // Comprobamos si está seteada la variable ACTION en la URL (Método GET)
 // Si no es así, procedemos a validar el login, si este es correcto cargamos el fichero home.php
