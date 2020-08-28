@@ -20,7 +20,15 @@ $class = new Asysteco;
 $class->bdConex($insti_host, $insti_user, $insti_pass, $insti_db);
 // Comprobamos si existen horarios para actualizar
 
-$class->tempToValid();
+if(! $class->tempToValid())
+{
+    $ERR_MSG = $class->ERR_ASYSTECO;
+    $ERR_MSG .= "
+    <br>
+    <span class='glyphicon glyphicon-warning-sign'> </span> Contacta urgentemente con los administradores de la plataforma.
+    <br>
+    <a href='mailto:admin@asysteco.com?subject=Urgente%20ASYSTECO%20Horarios_Temporales&body=Ha%20surgido%20un%20problema%20al%20generar%20los%20horarios%20desde%20temporales.'>Enviar correo urgente</a>";
+}
 // Comprobamos si está seteada la variable ACTION en la URL (Método GET)
 // Si no es así, procedemos a validar el login, si este es correcto cargamos el fichero home.php
 // En su defecto cargaremos el formulario de login
