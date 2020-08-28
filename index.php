@@ -1437,7 +1437,7 @@ if(isset($_GET['ACTION']))
                         echo "<h3>Fichaje</h3>";
                         include($dirs['inc'] . 'qr-reader.php');
                     echo "</div>";
-                    echo "<div class='col-xs-12 col-md-8' >";
+                    echo "<div class='col-xs-12 col-md-8' style='text-align: center;'>";
                         include($dirs['inc'] . 'filtro-edif-guardias.php');
                         include($dirs['inc'] . 'contenido-guardias.php');
                     echo "</div>";
@@ -1454,8 +1454,12 @@ if(isset($_GET['ACTION']))
                 ';
                 include($dirs['inc'] . 'top-nav.php');
                 include($dirs['inc'] . 'contenido-home.php');
-                include($dirs['inc'] . 'filtro-edif-guardias.php');
-                include($dirs['inc'] . 'contenido-guardias.php');
+                echo "<div class='row'>";
+                  echo "<div class='col-xs-12' style='text-align: center;'>";
+                      include($dirs['inc'] . 'filtro-edif-guardias.php');
+                      include($dirs['inc'] . 'contenido-guardias.php');
+                  echo "</div>";
+                echo "</div>";
                 include($dirs['inc'] . 'errors.php');
                 include($dirs['inc'] . 'footer.php');
               }
