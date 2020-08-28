@@ -3,7 +3,8 @@
 $('.entrada').hide();
 
 $(window).click(function() {
-	$('.entrada').hide()
+	$('.entrada').hide(),
+	$('#grupo-tutor').show()
 });
 
 $('.entrada').click(function(event){
