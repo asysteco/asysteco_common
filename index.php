@@ -2,8 +2,6 @@
 // Iniciamos las variables de sesión con @ para que no nos devuelva warnings si la sesión ya estaba iniciada
 @session_start();
 
-// Requerimos el fichero de configuración de directorios
-// Requerimos los ficheros de las clases que hemos creado
 
 $subrootsplit = preg_split('/\//', $_SERVER['REQUEST_URI']);
 $subroot = '/' . $subrootsplit[1];
@@ -12,14 +10,22 @@ preg_match('/^\/[A-Z]+$/i', $subroot) ? $subroot = $subroot : $subroot = '' ;
 $Titulo = preg_split('/\//', $subroot);
 $Titulo = $Titulo[1];
 
+// Requerimos el fichero de configuración de directorios
 require_once(dirname($_SERVER['DOCUMENT_ROOT']) . $subroot . '/inc/dir_config.php');
-require_once($basedir . $subdir . '/config_instituto.php');
-require_once($dirs['class'] . 'Asysteco.php');
-// iniciamos las clases y las guardamos en variables
-$class = new Asysteco;
-$class->bdConex($insti_host, $insti_user, $insti_pass, $insti_db);
-// Comprobamos si existen horarios para actualizar
 
+// Requerimos el fichero de configuración de variables de conexión
+require_once($basedir . $subdir . '/config_instituto.php');
+
+// Requerimos la clase Asysteco
+require_once($dirs['class'] . 'Asysteco.php');
+
+// iniciamos la clase y la guardamos en $class
+$class = new Asysteco;
+
+// Iniciamos la conexión a la base de datos
+$class->bdConex($insti_host, $insti_user, $insti_pass, $insti_db);
+
+// Comprobamos si existen horarios para actualizar
 if(! $class->tempToValid())
 {
     $ERR_MSG = $class->ERR_ASYSTECO;
@@ -29,6 +35,7 @@ if(! $class->tempToValid())
     <br>
     <a href='mailto:admin@asysteco.com?subject=Urgente%20ASYSTECO%20Horarios_Temporales&body=Ha%20surgido%20un%20problema%20al%20generar%20los%20horarios%20desde%20temporales%20en%20$Titulo.'>Enviar correo urgente</a>";
 }
+
 // Comprobamos si está seteada la variable ACTION en la URL (Método GET)
 // Si no es así, procedemos a validar el login, si este es correcto cargamos el fichero home.php
 // En su defecto cargaremos el formulario de login
