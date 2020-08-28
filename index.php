@@ -881,7 +881,7 @@ if(isset($_GET['ACTION']))
           {
             include_once($dirs['inc'] . 'valida_edit_profesor.php');
             $extras = '<link rel="stylesheet" href="css/login-style.css">';
-            $style "
+            $style = "
             #grupo-tutor-select {
               background-color: #f6f6f6;
               border: none;
