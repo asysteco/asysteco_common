@@ -333,22 +333,25 @@ if(isset($_GET['ACTION']))
           if($class->compruebaCambioPass())
           {
             $act_asistencia = 'active';
+            $extras = "
+              $(function (){
+                  $('#busca_asiste').datepicker();
+              });
+            ";
             $style = include_once($dirs['public'] . 'css/asistencias.css');
             include_once($dirs['inc'] . 'top-nav.php');
 
             switch ($_GET['OPT'])
             {
+              case 'sesion':
+                $_GET['ID'] = $_SESSION['ID'];
+                include_once($dirs['inc'] . 'contenido-asistencias.php');
+              break;
+
               default:
-                $extras .= "
-                  $(function (){
-                      $('#busca_asiste').datepicker();
-                  });
-                ";
                 include_once($dirs['inc'] . 'contenido-asistencias.php');
               break;
             }
-
-            include_once($dirs['inc'] . 'contenido-fichajes.php');
           }
           else
           {
@@ -742,90 +745,6 @@ if(isset($_GET['ACTION']))
           {
             header('Location: index.php?ACTION=primer_cambio');
           } 
-        }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
-      break;
-
-      case 'faltas_profesor':
-        if($class->isLogged() && $_SESSION['Perfil'] == 'Admin')
-        {
-          if($class->compruebaCambioPass())
-          {
-            $extras .= "<script>
-            $.datepicker.regional['es'] = {
-            closeText: 'Cerrar',
-            prevText: '< Ant',
-            nextText: 'Sig >',
-            currentText: 'Hoy',
-            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-            monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
-            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-            dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
-            dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
-            weekHeader: 'Sm',
-            dateFormat: 'dd/mm/yy',
-            firstDay: 1,
-            isRTL: false,
-            showMonthAfterYear: false,
-            yearSuffix: ''
-            };
-            $.datepicker.setDefaults($.datepicker.regional['es']);
-        
-            $(function (){
-                $('#busca_asiste').datepicker();
-            });
-          </script>";
-            $style = "
-            input[type=text], input[type=password] {
-            background-color: #f6f6f6;
-            border: none;
-            color: #0d0d0d;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 5px;
-            width: 85%;
-            border: 2px solid #f6f6f6;
-            -webkit-transition: all 0.5s ease-in-out;
-            -moz-transition: all 0.5s ease-in-out;
-            -ms-transition: all 0.5s ease-in-out;
-            -o-transition: all 0.5s ease-in-out;
-            transition: all 0.5s ease-in-out;
-            -webkit-border-radius: 5px 5px 5px 5px;
-            border-radius: 5px 5px 5px 5px;
-            }
-            
-            input[type=text]:focus {
-            background-color: #fff;
-            border-bottom: 2px solid #5fbae9;
-            }
-            
-            input[type=text]:placeholder {
-            color: #cccccc;
-            }
-            #full-table td, #full-table th {
-              text-align: center;
-              vertical-align: middle;
-            }
-            ";
-            include_once($dirs['inc'] . 'top-nav.php');
-            include_once($dirs['inc'] . 'contenido-asistencias.php');
-            include_once('js/filtro_asistencias.js');
-            include_once('js/update_marcajes.js');
-            include_once($dirs['inc'] . 'errors.php');
-            include_once($dirs['inc'] . 'footer.php');
-          }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
         }
         else
         {
