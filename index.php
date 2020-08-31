@@ -284,8 +284,16 @@ if(isset($_GET['ACTION']))
                 include_once($dirs['inc'] . 'edit-horario-profesor.php');
               break;
 
-              case 'edit-t-horario':
+              case 'edit-t':
                 include_once($dirs['inc'] . 'edit-t-horario.php');
+              break;
+
+              case 'edit-crear':
+                include_once($dirs['inc'] . 'edit-crear-horario.php');
+              break;
+
+              case 'update':
+                include_once($dirs['inc'] . 'actualiza.php');
               break;
               
               default:
@@ -294,50 +302,6 @@ if(isset($_GET['ACTION']))
               break;
             }
 
-            include_once($dirs['inc'] . 'errors.php');
-            include_once($dirs['inc'] . 'footer.php');
-          }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
-        }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
-      break;
-        
-      case 'edit-crear-horario':
-        if($class->isLogged())
-        {
-          if($class->compruebaCambioPass())
-          {
-            include_once($dirs['inc'] . 'edit-crear-horario.php');
-          }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
-        }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
-      break;
-        
-      case 'nuevo-registro-horario-profesor':
-        if($class->isLogged())
-        {
-          if($class->compruebaCambioPass())
-          {
-            $act_profesores = 'active';
-            include_once($dirs['inc'] . 'top-nav.php');
-            include_once($dirs['inc'] . 'nuevo-registro-horario-profesor.php');
             include_once($dirs['inc'] . 'errors.php');
             include_once($dirs['inc'] . 'footer.php');
           }
@@ -372,48 +336,6 @@ if(isset($_GET['ACTION']))
           header("Refresh:2; url=index.php");
           include_once($dirs['inc'] . 'msg_modal.php');
         }
-      break;
-    
-      case 'update-t-horario':
-        if($class->isLogged())
-        {
-          if($class->compruebaCambioPass())
-          {
-            include_once($dirs['inc'] . 'actualiza.php');
-          }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
-        }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
-      break;
-    
-      case 'import-horario':
-        if($class->isLogged())
-        {
-          if($class->compruebaCambioPass())
-          {
-            include_once($dirs['inc'] . 'errors.php');
-            include_once($dirs['inc'] . 'footer.php');
-          }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
-        }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
-
       break;
     
       case 'asistencias':

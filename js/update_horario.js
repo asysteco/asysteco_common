@@ -52,7 +52,7 @@ $('.entrada').on('change', function(){
 
 	$(sp).html(texto),
 	$(sp).show(),
-	enlace="index.php?ACTION=update-horario&id="+id+"&columna="+columna+"&texto="+texto,
+	enlace="index.php?ACTION=horarios&OPT=update&SUBOPT=horario&id="+id+"&columna="+columna+"&texto="+texto,
 	$('#response').load(encodeURI(enlace))
 	
 });
