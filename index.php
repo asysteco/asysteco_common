@@ -364,7 +364,6 @@ if(isset($_GET['ACTION']))
           if($class->compruebaCambioPass())
           {
             $act_profesores = 'active';
-            $scripts = '<link rel="stylesheet" href="css/profesores.css">';
             switch ($_GET['OPT'])
             {
               case 'import':
@@ -390,7 +389,33 @@ if(isset($_GET['ACTION']))
                 include_once($dirs['inc'] . 'muestra-registros-profesores.php');
               break;
               
+              case 'edit':
+                $scripts = '<link rel="stylesheet" href="css/profesores-edit.css">';
+                include_once($dirs['inc'] . 'valida_edit_profesor.php');
+                include_once($dirs['inc'] . 'top-nav.php');
+                include_once($dirs['inc'] . 'editar_profesor.php');
+              break;
+              
+              case 'sustituir':
+                $scripts = '<link rel="stylesheet" href="css/profesores-sustituir.css">';
+                include_once($dirs['inc'] . 'top-nav.php');
+                include_once($dirs['inc'] . 'form_sustituto.php');
+              break;
+              
+              case 'sustituto':
+                include_once($dirs['inc'] . 'agregar-sustituto.php');
+                if(isset($ERR_MSG)  && $ERR_MSG != '')
+                {
+                  header("Location: index.php?ACTION=profesores&ERR_MSG=" . $ERR_MSG);
+                }
+                else
+                {
+                  header("Location: index.php?ACTION=profesores&MSG=" . $MSG);
+                }
+              break;
+              
               default:
+                $scripts = '<link rel="stylesheet" href="css/profesores.css">';
                 if(isset($_POST['boton']) && $class->validRegisterProf())
                 {
                   header('Location: index.php?ACTION=profesores');
@@ -413,99 +438,6 @@ if(isset($_GET['ACTION']))
           $MSG = "Debes iniciar sesión para realizar esta acción.";
           header("Refresh:2; url=index.php");
           include_once($dirs['inc'] . 'msg_modal.php');
-        }
-      break;
-  
-      case 'editar_profesor':
-        if($class->isLogged() && $_SESSION['Perfil'] == 'Admin')
-        {
-          if($class->compruebaCambioPass())
-          {
-            include_once($dirs['inc'] . 'valida_edit_profesor.php');
-            $extras = '<link rel="stylesheet" href="css/login-style.css">';
-            $style = "
-            #grupo-tutor-select {
-              background-color: #f6f6f6;
-              border: none;
-              color: #0d0d0d;
-              padding: 15px 32px;
-              text-align: center;
-              text-decoration: none;
-              display: inline-block;
-              font-size: 16px;
-              margin: 5px;
-              width: 85%;
-              border: 2px solid #f6f6f6;
-              -webkit-transition: all 0.5s ease-in-out;
-              -moz-transition: all 0.5s ease-in-out;
-              -ms-transition: all 0.5s ease-in-out;
-              -o-transition: all 0.5s ease-in-out;
-              transition: all 0.5s ease-in-out;
-              -webkit-border-radius: 5px 5px 5px 5px;
-              border-radius: 5px 5px 5px 5px;
-            }";
-            include_once($dirs['inc'] . 'top-nav.php');
-            include_once($dirs['inc'] . 'editar_profesor.php');
-            include_once($dirs['inc'] . 'errors.php');
-            include_once($dirs['inc'] . 'footer.php');
-          }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          } 
-        }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
-      break;
-
-      case 'formulario-sustituto':
-        {
-          if($class->isLogged() && $_SESSION['Perfil'] == 'Admin')
-          {
-            if($class->compruebaCambioPass())
-            {
-              $style = '
-                #select_sustituto {
-                  background-color: #f6f6f6;
-                  border: none;
-                  color: #0d0d0d;
-                  padding: 15px 32px;
-                  text-align: center;
-                  text-decoration: none;
-                  display: inline-block;
-                  font-size: 16px;
-                  margin: 5px;
-                  width: 50%;
-                  border: 2px solid #f6f6f6;
-                  -webkit-transition: all 0.5s ease-in-out;
-                  -moz-transition: all 0.5s ease-in-out;
-                  -ms-transition: all 0.5s ease-in-out;
-                  -o-transition: all 0.5s ease-in-out;
-                  transition: all 0.5s ease-in-out;
-                  -webkit-border-radius: 5px 5px 5px 5px;
-                  border-radius: 5px 5px 5px 5px;
-                }
-              ';
-              include_once($dirs['inc'] . 'top-nav.php');
-              include_once($dirs['inc'] . 'formulario-sustituto.php');
-              include_once($dirs['inc'] . 'errors.php');
-              include_once($dirs['inc'] . 'footer.php');
-            }
-            else
-            {
-              header('Location: index.php?ACTION=primer_cambio');
-            } 
-          }
-          else
-          {
-            $MSG = "Debes iniciar sesión para realizar esta acción.";
-            header("Refresh:2; url=index.php");
-            include_once($dirs['inc'] . 'msg_modal.php');
-          }
         }
       break;
 
