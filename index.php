@@ -54,6 +54,16 @@ if(isset($_GET['ACTION']))
           if($class->compruebaCambioPass())
           {
             $act_home = 'active';
+            switch ($_GET['OPT'])
+            {
+              case 'value':
+                # code...
+                break;
+              
+              default:
+                # code...
+                break;
+            }
             include($dirs['inc'] . 'home.php');
           }
           else
@@ -462,7 +472,7 @@ if(isset($_GET['ACTION']))
                   header('Location: index.php?ACTION=profesores');
                 }
                 include_once($dirs['inc'] . 'top-nav.php');
-                include_once($dirs['inc'] . 'contenido-profesores.php');
+                include_once($dirs['inc'] . 'profesores.php');
               break;
             }
             
@@ -482,33 +492,25 @@ if(isset($_GET['ACTION']))
         }
       break;
     
-      case 'create_marcajes':
-        if($class->isLogged() && $_SESSION['Perfil'] == 'Admin' || $_SESSION['Perfil'] == 'Profesor')
+      case 'marcajes':
+        if($class->isLogged())
         {
           if($class->compruebaCambioPass())
           {
-            header("Refresh:2; url=$_SERVER[HTTP_REFERER]");
-            include_once($dirs['inc'] . 'marcajes.php');
-          }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
-        }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
-      break;
-
-      case 'update_marcajes':
-        if($class->isLogged() && $_SESSION['Perfil'] == 'Admin' || $_SESSION['Perfil'] == 'Profesor')
-        {
-          if($class->compruebaCambioPass())
-          {
-            include_once($dirs['inc'] . 'update-marcajes.php');
+            switch($_GET['OPT'])
+            {
+              case 'create':
+                include_once($dirs['inc'] . 'marcajes.php');
+              break;
+              
+              case 'update':
+                include_once($dirs['inc'] . 'update-marcajes.php');
+              break;
+              
+              default:
+                header('Location: index.php');
+              break;
+            }
           }
           else
           {
@@ -547,98 +549,44 @@ if(isset($_GET['ACTION']))
         }
       break;
 
-      case 'form_mensajes':
+      case 'mensajes':
         if($class->isLogged())
         {
           if($class->compruebaCambioPass())
           {
             $act_usuario = 'active';
-            $extras = '<link rel="stylesheet" href="css/mensajes.css">';
-            $extras .= '<link rel="stylesheet" href="css/message.css">';
-            $extras .= '<script>
-            $( function() {
-              $( "#tabs" ).tabs();
-            } );
-            </script>';
-            $style = '
-              html {
-                background-color: white;
-              }
-              body {
-                height: 100%;
-              }
-
-              #select_mensaje {
-                background-color: #f6f6f6;
-                border: none;
-                color: #0d0d0d;
-                padding: 15px 32px;
-                text-align: center;
-                text-decoration: none;
-                display: inline-block;
-                font-size: 16px;
-                margin: 5px;
-                width: 85%;
-                border: 2px solid #f6f6f6;
-                -webkit-transition: all 0.5s ease-in-out;
-                -moz-transition: all 0.5s ease-in-out;
-                -ms-transition: all 0.5s ease-in-out;
-                -o-transition: all 0.5s ease-in-out;
-                transition: all 0.5s ease-in-out;
-                -webkit-border-radius: 5px 5px 5px 5px;
-                border-radius: 5px 5px 5px 5px;
-              }
+            $scripts = '<link rel="stylesheet" href="css/mensajes.css">';
+            $scripts .= '<link rel="stylesheet" href="css/message.css">';
+            $extras = '
+              $( function() {
+                $( "#tabs" ).tabs();
+              } );
             ';
-            include_once($dirs['inc'] . 'top-nav.php');
-            include_once($dirs['inc'] . 'form_mensajes.php');
-            include_once($dirs['inc'] . 'listar_mensajes.php');
-            include_once($dirs['public'] . 'js/menu_mensaje.js');
+
+            switch ($_GET['OPT'])
+            {
+              case 'add':
+                include_once($dirs['inc'] . 'enviar_mensaje.php');
+              break;
+
+              case 'remove':
+                include_once($dirs['inc'] . 'eliminar_mensaje.php');
+              break;
+              
+              default:
+                include_once($dirs['inc'] . 'top-nav.php');
+                include_once($dirs['inc'] . 'form_mensajes.php');
+                include_once($dirs['inc'] . 'listar_mensajes.php');
+                include_once($dirs['public'] . 'js/menu_mensaje.js');
+              break;
+            }
+
             include_once($dirs['inc'] . 'errors.php');
             include_once($dirs['inc'] . 'footer.php');
           }
           else
           {
             header('Location: index.php?ACTION=primer_cambio');
-          }
-        }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
-      break;
-
-      case 'enviar_mensaje':
-        if($class->isLogged())
-        {
-          if($class->compruebaCambioPass())
-          {
-            include_once($dirs['inc'] . 'enviar_mensaje.php');
-          }
-          else
-          {
-            header('Location: index.php?ACTION=form_mensajes');
-          }
-        }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
-      break;
-
-      case 'eliminar_mensaje':
-        if($class->isLogged())
-        {
-          if($class->compruebaCambioPass())
-          {
-            include_once($dirs['inc'] . 'eliminar_mensaje.php');
-          }
-          else
-          {
-            header('Location: index.php?ACTION=listar_mensajes');
           }
         }
         else
@@ -681,11 +629,7 @@ if(isset($_GET['ACTION']))
             if($class->compruebaCambioPass())
             {
               $act_home = 'active';
-              $extras = '
-              <style>
-                canvas {box-shadow: 4px 6px 15px grey; padding: 2px; border-radius: 10px;}
-                .respuesta span {display: block; box-shadow: 4px 6px 15px grey; padding: 50px; border-radius: 10px; margin-top: 30px;}
-              </style>
+              $scripts = '
               <script type="text/javascript" src="js/jsqrcode/grid.js"></script>
               <script type="text/javascript" src="js/jsqrcode/version.js"></script>
               <script type="text/javascript" src="js/jsqrcode/detector.js"></script>
@@ -707,6 +651,8 @@ if(isset($_GET['ACTION']))
               if($_SESSION['Perfil'] === 'Admin')
               {
                 $style = '
+                    canvas {box-shadow: 4px 6px 15px grey; padding: 2px; border-radius: 10px;}
+                    .respuesta span {display: block; box-shadow: 4px 6px 15px grey; padding: 50px; border-radius: 10px; margin-top: 30px;}
                     .filtro_edificio {
                         margin-top: 50px;
                     }
@@ -715,16 +661,17 @@ if(isset($_GET['ACTION']))
                     }
                 ';
                 include($dirs['inc'] . 'top-nav.php');
-                include($dirs['inc'] . 'contenido-home.php');
-                echo "<div class='row'>";
-                    echo "<div id='qreader' class='col-xs-12 col-md-4' >";
-                        echo "<h3>Fichaje</h3>";
-                        include($dirs['inc'] . 'qr-reader.php');
-                    echo "</div>";
-                    echo "<div class='col-xs-12 col-md-8' style='text-align: center;'>";
-                        include($dirs['inc'] . 'filtro-edif-guardias.php');
-                        include($dirs['inc'] . 'contenido-guardias.php');
-                    echo "</div>";
+                echo '<div class="container-fluid" style="margin-top:50px">';
+                  echo "<div class='row'>";
+                      echo "<div id='qreader' class='col-xs-12 col-md-4' >";
+                          echo "<h3>Fichaje</h3>";
+                          include($dirs['inc'] . 'qr-reader.php');
+                      echo "</div>";
+                      echo "<div class='col-xs-12 col-md-8' style='text-align: center;'>";
+                          include($dirs['inc'] . 'filtro-edif-guardias.php');
+                          include($dirs['inc'] . 'contenido-guardias.php');
+                      echo "</div>";
+                  echo "</div>";
                 echo "</div>";
                 include($dirs['inc'] . 'errors.php');
                 include($dirs['inc'] . 'footer.php');
@@ -737,11 +684,12 @@ if(isset($_GET['ACTION']))
                 }
                 ';
                 include($dirs['inc'] . 'top-nav.php');
-                include($dirs['inc'] . 'contenido-home.php');
-                echo "<div class='row'>";
-                  echo "<div class='col-xs-12' style='text-align: center;'>";
-                      include($dirs['inc'] . 'filtro-edif-guardias.php');
-                      include($dirs['inc'] . 'contenido-guardias.php');
+                echo '<div class="container-fluid" style="margin-top:50px">';
+                  echo "<div class='row'>";
+                    echo "<div class='col-xs-12' style='text-align: center;'>";
+                        include($dirs['inc'] . 'filtro-edif-guardias.php');
+                        include($dirs['inc'] . 'contenido-guardias.php');
+                    echo "</div>";
                   echo "</div>";
                 echo "</div>";
                 include($dirs['inc'] . 'errors.php');
@@ -772,33 +720,13 @@ if(isset($_GET['ACTION']))
           if($class->compruebaCambioPass())
           {
             $act_usuario = 'active';
-            $extras .= "<script>
-            $.datepicker.regional['es'] = {
-            closeText: 'Cerrar',
-            prevText: '< Ant',
-            nextText: 'Sig >',
-            currentText: 'Hoy',
-            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-            monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
-            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-            dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
-            dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
-            weekHeader: 'Sm',
-            dateFormat: 'dd/mm/yy',
-            firstDay: 1,
-            isRTL: false,
-            showMonthAfterYear: false,
-            yearSuffix: ''
-            };
-            $.datepicker.setDefaults($.datepicker.regional['es']);
-        
-            $(function (){
-                $('#fechainicioasis').datepicker();
-                $('#fechainifaltas').datepicker();
-                $('#fechainifichaje').datepicker();
-                $('#fechainimarc').datepicker();
-            });
-            </script>
+            $extras = "        
+              $(function (){
+                  $('#fechainicioasis').datepicker();
+                  $('#fechainifaltas').datepicker();
+                  $('#fechainifichaje').datepicker();
+                  $('#fechainimarc').datepicker();
+              });
             ";
             $style = "
             input[type=text], #select_admon_marcajes, #select_admon_asistencias, #select_admon_horarios {
@@ -806,15 +734,67 @@ if(isset($_GET['ACTION']))
               display: inline-block;
             }
             ";
-            include_once($dirs['inc'] . 'top-nav.php');
-            include_once($dirs['inc'] . 'menu_admon.php');
-            include_once($dirs['public'] . 'js/admon.js');
-            include_once($dirs['public'] . 'js/admon_fecha_asistencias.js');
-            include_once($dirs['public'] . 'js/admon_fecha_faltas.js');
-            include_once($dirs['public'] . 'js/admon_fecha_fichaje.js');
-            include_once($dirs['public'] . 'js/admon_fecha_marcaje.js');
-            include_once($dirs['inc'] . 'errors.php');
-            include_once($dirs['inc'] . 'footer.php');
+            switch ($_GET['OPT'])
+            {
+              case 'select':
+                if(isset($_GET['export']) && $_GET['export'] == 'marcajes')
+                {
+                  include_once($dirs['inc'] . 'export_marcajes.php');
+                }
+                if(isset($_GET['export']) && $_GET['export'] == 'asistencias')
+                {
+                  include_once($dirs['inc'] . 'export_asistencias.php');
+                }
+                elseif(isset($_GET['export']) && $_GET['export'] == 'faltas')
+                {
+                  include_once($dirs['inc'] . 'export_faltas.php');
+                }
+                elseif(isset($_GET['export']) && $_GET['export'] == 'horarios')
+                {
+                  include_once($dirs['inc'] . 'export_horarios.php');
+                }
+                elseif(isset($_GET['select']) && $_GET['select'] == 'marcajes')
+                {
+                  include_once($dirs['inc'] . 'list_marcajes.php');
+                }
+                elseif(isset($_GET['select']) && $_GET['select'] == 'asistencias')
+                {
+                  include_once($dirs['inc'] . 'list_asistencias.php');
+                }
+                elseif(isset($_GET['select']) && $_GET['select'] == 'faltas')
+                {
+                  include_once($dirs['inc'] . 'list_faltas.php');
+                }
+                elseif(isset($_GET['select']) && $_GET['select'] == 'horarios')
+                {
+                  include_once($dirs['inc'] . 'list_horarios.php');
+                }
+                elseif(isset($_GET['select']) && $_GET['select'] == 'fichadi')
+                {
+                  include_once($dirs['inc'] . 'ficha_diario.php');
+                }
+                elseif(isset($_GET['select']) && $_GET['select'] == 'fichafe')
+                {
+                  include_once($dirs['inc'] . 'ficha_fecha.php');
+                }
+                else
+                {
+                  header('Location: index.php');
+                }
+              break;
+              
+              default:
+              include_once($dirs['inc'] . 'top-nav.php');
+              include_once($dirs['inc'] . 'menu_admon.php');
+              include_once($dirs['public'] . 'js/admon.js');
+              include_once($dirs['public'] . 'js/admon_fecha_asistencias.js');
+              include_once($dirs['public'] . 'js/admon_fecha_faltas.js');
+              include_once($dirs['public'] . 'js/admon_fecha_fichaje.js');
+              include_once($dirs['public'] . 'js/admon_fecha_marcaje.js');
+              include_once($dirs['inc'] . 'errors.php');
+              include_once($dirs['inc'] . 'footer.php');
+              break;
+            }
           }
           else
           {

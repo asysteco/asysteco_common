@@ -5,7 +5,7 @@
         Fecha = datos[1],
         Hora = datos[2],
         Valor = datos[3];
-        if($('#marcaje-response').load('index.php?ACTION=update_marcajes&Profesor='+Profesor+'&Fecha='+Fecha+'&Hora='+Hora+'&Valor='+Valor))
+        if($('#marcaje-response').load('index.php?ACTION=marcajes&OPT=update&Profesor='+Profesor+'&Fecha='+Fecha+'&Hora='+Hora+'&Valor='+Valor))
         {
             location.reload()
         }
