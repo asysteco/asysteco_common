@@ -254,6 +254,7 @@ if(isset($_GET['ACTION']))
           if($class->compruebaCambioPass())
           {
             $act_horario = 'active';
+
             switch ($_GET['OPT']) {
               case 'crear':
                 $style = include_once($dirs['public'] . 'horarios-crear.css');
@@ -274,7 +275,7 @@ if(isset($_GET['ACTION']))
                     require_once($dirs['inc'] . 'actualiza_horas.php');
                 }
                 include_once($dirs['inc'] . 'top-nav.php');
-                include_once($dirs['inc'] . 'contenido-import-horario.php');
+                include_once($dirs['inc'] . 'import-horario.php');
               break;
               
               default:
@@ -282,6 +283,7 @@ if(isset($_GET['ACTION']))
                 include_once($dirs['inc'] . 'contenido-horarios.php');
               break;
             }
+
             include_once($dirs['inc'] . 'errors.php');
             include_once($dirs['inc'] . 'footer.php');
           }
