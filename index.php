@@ -290,6 +290,10 @@ if(isset($_GET['ACTION']))
               case 'guardias':
                 include_once($dirs['inc'] . 'edit-guardias.php');
               break;
+
+              case 'profesor':
+                include_once($dirs['inc'] . 'horario-profesor.php');
+              break;
               
               default:
                 include_once($dirs['inc'] . 'top-nav.php');
@@ -379,10 +383,6 @@ if(isset($_GET['ACTION']))
                 }
                 include_once($dirs['inc'] . 'top-nav.php');
                 include_once($dirs['inc'] . 'import-profesorado.php');
-              break;
-
-              case 'horario':
-                include_once($dirs['inc'] . 'horario-profesor.php');
               break;
 
               case 'registros':
