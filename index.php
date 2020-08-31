@@ -74,7 +74,7 @@ if(isset($_GET['ACTION']))
             <script type="text/javascript" src="js/jsqrcode/alignpat.js"></script>
             <script type="text/javascript" src="js/jsqrcode/databr.js"></script>
             ';
-            include($dirs['inc'] . 'top-nav.php');
+            include_once($dirs['inc'] . 'top-nav.php');
             if(isset($_GET['OPT']))
             {
               switch ($_GET['OPT'])
@@ -82,7 +82,7 @@ if(isset($_GET['ACTION']))
                 case 'Edificio':
                   if(isset($_GET['Numero']))
                   {
-                  include($dirs['inc'] . 'home.php');
+                    include($dirs['inc'] . 'home.php');
                   }
                   else
                   {
@@ -868,6 +868,27 @@ else
     if($class->compruebaCambioPass())
     {
       $act_home = 'active';
+      $scripts = '<link rel="stylesheet" href="css/qr-reader.css">';
+      $scripts .= '
+      <script type="text/javascript" src="js/jsqrcode/grid.js"></script>
+      <script type="text/javascript" src="js/jsqrcode/version.js"></script>
+      <script type="text/javascript" src="js/jsqrcode/detector.js"></script>
+      <script type="text/javascript" src="js/jsqrcode/formatinf.js"></script>
+      <script type="text/javascript" src="js/jsqrcode/errorlevel.js"></script>
+      <script type="text/javascript" src="js/jsqrcode/bitmat.js"></script>
+      <script type="text/javascript" src="js/jsqrcode/datablock.js"></script>
+      <script type="text/javascript" src="js/jsqrcode/bmparser.js"></script>
+      <script type="text/javascript" src="js/jsqrcode/datamask.js"></script>
+      <script type="text/javascript" src="js/jsqrcode/rsdecoder.js"></script>
+      <script type="text/javascript" src="js/jsqrcode/gf256poly.js"></script>
+      <script type="text/javascript" src="js/jsqrcode/gf256.js"></script>
+      <script type="text/javascript" src="js/jsqrcode/decoder.js"></script>
+      <script type="text/javascript" src="js/jsqrcode/qrcode.js"></script>
+      <script type="text/javascript" src="js/jsqrcode/findpat.js"></script>
+      <script type="text/javascript" src="js/jsqrcode/alignpat.js"></script>
+      <script type="text/javascript" src="js/jsqrcode/databr.js"></script>
+      ';
+      include_once($dirs['inc'] . 'top-nav.php');
       include($dirs['inc'] . 'home.php');
     }
     else
