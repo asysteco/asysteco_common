@@ -7,7 +7,7 @@
         Valor = datos[3];
         if($('#marcaje-response').load('index.php?ACTION=update_marcajes&Profesor='+Profesor+'&Fecha='+Fecha+'&Hora='+Hora+'&Valor='+Valor))
         {
-            $('#table-container').load('index.php?ACTION=faltas_profesor&ID='+Profesor+' #full-table'),
+            $('#table-container').load('index.php?ACTION=asistencias&ID='+Profesor+' #full-table'),
             location.reload()
         }
         else
