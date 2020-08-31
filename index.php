@@ -131,7 +131,7 @@ if(isset($_GET['ACTION']))
           if($class->compruebaCambioPass())
           {
             $act_usuario = 'active';
-            $extras = '<link rel="stylesheet" href="css/login-style.css">';
+            $scripts = '<link rel="stylesheet" href="css/login-style.css">';
             include_once($dirs['inc'] . 'valida_new_pass.php');
             include_once($dirs['inc'] . 'top-nav.php');
             include_once($dirs['inc'] . 'new_pass.php');
