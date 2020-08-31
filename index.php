@@ -390,6 +390,7 @@ if(isset($_GET['ACTION']))
               break;
               
               case 'edit':
+                $scripts = '<link rel="stylesheet" href="css/login-style.css">';
                 $scripts = '<link rel="stylesheet" href="css/profesores-edit.css">';
                 include_once($dirs['inc'] . 'valida_edit_profesor.php');
                 include_once($dirs['inc'] . 'top-nav.php');
