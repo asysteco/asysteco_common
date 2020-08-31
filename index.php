@@ -277,6 +277,16 @@ if(isset($_GET['ACTION']))
                 include_once($dirs['inc'] . 'top-nav.php');
                 include_once($dirs['inc'] . 'import-horario.php');
               break;
+
+              case 'edit-horario-profesor':
+                $style = include_once($dirs['public'] . 'horarios-edit.css');
+                include_once($dirs['inc'] . 'top-nav.php');
+                include_once($dirs['inc'] . 'edit-horario-profesor.php');
+              break;
+
+              case 'edit-t-horario':
+                include_once($dirs['inc'] . 'edit-t-horario.php');
+              break;
               
               default:
                 include_once($dirs['inc'] . 'top-nav.php');
@@ -286,92 +296,6 @@ if(isset($_GET['ACTION']))
 
             include_once($dirs['inc'] . 'errors.php');
             include_once($dirs['inc'] . 'footer.php');
-          }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
-        }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
-      break;
-        
-      case 'edit-horario-profesor':
-        if($class->isLogged())
-        {
-          if($class->compruebaCambioPass())
-          {
-            $act_horario = 'active';
-            $style = "
-            .entrada {
-              display: none;
-            }
-            .btn-react-del {
-              transform: scale(1.4);
-              transition-duration: 0.1s;
-              cursor: pointer;
-            }
-            .btn-react-del:hover {
-              color: #b30c0c;
-              transform: scale(1.6);
-            }
-
-            .btn-react-add {
-              transform: scale(1.4);
-              transition-duration: 0.1s;
-              cursor: pointer;
-            }
-            .btn-react-add:hover {
-              color: green;
-              transform: scale(1.6);
-            }
-
-            .btn-react-add-more {
-              transition-duration: 0.1s;
-              cursor: pointer;
-            }
-            .btn-react-add-more:hover {
-              color: green;
-              transform: scale(1.2);
-            }
-
-            .btn-react-del-group {
-              transition-duration: 0.1s;
-              cursor: pointer;
-            }
-            .btn-react-del-group:hover {
-              color: #b30c0c;
-              transform: scale(1.2);
-            }
-            ";
-            include_once($dirs['inc'] . 'top-nav.php');
-            include_once($dirs['inc'] . 'edit-horario-profesor.php');
-            include_once($dirs['inc'] . 'errors.php');
-            include_once($dirs['inc'] . 'footer.php');
-          }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
-        }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
-      break;
-        
-      case 'edit-t-horario':
-        if($class->isLogged())
-        {
-          if($class->compruebaCambioPass())
-          {
-            include_once($dirs['inc'] . 'edit-t-horario.php');
           }
           else
           {
