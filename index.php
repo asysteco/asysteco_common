@@ -294,6 +294,18 @@ if(isset($_GET['ACTION']))
               case 'profesor':
                 include_once($dirs['inc'] . 'horario-profesor.php');
               break;
+
+              case 'remove':
+                include_once($dirs['inc'] . 'remove-horario-profesor.php');
+                if(isset($ERR_MSG) && $ERR_MSG != '')
+                {
+                  header("Location: index.php?ACTION=profesores&ERR_MSG=" . $ERR_MSG);
+                }
+                else
+                {
+                  header("Location: index.php?ACTION=profesores&MSG=" . $MSG);
+                }
+              break;
               
               default:
                 include_once($dirs['inc'] . 'top-nav.php');
@@ -403,8 +415,36 @@ if(isset($_GET['ACTION']))
                 include_once($dirs['inc'] . 'form_sustituto.php');
               break;
               
-              case 'sustituto':
+              case 'add-sustituto':
                 include_once($dirs['inc'] . 'agregar-sustituto.php');
+                if(isset($ERR_MSG)  && $ERR_MSG != '')
+                {
+                  header("Location: index.php?ACTION=profesores&ERR_MSG=" . $ERR_MSG);
+                }
+                else
+                {
+                  header("Location: index.php?ACTION=profesores&MSG=" . $MSG);
+                }
+              break;
+              
+              case 'remove-sustituto':
+                include_once($dirs['inc'] . 'retirar-sustituto.php');
+              break;
+              
+              case 'des-act':
+                include_once($dirs['inc'] . 'des-act-profesor.php');
+                if(isset($ERR_MSG) && $ERR_MSG != '')
+                {
+                  header("Location: index.php?ACTION=profesores&ERR_MSG=" . $ERR_MSG);
+                }
+                else
+                {
+                  header("Location: index.php?ACTION=profesores&MSG=" . $MSG);
+                }
+              break;
+              
+              case 'reset-pass':
+                include_once($dirs['inc'] . 'reset_pass.php');
                 if(isset($ERR_MSG)  && $ERR_MSG != '')
                 {
                   header("Location: index.php?ACTION=profesores&ERR_MSG=" . $ERR_MSG);
@@ -433,139 +473,6 @@ if(isset($_GET['ACTION']))
           {
             header('Location: index.php?ACTION=primer_cambio');
           }   
-        }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
-      break;
-
-      case 'Agregar-sustituto':
-        if($class->isLogged() && $_SESSION['Perfil'] == 'Admin')
-        {
-          if($class->compruebaCambioPass())
-          {
-            include_once($dirs['inc'] . 'agregar-sustituto-profesor.php');
-            if(isset($ERR_MSG)  && $ERR_MSG != '')
-            {
-              header("Location: index.php?ACTION=profesores&ERR_MSG=" . $ERR_MSG);
-            }
-            else
-            {
-              header("Location: index.php?ACTION=profesores&MSG=" . $MSG);
-            }
-          }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          } 
-        }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
-      break;
-
-      case 'retirar-sustitucion':
-        if($class->isLogged() && $_SESSION['Perfil'] == 'Admin')
-        {
-          if($class->compruebaCambioPass())
-          {
-            include_once($dirs['inc'] . 'retirar-sustituto-profesor.php');
-            header('location: index.php?ACTION=profesores');
-          }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          } 
-        }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
-      break;
-
-      case 'desactivar-activar-profesor':
-        if($class->isLogged() && $_SESSION['Perfil'] == 'Admin')
-        {
-          if($class->compruebaCambioPass())
-          {
-            include_once($dirs['inc'] . 'update-activo-profesor.php');
-            if(isset($ERR_MSG) && $ERR_MSG != '')
-            {
-              header("Location: index.php?ACTION=profesores&ERR_MSG=" . $ERR_MSG);
-            }
-            else
-            {
-              header("Location: index.php?ACTION=profesores&MSG=" . $MSG);
-            }
-          }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          } 
-        }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
-      break;
-      
-      case 'reset_pass':
-        if($class->isLogged() && $_SESSION['Perfil'] == 'Admin')
-        {
-          if($class->compruebaCambioPass())
-          {
-            include_once($dirs['inc'] . 'reset_pass.php');
-            if(isset($ERR_MSG)  && $ERR_MSG != '')
-            {
-              header("Location: index.php?ACTION=profesores&ERR_MSG=" . $ERR_MSG);
-            }
-            else
-            {
-              header("Location: index.php?ACTION=profesores&MSG=" . $MSG);
-            }
-          }
-          else
-          {
-            header('Location: index.php');
-          }
-        }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
-      break;
-
-      case 'delete-horario-profesor':
-        if($class->isLogged() && $_SESSION['Perfil'] == 'Admin')
-        {
-          if($class->compruebaCambioPass())
-          {
-            include_once($dirs['inc'] . 'delete-horario-profesor.php');
-            if(isset($ERR_MSG) && $ERR_MSG != '')
-            {
-              header("Location: index.php?ACTION=profesores&ERR_MSG=" . $ERR_MSG);
-            }
-            else
-            {
-              header("Location: index.php?ACTION=profesores&MSG=" . $MSG);
-            }
-          }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          } 
         }
         else
         {
