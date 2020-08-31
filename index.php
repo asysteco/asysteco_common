@@ -254,95 +254,34 @@ if(isset($_GET['ACTION']))
           if($class->compruebaCambioPass())
           {
             $act_horario = 'active';
-            include_once($dirs['inc'] . 'top-nav.php');
-            include_once($dirs['inc'] . 'contenido-horarios.php');
-            include_once($dirs['inc'] . 'errors.php');
-            include_once($dirs['inc'] . 'footer.php');
-          }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
-        }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
-      break;
-    
-      case 'crear-horario':
-        if($class->isLogged())
-        {
-          if($class->compruebaCambioPass())
-          {
-            $act_horario = 'active';
-            $style = "
-            .entrada {
-              display: none;
-            }
-            .btn-react-del {
-              transform: scale(1.4);
-              transition-duration: 0.1s;
-              cursor: pointer;
-            }
-            .btn-react-del:hover {
-              color: #b30c0c;
-              transform: scale(1.6);
-            }
+            switch ($_GET['OPT']) {
+              case 'crear':
+                $style = include_once($dirs['public'] . 'horarios-crear.css');
+                include_once($dirs['inc'] . 'top-nav.php');
+                include_once($dirs['inc'] . 'crear-horario.php');
+              break;
 
-            .btn-react-add {
-              transform: scale(1.4);
-              transition-duration: 0.1s;
-              cursor: pointer;
+              case 'import':
+                $extras = "
+                  $(function (){
+                      $('#fecha_incorpora').datepicker({minDate: +1});
+                  });
+                ";
+                $style = include_once($dirs['public'] . 'horarios-import.css');
+                if (isset($_POST["import"]))
+                {
+                    require_once($dirs['inc'] . 'import-mysql-horario.php');
+                    require_once($dirs['inc'] . 'actualiza_horas.php');
+                }
+                include_once($dirs['inc'] . 'top-nav.php');
+                include_once($dirs['inc'] . 'contenido-import-horario.php');
+              break;
+              
+              default:
+                include_once($dirs['inc'] . 'top-nav.php');
+                include_once($dirs['inc'] . 'contenido-horarios.php');
+              break;
             }
-            .btn-react-add:hover {
-              color: green;
-              transform: scale(1.6);
-            }
-
-            .btn-react-add-more {
-              transition-duration: 0.1s;
-              cursor: pointer;
-            }
-            .btn-react-add-more:hover {
-              color: green;
-              transform: scale(1.2);
-            }
-
-            .btn-react-del-group {
-              transition-duration: 0.1s;
-              cursor: pointer;
-            }
-            .btn-react-del-group:hover {
-              color: #b30c0c;
-              transform: scale(1.2);
-            }
-
-            #select_tipo {
-              background-color: #f6f6f6;
-              border: none;
-              color: #0d0d0d;
-              padding: 15px 32px;
-              text-align: center;
-              text-decoration: none;
-              display: inline-block;
-              font-size: 16px;
-              margin: 5px;
-              width: 85%;
-              border: 2px solid #f6f6f6;
-              -webkit-transition: all 0.5s ease-in-out;
-              -moz-transition: all 0.5s ease-in-out;
-              -ms-transition: all 0.5s ease-in-out;
-              -o-transition: all 0.5s ease-in-out;
-              transition: all 0.5s ease-in-out;
-              -webkit-border-radius: 5px 5px 5px 5px;
-              border-radius: 5px 5px 5px 5px;
-            }
-            ";
-            include_once($dirs['inc'] . 'top-nav.php');
-            include_once($dirs['inc'] . 'crear-horario.php');
             include_once($dirs['inc'] . 'errors.php');
             include_once($dirs['inc'] . 'footer.php');
           }
@@ -559,43 +498,6 @@ if(isset($_GET['ACTION']))
         {
           if($class->compruebaCambioPass())
           {
-            $act_horario = 'active';
-            $extras = "<script>
-            $.datepicker.regional['es'] = {
-            closeText: 'Cerrar',
-            prevText: '< Ant',
-            nextText: 'Sig >',
-            currentText: 'Hoy',
-            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-            monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
-            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-            dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
-            dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
-            weekHeader: 'Sm',
-            dateFormat: 'dd/mm/yy',
-            firstDay: 1,
-            isRTL: false,
-            showMonthAfterYear: false,
-            yearSuffix: ''
-            };
-            $.datepicker.setDefaults($.datepicker.regional['es']);
-        
-            $(function (){
-                $('#fecha_incorpora').datepicker({minDate: +1});
-            });
-            </script>";
-            $style = "
-            input[type=file] {
-              display: inline-block;
-              padding: 6px 12px 6px 0;
-            }";
-            if (isset($_POST["import"]))
-            {
-                require_once($dirs['inc'] . 'import-mysql-horario.php');
-                require_once($dirs['inc'] . 'actualiza_horas.php');
-            }
-            include_once($dirs['inc'] . 'top-nav.php');
-            include_once($dirs['inc'] . 'contenido-import-horario.php');
             include_once($dirs['inc'] . 'errors.php');
             include_once($dirs['inc'] . 'footer.php');
           }
