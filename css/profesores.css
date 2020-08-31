@@ -1,0 +1,37 @@
+.reset_icon {
+transition-duration: 0.4s;
+}
+.reset_icon:hover {
+transform: rotate(360deg) scale(1.4);
+}
+
+.edit_icon, .list_icon {
+transition-duration: 0.2s;
+}
+.edit_icon:hover, .list_icon:hover {
+transform: scale(1.4);
+}
+
+.remove_icon {
+transition-duration: 0.2s;
+}
+.remove_icon:hover {
+transform: scale(1.4);
+color: red;
+}
+
+.add_icon {
+transition-duration: 0.2s;
+}
+.add_icon:hover {
+transform: scale(1.4);
+color: green;
+}
+
+.row_show:hover {
+cursor: pointer;
+}
+#tabla_profesores td, #tabla_profesores th{
+text-align: center;
+vertical-align: middle;
+}

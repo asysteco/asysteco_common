@@ -358,153 +358,50 @@ if(isset($_GET['ACTION']))
         
       break;
     
-      case 'muestra-registros-profesores':
-        if($class->isLogged())
-        {
-          if($class->compruebaCambioPass())
-          {
-            include_once($dirs['inc'] . 'muestra-registros-profesores.php');
-          }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
-        }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
-      break;
-    
-      case 'import-profesorado':
-        if($class->isLogged())
-        {
-          if($class->compruebaCambioPass())
-          {
-            $act_profesores = 'active';
-            $style = "
-            input[type=file] {
-              display: inline-block;
-              padding: 6px 12px 6px 0;
-            }";
-            if (isset($_POST["import"]))
-            {
-				      require_once($dirs['inc'] . 'import-mysql-profesorado.php');
-            }
-            include_once($dirs['inc'] . 'top-nav.php');
-            include_once($dirs['inc'] . 'contenido-import-profesorado.php');
-            include_once($dirs['inc'] . 'errors.php');
-            include_once($dirs['inc'] . 'footer.php');
-          }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
-        }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
-      break;
-    
       case 'profesores':
         if($class->isLogged())
         {
           if($class->compruebaCambioPass())
           {
             $act_profesores = 'active';
-            $extras = "
-              <script>
-              $.datepicker.regional['es'] = {
-                closeText: 'Cerrar',
-                prevText: '< Ant',
-                nextText: 'Sig >',
-                currentText: 'Hoy',
-                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
-                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-                dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
-                dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
-                weekHeader: 'Sm',
-                dateFormat: 'dd/mm/yy',
-                firstDay: 1,
-                isRTL: false,
-                showMonthAfterYear: false,
-                yearSuffix: ''
-              };
-              $.datepicker.setDefaults($.datepicker.regional['es']);
-            </script>";
-            $style = "
-            .reset_icon {
-              transition-duration: 0.4s;
-            }
-            .reset_icon:hover {
-              transform: rotate(360deg) scale(1.4);
-            }
-
-            .edit_icon, .list_icon {
-              transition-duration: 0.2s;
-            }
-            .edit_icon:hover, .list_icon:hover {
-              transform: scale(1.4);
-            }
-
-            .remove_icon {
-              transition-duration: 0.2s;
-            }
-            .remove_icon:hover {
-              transform: scale(1.4);
-              color: red;
-            }
-
-            .add_icon {
-              transition-duration: 0.2s;
-            }
-            .add_icon:hover {
-              transform: scale(1.4);
-              color: green;
-            }
-
-            .row_show:hover {
-              cursor: pointer;
-            }
-            #tabla_profesores td, #tabla_profesores th{
-              text-align: center;
-              vertical-align: middle;
-            }
-            ";
-            if(isset($_GET['profesor']) && $_GET['profesor'] != '')
+            $scripts = '<link rel="stylesheet" href="css/profesores.css">';
+            switch ($_GET['OPT'])
             {
-              include_once($dirs['inc'] . 'contenido-horario-profesor.php');
-            }
-            else
-            {
-              if(isset($_POST['boton']))
-              {
-                if($class->validRegisterProf())
+              case 'import':
+                $style = "
+                  input[type=file] {
+                    display: inline-block;
+                    padding: 6px 12px 6px 0;
+                  }
+                ";
+                if (isset($_POST["import"]))
                 {
-                  header('location: index.php?ACTION=profesores');
+                  require_once($dirs['inc'] . 'import-mysql-profesorado.php');
                 }
-                else
+                include_once($dirs['inc'] . 'top-nav.php');
+                include_once($dirs['inc'] . 'import-profesorado.php');
+              break;
+
+              case 'horario':
+                include_once($dirs['inc'] . 'horario-profesor.php');
+              break;
+
+              case 'registros':
+                include_once($dirs['inc'] . 'muestra-registros-profesores.php');
+              break;
+              
+              default:
+                if(isset($_POST['boton']) && $class->validRegisterProf())
                 {
-                  include_once($dirs['inc'] . 'top-nav.php');
-                  include_once($dirs['inc'] . 'contenido-profesores.php');
-                  include_once($dirs['inc'] . 'errors.php');
-                  include_once($dirs['inc'] . 'footer.php');
+                  header('Location: index.php?ACTION=profesores');
                 }
-              }
-              else
-              {
                 include_once($dirs['inc'] . 'top-nav.php');
                 include_once($dirs['inc'] . 'contenido-profesores.php');
-                include_once($dirs['inc'] . 'errors.php');
-                include_once($dirs['inc'] . 'footer.php');
-              }
+              break;
             }
+            
+            include_once($dirs['inc'] . 'errors.php');
+            include_once($dirs['inc'] . 'footer.php');
           }
           else
           {

@@ -26,7 +26,7 @@ $('#btn-todos-registros-prof').on('click', function() {
     $("#todos-registros").html(""),
     $("#loading-msg").html("Cargando..."),
     $("#loading").show(),
-    $('#todos-registros').load('index.php?ACTION=muestra-registros-profesores'),
+    $('#todos-registros').load('index.php?ACTION=profesores&OPT=registros'),
     $("#loading").delay().fadeOut()
 });
 </script>
