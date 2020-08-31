@@ -75,22 +75,29 @@ if(isset($_GET['ACTION']))
             <script type="text/javascript" src="js/jsqrcode/databr.js"></script>
             ';
             include($dirs['inc'] . 'top-nav.php');
-            switch ($_GET['OPT'])
+            if(isset($_GET['OPT']))
             {
-              case 'Edificio':
-                if(isset($_GET['Numero']))
-                {
-                include($dirs['inc'] . 'home.php');
-                }
-                else
-                {
-                    header('Location: index.php');
-                }
-              break;
-              
-              default:
-                include($dirs['inc'] . 'home.php');
-              break;
+              switch ($_GET['OPT'])
+              {
+                case 'Edificio':
+                  if(isset($_GET['Numero']))
+                  {
+                  include($dirs['inc'] . 'home.php');
+                  }
+                  else
+                  {
+                      header('Location: index.php');
+                  }
+                break;
+                
+                default:
+                  include($dirs['inc'] . 'home.php');
+                break;
+              }
+            }
+            else
+            {
+              include($dirs['inc'] . 'home.php');
             }
 
             include($dirs['inc'] . 'errors.php');
