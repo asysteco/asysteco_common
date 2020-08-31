@@ -257,7 +257,7 @@ if(isset($_GET['ACTION']))
 
             switch ($_GET['OPT']) {
               case 'crear':
-                $style = include_once($dirs['public'] . 'horarios-crear.css');
+                $style = include_once($dirs['public'] . 'css/horarios-crear.css');
                 include_once($dirs['inc'] . 'top-nav.php');
                 include_once($dirs['inc'] . 'crear-horario.php');
               break;
@@ -268,7 +268,7 @@ if(isset($_GET['ACTION']))
                       $('#fecha_incorpora').datepicker({minDate: +1});
                   });
                 ";
-                $style = include_once($dirs['public'] . 'horarios-import.css');
+                $style = include_once($dirs['public'] . 'css/horarios-import.css');
                 if (isset($_POST["import"]))
                 {
                     require_once($dirs['inc'] . 'import-mysql-horario.php');
@@ -279,7 +279,7 @@ if(isset($_GET['ACTION']))
               break;
 
               case 'edit-horario-profesor':
-                $style = include_once($dirs['public'] . 'horarios-edit.css');
+                $style = include_once($dirs['public'] . 'css/horarios-edit.css');
                 include_once($dirs['inc'] . 'top-nav.php');
                 include_once($dirs['inc'] . 'edit-horario-profesor.php');
               break;
