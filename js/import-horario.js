@@ -26,7 +26,7 @@ $('#btn-todos-registros').on('click', function() {
     $("#todos-registros").html(""),
     $("#loading-msg").html("Cargando..."),
     $("#loading").show(),
-    $('#todos-registros').load('index.php?ACTION=muestra-registros-horarios'),
+    $('#todos-registros').load('index.php?ACTION=horarios&OPT=registros'),
     $("#loading").delay().fadeOut()
 });
 $('#fecha_incorpora').keypress(function(e) {

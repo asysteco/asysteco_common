@@ -295,6 +295,10 @@ if(isset($_GET['ACTION']))
               case 'update':
                 include_once($dirs['inc'] . 'actualiza.php');
               break;
+
+              case 'registros':
+                include_once($dirs['inc'] . 'muestra-registros-horarios.php');
+              break;
               
               default:
                 include_once($dirs['inc'] . 'top-nav.php');
