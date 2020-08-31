@@ -152,7 +152,7 @@ if(isset($_GET['ACTION']))
       break;
   
       case 'primer_cambio':
-        $extras = '<link rel="stylesheet" href="css/login-style.css">';
+        $scripts = '<link rel="stylesheet" href="css/login-style.css">';
         include_once($dirs['inc'] . 'valida_primer_cambio.php');
         include_once($dirs['inc'] . 'top-nav.php');
         include_once($dirs['inc'] . 'primer_cambio.php');
@@ -750,69 +750,6 @@ if(isset($_GET['ACTION']))
           $MSG = "Debes iniciar sesión para realizar esta acción.";
           header("Refresh:2; url=index.php");
           include_once($dirs['inc'] . 'msg_modal.php');
-        }
-      break;
-
-      case 'admon_select':
-        if($class->isLogged())
-        {
-          if($class->compruebaCambioPass())
-          {
-            if(isset($_GET['export']) && $_GET['export'] == 'marcajes')
-            {
-              include_once($dirs['inc'] . 'export_marcajes.php');
-            }
-            if(isset($_GET['export']) && $_GET['export'] == 'asistencias')
-            {
-              include_once($dirs['inc'] . 'export_asistencias.php');
-            }
-            elseif(isset($_GET['export']) && $_GET['export'] == 'faltas')
-            {
-              include_once($dirs['inc'] . 'export_faltas.php');
-            }
-            elseif(isset($_GET['export']) && $_GET['export'] == 'horarios')
-            {
-              include_once($dirs['inc'] . 'export_horarios.php');
-            }
-            elseif(isset($_GET['select']) && $_GET['select'] == 'marcajes')
-            {
-              include_once($dirs['inc'] . 'list_marcajes.php');
-            }
-            elseif(isset($_GET['select']) && $_GET['select'] == 'asistencias')
-            {
-              include_once($dirs['inc'] . 'list_asistencias.php');
-            }
-            elseif(isset($_GET['select']) && $_GET['select'] == 'faltas')
-            {
-              include_once($dirs['inc'] . 'list_faltas.php');
-            }
-            elseif(isset($_GET['select']) && $_GET['select'] == 'horarios')
-            {
-              include_once($dirs['inc'] . 'list_horarios.php');
-            }
-            elseif(isset($_GET['select']) && $_GET['select'] == 'fichadi')
-            {
-              include_once($dirs['inc'] . 'ficha_diario.php');
-            }
-            elseif(isset($_GET['select']) && $_GET['select'] == 'fichafe')
-            {
-              include_once($dirs['inc'] . 'ficha_fecha.php');
-            }
-            else
-            {
-              header('Location: index.php');
-            }
-          }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
-        }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dsubdirirs['inc'] . 'msg_modal.php');
         }
       break;
     
