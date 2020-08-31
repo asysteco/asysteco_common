@@ -124,7 +124,7 @@ if(isset($_GET['ACTION']))
               $marcajes = $response->fetch_assoc();
               if($marcajes['num'] > 0)
               {
-                $extras = '<link rel="stylesheet" href="css/form.css">';
+                $scripts = '<link rel="stylesheet" href="css/form.css">';
                 include_once($dirs['inc'] . 'top-nav.php');
                 echo '<div class="container" style="margin-top: 50px;">';
                   echo "<div class='row'>";
