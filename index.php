@@ -78,7 +78,14 @@ if(isset($_GET['ACTION']))
             switch ($_GET['OPT'])
             {
               case 'Edificio':
+                if(isset($_GET['Numero']))
+                {
                 include($dirs['inc'] . 'home.php');
+                }
+                else
+                {
+                    header('Location: index.php');
+                }
               break;
               
               default:
