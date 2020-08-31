@@ -280,35 +280,10 @@ if(isset($_GET['ACTION']))
               
               default:
                 include_once($dirs['inc'] . 'top-nav.php');
-                include_once($dirs['inc'] . 'contenido-horarios.php');
+                include_once($dirs['inc'] . 'horarios.php');
               break;
             }
 
-            include_once($dirs['inc'] . 'errors.php');
-            include_once($dirs['inc'] . 'footer.php');
-          }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
-        }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
-      break;
-        
-      case 'modificar-horario':
-        if($class->isLogged())
-        {
-          if($class->compruebaCambioPass())
-          {
-            $act_horario = 'active';
-            include_once($dirs['inc'] . 'top-nav.php');
-            include_once($dirs['inc'] . 'modificar-horario.php');
-            include_once($dirs['inc'] . 'contenido-horarios.php');
             include_once($dirs['inc'] . 'errors.php');
             include_once($dirs['inc'] . 'footer.php');
           }
