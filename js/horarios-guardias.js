@@ -1,21 +1,21 @@
 
-echo "<script>
+<script>
 $('#anterior-profesor').click(function(){
     $('#guardias-response').load('index.php?ACTION=horarios&OPT=guardias&profesor=$anterior[ID]')
 })
-</script>";
-echo "<script>
+</script>
+<script>
 $('#siguiente-profesor').click(function(){
     $('#guardias-response').load('index.php?ACTION=horarios&OPT=guardias&profesor=$siguiente[ID]')
 })
-</script>";
-echo "<script>
+</script>
+<script>
 $('#select-edit-guardias').on('change', function(){
 profesor = $(this).val(),
 $('#guardias-response').load('index.php?ACTION=horarios&OPT=guardias&profesor='+profesor)
 })
-</script>";
-echo "<script>
+</script>
+<script>
 $('.act').hide();
 $('.act').on('click', function(){
 enlace = $(this).attr('enlace'),
@@ -24,9 +24,9 @@ setTimeout(function(){
 $('#guardias-response').load('index.php?ACTION=horarios&OPT=guardias&profesor='+$n[ID])
 },200)
 });
-</script>";
+</script>
 
-echo "<script>
+<script>
 $('.edificio').on('change', function() {
 edificio = $(this).val(),
 id = $(this).attr('id').split('-'),
@@ -43,4 +43,4 @@ else
     $('#'+plus).show()
 }
 });
-</script>";
+</script>
