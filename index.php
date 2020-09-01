@@ -361,6 +361,7 @@ if(isset($_GET['ACTION']))
                   border-radius: 5px 5px 5px 5px;
                   }
                 ";
+                include_once($dirs['inc'] . 'top-nav.php');
                 include_once($dirs['inc'] . 'edit-guardias.php');
               break;
 
