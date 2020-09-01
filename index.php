@@ -339,15 +339,21 @@ if(isset($_GET['ACTION']))
               break;
 
               case 'edit-guardias':
-                if(isset($_GET['SUBOPT']))
+                switch ($_GET['SUBOPT'])
                 {
-                  include_once($dirs['inc'] . 'update-guardias.php');
-                }
-                else
-                {
-                  $scripts = '<link rel="stylesheet" href="css/horarios-edit-guardias.css">';
-                  include_once($dirs['inc'] . 'top-nav.php');
-                  include_once($dirs['inc'] . 'edit-guardias.php');
+                  case 'add':
+                    include_once($dirs['inc'] . 'update-guardias.php');
+                  break;
+
+                  case 'remove':
+                    include_once($dirs['inc'] . 'update-guardias.php');
+                  break;
+                  
+                  default:
+                    $scripts = '<link rel="stylesheet" href="css/horarios-edit-guardias.css">';
+                    include_once($dirs['inc'] . 'top-nav.php');
+                    include_once($dirs['inc'] . 'edit-guardias.php');
+                  break;
                 }
               break;
 
