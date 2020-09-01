@@ -119,7 +119,7 @@ if(isset($_GET['ACTION']))
       break;
     
       case 'pruebas':
-        $scripts = '<link rel="stylesheet" href="' . $dirs['inc'] . 'estilos.css">';
+        $scripts = '<link rel="stylesheet" href="css/estilos.css">';
         include_once($dirs['inc'] . 'top-nav.php');
         include_once($dirs['inc'] . 'pruebas.php');
         include_once($dirs['inc'] . 'errors.php');
