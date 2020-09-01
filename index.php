@@ -119,6 +119,7 @@ if(isset($_GET['ACTION']))
       break;
     
       case 'pruebas':
+        $style = include_once($dirs['inc'] . 'estilos.php'); 
         include_once($dirs['inc'] . 'top-nav.php');
         include_once($dirs['inc'] . 'pruebas.php');
         include_once($dirs['inc'] . 'errors.php');
