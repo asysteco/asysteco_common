@@ -322,6 +322,22 @@ if(isset($_GET['ACTION']))
                 include_once($dirs['inc'] . 'edit-t-horario.php');
               break;
 
+              case 'edit-crear':
+                include_once($dirs['inc'] . 'edit-crear-horario.php');
+              break;
+
+              case 'update':
+                include_once($dirs['inc'] . 'actualiza.php');
+              break;
+
+              case 'registros':
+                include_once($dirs['inc'] . 'muestra-registros-horarios.php');
+              break;
+
+              case 'guardias':
+                include_once($dirs['inc'] . 'horario-guardias.php');
+              break;
+
               case 'edit-guardias':
                 $style = "
                 #select-edit-guardias {
@@ -345,22 +361,6 @@ if(isset($_GET['ACTION']))
                   border-radius: 5px 5px 5px 5px;
                   }
                 ";
-                include_once($dirs['inc'] . 'edit-guardias.php');
-              break;
-
-              case 'edit-crear':
-                include_once($dirs['inc'] . 'edit-crear-horario.php');
-              break;
-
-              case 'update':
-                include_once($dirs['inc'] . 'actualiza.php');
-              break;
-
-              case 'registros':
-                include_once($dirs['inc'] . 'muestra-registros-horarios.php');
-              break;
-
-              case 'guardias':
                 include_once($dirs['inc'] . 'edit-guardias.php');
               break;
 
