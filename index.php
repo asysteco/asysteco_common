@@ -307,8 +307,8 @@ if(isset($_GET['ACTION']))
                 if (isset($_POST["import"]))
                 {
                     require_once($dirs['inc'] . 'import-mysql-horario.php');
-                    require_once($dirs['inc'] . 'actualiza_horas.php');
-                    if(! isset($ERR_MSG))
+                    $class->updateHoras();
+                    if(! isset($class->ERR_ASYSTECO))
                     {
                         $MSG .= "<br>Horarios actualizados correctamente.";
                         header("Refresh: 0; url=$_SERVER[HTTP_REFERER]");
