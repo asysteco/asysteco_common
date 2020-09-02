@@ -4,14 +4,6 @@
 	border-top: 3px solid #fff;
 }
 
-.footer-copy {
-	color: #9d9d9d;
-}
-
-.footer-redes {
-	color: #9d9d9d;
-}
-
 .main-copy-redes {
 	width: 98%;
 	max-width: 1000px;
@@ -34,6 +26,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
+	color: #9d9d9d;
 }
 
 
