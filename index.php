@@ -308,6 +308,11 @@ if(isset($_GET['ACTION']))
                 {
                     require_once($dirs['inc'] . 'import-mysql-horario.php');
                     require_once($dirs['inc'] . 'actualiza_horas.php');
+                    if(! isset($ERR_MSG))
+                    {
+                        $MSG .= "<br>Horarios actualizados correctamente.";
+                        header("Refresh: 0; url=$_SERVER[HTTP_REFERER]");
+                    }
                 }
                 include_once($dirs['inc'] . 'top-nav.php');
                 include_once($dirs['inc'] . 'import-horario.php');
