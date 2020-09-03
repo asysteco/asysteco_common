@@ -5,7 +5,7 @@
 
 $subrootsplit = preg_split('/\//', $_SERVER['REQUEST_URI']);
 $subroot = '/' . $subrootsplit[1];
-preg_match('/^\/[A-Z]+$/i', $subroot) ? $subroot = $subroot : $subroot = '' ;
+preg_match('/^\/[A-Z-]+$/i', $subroot) ? $subroot = $subroot : $subroot = '' ;
 
 $Titulo = preg_split('/\//', $subroot);
 $Titulo = $Titulo[1];
