@@ -268,6 +268,17 @@ if(isset($_GET['ACTION']))
                 include_once($dirs['inc'] . 'crear-horario.php');
               break;
 
+              case 'apply-now':
+                if($class->tempToValid())
+                {
+                  header("Location: index.php?ACTION=profesores");
+                }
+                else
+                {
+                  $ERR_MSG = $class->ERR_ASYSTECO;
+                }
+              break;
+
               case 'import':
                 $extras = "
                   $(function (){
