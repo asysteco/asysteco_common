@@ -85,10 +85,6 @@ if(isset($_GET['ACTION']))
                   include($dirs['inc'] . 'home.php');
                 break;
               }
-              echo '
-              <script>
-                $("nav").hide();
-              </script>';
             include($dirs['inc'] . 'errors.php');
             include($dirs['inc'] . 'footer.php');
           }
