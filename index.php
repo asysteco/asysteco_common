@@ -402,6 +402,10 @@ if(isset($_GET['ACTION']))
 
             switch ($_GET['OPT'])
             {
+              case 'all':
+                include_once($dirs['inc'] . 'contenido-asistencias-all.php');
+              break;
+
               case 'sesion':
                 $_GET['ID'] = $_SESSION['ID'];
                 include_once($dirs['inc'] . 'contenido-asistencias.php');
@@ -577,7 +581,6 @@ if(isset($_GET['ACTION']))
         {
           if($class->compruebaCambioPass())
           {
-            $act_home = 'active';
             $scripts = '<link rel="stylesheet" href="css/qr-reader.css">';
             $scripts .= '
             <script type="text/javascript" src="js/jsqrcode/grid.js"></script>
