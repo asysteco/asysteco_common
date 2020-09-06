@@ -430,7 +430,7 @@ if(isset($_GET['ACTION']))
       break;
     
       case 'profesores':
-        if($class->isLogged())
+        if($class->isLogged() && $_SESSION['Perfil'] === 'Admin')
         {
           if($class->compruebaCambioPass())
           {
