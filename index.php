@@ -53,40 +53,31 @@ if(isset($_GET['ACTION']))
         {
           if($class->compruebaCambioPass())
           {
-            $act_home = 'active';
-            $scripts = '<link rel="stylesheet" href="css/qr-reader.css">';
-            $scripts .= '
-            <script type="text/javascript" src="js/jsqrcode/grid.js"></script>
-            <script type="text/javascript" src="js/jsqrcode/version.js"></script>
-            <script type="text/javascript" src="js/jsqrcode/detector.js"></script>
-            <script type="text/javascript" src="js/jsqrcode/formatinf.js"></script>
-            <script type="text/javascript" src="js/jsqrcode/errorlevel.js"></script>
-            <script type="text/javascript" src="js/jsqrcode/bitmat.js"></script>
-            <script type="text/javascript" src="js/jsqrcode/datablock.js"></script>
-            <script type="text/javascript" src="js/jsqrcode/bmparser.js"></script>
-            <script type="text/javascript" src="js/jsqrcode/datamask.js"></script>
-            <script type="text/javascript" src="js/jsqrcode/rsdecoder.js"></script>
-            <script type="text/javascript" src="js/jsqrcode/gf256poly.js"></script>
-            <script type="text/javascript" src="js/jsqrcode/gf256.js"></script>
-            <script type="text/javascript" src="js/jsqrcode/decoder.js"></script>
-            <script type="text/javascript" src="js/jsqrcode/qrcode.js"></script>
-            <script type="text/javascript" src="js/jsqrcode/findpat.js"></script>
-            <script type="text/javascript" src="js/jsqrcode/alignpat.js"></script>
-            <script type="text/javascript" src="js/jsqrcode/databr.js"></script>
-            ';
-            include_once($dirs['inc'] . 'top-nav.php');
-              switch ($_GET['OPT'])
+            if($_SESSION['Perfil'] === 'Admin')
+            {
+              $act_home = 'active';
+              $scripts = '<link rel="stylesheet" href="css/profesores.css">';
+              if(isset($_POST['boton']) && $class->validRegisterProf())
               {
-                case 'Edificio':
-                    include($dirs['inc'] . 'home.php');
-                break;
-                
-                default:
-                  include($dirs['inc'] . 'home.php');
-                break;
+                header('Location: index.php?ACTION=profesores');
               }
-            include($dirs['inc'] . 'errors.php');
-            include($dirs['inc'] . 'footer.php');
+              include_once($dirs['inc'] . 'top-nav.php');
+              include_once($dirs['inc'] . 'profesores.php');
+              include($dirs['inc'] . 'errors.php');
+              include($dirs['inc'] . 'footer.php');
+            }
+            elseif($_SESSION['Perfil'] === 'Profesor')
+            {
+              $act_home = 'active';
+              include_once($dirs['inc'] . 'top-nav.php');
+              include_once($dirs['inc'] . 'horarios.php');
+              include($dirs['inc'] . 'errors.php');
+              include($dirs['inc'] . 'footer.php');
+            }
+            else
+            {
+              die('<h1 style="color:red;">Error de proceso...</h1>');
+            }
           }
           else
           {
