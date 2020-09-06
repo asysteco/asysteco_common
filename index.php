@@ -73,13 +73,8 @@ if(isset($_GET['ACTION']))
             <script type="text/javascript" src="js/jsqrcode/findpat.js"></script>
             <script type="text/javascript" src="js/jsqrcode/alignpat.js"></script>
             <script type="text/javascript" src="js/jsqrcode/databr.js"></script>
-            <script>
-              $("nav").hide();
-            </script>
             ';
             include_once($dirs['inc'] . 'top-nav.php');
-            if(isset($_GET['OPT']))
-            {
               switch ($_GET['OPT'])
               {
                 case 'Edificio':
@@ -97,12 +92,10 @@ if(isset($_GET['ACTION']))
                   include($dirs['inc'] . 'home.php');
                 break;
               }
-            }
-            else
-            {
-              include($dirs['inc'] . 'home.php');
-            }
-
+              echo '
+              <script>
+                $("nav").hide();
+              </script>';
             include($dirs['inc'] . 'errors.php');
             include($dirs['inc'] . 'footer.php');
           }
