@@ -73,6 +73,9 @@ if(isset($_GET['ACTION']))
             <script type="text/javascript" src="js/jsqrcode/findpat.js"></script>
             <script type="text/javascript" src="js/jsqrcode/alignpat.js"></script>
             <script type="text/javascript" src="js/jsqrcode/databr.js"></script>
+            <script>
+              $("nav").hiden();
+            </script>
             ';
             include_once($dirs['inc'] . 'top-nav.php');
             if(isset($_GET['OPT']))
