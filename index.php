@@ -394,7 +394,10 @@ if(isset($_GET['ACTION']))
             switch ($_GET['OPT'])
             {
               case 'all':
-                include_once($dirs['inc'] . 'contenido-asistencias-all.php');
+                if($_SESSION['Perfil'] === 'Admin')
+                {
+                  include_once($dirs['inc'] . 'contenido-asistencias-all.php');
+                }
               break;
 
               case 'sesion':
