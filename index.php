@@ -577,11 +577,40 @@ if(isset($_GET['ACTION']))
         {
           if($class->compruebaCambioPass())
           {
-            $act_guardias = 'active';
+            $act_home = 'active';
+            $scripts = '<link rel="stylesheet" href="css/qr-reader.css">';
+            $scripts .= '
+            <script type="text/javascript" src="js/jsqrcode/grid.js"></script>
+            <script type="text/javascript" src="js/jsqrcode/version.js"></script>
+            <script type="text/javascript" src="js/jsqrcode/detector.js"></script>
+            <script type="text/javascript" src="js/jsqrcode/formatinf.js"></script>
+            <script type="text/javascript" src="js/jsqrcode/errorlevel.js"></script>
+            <script type="text/javascript" src="js/jsqrcode/bitmat.js"></script>
+            <script type="text/javascript" src="js/jsqrcode/datablock.js"></script>
+            <script type="text/javascript" src="js/jsqrcode/bmparser.js"></script>
+            <script type="text/javascript" src="js/jsqrcode/datamask.js"></script>
+            <script type="text/javascript" src="js/jsqrcode/rsdecoder.js"></script>
+            <script type="text/javascript" src="js/jsqrcode/gf256poly.js"></script>
+            <script type="text/javascript" src="js/jsqrcode/gf256.js"></script>
+            <script type="text/javascript" src="js/jsqrcode/decoder.js"></script>
+            <script type="text/javascript" src="js/jsqrcode/qrcode.js"></script>
+            <script type="text/javascript" src="js/jsqrcode/findpat.js"></script>
+            <script type="text/javascript" src="js/jsqrcode/alignpat.js"></script>
+            <script type="text/javascript" src="js/jsqrcode/databr.js"></script>
+            ';
             include_once($dirs['inc'] . 'top-nav.php');
-            include_once($dirs['inc'] . 'contenido-guardias.php');
-            include_once($dirs['inc'] . 'errors.php');
-            include_once($dirs['inc'] . 'footer.php');
+              switch ($_GET['OPT'])
+              {
+                case 'Edificio':
+                    include($dirs['inc'] . 'home.php');
+                break;
+                
+                default:
+                  include($dirs['inc'] . 'home.php');
+                break;
+              }
+            include($dirs['inc'] . 'errors.php');
+            include($dirs['inc'] . 'footer.php');
           }
           else
           {
