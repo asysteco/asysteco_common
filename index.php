@@ -509,6 +509,7 @@ if(isset($_GET['ACTION']))
                 {
                   if($class->validRegisterProf())
                   {
+                    $MSG = "Profesor: $_POST[Nombre] con iniciales: $_POST[Iniciales] añadido correctamente";
                     header('Refresh: 1; index.php?ACTION=profesores');
                   }
                   else
