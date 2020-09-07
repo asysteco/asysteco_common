@@ -1,7 +1,7 @@
 
 <script>
 $(function (){
-    $('#fecha-edit').datepicker({ minDate: +1})
+    $('#fecha-edit').datepicker({ minDate: 0})
 });
 $('#fecha-edit').keypress(function(e) {
     e.preventDefault()
