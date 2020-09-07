@@ -448,7 +448,7 @@ if(isset($_GET['ACTION']))
             $act_profesores = 'active';
             switch ($_GET['OPT'])
             {
-              case 'import':
+              case 'import-form':
                 $style = "
                   input[type=file] {
                     display: inline-block;
@@ -459,7 +459,7 @@ if(isset($_GET['ACTION']))
                 include_once($dirs['inc'] . 'import-profesorado.php');
               break;
 
-              case 'import-import':
+              case 'import-csv':
                 $style = "
                   input[type=file] {
                     display: inline-block;
