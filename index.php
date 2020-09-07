@@ -505,9 +505,17 @@ if(isset($_GET['ACTION']))
               break;
               
               case 'add-profesor':
-                if(isset($_POST['add-profesor']) && $_POST['add-profesor'] === 'add' && $class->validRegisterProf())
+                if(isset($_POST['add-profesor']) && $_POST['add-profesor'] === 'add')
                 {
-                  header('Refresh: 1; index.php?ACTION=profesores');
+                  if($class->validRegisterProf())
+                  {
+                    header('Refresh: 1; index.php?ACTION=profesores');
+                  }
+                  else
+                  {
+                    include_once($dirs['inc'] . 'top-nav.php');
+                    include_once($dirs['inc'] . 'form-add-profesor.php');
+                  }
                 }
                 else
                 {
