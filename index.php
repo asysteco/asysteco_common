@@ -279,7 +279,7 @@ if(isset($_GET['ACTION']))
                 }
               break;
 
-              case 'import':
+              case 'import-form':
                 $extras = "
                   $(function (){
                       $('#fecha_incorpora').datepicker({minDate: +1});
@@ -291,6 +291,11 @@ if(isset($_GET['ACTION']))
                     padding: 6px 12px 6px 0;
                   }
                 ";
+                include_once($dirs['inc'] . 'top-nav.php');
+                include_once($dirs['inc'] . 'import-horario.php');
+              break;
+
+              case 'import-csv':
                 if (isset($_POST["import"]))
                 {
                     require_once($dirs['inc'] . 'import-mysql-horario.php');
@@ -298,11 +303,9 @@ if(isset($_GET['ACTION']))
                     if(! isset($class->ERR_ASYSTECO))
                     {
                         $MSG .= "<br>Horarios actualizados correctamente.";
-                        header("Refresh: 0; url=$_SERVER[HTTP_REFERER]");
+                        header("Refresh: 1; $_SERVER[HTTP_REFERER]");
                     }
                 }
-                include_once($dirs['inc'] . 'top-nav.php');
-                include_once($dirs['inc'] . 'import-horario.php');
               break;
 
               case 'edit-horario-profesor':
