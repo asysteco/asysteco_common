@@ -455,12 +455,30 @@ if(isset($_GET['ACTION']))
                     padding: 6px 12px 6px 0;
                   }
                 ";
+                include_once($dirs['inc'] . 'top-nav.php');
+                include_once($dirs['inc'] . 'import-profesorado.php');
+              break;
+
+              case 'import-import':
+                $style = "
+                  input[type=file] {
+                    display: inline-block;
+                    padding: 6px 12px 6px 0;
+                  }
+                ";
                 if (isset($_POST["import"]))
                 {
                   require_once($dirs['inc'] . 'import-mysql-profesorado.php');
                 }
-                include_once($dirs['inc'] . 'top-nav.php');
-                include_once($dirs['inc'] . 'import-profesorado.php');
+
+                if(isset($MSG) && $MSG != '')
+                {
+                  header("Refresh: 2; index.php?ACTION=profesores");
+                }
+                else
+                {
+                  header("Refresh: 2; index.php?ACTION=profesores&OPT=import");
+                }
               break;
 
               case 'registros':
