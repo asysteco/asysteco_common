@@ -504,6 +504,17 @@ if(isset($_GET['ACTION']))
                 include_once($dirs['inc'] . 'form_sustituto.php');
               break;
               
+              case 'add-profesor':
+                if(isset($_POST['add-profesor']) && $_POST['add-profesor'] === 'add' && $class->validRegisterProf())
+                {
+                  header('Refresh: 1; index.php?ACTION=profesores');
+                }
+                else
+                {
+                  include_once($dirs['inc'] . 'form-add-profesor.php');
+                }
+              break;
+              
               case 'add-sustituto':
                 include_once($dirs['inc'] . 'agregar-sustituto.php');
                 if(isset($ERR_MSG)  && $ERR_MSG != '')
@@ -546,10 +557,6 @@ if(isset($_GET['ACTION']))
               
               default:
                 $scripts = '<link rel="stylesheet" href="css/profesores.css">';
-                if(isset($_POST['boton']) && $class->validRegisterProf())
-                {
-                  header('Location: index.php?ACTION=profesores');
-                }
                 include_once($dirs['inc'] . 'top-nav.php');
                 include_once($dirs['inc'] . 'profesores.php');
               break;
