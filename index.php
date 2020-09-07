@@ -511,6 +511,7 @@ if(isset($_GET['ACTION']))
                 }
                 else
                 {
+                  include_once($dirs['inc'] . 'top-nav.php');
                   include_once($dirs['inc'] . 'form-add-profesor.php');
                 }
               break;
