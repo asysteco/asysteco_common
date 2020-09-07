@@ -474,10 +474,12 @@ if(isset($_GET['ACTION']))
                 if(isset($MSG) && $MSG != '')
                 {
                   header("Refresh: 2; index.php?ACTION=profesores");
+                  include_once($dirs['inc'] . 'top-nav.php');
                 }
                 else
                 {
                   header("Refresh: 2; index.php?ACTION=profesores&OPT=import");
+                  include_once($dirs['inc'] . 'top-nav.php');
                 }
               break;
 
