@@ -750,18 +750,15 @@ if(isset($_GET['ACTION']))
         if($class->isLogged())
         {
           if($class->compruebaCambioPass())
-          {
+          {            
             $act_usuario = 'active';
             $extras = "        
               $(function (){
-                  $('#fechainicioasis').datepicker();
-                  $('#fechainifaltas').datepicker();
-                  $('#fechainifichaje').datepicker();
-                  $('#fechainimarc').datepicker();
+                  $('#fechainicio').datepicker();
               });
             ";
             $style = "
-            input[type=text], #select_admon_marcajes, #select_admon_asistencias, #select_admon_horarios {
+            input[type=text], #select_admon {
               width: 25%;
               display: inline-block;
             }
@@ -803,11 +800,11 @@ if(isset($_GET['ACTION']))
                 }
                 elseif(isset($_GET['select']) && $_GET['select'] == 'fichadi')
                 {
-                  include_once($dirs['inc'] . 'ficha_diario.php');
+                  include_once($dirs['inc'] . 'list_fichaje_diario.php');
                 }
                 elseif(isset($_GET['select']) && $_GET['select'] == 'fichafe')
                 {
-                  include_once($dirs['inc'] . 'ficha_fecha.php');
+                  include_once($dirs['inc'] . 'list_fichaje_fecha.php');
                 }
                 else
                 {
@@ -819,10 +816,7 @@ if(isset($_GET['ACTION']))
               include_once($dirs['inc'] . 'top-nav.php');
               include_once($dirs['inc'] . 'menu_admon.php');
               include_once($dirs['public'] . 'js/admon.js');
-              include_once($dirs['public'] . 'js/admon_fecha_asistencias.js');
-              include_once($dirs['public'] . 'js/admon_fecha_faltas.js');
-              include_once($dirs['public'] . 'js/admon_fecha_fichaje.js');
-              include_once($dirs['public'] . 'js/admon_fecha_marcaje.js');
+              include_once($dirs['public'] . 'js/admon_filtrado_fecha.js');
               include_once($dirs['inc'] . 'errors.php');
               include_once($dirs['inc'] . 'footer.php');
               break;
