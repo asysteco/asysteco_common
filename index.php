@@ -540,6 +540,14 @@ if(isset($_GET['ACTION']))
               
               case 'remove-sustituto':
                 include_once($dirs['inc'] . 'retirar-sustituto.php');
+                if(isset($ERR_MSG)  && $ERR_MSG != '')
+                {
+                  header("Location: index.php?ACTION=profesores&ERR_MSG=" . $ERR_MSG);
+                }
+                else
+                {
+                  header("Location: index.php?ACTION=profesores&MSG=" . $MSG);
+                }
               break;
               
               case 'des-act':

@@ -11,11 +11,11 @@ $(window).click(function() {
 	$('.txt').show()
 });
 
-$('.entrada').click(function(event){
+$('.entrada, .txt').click(function(event){
     event.stopPropagation()
 });
 
-$('.txt').on('dblclick', function(){
+$('.txt').on('click', function(){
 	texto=$(this).html(),
 	datos=$(this).attr('id').split('_'),
 	id=datos[1],
