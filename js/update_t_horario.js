@@ -62,7 +62,6 @@ $('.entrada').on('change', function(){
 	
 });
 $('.act').on('click', function(event) {
-	id = $(this).parent().attr('id'),
 	event.preventDefault(),
 	enlace = $(this).attr('enlace'),
 	$('#response').load(encodeURI(enlace)),
