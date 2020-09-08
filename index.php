@@ -303,7 +303,8 @@ if(isset($_GET['ACTION']))
                     if(! isset($class->ERR_ASYSTECO))
                     {
                         $MSG .= "<br>Horarios actualizados correctamente.";
-                        header("Refresh: 1; $_SERVER[HTTP_REFERER]");
+                        header("Refresh: 2; $_SERVER[HTTP_REFERER]");
+                        include_once($dirs['inc'] . 'top-nav.php');
                     }
                 }
               break;
