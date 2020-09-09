@@ -25,6 +25,12 @@ $class = new Asysteco;
 // Iniciamos la conexión a la base de datos
 $class->bdConex($insti_host, $insti_user, $insti_pass, $insti_db);
 
+// Establecemos UTF8 como cotejamiento de caracteres
+if (!$class->conex->set_charset("utf8")) {
+    printf("Error cargando el conjunto de caracteres utf8: %s\n", $class->conex->error);
+    exit();
+}
+
 // Comprobamos si existen horarios para actualizar
 if(! $class->tempToValid())
 {
