@@ -74,9 +74,9 @@ if(isset($_GET['ACTION']))
             }
             elseif($_SESSION['Perfil'] === 'Profesor')
             {
-              $act_home = 'active';
+              $act_qr = 'active';
               include_once($dirs['inc'] . 'top-nav.php');
-              include_once($dirs['inc'] . 'horarios.php');
+              include_once($dirs['inc'] . 'generate_code.php');
               include($dirs['inc'] . 'errors.php');
               include($dirs['inc'] . 'footer.php');
             }
@@ -214,6 +214,7 @@ if(isset($_GET['ACTION']))
         {
           if($class->compruebaCambioPass())
           {
+            $act_qr = 'active';
             include_once($dirs['inc'] . 'top-nav.php');
             include_once($dirs['inc'] . 'generate_code.php');
             include_once($dirs['inc'] . 'errors.php');
@@ -642,6 +643,7 @@ if(isset($_GET['ACTION']))
         {
           if($class->compruebaCambioPass())
           {
+            $act_guardias = 'active';
             $scripts = '<link rel="stylesheet" href="css/qr-reader.css">';
             $scripts .= '
             <script type="text/javascript" src="js/jsqrcode/grid.js"></script>
@@ -916,9 +918,9 @@ else
       }
       elseif($_SESSION['Perfil'] === 'Profesor')
       {
-        $act_home = 'active';
+        $act_qr = 'active';
         include_once($dirs['inc'] . 'top-nav.php');
-        include_once($dirs['inc'] . 'horarios.php');
+        include_once($dirs['inc'] . 'generate_code.php');
         include($dirs['inc'] . 'errors.php');
         include($dirs['inc'] . 'footer.php');
       }
