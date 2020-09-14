@@ -7,7 +7,8 @@
         Valor = datos[3];
         if($('#marcaje-response').load('index.php?ACTION=marcajes&OPT=update&Profesor='+Profesor+'&Fecha='+Fecha+'&Hora='+Hora+'&Valor='+Valor))
         {
-            location.reload()
+            $('#table-container').hide(),
+            setTimeout(function(){location.reload()}, 200)
         }
         else
         {
