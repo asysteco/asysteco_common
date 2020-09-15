@@ -96,8 +96,7 @@
                   }
                   else
                   {
-                    $('#output').load('index.php?ACTION=fichar-asist&criptedval='+encodeURI(val)),
-                    $('.table').load(location.href + ' .table > *')
+                    $('#output').load('index.php?ACTION=admin-login&criptedval='+encodeURI(val))
                   }
                 }
             }
@@ -109,8 +108,8 @@
             
             function showDefaultCanvas() {
                 context.clearRect(0, 0, canvas.width, canvas.height);        
-                context.font = "30px Arial";
-                context.fillText("Lector QR", 55, 130);
+                context.font = "45px Arial";
+                context.fillText("Lector QR", 100, 200);
             }
 
             window.setInterval(() => {
