@@ -111,4 +111,8 @@
                 context.font = "45px Arial";
                 context.fillText("Lector QR", 100, 200);
             }
+            
+            window.setInterval(() => {
+                location.reload();
+            }, 300000);
         </script>
