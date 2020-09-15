@@ -695,22 +695,7 @@ if(isset($_GET['ACTION']))
         }
       break;
 
-      case 'pcp':
-        echo '<script>
-          var userAgent = navigator.userAgent.toLowerCase();
-          var isSupportedBrowser = (/armv.* raspbian chromium/i).test(userAgent);
-          if(isSupportedBrowser)
-          {
-            location.href ="index.php?ACTION=control-presencia";
-          }
-          else
-          {
-            location.href = "index.php";
-          }
-        </script>';
-      break;
-
-      case 'control-presencia':
+      case 'cp':
         echo '
         <!DOCTYPE html>
         <html lang="es">
@@ -728,6 +713,16 @@ if(isset($_GET['ACTION']))
           <script src="js/datepicker_common.js"></script>
           <script src="js/flecha.js"></script>
           <link rel="stylesheet" href="css/qr-reader.css">
+          
+          <script>
+            var userAgent = navigator.userAgent.toLowerCase();
+            var isSupportedBrowser = (/armv.* raspbian chromium/i).test(userAgent);
+            if(! isSupportedBrowser)
+            {
+              location.href = "index.php";
+            }
+          </script>
+
           <script type="text/javascript" src="js/jsqrcode/grid.js"></script>
           <script type="text/javascript" src="js/jsqrcode/version.js"></script>
           <script type="text/javascript" src="js/jsqrcode/detector.js"></script>
@@ -745,7 +740,6 @@ if(isset($_GET['ACTION']))
           <script type="text/javascript" src="js/jsqrcode/findpat.js"></script>
           <script type="text/javascript" src="js/jsqrcode/alignpat.js"></script>
           <script type="text/javascript" src="js/jsqrcode/databr.js"></script>';
-          
         echo '</head>
         <body>';
         echo '<div class="container-fluid" style="margin-top:50px">';
