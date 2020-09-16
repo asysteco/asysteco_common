@@ -352,6 +352,14 @@ if(isset($_GET['ACTION']))
                   case 'add':
                     include_once($dirs['inc'] . 'update-guardias.php');
                   break;
+                  
+                  case 'addt':
+                    include_once($dirs['inc'] . 'update-guardias.php');
+                  break;
+
+                  case 'removet':
+                    include_once($dirs['inc'] . 'update-guardias.php');
+                  break;
 
                   case 'remove':
                     include_once($dirs['inc'] . 'update-guardias.php');

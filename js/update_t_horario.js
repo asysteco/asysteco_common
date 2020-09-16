@@ -67,4 +67,35 @@ $('.act').on('click', function(event) {
 	$('#response').load(encodeURI(enlace)),
 	setTimeout(function(){location.reload()}, 500);
 });
+
+var profesor = $('#profesor').attr('profesor');
+$('.guardia').hide();
+$('.guardia').on('click', function(){
+enlace = $(this).attr('enlace'),
+$('#response').load(enlace),
+setTimeout(function(){location.href = location.href}, 500);
+});
+
+$('.remove-guardia').on('click', function(){
+enlace = $(this).attr('enlace'),
+$('#response').load(enlace),
+setTimeout(function(){location.href = location.href}, 500);
+});
+
+$('.edificio').on('change', function() {
+edificio = $(this).val(),
+id = $(this).attr('id').split('-'),
+plus = 'plus-'+id[1]+'-'+id[2];
+if(edificio == '')
+{
+    $('#'+plus).hide();
+    return
+}
+else
+{
+    enlace = $('#'+plus).attr('enlace'),
+    $('#'+plus).attr('enlace', enlace+'&e='+edificio),
+    $('#'+plus).show()
+}
+});
 </script>
