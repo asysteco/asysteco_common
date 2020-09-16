@@ -493,7 +493,7 @@ if(isset($_GET['ACTION']))
                 }
                 else
                 {
-                  header("Refresh: 2; index.php?ACTION=profesores&OPT=import");
+                  header("Refresh: 4; index.php?ACTION=profesores&OPT=import");
                   include_once($dirs['inc'] . 'top-nav.php');
                 }
               break;
