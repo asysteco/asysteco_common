@@ -2,19 +2,11 @@
 // Iniciamos las variables de sesión con @ para que no nos devuelva warnings si la sesión ya estaba iniciada
 @session_start();
 
-
-$subrootsplit = preg_split('/\//', $_SERVER['REQUEST_URI']);
-$subroot = '/' . $subrootsplit[1];
-preg_match('/^\/[A-Z-]+$/i', $subroot) ? $subroot = $subroot : $subroot = '' ;
-
-$Titulo = preg_split('/\//', $subroot);
-$Titulo = $Titulo[1];
-
-// Requerimos el fichero de configuración de directorios
-require_once(dirname($_SERVER['DOCUMENT_ROOT']) . $subroot . '/inc/dir_config.php');
+$subroot = pathinfo($_SERVER['REQUEST_URI']);
+$subroot = $subroot["dirname"];
 
 // Requerimos el fichero de configuración de variables de conexión
-require_once($basedir . $subdir . '/config_instituto.php');
+require_once(dirname($_SERVER['DOCUMENT_ROOT']) . $subroot . '/config_instituto.php');
 
 // Requerimos la clase Asysteco
 require_once($dirs['class'] . 'Asysteco.php');
@@ -55,7 +47,7 @@ if(isset($_GET['ACTION']))
         {
           require_once($dirs['inc'] . 'login_valida.php');
         }
-        if($class->isLogged())
+        if($class->isLogged($Titulo))
         {
           if($class->compruebaCambioPass())
           {
@@ -113,7 +105,7 @@ if(isset($_GET['ACTION']))
       break;
   
       case 'cambio_pass':
-        if($class->isLogged())
+        if($class->isLogged($Titulo))
         {
           if($class->compruebaCambioPass())
           {
@@ -148,7 +140,7 @@ if(isset($_GET['ACTION']))
       break;
     
       case 'lectivos':
-        if($class->isLogged())
+        if($class->isLogged($Titulo))
         {
           if($class->compruebaCambioPass())
           {
@@ -214,7 +206,7 @@ if(isset($_GET['ACTION']))
       break;
     
       case 'qrcoder':
-        if($class->isLogged())
+        if($class->isLogged($Titulo))
         {
           if($class->compruebaCambioPass())
           {
@@ -238,7 +230,7 @@ if(isset($_GET['ACTION']))
       break;
     
       case 'registrarse':
-        if($class->isLogged())
+        if($class->isLogged($Titulo))
         {
           if($class->compruebaCambioPass())
           {
@@ -265,7 +257,7 @@ if(isset($_GET['ACTION']))
       break;
     
       case 'horarios':
-        if($class->isLogged())
+        if($class->isLogged($Titulo))
         {
           if($class->compruebaCambioPass())
           {
@@ -412,7 +404,7 @@ if(isset($_GET['ACTION']))
       break;
     
       case 'asistencias':
-        if($class->isLogged())
+        if($class->isLogged($Titulo))
         {
           if($class->compruebaCambioPass())
           {
@@ -464,7 +456,7 @@ if(isset($_GET['ACTION']))
       break;
     
       case 'profesores':
-        if($class->isLogged() && $_SESSION['Perfil'] === 'Admin')
+        if($class->isLogged($Titulo) && $_SESSION['Perfil'] === 'Admin')
         {
           if($class->compruebaCambioPass())
           {
@@ -618,7 +610,7 @@ if(isset($_GET['ACTION']))
       break;
     
       case 'marcajes':
-        if($class->isLogged())
+        if($class->isLogged($Titulo))
         {
           if($class->compruebaCambioPass())
           {
@@ -651,7 +643,7 @@ if(isset($_GET['ACTION']))
       break;
     
       case 'guardias':
-        if($class->isLogged())
+        if($class->isLogged($Titulo))
         {
           if($class->compruebaCambioPass())
           {
@@ -764,7 +756,7 @@ if(isset($_GET['ACTION']))
       break;
 
       case 'mensajes':
-        if($class->isLogged())
+        if($class->isLogged($Titulo))
         {
           if($class->compruebaCambioPass())
           {
@@ -812,7 +804,7 @@ if(isset($_GET['ACTION']))
       break;
 
       case 'notificaciones':
-        if($class->isLogged() && $_SESSION['Perfil'] == 'Admin')
+        if($class->isLogged($Titulo) && $_SESSION['Perfil'] == 'Admin')
         {
           if($class->compruebaCambioPass())
           {
@@ -836,7 +828,7 @@ if(isset($_GET['ACTION']))
       break;
 
       case 'admon':
-        if($class->isLogged())
+        if($class->isLogged($Titulo))
         {
           if($class->compruebaCambioPass())
           {            
@@ -925,7 +917,7 @@ if(isset($_GET['ACTION']))
       break;
     
       case 'fichar-asist':
-        if($class->isLogged())
+        if($class->isLogged($Titulo))
         {
           if($class->compruebaCambioPass())
           {
@@ -945,7 +937,7 @@ if(isset($_GET['ACTION']))
       break;
     
       case 'clean_tmp':
-        if($class->isLogged())
+        if($class->isLogged($Titulo))
         {
           if($class->compruebaCambioPass())
           {
@@ -971,7 +963,7 @@ else
   {
     require_once($dirs['inc'] . 'login_valida.php');
   }
-  if($class->isLogged())
+  if($class->isLogged($Titulo))
   {
     if($class->compruebaCambioPass())
     {
