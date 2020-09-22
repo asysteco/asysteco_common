@@ -1,12 +1,13 @@
 <?php
+
 // Iniciamos las variables de sesión con @ para que no nos devuelva warnings si la sesión ya estaba iniciada
 @session_start();
 
-$subroot = pathinfo($_SERVER['REQUEST_URI']);
-preg_match('/[A-Z]+/i', $subroot['dirname']) ? $subroot = $subroot['dirname'] : $subroot = '/Testing' ;
+// Requerimos fichero de configuración esencial de directorios y constantes
+require_once("./config.php");
 
 // Requerimos el fichero de configuración de variables de conexión
-require_once(dirname($_SERVER['DOCUMENT_ROOT']) . $subroot . '/config_instituto.php');
+require_once($dirs['bdConfig']);
 
 // Requerimos la clase Asysteco
 require_once($dirs['class'] . 'Asysteco.php');
