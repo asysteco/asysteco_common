@@ -3,7 +3,7 @@
 @session_start();
 
 $subroot = pathinfo($_SERVER['REQUEST_URI']);
-preg_match('/^\\$/', $subroot['dirname']) ? $subroot = $subroot['dirname'] : $subroot = '/Testing' ;
+preg_match('/[A-Z]+/i', $subroot['dirname']) ? $subroot = $subroot['dirname'] : $subroot = '/Testing' ;
 
 // Requerimos el fichero de configuración de variables de conexión
 require_once(dirname($_SERVER['DOCUMENT_ROOT']) . $subroot . '/config_instituto.php');
