@@ -25,7 +25,7 @@ if (!$class->conex->set_charset("utf8")) {
 }
 
 // Comprobamos si existen horarios para actualizar
-if(! $class->tempToValid())
+if(! $class->horarioTemporalAHorarioReal())
 {
     $ERR_MSG = $class->ERR_ASYSTECO;
     $ERR_MSG .= "
@@ -273,7 +273,7 @@ if(isset($_GET['ACTION']))
               break;
 
               case 'apply-now':
-                if($class->tempToValid())
+                if($class->horarioTemporalAHorarioReal())
                 {
                   header("Location: index.php?ACTION=profesores");
                 }
