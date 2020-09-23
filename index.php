@@ -670,16 +670,7 @@ if(isset($_GET['ACTION']))
             <script type="text/javascript" src="js/jsqrcode/databr.js"></script>
             ';
             include_once($dirs['inc'] . 'top-nav.php');
-              switch ($_GET['OPT'])
-              {
-                case 'Edificio':
-                    include($dirs['inc'] . 'home.php');
-                break;
-                
-                default:
-                  include($dirs['inc'] . 'home.php');
-                break;
-              }
+            include($dirs['inc'] . 'home.php');
             include($dirs['inc'] . 'errors.php');
             include($dirs['inc'] . 'footer.php');
           }
