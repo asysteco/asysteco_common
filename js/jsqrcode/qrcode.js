@@ -77,12 +77,12 @@ qrcode.captureToCanvas = function()
                 qrcode.decode();
             }
             catch(e){       
-                console.log(e);
+                // console.log(e);
                 setTimeout(qrcode.captureToCanvas, 500);
             };
         }
         catch(e){       
-                console.log(e);
+                // console.log(e);
                 setTimeout(qrcode.captureToCanvas, 500);
         };
     }
@@ -100,20 +100,19 @@ qrcode.setWebcam = function(videoId)
             navigator.mediaDevices.enumerateDevices()
             .then(function(devices) {
               devices.forEach(function(device) {
-                console.log("deb1");
+                // console.log("deb1");
                 if (device.kind === 'videoinput') {
                   if(device.label.toLowerCase().search("back") >-1)
                     options=[{'sourceId': device.deviceId}] ;
                 }
-                console.log(device.kind + ": " + device.label +
-                            " id = " + device.deviceId);
+                // console.log(device.kind + ": " + device.label + " id = " + device.deviceId);
               });
             })
             
         }
         catch(e)
         {
-            console.log(e);
+            // console.log(e);
         }
     }
     else{
@@ -204,7 +203,7 @@ qrcode.decode = function(src){
             }
             catch(e)
             {
-                console.log(e);
+                // console.log(e);
                 qrcode.result = "error decoding QR Code";
             }
             if(qrcode.callback!=null)
@@ -233,7 +232,7 @@ qrcode.decode_url = function (s)
   }
   catch(e)
   {
-    console.log(e);
+    // console.log(e);
     escaped = s;
   }
   var ret = "";
@@ -242,7 +241,7 @@ qrcode.decode_url = function (s)
   }
   catch(e)
   {
-    console.log(e);
+    // console.log(e);
     ret = escaped;
   }
   return ret;
@@ -311,7 +310,7 @@ qrcode.process = function(ctx){
     
     var end = new Date().getTime();
     var time = end - start;
-    console.log(time);
+    //console.log(time);
     
     return qrcode.decode_utf8(str);
     //alert("Time:" + time + " Code: "+str);
