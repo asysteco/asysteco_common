@@ -44,7 +44,7 @@
                     updateOutputValue(decodedValue);
                     // Stops scanning
                     autoCaptureStatus = false;
-                    setTimeout(scanAgain, 1200);
+                    setTimeout(scanAgain, 1500);
                 } catch (err) {
                     if (err !== "No se ha podido encontrar la codificación (found 0)") {
                         //throw err;
