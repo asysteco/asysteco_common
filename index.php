@@ -273,7 +273,18 @@ if(isset($_GET['ACTION']))
               break;
 
               case 'apply-now':
-                if($class->horarioTemporalAHorarioReal())
+                if($class->horarioTemporalAHorarioReal($_GET['fecha']))
+                {
+                  header("Location: index.php?ACTION=profesores");
+                }
+                else
+                {
+                  $ERR_MSG = $class->ERR_ASYSTECO;
+                }
+              break;
+
+              case 'cancel-changes':
+                if($class->delHorarioTemporal($_GET['profesor'], $_GET['fecha']))
                 {
                   header("Location: index.php?ACTION=profesores");
                 }
