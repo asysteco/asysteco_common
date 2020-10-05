@@ -724,40 +724,52 @@ if(isset($_GET['ACTION']))
           <script>
             var userAgent = navigator.userAgent.toLowerCase();
             var isSupportedBrowser = (/armv.* raspbian chromium/i).test(userAgent);
-            if(isSupportedBrowser)
+            if(! isSupportedBrowser)
             {
               location.href = "index.php";
             }
-          </script>
+          </script>';
+          
+          if (! $options['QR-reader']) {
+              echo '
+              <script type="text/javascript" src="js/jsqrcode/grid.js"></script>
+              <script type="text/javascript" src="js/jsqrcode/version.js"></script>
+              <script type="text/javascript" src="js/jsqrcode/detector.js"></script>
+              <script type="text/javascript" src="js/jsqrcode/formatinf.js"></script>
+              <script type="text/javascript" src="js/jsqrcode/errorlevel.js"></script>
+              <script type="text/javascript" src="js/jsqrcode/bitmat.js"></script>
+              <script type="text/javascript" src="js/jsqrcode/datablock.js"></script>
+              <script type="text/javascript" src="js/jsqrcode/bmparser.js"></script>
+              <script type="text/javascript" src="js/jsqrcode/datamask.js"></script>
+              <script type="text/javascript" src="js/jsqrcode/rsdecoder.js"></script>
+              <script type="text/javascript" src="js/jsqrcode/gf256poly.js"></script>
+              <script type="text/javascript" src="js/jsqrcode/gf256.js"></script>
+              <script type="text/javascript" src="js/jsqrcode/decoder.js"></script>
+              <script type="text/javascript" src="js/jsqrcode/qrcode.js"></script>
+              <script type="text/javascript" src="js/jsqrcode/findpat.js"></script>
+              <script type="text/javascript" src="js/jsqrcode/alignpat.js"></script>
+              <script type="text/javascript" src="js/jsqrcode/databr.js"></script>';
+            echo '</head>
+            <body>';
 
-          <script type="text/javascript" src="js/jsqrcode/grid.js"></script>
-          <script type="text/javascript" src="js/jsqrcode/version.js"></script>
-          <script type="text/javascript" src="js/jsqrcode/detector.js"></script>
-          <script type="text/javascript" src="js/jsqrcode/formatinf.js"></script>
-          <script type="text/javascript" src="js/jsqrcode/errorlevel.js"></script>
-          <script type="text/javascript" src="js/jsqrcode/bitmat.js"></script>
-          <script type="text/javascript" src="js/jsqrcode/datablock.js"></script>
-          <script type="text/javascript" src="js/jsqrcode/bmparser.js"></script>
-          <script type="text/javascript" src="js/jsqrcode/datamask.js"></script>
-          <script type="text/javascript" src="js/jsqrcode/rsdecoder.js"></script>
-          <script type="text/javascript" src="js/jsqrcode/gf256poly.js"></script>
-          <script type="text/javascript" src="js/jsqrcode/gf256.js"></script>
-          <script type="text/javascript" src="js/jsqrcode/decoder.js"></script>
-          <script type="text/javascript" src="js/jsqrcode/qrcode.js"></script>
-          <script type="text/javascript" src="js/jsqrcode/findpat.js"></script>
-          <script type="text/javascript" src="js/jsqrcode/alignpat.js"></script>
-          <script type="text/javascript" src="js/jsqrcode/databr.js"></script>';
-        echo '</head>
-        <body>';
-        echo '<div class="container-fluid" style="margin-top:50px">';
-          echo "<div class='row'>";
-            echo "<div id='qreader' class='col-xs-12'>";
-              echo "<h1>Acerque el código QR de Administración para iniciar el lector...</h1><br>";
-                include($dirs['inc'] . 'qr-reader-admin-login.php');
+            echo '<div class="container-fluid" style="margin-top:50px">';
+            echo "<div class='row'>";
+              echo "<div id='qreader' class='col-xs-12'>";
+                  include($dirs['inc'] . 'qr-webcam-admin-login.php');
+              echo "</div>";
             echo "</div>";
-          echo "</div>";
-        echo "</div>"; 
-        include_once($dirs['public'] . 'js/qr-reader-admin-login.js');
+          echo "</div>"; 
+            include_once($dirs['public'] . 'js/qr-webcam-admin-login.js');
+          } else {
+            echo '<div class="container-fluid" style="margin-top:50px">';
+            echo "<div class='row'>";
+              echo "<div id='qreader' class='col-xs-12'>";
+                  include($dirs['inc'] . 'qr-reader-admin-login.php');
+              echo "</div>";
+            echo "</div>";
+          echo "</div>"; 
+          include_once($dirs['public'] . 'js/qr-reader-admin-login.js');
+          }
         include($dirs['inc'] . 'errors.php');
         include($dirs['inc'] . 'footer.php');
       break;
