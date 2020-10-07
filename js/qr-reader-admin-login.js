@@ -13,4 +13,7 @@
             $('#QR-lector').focus()
         }, 1500);
     });
+    window.setInterval(() => {
+        location.reload();
+    }, 300000);
 </script>
