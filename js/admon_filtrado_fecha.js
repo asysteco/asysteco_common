@@ -9,7 +9,8 @@ var hrefexasistencias = $('#exportasistencias').attr('enlace');
 var hreffaltas = $('#filtrofaltas').attr('enlace');
 var hrefexfaltas = $('#exportfaltas').attr('enlace');
 var hreffichajes = $('#filtrofichajes').attr('enlace');
-var hrefhorarios = $('#exporthorarios').attr('enlace');
+var hrefhorarios = $('#filtrohorarios').attr('enlace');
+var hrefexhorarios = $('#exporthorarios').attr('enlace');
 var fecha = $('#fechainicio').attr('enlace');
 var fecha2 = $('#fechafin').attr('enlace');
 var profesor = $('#select_admon').val();
@@ -39,7 +40,6 @@ $('#fechafin').on('change', function() {
         $('#exportasistencias').attr('enlace', hrefexasistencias+'&fechainicio='+fecha+'&fechafin='+fecha2+'&profesor='+profesor),
         $('#filtrofaltas').attr('enlace', hreffaltas+'&fechainicio='+fecha+'&fechafin='+fecha2+'&profesor='+profesor),
         $('#exportfaltas').attr('enlace', hrefexfaltas+'&fechainicio='+fecha+'&fechafin='+fecha2+'&profesor='+profesor),
-        $('#exporthorarios').attr('enlace', hrefhorarios+'&profesor='+profesor),
         $('#filtrofichajes').attr('enlace', hreffichajes+'&fechainicio='+fecha+'&fechafin='+fecha2+'&profesor='+profesor)
     }
 });
@@ -53,7 +53,8 @@ $('#select_admon').on('change', function() {
         $('#exportasistencias').attr('enlace', hrefexasistencias+'&profesor='+profesor),
         $('#filtrofaltas').attr('enlace', hreffaltas+'&profesor='+profesor),
         $('#exportfaltas').attr('enlace', hrefexfaltas+'&profesor='+profesor),
-        $('#exporthorarios').attr('enlace', hrefhorarios+'&profesor='+profesor),
+        $('#filtrohorarios').attr('enlace', hrefhorarios+'&profesor='+profesor),
+        $('#exporthorarios').attr('enlace', hrefexhorarios+'&profesor='+profesor),
         $('#filtrofichajes').attr('enlace', hreffichajes+'&profesor='+profesor)
     }
     else
@@ -64,7 +65,6 @@ $('#select_admon').on('change', function() {
         $('#exportasistencias').attr('enlace', hrefexasistencias+'&fechainicio='+fecha+'&fechafin='+fecha2+'&profesor='+profesor),
         $('#filtrofaltas').attr('enlace', hreffaltas+'&fechainicio='+fecha+'&fechafin='+fecha2+'&profesor='+profesor),
         $('#exportfaltas').attr('enlace', hrefexfaltas+'&fechainicio='+fecha+'&fechafin='+fecha2+'&profesor='+profesor),
-        $('#exporthorarios').attr('enlace', hrefhorarios+'&profesor='+profesor),
         $('#filtrofichajes').attr('enlace', hreffichajes+'&fechainicio='+fecha+'&fechafin='+fecha2+'&profesor='+profesor)
     }
 });
