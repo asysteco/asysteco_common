@@ -660,8 +660,7 @@ if(isset($_GET['ACTION']))
           if($class->compruebaCambioPass())
           {
             $act_guardias = 'active';
-            $scripts = '<link rel="stylesheet" href="css/qr-reader.css">
-            <script src="js/scroller.js"></script>';
+            $scripts = '<link rel="stylesheet" href="css/qr-reader.css">';
 
             if (! $options['QR-reader']) {
               $scripts .= '

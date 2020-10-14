@@ -7,3 +7,12 @@ canvas {box-shadow: 4px 6px 15px grey; padding: 2px; border-radius: 10px;}
 #qreader {
     text-align: center;
 }
+.scroller::-webkit-scrollbar {
+    display: none;
+}
+.scroller {
+    max-height: 85vh;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
