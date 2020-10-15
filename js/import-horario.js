@@ -1,11 +1,14 @@
 <script type="text/javascript">
 $(document).ready(function() {
-    $("#frmCSVImport").on("submit", function () {
+    $("#frmCSVImport").on("submit", function (e) {
+        e.preventDefault();
 	    $("#response").attr("class", "");
         $("#response").html("");
         $("#userTable").remove("");
         $("#loading-msg").html("Importando horarios...");
         $("#loading").show();
+        var formData = $(this).serialize();
+        var url = $(this).attr('action');
         var fileType = ".csv";
         var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + fileType + ")$");
         if (!regex.test($("#file").val().toLowerCase())) {
@@ -14,6 +17,15 @@ $(document).ready(function() {
             $("#response").html("Tipo de fichero no válido. Documento válido: <b>" + fileType + "</b>.");
             return false;
         }
+        $.ajax({
+            type:"POST",
+            url: url,
+            data: formData,
+            success:function(datos){
+                alert('khasgfjasf'+datos);
+                $('#file-content').html(datos);
+             }
+        })
         return true;
     });
 });

@@ -310,17 +310,18 @@ if(isset($_GET['ACTION']))
                 include_once($dirs['inc'] . 'import-horario.php');
               break;
 
+              case 'preview':
+                require_once($dirs['inc'] . 'preview-import-horario.php');
+              break;
+
               case 'import-csv':
-                if (isset($_POST["import"]))
+                require_once($dirs['inc'] . 'import-mysql-horario.php');
+                $class->updateHoras();
+                if(! isset($class->ERR_ASYSTECO))
                 {
-                    require_once($dirs['inc'] . 'import-mysql-horario.php');
-                    $class->updateHoras();
-                    if(! isset($class->ERR_ASYSTECO))
-                    {
-                        $MSG .= "<br>Horarios actualizados correctamente.";
-                        header("Refresh: 2; $_SERVER[HTTP_REFERER]");
-                        include_once($dirs['inc'] . 'top-nav.php');
-                    }
+                    $MSG .= "<br>Horarios actualizados correctamente.";
+                    header("Refresh: 2; $_SERVER[HTTP_REFERER]");
+                    include_once($dirs['inc'] . 'top-nav.php');
                 }
               break;
 
