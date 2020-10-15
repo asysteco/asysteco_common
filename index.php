@@ -305,6 +305,9 @@ if(isset($_GET['ACTION']))
                     display: inline-block;
                     padding: 6px 12px 6px 0;
                   }
+                  .format-body {
+                    margin-left: 25px;
+                  }
                 ";
                 include_once($dirs['inc'] . 'top-nav.php');
                 include_once($dirs['inc'] . 'import-horario.php');
