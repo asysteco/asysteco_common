@@ -22,7 +22,6 @@ $(document).ready(function() {
             url: url,
             data: formData,
             success:function(datos){
-                alert('khasgfjasf'+datos);
                 $('#file-content').html(datos);
              }
         })

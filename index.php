@@ -318,7 +318,8 @@ if(isset($_GET['ACTION']))
               break;
 
               case 'import-csv':
-                require_once($dirs['inc'] . 'import-mysql-horario.php');
+                //require_once($dirs['inc'] . 'import-mysql-horario.php');
+                require_once($dirs['inc'] . 'import-mysql-horario-ajax.php');
                 $class->updateHoras();
                 if(! isset($class->ERR_ASYSTECO))
                 {
