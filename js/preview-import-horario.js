@@ -20,8 +20,12 @@ $(document).ready(function (e) {
         $("#err").fadeOut();
       },
       success: function(data) {
+        if (data.match('error-cabecera')) {
+          alert('Error de cabecera, comprueba el formato del fichero.')
+        } else {
           $('#file-content-modal').modal('show'),
-          $('#file-content-preview').html(data);
+          $('#file-content-preview').html(data)
+        }
           $("#loading").fadeOut();
          },
         error: function(e) {
