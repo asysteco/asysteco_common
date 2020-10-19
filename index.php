@@ -964,7 +964,36 @@ if(isset($_GET['ACTION']))
         {
           if($class->compruebaCambioPass())
           {
+            $extras = "
+            $(function (){
+                $('#fichar-manual').datepicker({minDate: -5, maxDate: 0});
+            });
+          ";
+            $scripts = '<link rel="stylesheet" href="css/profesores-sustituir.css">';
+            include_once($dirs['inc'] . 'top-nav.php');
             include_once($dirs['inc'] . 'fichar-manual.php');
+            include_once($dirs['inc'] . 'errors.php');
+            include_once($dirs['inc'] . 'footer.php');
+          }
+          else
+          {
+            header('Location: index.php?ACTION=primer_cambio');
+          }
+        }
+        else
+        {
+          $MSG = "Debes iniciar sesión para realizar esta acción.";
+          header("Refresh:2; url=index.php");
+          include_once($dirs['inc'] . 'msg_modal.php');
+        }
+      break;
+
+      case 'fichar-mysql-manual':
+        if($class->isLogged($Titulo) && $_SESSION['Perfil'] === 'Admin')
+        {
+          if($class->compruebaCambioPass())
+          {
+            include_once($dirs['inc'] . 'fichar-mysql-manual.php');
           }
           else
           {
