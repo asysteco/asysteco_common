@@ -959,6 +959,26 @@ if(isset($_GET['ACTION']))
         }
       break;
     
+      case 'fichar-manual':
+        if($class->isLogged($Titulo) && $_SESSION['Perfil'] === 'Admin')
+        {
+          if($class->compruebaCambioPass())
+          {
+            include_once($dirs['inc'] . 'fichar-manual.php');
+          }
+          else
+          {
+            header('Location: index.php?ACTION=primer_cambio');
+          }
+        }
+        else
+        {
+          $MSG = "Debes iniciar sesión para realizar esta acción.";
+          header("Refresh:2; url=index.php");
+          include_once($dirs['inc'] . 'msg_modal.php');
+        }
+      break;
+    
       case 'clean_tmp':
         if($class->isLogged($Titulo))
         {
