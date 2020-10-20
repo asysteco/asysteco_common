@@ -37,8 +37,7 @@ $(document).ready(function (e) {
     $('.import-data').on('click', function() {
         form = $("#frmCSVImport");
         url = $(form).attr('action');
-        //opt = 'import-csv';
-        opt = 'import-preview';
+        opt = 'import-csv';
         urlPath = url+opt;
         usedMethod = $(form).attr('method');
         $.ajax({
@@ -49,15 +48,18 @@ $(document).ready(function (e) {
          cache: false,
          processData:false,
          beforeSend : function() {
-           //$('#file-content-modal').modal('hide'),
+           $('#file-content-modal').modal('hide'),
            $("#loading-msg").html("Importando horarios...");
            $("#loading").show();
            $("#err").fadeOut();
          },
          success: function(data) {
-          //$('#file-content-modal').modal('show'),
-          //$('#file-content-preview').html(data);
-          alert(data);
+          if (data.match('Error-importar')) {
+            alert('Error al importar fichero.')
+          } else {
+            $('#file-content-modal').modal('show'),
+            $('#file-content-preview').html(data)
+          }
              $("#loading").fadeOut();
              //location.reload();
             },
