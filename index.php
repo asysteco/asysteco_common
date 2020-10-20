@@ -491,6 +491,11 @@ if(isset($_GET['ACTION']))
                 include_once($dirs['inc'] . 'import-profesorado.php');
               break;
 
+              case 'preview':
+                include_once($dirs['inc'] . 'preview-import-profesores.php');
+                
+              break;
+
               case 'import-csv':
                 $style = "
                   input[type=file] {

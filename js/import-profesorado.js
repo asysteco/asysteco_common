@@ -1,4 +1,4 @@
-<script type="text/javascript">
+
 $(document).ready(function() {
     $("#frmCSVImport").on("submit", function () {
 	    $("#response").attr("class", ""),
@@ -17,8 +17,7 @@ $(document).ready(function() {
         return true;
     });
 });
-</script>
-<script>
+
 $(document).ready(function () {
     $('#loading').delay().fadeOut()
 });
@@ -29,9 +28,7 @@ $('#btn-todos-registros-prof').on('click', function() {
     $('#todos-registros').load('index.php?ACTION=profesores&OPT=registros'),
     $("#loading").delay().fadeOut()
 });
-</script>
-<script type="text/javascript">
+
 $(window).on('beforeunload', function(){
     return ;
 });
-</script>
