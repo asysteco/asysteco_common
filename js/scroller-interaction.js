@@ -5,7 +5,7 @@ var wait = 12000;
 var again = 22000;
 
 var top = 'fila_0';
-var bottom = 'fila_25';
+var bottom = 'fila_15';
 
 var action = function() {
   scrollDown();
