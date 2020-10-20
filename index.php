@@ -1013,6 +1013,10 @@ if(isset($_GET['ACTION']))
           include_once($dirs['inc'] . 'msg_modal.php');
         }
       break;
+
+      case 'plantilla':
+        require_once($dirs['inc'] . 'export-plantilla.php');
+      break;
     
       case 'clean_tmp':
         if($class->isLogged($Titulo))
