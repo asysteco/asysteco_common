@@ -1017,6 +1017,10 @@ if(isset($_GET['ACTION']))
       case 'plantilla':
         require_once($dirs['inc'] . 'export-plantilla.php');
       break;
+
+      case 'plantilla-profesores':
+        require_once($dirs['inc'] . 'export-plantilla-profesores.php');
+      break;
     
       case 'clean_tmp':
         if($class->isLogged($Titulo))
