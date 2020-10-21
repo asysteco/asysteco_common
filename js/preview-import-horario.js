@@ -17,11 +17,13 @@ $(document).ready(function (e) {
       {
         $("#loading-msg").html("Importando horarios...");
         $("#loading").show();
+        $("#loading").css('z-index', 99);
         $("#err").fadeOut();
       },
       success: function(data) {
         if (data.match('error-cabecera')) {
-          alert('Error de cabecera, comprueba el formato del fichero.')
+          $('#error-modal').modal('show'),
+          $('#error-content-modal').html('Error de cabecera, comprueba el formato del fichero.')
         } else {
           $('#file-content-modal').modal('show'),
           $('#file-content-preview').html(data)
@@ -40,7 +42,7 @@ $(document).ready(function (e) {
         opt = 'import-csv';
         urlPath = url+opt;
         usedMethod = $(form).attr('method');
-        $.ajax({
+        $.ajax({  
          url: urlPath,
          type: usedMethod,
          data:  new FormData($("#frmCSVImport")[0]),
@@ -55,13 +57,14 @@ $(document).ready(function (e) {
          },
          success: function(data) {
           if (data.match('Error-importar')) {
-            alert('Error al importar fichero.')
+            $('#error-modal').modal('show'),
+            $('#error-content-modal').html('Error al importar fichero.')
           } else {
-            $('#file-content-modal').modal('show'),
-            $('#file-content-preview').html(data)
+            $('#fine-modal').modal('show'),
+            $('#fine-content-modal').html('¡Datos importados con éxito!');
+            setTimeout(function(){location.reload()}, 700);
           }
-             $("#loading").fadeOut();
-             //location.reload();
+          $("#loading").fadeOut();
             },
            error: function(e) {
                $("#err").html(e).fadeIn();
