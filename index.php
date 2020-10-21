@@ -1000,6 +1000,7 @@ if(isset($_GET['ACTION']))
           if($class->compruebaCambioPass())
           {
             include_once($dirs['inc'] . 'fichar-mysql-manual.php');
+            header('Location: index.php?ACTION=asistencias&OPT=all');
           }
           else
           {
