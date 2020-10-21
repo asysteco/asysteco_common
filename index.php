@@ -497,27 +497,8 @@ if(isset($_GET['ACTION']))
               break;
 
               case 'import-csv':
-                $style = "
-                  input[type=file] {
-                    display: inline-block;
-                    padding: 6px 12px 6px 0;
-                  }
-                ";
-                if (isset($_POST["import"]))
-                {
-                  require_once($dirs['inc'] . 'import-mysql-profesorado.php');
-                }
-
-                if(isset($MSG) && $MSG != '')
-                {
-                  header("Refresh: 2; index.php?ACTION=profesores");
-                  include_once($dirs['inc'] . 'top-nav.php');
-                }
-                else
-                {
-                  header("Refresh: 3; index.php?ACTION=profesores&OPT=import");
-                  include_once($dirs['inc'] . 'top-nav.php');
-                }
+                //require_once($dirs['inc'] . 'import-mysql-profesorado.php');
+                  require_once($dirs['inc'] . 'import-mysql-profesorado-ajax.php');
               break;
 
               case 'registros':

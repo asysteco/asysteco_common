@@ -15,7 +15,7 @@ $(document).ready(function (e) {
       processData:false,
       beforeSend : function()
       {
-        $("#loading-msg").html("Importando horarios...");
+        $("#loading-msg").html("Cargando horarios CSV...");
         $("#loading").show();
         $("#loading").css('z-index', 99);
         $("#err").fadeOut();
@@ -53,12 +53,16 @@ $(document).ready(function (e) {
            $('#file-content-modal').modal('hide'),
            $("#loading-msg").html("Importando horarios...");
            $("#loading").show();
+           $("#loading").css('z-index', 99);
            $("#err").fadeOut();
          },
          success: function(data) {
           if (data.match('Error-importar')) {
             $('#error-modal').modal('show'),
             $('#error-content-modal').html('Error al importar fichero.')
+          } else if (data.match('No-profesor')) {
+            $('#error-modal').modal('show'),
+            $('#error-content-modal').html('El fichero CSV contiene iniciales que no hacen referencia a ningún profesor existente.')
           } else {
             $('#fine-modal').modal('show'),
             $('#fine-content-modal').html('¡Datos importados con éxito!');
