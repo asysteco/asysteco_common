@@ -3,6 +3,7 @@
 // Iniciamos las variables de sesión con @ para que no nos devuelva warnings si la sesión ya estaba iniciada
 @session_start();
 
+date_default_timezone_set('Europe/Madrid');
 // Requerimos fichero de configuración esencial de directorios y constantes
 require_once("./config.php");
 
