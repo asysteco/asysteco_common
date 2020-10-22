@@ -874,6 +874,10 @@ if(isset($_GET['ACTION']))
                 {
                   include_once($dirs['inc'] . 'export_horarios.php');
                 }
+                elseif(isset($_GET['export']) && $_GET['export'] == 'profesores')
+                {
+                  include_once($dirs['inc'] . 'export_profesores.php');
+                }
                 elseif(isset($_GET['select']) && $_GET['select'] == 'marcajes')
                 {
                   include_once($dirs['inc'] . 'list_marcajes.php');
