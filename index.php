@@ -1001,8 +1001,8 @@ if(isset($_GET['ACTION']))
         }
       break;
 
-      case 'plantilla':
-        require_once($dirs['inc'] . 'export-plantilla.php');
+      case 'plantilla-horarios':
+        require_once($dirs['inc'] . 'export-plantilla-horarios.php');
       break;
 
       case 'plantilla-profesores':
