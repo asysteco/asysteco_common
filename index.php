@@ -1002,13 +1002,85 @@ if(isset($_GET['ACTION']))
       break;
 
       case 'plantilla-horarios':
-        require_once($dirs['inc'] . 'export-plantilla-horarios.php');
+        if($class->isLogged($Titulo) && $_SESSION['Perfil'] === 'Admin')
+        {
+          if($class->compruebaCambioPass())
+          {
+            require_once($dirs['inc'] . 'export-plantilla-horarios.php');
+          }
+          else
+          {
+            header('Location: index.php?ACTION=primer_cambio');
+          }
+        }
+        else
+        {
+          $MSG = "Debes iniciar sesión para realizar esta acción.";
+          header("Refresh:2; url=index.php");
+          include_once($dirs['inc'] . 'msg_modal.php');
+        }
       break;
 
       case 'plantilla-profesores':
-        require_once($dirs['inc'] . 'export-plantilla-profesores.php');
+        if($class->isLogged($Titulo) && $_SESSION['Perfil'] === 'Admin')
+        {
+          if($class->compruebaCambioPass())
+          {
+            require_once($dirs['inc'] . 'export-plantilla-profesores.php');
+          }
+          else
+          {
+            header('Location: index.php?ACTION=primer_cambio');
+          }
+        }
+        else
+        {
+          $MSG = "Debes iniciar sesión para realizar esta acción.";
+          header("Refresh:2; url=index.php");
+          include_once($dirs['inc'] . 'msg_modal.php');
+        }
       break;
-    
+
+      case 'download_admin_guide':
+        if($class->isLogged($Titulo) && $_SESSION['Perfil'] === 'Admin')
+        {
+          if($class->compruebaCambioPass())
+          {
+            require_once($dirs['inc'] . 'export-guide-admin.php');
+          }
+          else
+          {
+            header('Location: index.php?ACTION=primer_cambio');
+          }
+        }
+        else
+        {
+          $MSG = "Debes iniciar sesión para realizar esta acción.";
+          header("Refresh:2; url=index.php");
+          include_once($dirs['inc'] . 'msg_modal.php');
+        }
+      break;
+
+      case 'download_profesor_guide':
+        if($class->isLogged($Titulo))
+        {
+          if($class->compruebaCambioPass())
+          {
+            require_once($dirs['inc'] . 'export-guide-profesor.php');
+          }
+          else
+          {
+            header('Location: index.php?ACTION=primer_cambio');
+          }
+        }
+        else
+        {
+          $MSG = "Debes iniciar sesión para realizar esta acción.";
+          header("Refresh:2; url=index.php");
+          include_once($dirs['inc'] . 'msg_modal.php');
+        }
+      break;
+
       case 'clean_tmp':
         if($class->isLogged($Titulo))
         {
