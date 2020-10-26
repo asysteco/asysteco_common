@@ -24,6 +24,9 @@ $(document).ready(function (e) {
         if (data.match('error-cabecera')) {
           $('#error-modal').modal('show'),
           $('#error-content-modal').html('Error de cabecera, comprueba el formato del fichero.')
+        } else if (data.match('error-file')) {
+          $('#error-modal').modal('show'),
+          $('#error-content-modal').html('Error de fichero, puede que esté dañado')
         } else {
           $('#file-content-modal').modal('show'),
           $('#file-content-preview').html(data)
