@@ -21,15 +21,14 @@ $class->bdConex($insti_host, $insti_user, $insti_pass, $insti_db);
 
 // Establecemos UTF8 como cotejamiento de caracteres
 if (!$class->conex->set_charset("utf8")) {
-    printf("Error cargando el conjunto de caracteres utf8: %s\n", $class->conex->error);
-    exit();
+  printf("Error cargando el conjunto de caracteres utf8: %s\n", $class->conex->error);
+  exit();
 }
 
 // Comprobamos si existen horarios para actualizar
-if(! $class->horarioTemporalAHorarioReal())
-{
-    $ERR_MSG = $class->ERR_ASYSTECO;
-    $ERR_MSG .= "
+if (!$class->horarioTemporalAHorarioReal()) {
+  $ERR_MSG = $class->ERR_ASYSTECO;
+  $ERR_MSG .= "
     <br>
     <span class='glyphicon glyphicon-warning-sign'> </span> Contacta urgentemente con los administradores de la plataforma.
     <br>
@@ -40,134 +39,107 @@ if(! $class->horarioTemporalAHorarioReal())
 // Si no es así, procedemos a validar el login, si este es correcto cargamos el fichero home.php
 // En su defecto cargaremos el formulario de login
 
-if(isset($_GET['ACTION']))
-{
-    switch($_GET['ACTION'])
-    {
-      default:
-        if(isset($_POST['Iniciales']) || isset($_POST['pass']))
-        {
-          require_once($dirs['inc'] . 'login_valida.php');
-        }
-        if($class->isLogged($Titulo))
-        {
-          if($class->compruebaCambioPass())
-          {
-            if($_SESSION['Perfil'] === 'Admin')
-            {
-              $act_home = 'active';
-              $scripts = '<link rel="stylesheet" href="css/profesores.css">';
-              if(isset($_POST['boton']) && $class->validRegisterProf())
-              {
-                header('Location: index.php?ACTION=profesores');
-              }
-              include_once($dirs['inc'] . 'top-nav.php');
-              include_once($dirs['inc'] . 'profesores.php');
-              include($dirs['inc'] . 'errors.php');
-              include($dirs['inc'] . 'footer.php');
+if (isset($_GET['ACTION'])) {
+  switch ($_GET['ACTION']) {
+    default:
+      if (isset($_POST['Iniciales']) || isset($_POST['pass'])) {
+        require_once($dirs['inc'] . 'login_valida.php');
+      }
+      if ($class->isLogged($Titulo)) {
+        if ($class->compruebaCambioPass()) {
+          if ($_SESSION['Perfil'] === 'Admin') {
+            $act_home = 'active';
+            $scripts = '<link rel="stylesheet" href="css/profesores.css">';
+            if (isset($_POST['boton']) && $class->validRegisterProf()) {
+              header('Location: index.php?ACTION=profesores');
             }
-            elseif($_SESSION['Perfil'] === 'Profesor')
-            {
-              $act_qr = 'active';
-              include_once($dirs['inc'] . 'top-nav.php');
-              include_once($dirs['inc'] . 'generate_code.php');
-              include($dirs['inc'] . 'errors.php');
-              include($dirs['inc'] . 'footer.php');
-            }
-            else
-            {
-              die('<h1 style="color:red;">Error de proceso...</h1>');
-            }
-          }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
-        }
-        else
-        {
-            include_once($dirs['inc'] . 'login_form.php');
-        }
-      break;
-    
-      case 'admin-login':
-        include_once($dirs['inc'] . 'admin-login.php');
-      break;
-    
-      case 'logout':
-        include_once($dirs['inc'] . 'logout.php');
-      break;
-    
-      case 'pruebas':
-        $scripts = '<link rel="stylesheet" href="css/estilos.css">';
-        include_once($dirs['inc'] . 'top-nav.php');
-        include_once($dirs['inc'] . 'pruebas.php');
-        include_once($dirs['inc'] . 'errors.php');
-        include_once($dirs['inc'] . 'footer.php');
-      break;
-  
-      case 'cambio_pass':
-        if($class->isLogged($Titulo))
-        {
-          if($class->compruebaCambioPass())
-          {
-            $act_usuario = 'active';
-            $scripts = '<link rel="stylesheet" href="css/login-style.css">';
-            include_once($dirs['inc'] . 'valida_new_pass.php');
             include_once($dirs['inc'] . 'top-nav.php');
-            include_once($dirs['inc'] . 'new_pass.php');
-            include_once($dirs['inc'] . 'errors.php');
-            include_once($dirs['inc'] . 'footer.php');
+            include_once($dirs['inc'] . 'profesores.php');
+            include($dirs['inc'] . 'errors.php');
+            include($dirs['inc'] . 'footer.php');
+          } elseif ($_SESSION['Perfil'] === 'Profesor') {
+            $act_qr = 'active';
+            include_once($dirs['inc'] . 'top-nav.php');
+            include_once($dirs['inc'] . 'generate_code.php');
+            include($dirs['inc'] . 'errors.php');
+            include($dirs['inc'] . 'footer.php');
+          } else {
+            die('<h1 style="color:red;">Error de proceso...</h1>');
           }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
+        } else {
+          header('Location: index.php?ACTION=primer_cambio');
         }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
+      } else {
+        include_once($dirs['inc'] . 'login_form.php');
+      }
+      break;
+
+    case 'admin-login':
+      include_once($dirs['inc'] . 'admin-login.php');
+      break;
+
+    case 'logout':
+      include_once($dirs['inc'] . 'logout.php');
+      break;
+
+    case 'pruebas':
+      $scripts = '<link rel="stylesheet" href="css/estilos.css">';
+      include_once($dirs['inc'] . 'top-nav.php');
+      include_once($dirs['inc'] . 'pruebas.php');
+      include_once($dirs['inc'] . 'errors.php');
+      include_once($dirs['inc'] . 'footer.php');
+      break;
+
+    case 'cambio_pass':
+      if ($class->isLogged($Titulo)) {
+        if ($class->compruebaCambioPass()) {
+          $act_usuario = 'active';
+          $scripts = '<link rel="stylesheet" href="css/login-style.css">';
+          include_once($dirs['inc'] . 'valida_new_pass.php');
+          include_once($dirs['inc'] . 'top-nav.php');
+          include_once($dirs['inc'] . 'new_pass.php');
+          include_once($dirs['inc'] . 'errors.php');
+          include_once($dirs['inc'] . 'footer.php');
+        } else {
+          header('Location: index.php?ACTION=primer_cambio');
         }
+      } else {
+        $MSG = "Debes iniciar sesión para realizar esta acción.";
+        header("Refresh:2; url=index.php");
+        include_once($dirs['inc'] . 'msg_modal.php');
+      }
       break;
-  
-      case 'primer_cambio':
-        $scripts = '<link rel="stylesheet" href="css/login-style.css">';
-        include_once($dirs['inc'] . 'valida_primer_cambio.php');
-        include_once($dirs['inc'] . 'top-nav.php');
-        include_once($dirs['inc'] . 'primer_cambio.php');
-        include_once($dirs['inc'] . 'errors.php');
-        include_once($dirs['inc'] . 'footer.php');
+
+    case 'primer_cambio':
+      $scripts = '<link rel="stylesheet" href="css/login-style.css">';
+      include_once($dirs['inc'] . 'valida_primer_cambio.php');
+      include_once($dirs['inc'] . 'top-nav.php');
+      include_once($dirs['inc'] . 'primer_cambio.php');
+      include_once($dirs['inc'] . 'errors.php');
+      include_once($dirs['inc'] . 'footer.php');
       break;
-    
-      case 'lectivos':
-        if($class->isLogged($Titulo))
-        {
-          if($class->compruebaCambioPass())
-          {
-            if($response = $class->query("SELECT COUNT(*) as num FROM $class->marcajes"))
-            {
-              $act_cal_escolar = 'active';
-              $marcajes = $response->fetch_assoc();
-              if($marcajes['num'] > 0)
-              {
-                $scripts = '<link rel="stylesheet" href="css/form.css">';
-                include_once($dirs['inc'] . 'top-nav.php');
-                echo '<div class="container" style="margin-top: 50px;">';
-                  echo "<div class='row'>";
-                    echo "<div class='col-xs-12'>";
-                      include_once($dirs['inc'] . 'calendario.php');
-                    echo "</div>";
-                  echo "</div>";
-                echo "</div>";
-                include_once($dirs['inc'] . 'errors.php');
-                include_once($dirs['inc'] . 'footer.php');
-              }
-              else
-              {
-                $scripts = '<link rel="stylesheet" href="css/form.css">';
-                $extras = "
+
+    case 'lectivos':
+      if ($class->isLogged($Titulo)) {
+        if ($class->compruebaCambioPass()) {
+          if ($response = $class->query("SELECT COUNT(*) as num FROM $class->marcajes")) {
+            $act_cal_escolar = 'active';
+            $marcajes = $response->fetch_assoc();
+            if ($marcajes['num'] > 0) {
+              $scripts = '<link rel="stylesheet" href="css/form.css">';
+              include_once($dirs['inc'] . 'top-nav.php');
+              echo '<div class="container" style="margin-top: 50px;">';
+              echo "<div class='row'>";
+              echo "<div class='col-xs-12'>";
+              include_once($dirs['inc'] . 'calendario.php');
+              echo "</div>";
+              echo "</div>";
+              echo "</div>";
+              include_once($dirs['inc'] . 'errors.php');
+              include_once($dirs['inc'] . 'footer.php');
+            } else {
+              $scripts = '<link rel="stylesheet" href="css/form.css">';
+              $extras = "
                   $(function (){
                       $('#datepicker_ini').datepicker();
                   });
@@ -181,481 +153,480 @@ if(isset($_GET['ACTION']))
                       $('#datepicker_fin_fest').datepicker();
                   });
                 ";
-                include_once($dirs['inc'] . 'valida-lectivos.php');
-                include_once($dirs['inc'] . 'top-nav.php');
-                include_once($dirs['inc'] . 'lectivos.php');
-                include_once($dirs['public'] . 'js/lectivos.js');
-                include_once($dirs['inc'] . 'errors.php');
-                include_once($dirs['inc'] . 'footer.php');
-              }
+              include_once($dirs['inc'] . 'valida-lectivos.php');
+              include_once($dirs['inc'] . 'top-nav.php');
+              include_once($dirs['inc'] . 'lectivos.php');
+              include_once($dirs['public'] . 'js/lectivos.js');
+              include_once($dirs['inc'] . 'errors.php');
+              include_once($dirs['inc'] . 'footer.php');
             }
-            else
-            {
-              $ERR_MSG = $class->ERR_ASYSTECO;
-            }
+          } else {
+            $ERR_MSG = $class->ERR_ASYSTECO;
           }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
+        } else {
+          header('Location: index.php?ACTION=primer_cambio');
         }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
+      } else {
+        $MSG = "Debes iniciar sesión para realizar esta acción.";
+        header("Refresh:2; url=index.php");
+        include_once($dirs['inc'] . 'msg_modal.php');
+      }
       break;
-    
-      case 'qrcoder':
-        if($class->isLogged($Titulo))
-        {
-          if($class->compruebaCambioPass())
-          {
-            $act_qr = 'active';
-            include_once($dirs['inc'] . 'top-nav.php');
-            include_once($dirs['inc'] . 'generate_code.php');
-            include_once($dirs['inc'] . 'errors.php');
-            include_once($dirs['inc'] . 'footer.php');
-          }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
-        }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
-      break;
-    
-      case 'registrarse':
-        if($class->isLogged($Titulo))
-        {
-          if($class->compruebaCambioPass())
-          {
-            if(isset($_POST['Nombre']) || isset($_POST['Iniciales']) || isset($_POST['pass1']) || isset($_POST['pass2']))
-            {
-              include_once($dirs['inc'] . 'register_valida.php');
-            }
-            else
-            {
-              include_once($dirs['inc'] . 'register_form.php');
-            }
-          }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
-        }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
-      break;
-    
-      case 'horarios':
-        if($class->isLogged($Titulo))
-        {
-          if($class->compruebaCambioPass())
-          {
-            $act_horario = 'active';
 
-            switch ($_GET['OPT'])
-            {
-              case 'crear':
+    case 'qrcoder':
+      if ($class->isLogged($Titulo)) {
+        if ($class->compruebaCambioPass()) {
+          $act_qr = 'active';
+          include_once($dirs['inc'] . 'top-nav.php');
+          include_once($dirs['inc'] . 'generate_code.php');
+          include_once($dirs['inc'] . 'errors.php');
+          include_once($dirs['inc'] . 'footer.php');
+        } else {
+          header('Location: index.php?ACTION=primer_cambio');
+        }
+      } else {
+        $MSG = "Debes iniciar sesión para realizar esta acción.";
+        header("Refresh:2; url=index.php");
+        include_once($dirs['inc'] . 'msg_modal.php');
+      }
+      break;
+
+    case 'registrarse':
+      if ($class->isLogged($Titulo)) {
+        if ($class->compruebaCambioPass()) {
+          if (isset($_POST['Nombre']) || isset($_POST['Iniciales']) || isset($_POST['pass1']) || isset($_POST['pass2'])) {
+            include_once($dirs['inc'] . 'register_valida.php');
+          } else {
+            include_once($dirs['inc'] . 'register_form.php');
+          }
+        } else {
+          header('Location: index.php?ACTION=primer_cambio');
+        }
+      } else {
+        $MSG = "Debes iniciar sesión para realizar esta acción.";
+        header("Refresh:2; url=index.php");
+        include_once($dirs['inc'] . 'msg_modal.php');
+      }
+      break;
+
+    case 'horarios':
+      if ($class->isLogged($Titulo)) {
+        if ($class->compruebaCambioPass()) {
+          $act_horario = 'active';
+
+          switch ($_GET['OPT']) {
+            case 'crear':
+              if ($_SESSION['Perfil'] == 'Admin') {
                 $scripts = '<link rel="stylesheet" href="css/horarios-crear.css">';
                 include_once($dirs['inc'] . 'top-nav.php');
                 include_once($dirs['inc'] . 'crear-horario.php');
+              } else {
+                $MSG = "Acceso denegado.";
+                header("Refresh:2; url=index.php");
+                include_once($dirs['inc'] . 'msg_modal.php');
+              }
               break;
 
-              case 'apply-now':
-                if($class->horarioTemporalAHorarioReal($_GET['fecha']))
-                {
+            case 'apply-now':
+              if ($class->horarioTemporalAHorarioReal($_GET['fecha'])) {
+                header("Location: index.php?ACTION=profesores");
+              } else {
+                $ERR_MSG = $class->ERR_ASYSTECO;
+              }
+              break;
+
+            case 'cancel-changes':
+              if ($_SESSION['Perfil'] == 'Admin') {
+                if ($class->delHorarioTemporal($_GET['profesor'], $_GET['fecha'])) {
                   header("Location: index.php?ACTION=profesores");
-                }
-                else
-                {
+                } else {
                   $ERR_MSG = $class->ERR_ASYSTECO;
                 }
+              } else {
+                $MSG = "Acceso denegado.";
+                header("Refresh:2; url=index.php");
+                include_once($dirs['inc'] . 'msg_modal.php');
+              }
               break;
 
-              case 'cancel-changes':
-                if($class->delHorarioTemporal($_GET['profesor'], $_GET['fecha']))
-                {
-                  header("Location: index.php?ACTION=profesores");
-                }
-                else
-                {
-                  $ERR_MSG = $class->ERR_ASYSTECO;
-                }
-              break;
-
-              case 'import-form':
+            case 'import-form':
+              if ($_SESSION['Perfil'] == 'Admin') {
                 $extras = "
-                  $(function (){
-                      $('#fecha_incorpora').datepicker({minDate: 0});
-                  });
-                ";
+                    $(function (){
+                        $('#fecha_incorpora').datepicker({minDate: 0});
+                    });
+                  ";
                 $style = "
-                  input[type=file] {
-                    display: inline-block;
-                    padding: 6px 12px 6px 0;
-                  }
-                  .format-body {
-                    margin-left: 25px;
-                  }
-                ";
+                    input[type=file] {
+                      display: inline-block;
+                      padding: 6px 12px 6px 0;
+                    }
+                    .format-body {
+                      margin-left: 25px;
+                    }
+                  ";
                 include_once($dirs['inc'] . 'top-nav.php');
                 include_once($dirs['inc'] . 'import-horario.php');
+              } else {
+                $MSG = "Acceso denegado.";
+                header("Refresh:2; url=index.php");
+                include_once($dirs['inc'] . 'msg_modal.php');
+              }
               break;
 
-              case 'preview':
+            case 'preview':
+              if ($_SESSION['Perfil'] == 'Admin') {
                 require_once($dirs['inc'] . 'preview-import-horario.php');
+              } else {
+                $MSG = "Acceso denegado.";
+                header("Refresh:2; url=index.php");
+                include_once($dirs['inc'] . 'msg_modal.php');
+              }
               break;
 
-              case 'import-csv':
-                //require_once($dirs['inc'] . 'import-mysql-horario.php');
+            case 'import-csv':
+              if ($_SESSION['Perfil'] == 'Admin') {
                 require_once($dirs['inc'] . 'import-mysql-horario-ajax.php');
-                // $class->updateHoras();
-                // if(! isset($class->ERR_ASYSTECO))
-                // {
-                //     $MSG .= "<br>Horarios actualizados correctamente.";
-                //     header("Refresh: 2; $_SERVER[HTTP_REFERER]");
-                //     include_once($dirs['inc'] . 'top-nav.php');
-                // }
+              } else {
+                $MSG = "Acceso denegado.";
+                header("Refresh:2; url=index.php");
+                include_once($dirs['inc'] . 'msg_modal.php');
+              }
               break;
 
-              case 'edit-horario-profesor':
+            case 'edit-horario-profesor':
+              if ($_SESSION['Perfil'] == 'Admin') {
                 $scripts = '<link rel="stylesheet" href="css/horarios-edit.css">';
                 include_once($dirs['inc'] . 'top-nav.php');
                 include_once($dirs['inc'] . 'edit-horario-profesor.php');
+              } else {
+                $MSG = "Acceso denegado.";
+                header("Refresh:2; url=index.php");
+                include_once($dirs['inc'] . 'msg_modal.php');
+              }
               break;
 
-              case 'edit-t':
+            case 'edit-t':
+              if ($_SESSION['Perfil'] == 'Admin') {
                 include_once($dirs['inc'] . 'edit-t-horario.php');
+              } else {
+                $MSG = "Acceso denegado.";
+                header("Refresh:2; url=index.php");
+                include_once($dirs['inc'] . 'msg_modal.php');
+              }
               break;
 
-              case 'edit-crear':
+            case 'edit-crear':
+              if ($_SESSION['Perfil'] == 'Admin') {
                 include_once($dirs['inc'] . 'edit-crear-horario.php');
+              } else {
+                $MSG = "Acceso denegado.";
+                header("Refresh:2; url=index.php");
+                include_once($dirs['inc'] . 'msg_modal.php');
+              }
               break;
 
-              case 'update':
+            case 'update':
+              if ($_SESSION['Perfil'] == 'Admin') {
                 include_once($dirs['inc'] . 'actualiza.php');
+              } else {
+                $MSG = "Acceso denegado.";
+                header("Refresh:2; url=index.php");
+                include_once($dirs['inc'] . 'msg_modal.php');
+              }
               break;
 
-              case 'registros':
+            case 'registros':
+              if ($_SESSION['Perfil'] == 'Admin') {
                 include_once($dirs['inc'] . 'muestra-registros-horarios.php');
+              } else {
+                $MSG = "Acceso denegado.";
+                header("Refresh:2; url=index.php");
+                include_once($dirs['inc'] . 'msg_modal.php');
+              }
               break;
 
-              case 'guardias':
+            case 'guardias':
+              if ($_SESSION['Perfil'] == 'Admin') {
                 include_once($dirs['inc'] . 'horario-guardias.php');
+              } else {
+                $MSG = "Acceso denegado.";
+                header("Refresh:2; url=index.php");
+                include_once($dirs['inc'] . 'msg_modal.php');
+              }
               break;
 
-              case 'edit-guardias':
-                switch ($_GET['SUBOPT'])
-                {
+            case 'edit-guardias':
+              if ($_SESSION['Perfil'] == 'Admin') {
+                switch ($_GET['SUBOPT']) {
                   case 'add':
                     include_once($dirs['inc'] . 'update-guardias.php');
-                  break;
-                  
+                    break;
+
                   case 'addt':
                     include_once($dirs['inc'] . 'update-guardias.php');
-                  break;
+                    break;
 
                   case 'removet':
                     include_once($dirs['inc'] . 'update-guardias.php');
-                  break;
+                    break;
 
                   case 'remove':
                     include_once($dirs['inc'] . 'update-guardias.php');
-                  break;
-                  
+                    break;
+
                   default:
                     $scripts = '<link rel="stylesheet" href="css/horarios-edit-guardias.css">';
                     include_once($dirs['inc'] . 'top-nav.php');
                     include_once($dirs['inc'] . 'edit-guardias.php');
-                  break;
+                    break;
                 }
+              } else {
+                $MSG = "Acceso denegado.";
+                header("Refresh:2; url=index.php");
+                include_once($dirs['inc'] . 'msg_modal.php');
+              }
               break;
 
-              case 'profesor':
+            case 'profesor':
+              if ($_SESSION['Perfil'] == 'Admin') {
                 include_once($dirs['inc'] . 'horario-profesor.php');
+              } else {
+                $MSG = "Acceso denegado.";
+                header("Refresh:2; url=index.php");
+                include_once($dirs['inc'] . 'msg_modal.php');
+              }
               break;
 
-              case 'remove':
+            case 'remove':
+              if ($_SESSION['Perfil'] == 'Admin') {
                 include_once($dirs['inc'] . 'remove-horario-profesor.php');
-                if(isset($ERR_MSG) && $ERR_MSG != '')
-                {
+                if (isset($ERR_MSG) && $ERR_MSG != '') {
                   header("Location: index.php?ACTION=profesores&ERR_MSG=" . $ERR_MSG);
-                }
-                else
-                {
+                } else {
                   header("Location: index.php?ACTION=profesores&MSG=" . $MSG);
                 }
+              } else {
+                $MSG = "Acceso denegado.";
+                header("Refresh:2; url=index.php");
+                include_once($dirs['inc'] . 'msg_modal.php');
+              }
               break;
-              
-              default:
-                include_once($dirs['inc'] . 'top-nav.php');
-                include_once($dirs['inc'] . 'horarios.php');
-              break;
-            }
 
-            include_once($dirs['inc'] . 'errors.php');
-            include_once($dirs['inc'] . 'footer.php');
+            default:
+              include_once($dirs['inc'] . 'top-nav.php');
+              include_once($dirs['inc'] . 'horarios.php');
+              break;
           }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
+
+          include_once($dirs['inc'] . 'errors.php');
+          include_once($dirs['inc'] . 'footer.php');
+        } else {
+          header('Location: index.php?ACTION=primer_cambio');
         }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
+      } else {
+        $MSG = "Debes iniciar sesión para realizar esta acción.";
+        header("Refresh:2; url=index.php");
+        include_once($dirs['inc'] . 'msg_modal.php');
+      }
       break;
-    
-      case 'asistencias':
-        if($class->isLogged($Titulo))
-        {
-          if($class->compruebaCambioPass())
-          {
-            $act_asistencia = 'active';
-            $scripts = '<link rel="stylesheet" href="css/asistencias.css">';
-            $extras = "
+
+    case 'asistencias':
+      if ($class->isLogged($Titulo)) {
+        if ($class->compruebaCambioPass()) {
+          $act_asistencia = 'active';
+          $scripts = '<link rel="stylesheet" href="css/asistencias.css">';
+          $extras = "
               $(function (){
                   $('#busca_asiste').datepicker();
               });
             ";
-            include_once($dirs['inc'] . 'top-nav.php');
+          include_once($dirs['inc'] . 'top-nav.php');
 
-            switch ($_GET['OPT'])
-            {
-              case 'all':
-                if($_SESSION['Perfil'] === 'Admin')
-                {
-                  include_once($dirs['inc'] . 'contenido-asistencias-all.php');
-                }
+          switch ($_GET['OPT']) {
+            case 'all':
+              if ($_SESSION['Perfil'] === 'Admin') {
+                include_once($dirs['inc'] . 'contenido-asistencias-all.php');
+              } else {
+                $MSG = "Acceso denegado.";
+                header("Refresh:2; url=index.php");
+                include_once($dirs['inc'] . 'msg_modal.php');
+              }
               break;
 
-              case 'sesion':
-                $_GET['ID'] = $_SESSION['ID'];
-                include_once($dirs['inc'] . 'contenido-asistencias.php');
+            case 'sesion':
+              $_GET['ID'] = $_SESSION['ID'];
+              include_once($dirs['inc'] . 'contenido-asistencias.php');
               break;
 
-              default:
-                include_once($dirs['inc'] . 'contenido-asistencias.php');
+            default:
+              include_once($dirs['inc'] . 'contenido-asistencias.php');
               break;
-            }
-            
-            include_once('js/filtro_asistencias.js');
-            include_once('js/update_marcajes.js');
-            include_once($dirs['inc'] . 'errors.php');
-            include_once($dirs['inc'] . 'footer.php');
           }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
+
+          include_once('js/filtro_asistencias.js');
+          include_once('js/update_marcajes.js');
+          include_once($dirs['inc'] . 'errors.php');
+          include_once($dirs['inc'] . 'footer.php');
+        } else {
+          header('Location: index.php?ACTION=primer_cambio');
         }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
-        
+      } else {
+        $MSG = "Debes iniciar sesión para realizar esta acción.";
+        header("Refresh:2; url=index.php");
+        include_once($dirs['inc'] . 'msg_modal.php');
+      }
+
       break;
-    
-      case 'profesores':
-        if($class->isLogged($Titulo) && $_SESSION['Perfil'] === 'Admin')
-        {
-          if($class->compruebaCambioPass())
-          {
-            $act_profesores = 'active';
-            switch ($_GET['OPT'])
-            {
-              case 'import-form':
-                $style = "
+
+    case 'profesores':
+      if ($class->isLogged($Titulo) && $_SESSION['Perfil'] === 'Admin') {
+        if ($class->compruebaCambioPass()) {
+          $act_profesores = 'active';
+          switch ($_GET['OPT']) {
+            case 'import-form':
+              $style = "
                   input[type=file] {
                     display: inline-block;
                     padding: 6px 12px 6px 0;
                   }
                 ";
-                include_once($dirs['inc'] . 'top-nav.php');
-                include_once($dirs['inc'] . 'import-profesorado.php');
+              include_once($dirs['inc'] . 'top-nav.php');
+              include_once($dirs['inc'] . 'import-profesorado.php');
               break;
 
-              case 'preview':
-                include_once($dirs['inc'] . 'preview-import-profesores.php');
-                
+            case 'preview':
+              include_once($dirs['inc'] . 'preview-import-profesores.php');
               break;
 
-              case 'import-csv':
-                //require_once($dirs['inc'] . 'import-mysql-profesorado.php');
-                  require_once($dirs['inc'] . 'import-mysql-profesorado-ajax.php');
+            case 'import-csv':
+              //require_once($dirs['inc'] . 'import-mysql-profesorado.php');
+              require_once($dirs['inc'] . 'import-mysql-profesorado-ajax.php');
               break;
 
-              case 'registros':
-                include_once($dirs['inc'] . 'muestra-registros-profesores.php');
+            case 'registros':
+              include_once($dirs['inc'] . 'muestra-registros-profesores.php');
               break;
-              
-              case 'edit':
-                $scripts = '<link rel="stylesheet" href="css/login-style.css">';
-                $scripts .= '<link rel="stylesheet" href="css/profesores-edit.css">';
-                include_once($dirs['inc'] . 'valida_edit_profesor.php');
-                include_once($dirs['inc'] . 'top-nav.php');
-                include_once($dirs['inc'] . 'editar_profesor.php');
+
+            case 'edit':
+              $scripts = '<link rel="stylesheet" href="css/login-style.css">';
+              $scripts .= '<link rel="stylesheet" href="css/profesores-edit.css">';
+              include_once($dirs['inc'] . 'valida_edit_profesor.php');
+              include_once($dirs['inc'] . 'top-nav.php');
+              include_once($dirs['inc'] . 'editar_profesor.php');
               break;
-              
-              case 'sustituir':
-                $scripts = '<link rel="stylesheet" href="css/profesores-sustituir.css">';
-                include_once($dirs['inc'] . 'top-nav.php');
-                include_once($dirs['inc'] . 'form_sustituto.php');
+
+            case 'sustituir':
+              $scripts = '<link rel="stylesheet" href="css/profesores-sustituir.css">';
+              include_once($dirs['inc'] . 'top-nav.php');
+              include_once($dirs['inc'] . 'form_sustituto.php');
               break;
-              
-              case 'add-profesor':
-                if(isset($_POST['add-profesor']) && $_POST['add-profesor'] === 'add')
-                {
-                  if($class->validRegisterProf())
-                  {
-                    $MSG = "Profesor: $_POST[Nombre] con iniciales: $_POST[Iniciales] añadido correctamente";
-                    header('Refresh: 2; index.php?ACTION=profesores');
-                    include_once($dirs['inc'] . 'top-nav.php');
-                  }
-                  else
-                  {
-                    include_once($dirs['inc'] . 'top-nav.php');
-                    include_once($dirs['inc'] . 'form-add-profesor.php');
-                  }
-                }
-                else
-                {
+
+            case 'add-profesor':
+              if (isset($_POST['add-profesor']) && $_POST['add-profesor'] === 'add') {
+                if ($class->validRegisterProf()) {
+                  $MSG = "Profesor: $_POST[Nombre] con iniciales: $_POST[Iniciales] añadido correctamente";
+                  header('Refresh: 2; index.php?ACTION=profesores');
+                  include_once($dirs['inc'] . 'top-nav.php');
+                } else {
                   include_once($dirs['inc'] . 'top-nav.php');
                   include_once($dirs['inc'] . 'form-add-profesor.php');
                 }
-              break;
-              
-              case 'add-sustituto':
-                include_once($dirs['inc'] . 'agregar-sustituto.php');
-                if(isset($ERR_MSG)  && $ERR_MSG != '')
-                {
-                  header("Location: index.php?ACTION=profesores&ERR_MSG=" . $ERR_MSG);
-                }
-                else
-                {
-                  header("Location: index.php?ACTION=profesores&MSG=" . $MSG);
-                }
-              break;
-              
-              case 'remove-sustituto':
-                include_once($dirs['inc'] . 'retirar-sustituto.php');
-                if(isset($ERR_MSG)  && $ERR_MSG != '')
-                {
-                  header("Location: index.php?ACTION=profesores&ERR_MSG=" . $ERR_MSG);
-                }
-                else
-                {
-                  header("Location: index.php?ACTION=profesores&MSG=" . $MSG);
-                }
-              break;
-              
-              case 'des-act':
-                include_once($dirs['inc'] . 'des-act-profesor.php');
-                if(isset($ERR_MSG) && $ERR_MSG != '')
-                {
-                  header("Location: index.php?ACTION=profesores&ERR_MSG=" . $ERR_MSG);
-                }
-                else
-                {
-                  header("Location: index.php?ACTION=profesores&MSG=" . $MSG);
-                }
-              break;
-              
-              case 'reset-pass':
-                include_once($dirs['inc'] . 'reset_pass.php');
-                if(isset($ERR_MSG)  && $ERR_MSG != '')
-                {
-                  header("Location: index.php?ACTION=profesores&ERR_MSG=" . $ERR_MSG);
-                }
-                else
-                {
-                  header("Location: index.php?ACTION=profesores&MSG=" . $MSG);
-                }
-              break;
-              
-              default:
-                $scripts = '<link rel="stylesheet" href="css/profesores.css">';
+              } else {
                 include_once($dirs['inc'] . 'top-nav.php');
-                include_once($dirs['inc'] . 'profesores.php');
+                include_once($dirs['inc'] . 'form-add-profesor.php');
+              }
               break;
-            }
-            
-            include_once($dirs['inc'] . 'errors.php');
-            include_once($dirs['inc'] . 'footer.php');
-          }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          }   
-        }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
-      break;
-    
-      case 'marcajes':
-        if($class->isLogged($Titulo))
-        {
-          if($class->compruebaCambioPass())
-          {
-            switch($_GET['OPT'])
-            {
-              case 'create':
-                include_once($dirs['inc'] . 'marcajes.php');
-              break;
-              
-              case 'update':
-                include_once($dirs['inc'] . 'update-marcajes.php');
-              break;
-              
-              default:
-                header('Location: index.php');
-              break;
-            }
-          }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
-        }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
-      break;
-    
-      case 'guardias':
-        if($class->isLogged($Titulo))
-        {
-          if($class->compruebaCambioPass())
-          {
-            $act_guardias = 'active';
-            $scripts = '<link rel="stylesheet" href="css/qr-reader.css">';
 
-            if (! $options['QR-reader']) {
-              $scripts .= '
+            case 'add-sustituto':
+              include_once($dirs['inc'] . 'agregar-sustituto.php');
+              if (isset($ERR_MSG)  && $ERR_MSG != '') {
+                header("Location: index.php?ACTION=profesores&ERR_MSG=" . $ERR_MSG);
+              } else {
+                header("Location: index.php?ACTION=profesores&MSG=" . $MSG);
+              }
+              break;
+
+            case 'remove-sustituto':
+              include_once($dirs['inc'] . 'retirar-sustituto.php');
+              if (isset($ERR_MSG)  && $ERR_MSG != '') {
+                header("Location: index.php?ACTION=profesores&ERR_MSG=" . $ERR_MSG);
+              } else {
+                header("Location: index.php?ACTION=profesores&MSG=" . $MSG);
+              }
+              break;
+
+            case 'des-act':
+              include_once($dirs['inc'] . 'des-act-profesor.php');
+              if (isset($ERR_MSG) && $ERR_MSG != '') {
+                header("Location: index.php?ACTION=profesores&ERR_MSG=" . $ERR_MSG);
+              } else {
+                header("Location: index.php?ACTION=profesores&MSG=" . $MSG);
+              }
+              break;
+
+            case 'reset-pass':
+              include_once($dirs['inc'] . 'reset_pass.php');
+              if (isset($ERR_MSG)  && $ERR_MSG != '') {
+                header("Location: index.php?ACTION=profesores&ERR_MSG=" . $ERR_MSG);
+              } else {
+                header("Location: index.php?ACTION=profesores&MSG=" . $MSG);
+              }
+              break;
+
+            default:
+              $scripts = '<link rel="stylesheet" href="css/profesores.css">';
+              include_once($dirs['inc'] . 'top-nav.php');
+              include_once($dirs['inc'] . 'profesores.php');
+              break;
+          }
+
+          include_once($dirs['inc'] . 'errors.php');
+          include_once($dirs['inc'] . 'footer.php');
+        } else {
+          header('Location: index.php?ACTION=primer_cambio');
+        }
+      } else {
+        $MSG = "Debes iniciar sesión para realizar esta acción.";
+        header("Refresh:2; url=index.php");
+        include_once($dirs['inc'] . 'msg_modal.php');
+      }
+      break;
+
+    case 'marcajes':
+      if ($class->isLogged($Titulo)) {
+        if ($class->compruebaCambioPass()) {
+          switch ($_GET['OPT']) {
+            case 'create':
+              include_once($dirs['inc'] . 'marcajes.php');
+              break;
+
+            case 'update':
+              include_once($dirs['inc'] . 'update-marcajes.php');
+              break;
+
+            default:
+              header('Location: index.php');
+              break;
+          }
+        } else {
+          header('Location: index.php?ACTION=primer_cambio');
+        }
+      } else {
+        $MSG = "Debes iniciar sesión para realizar esta acción.";
+        header("Refresh:2; url=index.php");
+        include_once($dirs['inc'] . 'msg_modal.php');
+      }
+      break;
+
+    case 'guardias':
+      if ($class->isLogged($Titulo)) {
+        if ($class->compruebaCambioPass()) {
+          $act_guardias = 'active';
+          $scripts = '<link rel="stylesheet" href="css/qr-reader.css">';
+
+          if (!$options['QR-reader']) {
+            $scripts .= '
               <script type="text/javascript" src="js/jsqrcode/grid.js"></script>
               <script type="text/javascript" src="js/jsqrcode/version.js"></script>
               <script type="text/javascript" src="js/jsqrcode/detector.js"></script>
@@ -674,28 +645,24 @@ if(isset($_GET['ACTION']))
               <script type="text/javascript" src="js/jsqrcode/alignpat.js"></script>
               <script type="text/javascript" src="js/jsqrcode/databr.js"></script>
               ';
-            }
-            
-            include_once($dirs['inc'] . 'top-nav.php');
-            include($dirs['inc'] . 'home.php');
-            include($dirs['inc'] . 'errors.php');
-            include($dirs['inc'] . 'footer.php');
           }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
+
+          include_once($dirs['inc'] . 'top-nav.php');
+          include($dirs['inc'] . 'home.php');
+          include($dirs['inc'] . 'errors.php');
+          include($dirs['inc'] . 'footer.php');
+        } else {
+          header('Location: index.php?ACTION=primer_cambio');
         }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
+      } else {
+        $MSG = "Debes iniciar sesión para realizar esta acción.";
+        header("Refresh:2; url=index.php");
+        include_once($dirs['inc'] . 'msg_modal.php');
+      }
       break;
 
-      case 'cp':
-        echo '
+    case 'cp':
+      echo '
         <!DOCTYPE html>
         <html lang="es">
         <head>
@@ -721,9 +688,9 @@ if(isset($_GET['ACTION']))
               location.href = "index.php";
             }
           </script>';
-          
-          if (! $options['QR-reader']) {
-              echo '
+
+      if (!$options['QR-reader']) {
+        echo '
               <script type="text/javascript" src="js/jsqrcode/grid.js"></script>
               <script type="text/javascript" src="js/jsqrcode/version.js"></script>
               <script type="text/javascript" src="js/jsqrcode/detector.js"></script>
@@ -741,174 +708,136 @@ if(isset($_GET['ACTION']))
               <script type="text/javascript" src="js/jsqrcode/findpat.js"></script>
               <script type="text/javascript" src="js/jsqrcode/alignpat.js"></script>
               <script type="text/javascript" src="js/jsqrcode/databr.js"></script>';
-            echo '</head>
+        echo '</head>
             <body>';
 
-            echo '<div class="container-fluid" style="margin-top:50px">';
-            echo "<div class='row'>";
-              echo "<div id='qreader' class='col-xs-12'>";
-                  include($dirs['inc'] . 'qr-webcam-admin-login.php');
-              echo "</div>";
-            echo "</div>";
-          echo "</div>"; 
-            include_once($dirs['public'] . 'js/qr-webcam-admin-login.js');
-          } else {
-            echo '<div class="container-fluid" style="margin-top:50px">';
-            echo "<div class='row'>";
-              echo "<div id='qreader' class='col-xs-12'>";
-                  include($dirs['inc'] . 'qr-reader-admin-login.php');
-              echo "</div>";
-            echo "</div>";
-          echo "</div>"; 
-          include_once($dirs['public'] . 'js/qr-reader-admin-login.js');
-          }
-        include($dirs['inc'] . 'errors.php');
-        include($dirs['inc'] . 'footer.php');
+        echo '<div class="container-fluid" style="margin-top:50px">';
+        echo "<div class='row'>";
+        echo "<div id='qreader' class='col-xs-12'>";
+        include($dirs['inc'] . 'qr-webcam-admin-login.php');
+        echo "</div>";
+        echo "</div>";
+        echo "</div>";
+        include_once($dirs['public'] . 'js/qr-webcam-admin-login.js');
+      } else {
+        echo '<div class="container-fluid" style="margin-top:50px">';
+        echo "<div class='row'>";
+        echo "<div id='qreader' class='col-xs-12'>";
+        include($dirs['inc'] . 'qr-reader-admin-login.php');
+        echo "</div>";
+        echo "</div>";
+        echo "</div>";
+        include_once($dirs['public'] . 'js/qr-reader-admin-login.js');
+      }
+      include($dirs['inc'] . 'errors.php');
+      include($dirs['inc'] . 'footer.php');
       break;
 
-      case 'mensajes':
-        if($class->isLogged($Titulo))
-        {
-          if($class->compruebaCambioPass())
-          {
-            $act_usuario = 'active';
-            $scripts = '<link rel="stylesheet" href="css/mensajes.css">';
-            $scripts .= '<link rel="stylesheet" href="css/message.css">';
-            $extras = '
+    case 'mensajes':
+      if ($class->isLogged($Titulo)) {
+        if ($class->compruebaCambioPass()) {
+          $act_usuario = 'active';
+          $scripts = '<link rel="stylesheet" href="css/mensajes.css">';
+          $scripts .= '<link rel="stylesheet" href="css/message.css">';
+          $extras = '
               $( function() {
                 $( "#tabs" ).tabs();
               } );
             ';
 
-            switch ($_GET['OPT'])
-            {
-              case 'add':
-                include_once($dirs['inc'] . 'enviar_mensaje.php');
+          switch ($_GET['OPT']) {
+            case 'add':
+              include_once($dirs['inc'] . 'enviar_mensaje.php');
               break;
 
-              case 'remove':
-                include_once($dirs['inc'] . 'eliminar_mensaje.php');
+            case 'remove':
+              include_once($dirs['inc'] . 'eliminar_mensaje.php');
               break;
-              
-              default:
-                include_once($dirs['inc'] . 'top-nav.php');
-                include_once($dirs['inc'] . 'form_mensajes.php');
-                include_once($dirs['inc'] . 'listar_mensajes.php');
-                include_once($dirs['public'] . 'js/menu_mensaje.js');
-              break;
-            }
 
-            include_once($dirs['inc'] . 'errors.php');
-            include_once($dirs['inc'] . 'footer.php');
+            default:
+              include_once($dirs['inc'] . 'top-nav.php');
+              include_once($dirs['inc'] . 'form_mensajes.php');
+              include_once($dirs['inc'] . 'listar_mensajes.php');
+              include_once($dirs['public'] . 'js/menu_mensaje.js');
+              break;
           }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
+
+          include_once($dirs['inc'] . 'errors.php');
+          include_once($dirs['inc'] . 'footer.php');
+        } else {
+          header('Location: index.php?ACTION=primer_cambio');
         }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
+      } else {
+        $MSG = "Debes iniciar sesión para realizar esta acción.";
+        header("Refresh:2; url=index.php");
+        include_once($dirs['inc'] . 'msg_modal.php');
+      }
       break;
 
-      case 'notificaciones':
-        if($class->isLogged($Titulo) && $_SESSION['Perfil'] == 'Admin')
-        {
-          if($class->compruebaCambioPass())
-          {
-            $act_usuario = 'active';
-            include_once($dirs['inc'] . 'top-nav.php');
-            include_once($dirs['inc'] . 'notificaciones.php');
-            include_once($dirs['inc'] . 'errors.php');
-            include_once($dirs['inc'] . 'footer.php');
-          }
-          else
-          {
-            header('Location: index.php');
-          }
+    case 'notificaciones':
+      if ($class->isLogged($Titulo) && $_SESSION['Perfil'] == 'Admin') {
+        if ($class->compruebaCambioPass()) {
+          $act_usuario = 'active';
+          include_once($dirs['inc'] . 'top-nav.php');
+          include_once($dirs['inc'] . 'notificaciones.php');
+          include_once($dirs['inc'] . 'errors.php');
+          include_once($dirs['inc'] . 'footer.php');
+        } else {
+          header('Location: index.php');
         }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
+      } else {
+        $MSG = "Debes iniciar sesión para realizar esta acción.";
+        header("Refresh:2; url=index.php");
+        include_once($dirs['inc'] . 'msg_modal.php');
+      }
       break;
 
-      case 'admon':
-        if($class->isLogged($Titulo))
-        {
-          if($class->compruebaCambioPass())
-          {            
-            $act_usuario = 'active';
-            $extras = "        
+    case 'admon':
+      if ($class->isLogged($Titulo) && $_SESSION['Perfil'] == 'Admin') {
+        if ($class->compruebaCambioPass()) {
+          $act_usuario = 'active';
+          $extras = "        
               $(function (){
                   $('#fechainicio').datepicker();
               });
             ";
-            $style = "
+          $style = "
             input[type=text], #select_admon {
               width: 25%;
               display: inline-block;
             }
             ";
-            switch ($_GET['OPT'])
-            {
-              case 'select':
-                if(isset($_GET['export']) && $_GET['export'] == 'marcajes')
-                {
-                  include_once($dirs['inc'] . 'export_marcajes.php');
-                }
-                if(isset($_GET['export']) && $_GET['export'] == 'asistencias')
-                {
-                  include_once($dirs['inc'] . 'export_asistencias.php');
-                }
-                elseif(isset($_GET['export']) && $_GET['export'] == 'faltas')
-                {
-                  include_once($dirs['inc'] . 'export_faltas.php');
-                }
-                elseif(isset($_GET['export']) && $_GET['export'] == 'horarios')
-                {
-                  include_once($dirs['inc'] . 'export_horarios.php');
-                }
-                elseif(isset($_GET['export']) && $_GET['export'] == 'profesores')
-                {
-                  include_once($dirs['inc'] . 'export_profesores.php');
-                }
-                elseif(isset($_GET['select']) && $_GET['select'] == 'marcajes')
-                {
-                  include_once($dirs['inc'] . 'list_marcajes.php');
-                }
-                elseif(isset($_GET['select']) && $_GET['select'] == 'asistencias')
-                {
-                  include_once($dirs['inc'] . 'list_asistencias.php');
-                }
-                elseif(isset($_GET['select']) && $_GET['select'] == 'faltas')
-                {
-                  include_once($dirs['inc'] . 'list_faltas.php');
-                }
-                elseif(isset($_GET['select']) && $_GET['select'] == 'horarios')
-                {
-                  include_once($dirs['inc'] . 'list_horarios.php');
-                }
-                elseif(isset($_GET['select']) && $_GET['select'] == 'fichadi')
-                {
-                  include_once($dirs['inc'] . 'list_fichaje_diario.php');
-                }
-                elseif(isset($_GET['select']) && $_GET['select'] == 'fichafe')
-                {
-                  include_once($dirs['inc'] . 'list_fichaje_fecha.php');
-                }
-                else
-                {
-                  header('Location: index.php');
-                }
+          switch ($_GET['OPT']) {
+            case 'select':
+              if (isset($_GET['export']) && $_GET['export'] == 'marcajes') {
+                include_once($dirs['inc'] . 'export_marcajes.php');
+              }
+              if (isset($_GET['export']) && $_GET['export'] == 'asistencias') {
+                include_once($dirs['inc'] . 'export_asistencias.php');
+              } elseif (isset($_GET['export']) && $_GET['export'] == 'faltas') {
+                include_once($dirs['inc'] . 'export_faltas.php');
+              } elseif (isset($_GET['export']) && $_GET['export'] == 'horarios') {
+                include_once($dirs['inc'] . 'export_horarios.php');
+              } elseif (isset($_GET['export']) && $_GET['export'] == 'profesores') {
+                include_once($dirs['inc'] . 'export_profesores.php');
+              } elseif (isset($_GET['select']) && $_GET['select'] == 'marcajes') {
+                include_once($dirs['inc'] . 'list_marcajes.php');
+              } elseif (isset($_GET['select']) && $_GET['select'] == 'asistencias') {
+                include_once($dirs['inc'] . 'list_asistencias.php');
+              } elseif (isset($_GET['select']) && $_GET['select'] == 'faltas') {
+                include_once($dirs['inc'] . 'list_faltas.php');
+              } elseif (isset($_GET['select']) && $_GET['select'] == 'horarios') {
+                include_once($dirs['inc'] . 'list_horarios.php');
+              } elseif (isset($_GET['select']) && $_GET['select'] == 'fichadi') {
+                include_once($dirs['inc'] . 'list_fichaje_diario.php');
+              } elseif (isset($_GET['select']) && $_GET['select'] == 'fichafe') {
+                include_once($dirs['inc'] . 'list_fichaje_fecha.php');
+              } else {
+                header('Location: index.php');
+              }
               break;
-              
-              default:
+
+            default:
               include_once($dirs['inc'] . 'top-nav.php');
               include_once($dirs['inc'] . 'menu_admon.php');
               include_once($dirs['public'] . 'js/admon_filtrado_fecha.js');
@@ -916,235 +845,168 @@ if(isset($_GET['ACTION']))
               include_once($dirs['inc'] . 'errors.php');
               include_once($dirs['inc'] . 'footer.php');
               break;
-            }
           }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
+        } else {
+          header('Location: index.php?ACTION=primer_cambio');
         }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
+      } else {
+        $MSG = "Debes iniciar sesión para realizar esta acción.";
+        header("Refresh:2; url=index.php");
+        include_once($dirs['inc'] . 'msg_modal.php');
+      }
       break;
-    
-      case 'fichar-asist':
-        if($class->isLogged($Titulo))
-        {
-          if($class->compruebaCambioPass())
-          {
-            include_once($dirs['inc'] . 'fichar-asistencia.php');
-          }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
+
+    case 'fichar-asist':
+      if ($class->isLogged($Titulo) && $_SESSION['Perfil'] == 'Admin') {
+        if ($class->compruebaCambioPass()) {
+          include_once($dirs['inc'] . 'fichar-asistencia.php');
+        } else {
+          header('Location: index.php?ACTION=primer_cambio');
         }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
+      } else {
+        $MSG = "Debes iniciar sesión para realizar esta acción.";
+        header("Refresh:2; url=index.php");
+        include_once($dirs['inc'] . 'msg_modal.php');
+      }
       break;
-    
-      case 'fichar-manual':
-        if($class->isLogged($Titulo) && $_SESSION['Perfil'] === 'Admin')
-        {
-          if($class->compruebaCambioPass())
-          {
-            $extras = "
+
+    case 'fichar-manual':
+      if ($class->isLogged($Titulo) && $_SESSION['Perfil'] === 'Admin') {
+        if ($class->compruebaCambioPass()) {
+          $extras = "
             $(function (){
                 $('#fichar-manual').datepicker({minDate: -5, maxDate: 0});
             });
           ";
-            $scripts = '<link rel="stylesheet" href="css/profesores-sustituir.css">';
-            include_once($dirs['inc'] . 'top-nav.php');
-            include_once($dirs['inc'] . 'fichar-manual.php');
-            include_once($dirs['inc'] . 'errors.php');
-            include_once($dirs['inc'] . 'footer.php');
-          }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
+          $scripts = '<link rel="stylesheet" href="css/profesores-sustituir.css">';
+          include_once($dirs['inc'] . 'top-nav.php');
+          include_once($dirs['inc'] . 'fichar-manual.php');
+          include_once($dirs['inc'] . 'errors.php');
+          include_once($dirs['inc'] . 'footer.php');
+        } else {
+          header('Location: index.php?ACTION=primer_cambio');
         }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
+      } else {
+        $MSG = "Debes iniciar sesión para realizar esta acción.";
+        header("Refresh:2; url=index.php");
+        include_once($dirs['inc'] . 'msg_modal.php');
+      }
       break;
 
-      case 'fichar-mysql-manual':
-        if($class->isLogged($Titulo) && $_SESSION['Perfil'] === 'Admin')
-        {
-          if($class->compruebaCambioPass())
-          {
-            include_once($dirs['inc'] . 'fichar-mysql-manual.php');
-            header('Location: index.php?ACTION=asistencias&OPT=all');
-          }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
+    case 'fichar-mysql-manual':
+      if ($class->isLogged($Titulo) && $_SESSION['Perfil'] === 'Admin') {
+        if ($class->compruebaCambioPass()) {
+          include_once($dirs['inc'] . 'fichar-mysql-manual.php');
+          header('Location: index.php?ACTION=asistencias&OPT=all');
+        } else {
+          header('Location: index.php?ACTION=primer_cambio');
         }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
+      } else {
+        $MSG = "Debes iniciar sesión para realizar esta acción.";
+        header("Refresh:2; url=index.php");
+        include_once($dirs['inc'] . 'msg_modal.php');
+      }
       break;
 
-      case 'plantilla-horarios':
-        if($class->isLogged($Titulo) && $_SESSION['Perfil'] === 'Admin')
-        {
-          if($class->compruebaCambioPass())
-          {
-            require_once($dirs['inc'] . 'export-plantilla-horarios.php');
-          }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
+    case 'plantilla-horarios':
+      if ($class->isLogged($Titulo) && $_SESSION['Perfil'] === 'Admin') {
+        if ($class->compruebaCambioPass()) {
+          require_once($dirs['inc'] . 'export-plantilla-horarios.php');
+        } else {
+          header('Location: index.php?ACTION=primer_cambio');
         }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
+      } else {
+        $MSG = "Debes iniciar sesión para realizar esta acción.";
+        header("Refresh:2; url=index.php");
+        include_once($dirs['inc'] . 'msg_modal.php');
+      }
       break;
 
-      case 'plantilla-profesores':
-        if($class->isLogged($Titulo) && $_SESSION['Perfil'] === 'Admin')
-        {
-          if($class->compruebaCambioPass())
-          {
-            require_once($dirs['inc'] . 'export-plantilla-profesores.php');
-          }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
+    case 'plantilla-profesores':
+      if ($class->isLogged($Titulo) && $_SESSION['Perfil'] === 'Admin') {
+        if ($class->compruebaCambioPass()) {
+          require_once($dirs['inc'] . 'export-plantilla-profesores.php');
+        } else {
+          header('Location: index.php?ACTION=primer_cambio');
         }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
+      } else {
+        $MSG = "Debes iniciar sesión para realizar esta acción.";
+        header("Refresh:2; url=index.php");
+        include_once($dirs['inc'] . 'msg_modal.php');
+      }
       break;
 
-      case 'download_admin_guide':
-        if($class->isLogged($Titulo) && $_SESSION['Perfil'] === 'Admin')
-        {
-          if($class->compruebaCambioPass())
-          {
-            require_once($dirs['inc'] . 'export-guide-admin.php');
-          }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
+    case 'download_admin_guide':
+      if ($class->isLogged($Titulo) && $_SESSION['Perfil'] === 'Admin') {
+        if ($class->compruebaCambioPass()) {
+          require_once($dirs['inc'] . 'export-guide-admin.php');
+        } else {
+          header('Location: index.php?ACTION=primer_cambio');
         }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
+      } else {
+        $MSG = "Debes iniciar sesión para realizar esta acción.";
+        header("Refresh:2; url=index.php");
+        include_once($dirs['inc'] . 'msg_modal.php');
+      }
       break;
 
-      case 'download_profesor_guide':
-        if($class->isLogged($Titulo))
-        {
-          if($class->compruebaCambioPass())
-          {
-            require_once($dirs['inc'] . 'export-guide-profesor.php');
-          }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
+    case 'download_profesor_guide':
+      if ($class->isLogged($Titulo)) {
+        if ($class->compruebaCambioPass()) {
+          require_once($dirs['inc'] . 'export-guide-profesor.php');
+        } else {
+          header('Location: index.php?ACTION=primer_cambio');
         }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
+      } else {
+        $MSG = "Debes iniciar sesión para realizar esta acción.";
+        header("Refresh:2; url=index.php");
+        include_once($dirs['inc'] . 'msg_modal.php');
+      }
       break;
 
-      case 'clean_tmp':
-        if($class->isLogged($Titulo))
-        {
-          if($class->compruebaCambioPass())
-          {
-            include_once($dirs['inc'] . 'clean_tmp.php');
-          }
-          else
-          {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
+    case 'clean_tmp':
+      if ($class->isLogged($Titulo)) {
+        if ($class->compruebaCambioPass()) {
+          include_once($dirs['inc'] . 'clean_tmp.php');
+        } else {
+          header('Location: index.php?ACTION=primer_cambio');
         }
-        else
-        {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
+      } else {
+        $MSG = "Debes iniciar sesión para realizar esta acción.";
+        header("Refresh:2; url=index.php");
+        include_once($dirs['inc'] . 'msg_modal.php');
+      }
       break;
-    }
-}
-else
-{
-  if(isset($_POST['Iniciales']) || isset($_POST['pass']))
-  {
+  }
+} else {
+  if (isset($_POST['Iniciales']) || isset($_POST['pass'])) {
     require_once($dirs['inc'] . 'login_valida.php');
   }
-  if($class->isLogged($Titulo))
-  {
-    if($class->compruebaCambioPass())
-    {
-      if($_SESSION['Perfil'] === 'Admin')
-      {
+  if ($class->isLogged($Titulo)) {
+    if ($class->compruebaCambioPass()) {
+      if ($_SESSION['Perfil'] === 'Admin') {
         $act_home = 'active';
         $scripts = '<link rel="stylesheet" href="css/profesores.css">';
-        if(isset($_POST['boton']) && $class->validRegisterProf())
-        {
+        if (isset($_POST['boton']) && $class->validRegisterProf()) {
           header('Location: index.php?ACTION=profesores');
         }
         include_once($dirs['inc'] . 'top-nav.php');
         include_once($dirs['inc'] . 'profesores.php');
         include($dirs['inc'] . 'errors.php');
         include($dirs['inc'] . 'footer.php');
-      }
-      elseif($_SESSION['Perfil'] === 'Profesor')
-      {
+      } elseif ($_SESSION['Perfil'] === 'Profesor') {
         $act_qr = 'active';
         include_once($dirs['inc'] . 'top-nav.php');
         include_once($dirs['inc'] . 'generate_code.php');
         include($dirs['inc'] . 'errors.php');
         include($dirs['inc'] . 'footer.php');
-      }
-      else
-      {
+      } else {
         die('<h1 style="color:red;">Error de proceso...</h1>');
       }
-    }
-    else
-    {
+    } else {
       header('Location: index.php?ACTION=primer_cambio');
     }
-  }
-  else
-  {
-      include_once($dirs['inc'] . 'login_form.php');
+  } else {
+    include_once($dirs['inc'] . 'login_form.php');
   }
 }
