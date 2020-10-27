@@ -722,7 +722,7 @@ if (isset($_GET['ACTION'])) {
       } else {
         echo '<div class="container-fluid" style="margin-top:50px">';
         echo "<div class='row'>";
-        echo "<div id='qreader' class='col-xs-12'>";
+        echo "<div id='qreader' class='col-xs-12' style='margin-top: 20vh;'>";
         include($dirs['inc'] . 'qr-reader-admin-login.php');
         echo "</div>";
         echo "</div>";
