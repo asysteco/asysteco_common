@@ -30,19 +30,12 @@ $('.act').on('click', function () {
             if (data.match('Error-add')) {
                 $('#error-modal').modal('show'),
                     $('#error-content-modal').html('<h3>Error al añadir guardia.</h3>')
-            } else if (data.match('Error-remove')) {
-                $('#error-modal').modal('show'),
-                    $('#error-content-modal').html('<h3>Error al eliminar guardia.</h3>')
             } else if (data.match('Error-params')) {
                 $('#error-modal').modal('show'),
                     $('#error-content-modal').html('<h3>Error, parámetros no válidos.</h3>')
             } else if (data.match('Ok-add')) {
                 $('#fine-modal').modal('show'),
                     $('#fine-content-modal').html('<h3>Guradia añadida correctamente.</h3>');
-                    loadGuardias();
-            } else if (data.match('Ok-remove')) {
-                $('#fine-modal').modal('show'),
-                    $('#fine-content-modal').html('<h3>Guradia eliminada correctamente.</h3>')
                     loadGuardias();
             } else {
                 $('#error-modal').modal('show'),
@@ -73,22 +66,15 @@ $('.remove-guardia').on('click', function () {
             $('#loading').css('z-index', 99);
         },
         success: function (data) {
-            if (data.match('Error-add')) {
-                $('#error-modal').modal('show'),
-                    $('#error-content-modal').html('<h3>Error al añadir guardia.</h3>')
-            } else if (data.match('Error-remove')) {
+            if (data.match('Error-remove')) {
                 $('#error-modal').modal('show'),
                     $('#error-content-modal').html('<h3>Error al eliminar guardia.</h3>')
             } else if (data.match('Error-params')) {
                 $('#error-modal').modal('show'),
                     $('#error-content-modal').html('<h3>Error, parámetros no válidos.</h3>')
-            } else if (data.match('Ok-add')) {
-                $('#fine-modal').modal('show'),
-                    $('#fine-content-modal').html('<h3>Guradia añadida correctamente.</h3>');
-                    loadGuardias();
             } else if (data.match('Ok-remove')) {
                 $('#fine-modal').modal('show'),
-                    $('#fine-content-modal').html('<h3>Guradia eliminada correctamente.</h3>')
+                    $('#fine-content-modal').html('<h3>Guradia eliminada correctamente.</h3>');
                     loadGuardias();
             } else {
                 $('#error-modal').modal('show'),
