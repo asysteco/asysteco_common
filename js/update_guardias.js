@@ -40,16 +40,13 @@ $('.act').on('click', function () {
                 $('#fine-modal').modal('show'),
                     $('#fine-content-modal').html('<h3>Guradia añadida correctamente.</h3>');
                     loadGuardias();
-                // setTimeout(function () { location.reload() }, 700);
             } else if (data.match('Ok-remove')) {
                 $('#fine-modal').modal('show'),
                     $('#fine-content-modal').html('<h3>Guradia eliminada correctamente.</h3>')
                     loadGuardias();
-                // setTimeout(function () { location.reload() }, 700);
             } else {
                 $('#error-modal').modal('show'),
                     $('#error-content-modal').html('<h3>Error inesperado...</h3>')
-                // setTimeout(function(){location.reload()}, 700);
             }
             $('#loading').fadeOut();
         },
@@ -89,16 +86,13 @@ $('.remove-guardia').on('click', function () {
                 $('#fine-modal').modal('show'),
                     $('#fine-content-modal').html('<h3>Guradia añadida correctamente.</h3>');
                     loadGuardias();
-                //setTimeout(function () { location.reload() }, 700);
             } else if (data.match('Ok-remove')) {
                 $('#fine-modal').modal('show'),
                     $('#fine-content-modal').html('<h3>Guradia eliminada correctamente.</h3>')
                     loadGuardias();
-                //setTimeout(function () { location.reload() }, 700);
             } else {
                 $('#error-modal').modal('show'),
                     $('#error-content-modal').html('<h3>Error inesperado...</h3>')
-                // setTimeout(function(){location.reload()}, 700);
             }
             $('#loading').fadeOut();
         },
