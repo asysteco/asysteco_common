@@ -25,7 +25,7 @@ $('.eliminar').on('click', function() {
     processData:false,
     beforeSend : function() {
         $('#file-content-modal').modal('hide'),
-        $("#loading-msg").html("Importando horarios...");
+        $("#loading-msg").html("Eliminando datos...");
         $("#loading").show();
         $("#loading").css('z-index', 99);
     },
