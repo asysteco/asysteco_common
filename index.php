@@ -413,6 +413,16 @@ if (isset($_GET['ACTION'])) {
               }
               break;
 
+            case 'delete-all':
+              if ($_SESSION['Perfil'] == 'Admin') {
+                include_once($dirs['inc'] . 'delete_all_horarios.php');
+              } else {
+                $MSG = "Acceso denegado.";
+                header("Refresh:2; url=index.php");
+                include_once($dirs['inc'] . 'msg_modal.php');
+              }
+              break;
+
             default:
               include_once($dirs['inc'] . 'top-nav.php');
               include_once($dirs['inc'] . 'horarios.php');
@@ -571,6 +581,16 @@ if (isset($_GET['ACTION'])) {
                 header("Location: index.php?ACTION=profesores&ERR_MSG=" . $ERR_MSG);
               } else {
                 header("Location: index.php?ACTION=profesores&MSG=" . $MSG);
+              }
+              break;
+
+            case 'delete-all':
+              if ($_SESSION['Perfil'] == 'Admin') {
+                include_once($dirs['inc'] . 'delete_all_profesores.php');
+              } else {
+                $MSG = "Acceso denegado.";
+                header("Refresh:2; url=index.php");
+                include_once($dirs['inc'] . 'msg_modal.php');
               }
               break;
 
