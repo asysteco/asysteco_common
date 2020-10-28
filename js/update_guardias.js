@@ -22,7 +22,7 @@ $('.act').on('click', function () {
         processData: false,
         beforeSend: function () {
             $('#file-content-modal').modal('hide'),
-                $('#loading-msg').html('Cargando datos...');
+                $('#loading-msg').html('Cargando guardias...');
             $('#loading').show();
             $('#loading').css('z-index', 99);
         },
@@ -68,7 +68,7 @@ $('.remove-guardia').on('click', function () {
         processData: false,
         beforeSend: function () {
             $('#file-content-modal').modal('hide'),
-                $('#loading-msg').html('Cargando datos...');
+                $('#loading-msg').html('Cargando guardias...');
             $('#loading').show();
             $('#loading').css('z-index', 99);
         },
