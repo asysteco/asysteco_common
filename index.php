@@ -831,8 +831,7 @@ if (isset($_GET['ACTION'])) {
             case 'select':
               if (isset($_GET['export']) && $_GET['export'] == 'marcajes') {
                 include_once($dirs['inc'] . 'export_marcajes.php');
-              }
-              if (isset($_GET['export']) && $_GET['export'] == 'asistencias') {
+              } elseif (isset($_GET['export']) && $_GET['export'] == 'asistencias') {
                 include_once($dirs['inc'] . 'export_asistencias.php');
               } elseif (isset($_GET['export']) && $_GET['export'] == 'faltas') {
                 include_once($dirs['inc'] . 'export_faltas.php');
