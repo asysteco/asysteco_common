@@ -22,11 +22,9 @@ $(document).ready(function (e) {
     },
     success: function(data) {
       if (data.match('error-cabecera')) {
-        $('#error-modal').modal('show'),
-        $('#error-content-modal').html('<h3>Error de cabecera, comprueba el formato del fichero.</h3>')
+        toastr["error"]("Error de cabecera, comprueba el formato del fichero.", "Error!")
       } else if (data.match('error-file')) {
-        $('#error-modal').modal('show'),
-        $('#error-content-modal').html('<h3>Error de fichero, puede que esté dañado</h3>')
+        toastr["error"]("Error de fichero, puede que esté dañado", "Error!")
       } else {
         $('#file-content-modal').modal('show'),
         $('#file-content-preview').html(data)
@@ -61,14 +59,11 @@ $(document).ready(function (e) {
         },
         success: function(data) {
         if (data.match('Error-importar')) {
-          $('#error-modal').modal('show'),
-          $('#error-content-modal').html('<h3>Error al importar fichero.</h3>')
+          toastr["error"]("Error al importar fichero.", "Error!")
         } else if (data.match('Error-csv')) {
-          $('#error-modal').modal('show'),
-          $('#error-content-modal').html('<h3>El fichero CSV contiene datos erróneos.</h3>')
+          toastr["error"]("El fichero CSV contiene datos erróneos.", "Error!")
         } else {
-          $('#fine-modal').modal('show'),
-          $('#fine-content-modal').html('<h3>¡Datos importados con éxito!</h3>');
+          toastr["success"]("¡Datos importados con éxito!", "Correcto!");
           setTimeout(function(){location.reload()}, 700);
         }
         $("#loading").fadeOut();

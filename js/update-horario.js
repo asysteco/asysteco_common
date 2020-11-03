@@ -59,18 +59,14 @@ $('.entrada').on('change', function () {
         },
         success: function (data) {
             if (data.match('Error-add')) {
-                $('#error-modal').modal('show'),
-                    $('#error-content-modal').html('<h3>Error al añadir hora.</h3>')
+                toastr["error"]("Error al añadir hora.", "Error!")
             } else if (data.match('Error-remove')) {
-                $('#error-modal').modal('show'),
-                    $('#error-content-modal').html('<h3>Error al eliminar hora.</h3>')
+                toastr["error"]("Error al eliminar hora.", "Error!")
             } else if (data.match('Error-params')) {
-                $('#error-modal').modal('show'),
-                    $('#error-content-modal').html('<h3>Error, parámetros no válidos.</h3>')
+                toastr["error"]("Error, parámetros no válidos.", "Error!")
             } else {
-                $('#fine-modal').modal('show'),
-                    $('#fine-content-modal').html('<h3>Acción realizada correctamente.</h3>'),
-                    setTimeout(function () { location.reload() }, 700)
+                toastr["success"]("Acción realizada correctamente.", "Correcto!"),
+                setTimeout(function () { location.reload() }, 700)
             }
             $('#loading').fadeOut();
         },
@@ -98,18 +94,14 @@ $('.act').on('click', function () {
         },
         success: function (data) {
             if (data.match('Error-add')) {
-                $('#error-modal').modal('show'),
-                    $('#error-content-modal').html('<h3>Error al añadir hora.</h3>')
+                toastr["error"]("Error al añadir hora.", "Error!")
             } else if (data.match('Error-remove')) {
-                $('#error-modal').modal('show'),
-                    $('#error-content-modal').html('<h3>Error al eliminar hora.</h3>')
+                toastr["error"]("Error al eliminar hora.", "Error!")
             } else if (data.match('Error-params')) {
-                $('#error-modal').modal('show'),
-                    $('#error-content-modal').html('<h3>Error, parámetros no válidos.</h3>')
+                toastr["error"]("Error, parámetros no válidos.", "Error!")
             } else {
-                $('#fine-modal').modal('show'),
-                    $('#fine-content-modal').html('<h3>Acción realizada correctamente.</h3>')
-                    setTimeout(function () { location.reload() }, 700)
+                toastr["success"]("Acción realizada correctamente.", "Correcto!"),
+                setTimeout(function () { location.reload() }, 700)
             }
             $('#loading').fadeOut();
         },

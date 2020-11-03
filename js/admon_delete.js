@@ -31,21 +31,15 @@ $('.eliminar').on('click', function() {
     },
     success: function(data) {
         if (data.match('Error-horarios')) {
-            $('#error-modal').modal('show'),
-            $('#error-content-modal').html('<h3>Error al eliminar los horarios.</h3>')
+            toastr["error"]("Error al eliminar los horarios.", "Error!")
         } else if (data.match('Error-temp-horarios')) {
-            $('#error-modal').modal('show'),
-            $('#error-content-modal').html('<h3>Error al eliminar los horarios programados.</h3>')
+            toastr["error"]("Error al eliminar los horarios programados.", "Error!")
         } else if (data.match('Error-fichar')) {
-            $('#error-modal').modal('show'),
-            $('#error-content-modal').html('<h3>Error al eliminar los fichajes.</h3>')
+            toastr["error"]("Error al eliminar los fichajes.", "Error!")
         } else if (data.match('Error-profesores')) {
-            $('#error-modal').modal('show'),
-            $('#error-content-modal').html('<h3>Error al eliminar los profesores.</h3>')
+            toastr["error"]("Error al eliminar los profesores.", "Error!")
         } else {
-            $('#fine-modal').modal('show'),
-            $('#fine-content-modal').html('<h3>¡Datos eliminados con éxito!</h3>');
-            // setTimeout(function(){location.reload()}, 700);
+            toastr["success"]("¡Datos eliminados con éxito!", "Correcto!")
         }
         $("#loading").fadeOut();
     },

@@ -28,18 +28,14 @@ $('.act').on('click', function () {
         },
         success: function (data) {
             if (data.match('Error-add')) {
-                $('#error-modal').modal('show'),
-                    $('#error-content-modal').html('<h3>Error al añadir guardia.</h3>')
+                toastr["error"]("Error al añadir guardia.", "Error!")
             } else if (data.match('Error-params')) {
-                $('#error-modal').modal('show'),
-                    $('#error-content-modal').html('<h3>Error, parámetros no válidos.</h3>')
+                toastr["error"]("Error, parámetros no válidos.", "Error!")
             } else if (data.match('Ok-add')) {
-                $('#fine-modal').modal('show'),
-                    $('#fine-content-modal').html('<h3>Guradia añadida correctamente.</h3>');
-                    loadGuardias();
+                toastr["success"]("Guradia añadida correctamente.", "Correcto!");
+                loadGuardias();
             } else {
-                $('#error-modal').modal('show'),
-                    $('#error-content-modal').html('<h3>Error inesperado...</h3>')
+                toastr["error"]("Error inesperado...", "Error!")
             }
             $('#loading').fadeOut();
         },
@@ -67,18 +63,14 @@ $('.remove-guardia').on('click', function () {
         },
         success: function (data) {
             if (data.match('Error-remove')) {
-                $('#error-modal').modal('show'),
-                    $('#error-content-modal').html('<h3>Error al eliminar guardia.</h3>')
+                toastr["error"]("Error al eliminar guardia.", "Error!")
             } else if (data.match('Error-params')) {
-                $('#error-modal').modal('show'),
-                    $('#error-content-modal').html('<h3>Error, parámetros no válidos.</h3>')
+                toastr["error"]("Error, parámetros no válidos.", "Error!")
             } else if (data.match('Ok-remove')) {
-                $('#fine-modal').modal('show'),
-                    $('#fine-content-modal').html('<h3>Guradia eliminada correctamente.</h3>');
-                    loadGuardias();
+                toastr["success"]("Guradia eliminada correctamente.", "Correcto!");
+                loadGuardias();
             } else {
-                $('#error-modal').modal('show'),
-                    $('#error-content-modal').html('<h3>Error inesperado...</h3>')
+                toastr["error"]("Error inesperado...", "Error!")
             }
             $('#loading').fadeOut();
         },
