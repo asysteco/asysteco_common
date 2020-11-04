@@ -358,28 +358,12 @@ if (isset($_GET['ACTION'])) {
 
             case 'edit-guardias':
               if ($_SESSION['Perfil'] == 'Admin') {
-                switch ($_GET['SUBOPT']) {
-                  case 'add':
+                if (isset($_GET['SUBOPT'])) {
                     include_once($dirs['inc'] . 'update-guardias.php');
-                    break;
-
-                  case 'addt':
-                    include_once($dirs['inc'] . 'update-guardias.php');
-                    break;
-
-                  case 'removet':
-                    include_once($dirs['inc'] . 'update-guardias.php');
-                    break;
-
-                  case 'remove':
-                    include_once($dirs['inc'] . 'update-guardias.php');
-                    break;
-
-                  default:
-                    $scripts = '<link rel="stylesheet" href="css/horarios-edit-guardias.css">';
-                    include_once($dirs['inc'] . 'top-nav.php');
-                    include_once($dirs['inc'] . 'edit-guardias.php');
-                    break;
+                } else {
+                  $scripts = '<link rel="stylesheet" href="css/horarios-edit-guardias.css">';
+                  include_once($dirs['inc'] . 'top-nav.php');
+                  include_once($dirs['inc'] . 'edit-guardias.php');
                 }
               } else {
                 $MSG = "Acceso denegado.";

@@ -7,11 +7,12 @@ $(document).ready(function () {
 
 $('#select-edit-guardias').on('change', function () {
     profesor = $(this).val(),
-        $('#guardias-response').load('index.php?ACTION=horarios&OPT=guardias&profesor=' + profesor)
+    loadGuardias(profesor);
 });
 
 $('.act').hide();
 $('.act').on('click', function () {
+    profesor = $('#profesor_act').attr('profesor');
     urlPath = $(this).attr('enlace');
     $.ajax({
         url: urlPath,
@@ -22,7 +23,7 @@ $('.act').on('click', function () {
         processData: false,
         beforeSend: function () {
             $('#file-content-modal').modal('hide'),
-                $('#loading-msg').html('Cargando guardias...');
+            $('#loading-msg').html('Cargando guardias...');
             $('#loading').show();
             $('#loading').css('z-index', 99);
         },
@@ -33,7 +34,7 @@ $('.act').on('click', function () {
                 toastr["error"]("Error, parámetros no válidos.", "Error!")
             } else if (data.match('Ok-add')) {
                 toastr["success"]("Guradia añadida correctamente.", "Correcto!");
-                loadGuardias();
+                loadGuardias(profesor);
             } else {
                 toastr["error"]("Error inesperado...", "Error!")
             }
@@ -41,12 +42,13 @@ $('.act').on('click', function () {
         },
         error: function (e) {
             $('#error-modal').modal('show'),
-                $('#error-content-modal').html(e);
+            $('#error-content-modal').html(e);
         }
     });
 });
 
 $('.remove-guardia').on('click', function () {
+    profesor = $('#profesor_act').attr('profesor');
     urlPath = $(this).attr('enlace');
     $.ajax({
         url: urlPath,
@@ -57,7 +59,7 @@ $('.remove-guardia').on('click', function () {
         processData: false,
         beforeSend: function () {
             $('#file-content-modal').modal('hide'),
-                $('#loading-msg').html('Cargando guardias...');
+            $('#loading-msg').html('Cargando guardias...');
             $('#loading').show();
             $('#loading').css('z-index', 99);
         },
@@ -68,7 +70,7 @@ $('.remove-guardia').on('click', function () {
                 toastr["error"]("Error, parámetros no válidos.", "Error!")
             } else if (data.match('Ok-remove')) {
                 toastr["success"]("Guradia eliminada correctamente.", "Correcto!");
-                loadGuardias();
+                loadGuardias(profesor);
             } else {
                 toastr["error"]("Error inesperado...", "Error!")
             }
@@ -96,8 +98,8 @@ $('.edificio').on('change', function () {
     }
 });
 
-function loadGuardias() {
-    urlPath = 'index.php?ACTION=horarios&OPT=guardias';
+function loadGuardias(profesor) {
+    urlPath = 'index.php?ACTION=horarios&OPT=guardias&profesor='+profesor;
     $.ajax({
         url: urlPath,
         type: 'GET',
@@ -106,7 +108,7 @@ function loadGuardias() {
         cache: false,
         processData: false,
         beforeSend: function () {
-                $('#loading-msg').html('Cargando guardias...');
+            $('#loading-msg').html('Cargando guardias...');
             $('#loading').show();
             $('#loading').css('z-index', 99);
         },
@@ -116,7 +118,7 @@ function loadGuardias() {
         },
         error: function (e) {
             $('#error-modal').modal('show'),
-                $('#error-content-modal').html(e);
+            $('#error-content-modal').html(e);
         }
     });
 }
