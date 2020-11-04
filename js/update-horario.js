@@ -111,3 +111,40 @@ $('.act').on('click', function () {
         }
     });
 });
+
+
+$('.remove-guardia').on('click', function () {
+    profesor = $('#profesor_act').attr('profesor');
+    urlPath = $(this).attr('enlace');
+    $.ajax({
+        url: urlPath,
+        type: 'GET',
+        data: {},
+        contentType: false,
+        cache: false,
+        processData: false,
+        beforeSend: function () {
+            $('#file-content-modal').modal('hide'),
+            $('#loading-msg').html('Cargando guardias...');
+            $('#loading').show();
+            $('#loading').css('z-index', 99);
+        },
+        success: function (data) {
+            if (data.match('Error-remove')) {
+                toastr["error"]("Error al eliminar guardia.", "Error!")
+            } else if (data.match('Error-params')) {
+                toastr["error"]("Error, parámetros no válidos.", "Error!")
+            } else if (data.match('Ok-remove')) {
+                toastr["success"]("Guradia eliminada correctamente.", "Correcto!"),
+                setTimeout(function () { location.reload() }, 700)
+            } else {
+                toastr["error"]("Error inesperado...", "Error!")
+            }
+            $('#loading').fadeOut();
+        },
+        error: function (e) {
+            $('#error-modal').modal('show'),
+                $('#error-content-modal').html(e);
+        }
+    });
+});
