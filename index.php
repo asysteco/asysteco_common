@@ -233,7 +233,39 @@ if (isset($_GET['ACTION'])) {
               } else {
                 $ERR_MSG = $class->ERR_ASYSTECO;
               }
-              break;
+            break;
+
+            case 'cursos':
+              if ($_SESSION['Perfil'] == 'Admin') {
+                include_once($dirs['inc'] . 'top-nav.php');
+                include_once($dirs['inc'] . 'cursos.php');
+              } else {
+                $MSG = "Acceso denegado.";
+                header("Refresh:2; url=index.php");
+                include_once($dirs['inc'] . 'msg_modal.php');
+              }
+            break;
+
+            case 'edit-cursos':
+              if ($_SESSION['Perfil'] == 'Admin') {
+                include_once($dirs['inc'] . 'edit-cursos.php');
+              } else {
+                $MSG = "Acceso denegado.";
+                header("Refresh:2; url=index.php");
+                include_once($dirs['inc'] . 'msg_modal.php');
+              }
+            break;
+
+            case 'aulas':
+              if ($_SESSION['Perfil'] == 'Admin') {
+                include_once($dirs['inc'] . 'top-nav.php');
+                include_once($dirs['inc'] . 'aulas.php');
+              } else {
+                $MSG = "Acceso denegado.";
+                header("Refresh:2; url=index.php");
+                include_once($dirs['inc'] . 'msg_modal.php');
+              }
+            break;
 
             case 'cancel-changes':
               if ($_SESSION['Perfil'] == 'Admin') {

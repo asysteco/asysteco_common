@@ -33,7 +33,7 @@ $('.act').on('click', function () {
             } else if (data.match('Error-params')) {
                 toastr["error"]("Error, parámetros no válidos.", "Error!")
             } else if (data.match('Ok-add')) {
-                toastr["success"]("Guradia añadida correctamente.", "Correcto!");
+                toastr["success"]("Guardia añadida correctamente.", "Correcto!");
                 loadGuardias(profesor);
             } else {
                 toastr["error"]("Error inesperado...", "Error!")
@@ -69,7 +69,7 @@ $('.remove-guardia').on('click', function () {
             } else if (data.match('Error-params')) {
                 toastr["error"]("Error, parámetros no válidos.", "Error!")
             } else if (data.match('Ok-remove')) {
-                toastr["success"]("Guradia eliminada correctamente.", "Correcto!");
+                toastr["success"]("Guardia eliminada correctamente.", "Correcto!");
                 loadGuardias(profesor);
             } else {
                 toastr["error"]("Error inesperado...", "Error!")
