@@ -316,16 +316,6 @@ if (isset($_GET['ACTION'])) {
               }
               break;
 
-            case 'edit-crear':
-              if ($_SESSION['Perfil'] == 'Admin') {
-                include_once($dirs['inc'] . 'edit-crear-horario.php');
-              } else {
-                $MSG = "Acceso denegado.";
-                header("Refresh:2; url=index.php");
-                include_once($dirs['inc'] . 'msg_modal.php');
-              }
-              break;
-
             case 'update':
               if ($_SESSION['Perfil'] == 'Admin') {
                 include_once($dirs['inc'] . 'actualiza.php');
@@ -601,10 +591,6 @@ if (isset($_GET['ACTION'])) {
       if ($class->isLogged($Titulo)) {
         if ($class->compruebaCambioPass()) {
           switch ($_GET['OPT']) {
-            case 'create':
-              include_once($dirs['inc'] . 'marcajes.php');
-              break;
-
             case 'update':
               include_once($dirs['inc'] . 'update-marcajes.php');
               break;
