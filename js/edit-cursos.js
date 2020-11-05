@@ -1,6 +1,32 @@
 $('.hide-it').hide();
 $('#loading').hide();
 
+$('.edit').hover(function(){
+    $(this).css('color', 'green');
+    $(this).css('transform', 'scale(1.3)');
+    $(this).css('cursor', 'pointer');
+}, function(){
+    $(this).css('color', 'black');
+    $(this).css('transform', 'scale(1)');
+});
+$('.remove').hover(function(){
+    $(this).css('color', 'red');
+    $(this).css('transform', 'scale(1.3)');
+    $(this).css('cursor', 'pointer');
+}, function(){
+    $(this).css('color', 'black');
+    $(this).css('transform', 'scale(1)');
+});
+
+$(window).click(function() {
+    $('.hide-it').hide(),
+    $('.show-it').show()
+});
+
+$('.edit, .hide-it, show-it').click(function(event){
+    event.stopPropagation()
+});
+
 $('.edit').on('click', function () {
     fieldSplit = $(this).attr('fields').split('_');
     fieldData = fieldSplit[1];
@@ -8,6 +34,7 @@ $('.edit').on('click', function () {
     txt = $('#txt_'+fieldData).html();
 
     $('#input_'+fieldData).val(txt).toggle();
+    $('#input_'+fieldData).focus();
     $('#txt_'+fieldData).toggle();
     $('#btn_'+fieldData).toggle();
 });
@@ -17,18 +44,18 @@ $('.update').on('click', function () {
     fieldId = $(this).attr('data');
     curso = $('#input_'+fieldId).val();
     action = 'update';
-
-    urlPath = 'index.php?ACTION=horarios&OPT=edit-cursos&action='+action+'&curso='+curso+'&data='+fieldId;
-    console.log(urlPath);
+    data = {
+        'action': action,
+        'curso': curso,
+        'data': fieldId
+    };
+    urlPath = 'index.php?ACTION=horarios&OPT=edit-cursos';
+    
     $.ajax({
         url: urlPath,
-        type: "GET",
-        data: {},
-        contentType: false,
-        cache: false,
-        processData: false,
+        type: "POST",
+        data: data,
         beforeSend: function () {
-            $('#file-content-modal').modal('hide'),
             $('#loading-msg').html('Cargando...');
             $('#loading').show();
             $('#loading').css('z-index', 99);
@@ -61,18 +88,17 @@ $('.update').on('click', function () {
 $('#add-btn').on('click', function () {
     action = $(this).attr('action');
     curso = $('#add-curso').val();
+    data = {
+        'action': action,
+        'curso': curso
+    };
+    urlPath = 'index.php?ACTION=horarios&OPT=edit-cursos';
 
-    urlPath = 'index.php?ACTION=horarios&OPT=edit-cursos&action='+action+'&curso='+curso;
-    console.log(urlPath);
     $.ajax({
         url: urlPath,
-        type: "GET",
-        data: {},
-        contentType: false,
-        cache: false,
-        processData: false,
+        type: "POST",
+        data: data,
         beforeSend: function () {
-            $('#file-content-modal').modal('hide'),
             $('#loading-msg').html('Cargando...');
             $('#loading').show();
             $('#loading').css('z-index', 99);
@@ -102,18 +128,21 @@ $('#add-btn').on('click', function () {
 $('.remove').on('click', function () {
     fieldId = $(this).attr('data');
     action = $(this).attr('action');
+    nombreCurso = $('#txt_'+fieldId).html();
+    data = {
+        'action': action,
+        'data': fieldId
+    };
+    urlPath = 'index.php?ACTION=horarios&OPT=edit-cursos';
 
-    urlPath = 'index.php?ACTION=horarios&OPT=edit-cursos&action='+action+'&data='+fieldId;
-    console.log(urlPath);
+    if (!confirm('¿Estás seguro/a de eliminar del curso '+nombreCurso+'?')) {
+        return;
+    }
     $.ajax({
         url: urlPath,
-        type: "GET",
-        data: {},
-        contentType: false,
-        cache: false,
-        processData: false,
+        type: "POST",
+        data: data,
         beforeSend: function () {
-            $('#file-content-modal').modal('hide'),
             $('#loading-msg').html('Cargando...');
             $('#loading').show();
             $('#loading').css('z-index', 99);
