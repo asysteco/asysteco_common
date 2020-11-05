@@ -267,6 +267,16 @@ if (isset($_GET['ACTION'])) {
               }
             break;
 
+            case 'edit-aulas':
+              if ($_SESSION['Perfil'] == 'Admin') {
+                include_once($dirs['inc'] . 'edit-aulas.php');
+              } else {
+                $MSG = "Acceso denegado.";
+                header("Refresh:2; url=index.php");
+                include_once($dirs['inc'] . 'msg_modal.php');
+              }
+            break;
+
             case 'cancel-changes':
               if ($_SESSION['Perfil'] == 'Admin') {
                 if ($class->delHorarioTemporal($_GET['profesor'], $_GET['fecha'])) {
