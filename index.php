@@ -491,7 +491,6 @@ if (isset($_GET['ACTION'])) {
           }
 
           include_once('js/filtro_asistencias.js');
-          include_once('js/update_marcajes.js');
           include_once($dirs['inc'] . 'errors.php');
           include_once($dirs['inc'] . 'footer.php');
         } else {
