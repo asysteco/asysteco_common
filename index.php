@@ -907,7 +907,7 @@ if (isset($_GET['ACTION'])) {
         if ($class->compruebaCambioPass()) {
           $extras = "
             $(function (){
-                $('#fichar-manual').datepicker({minDate: -5, maxDate: 0});
+              $('#add-fecha').datepicker({minDate: -5, maxDate: 0});
             });
           ";
           $scripts = '<link rel="stylesheet" href="css/profesores-sustituir.css">';
@@ -929,7 +929,6 @@ if (isset($_GET['ACTION'])) {
       if ($class->isLogged($Titulo) && $_SESSION['Perfil'] === 'Admin') {
         if ($class->compruebaCambioPass()) {
           include_once($dirs['inc'] . 'fichar-mysql-manual.php');
-          header('Location: index.php?ACTION=asistencias&OPT=all');
         } else {
           header('Location: index.php?ACTION=primer_cambio');
         }
