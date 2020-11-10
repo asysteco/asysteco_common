@@ -38,7 +38,7 @@ $('#add-manual').on('click', function (event) {
                 toastr["error"]("Error al añadir el Fichaje.", "Error!")
             } else if (data.match('Error-Ya-Fichado')) {
                 nombre = $( "#fichar-manual option:selected" ).text();
-                toastr["error"]("El profesor "+nombre+" ya ha fichado el día "+fecha+".", "Error!")
+                toastr["error"]("El/La profesor/a "+nombre+" ya ha fichado el día "+fecha+".", "Error!")
             } else if (data.match('Error-Festivo')) {
                 toastr["error"]("No se puede fichar en dias no lectivos.", "Error!")
             }else if (data.match('Error-Formato-Fecha')) {
