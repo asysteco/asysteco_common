@@ -215,6 +215,51 @@ if (isset($_GET['ACTION'])) {
           $act_horario = 'active';
 
           switch ($_GET['OPT']) {
+            case 'edit-horario':
+                include_once($dirs['inc'] . 'Horarios/edit-horario.php');
+              break;
+
+            case 'gest-horario':
+              $style = "
+                #profesor, .add-fields {
+                  text-align: center;
+                  margin-bottom: 25px;
+                }
+                table {
+                  text-align: center;
+                  width: 80%;
+                  margin: 5px;
+                }
+                table th {
+                  text-align:center;
+                }
+                .remove {
+                  padding: 10px;
+                  transition-duration: 0.2s;
+                }
+                #update-btn {
+                  position: fixed;
+                  top: 75px;
+                  right: 25px;
+                  background-color: #5cb85ccf;
+                }
+                #update-btn:hover {
+                  background-color: #449d44;
+                }
+                #cancel-btn {
+                  position: fixed;
+                  top: 75px;
+                  left: 25px;
+                  background-color: #d9534fc4;
+                }
+                #cancel-btn:hover {
+                  background-color: #d9534f;
+                }
+              ";
+              include_once($dirs['inc'] . 'top-nav.php');
+              include_once($dirs['inc'] . 'Horarios/horario-template.php');
+              break;
+
             case 'crear':
               if ($_SESSION['Perfil'] == 'Admin') {
                 $scripts = '<link rel="stylesheet" href="css/horarios-crear.css">';
@@ -237,6 +282,21 @@ if (isset($_GET['ACTION'])) {
 
             case 'cursos':
               if ($_SESSION['Perfil'] == 'Admin') {
+                $style = "
+                  table {
+                    text-align: center;
+                    width: 80%;
+                    margin: 5px;
+                  }
+                  table th, table td {
+                    text-align:center;
+                    vertical-align: middle;
+                  }
+                  .remove, .edit {
+                    padding: 10px;
+                    transition-duration: 0.2s;
+                  }
+                ";
                 include_once($dirs['inc'] . 'top-nav.php');
                 include_once($dirs['inc'] . 'cursos.php');
               } else {
@@ -258,6 +318,21 @@ if (isset($_GET['ACTION'])) {
 
             case 'aulas':
               if ($_SESSION['Perfil'] == 'Admin') {
+                $style = "
+                  table {
+                    text-align: center;
+                    width: 80%;
+                    margin: 5px;
+                  }
+                  table th, table td {
+                    text-align:center;
+                    vertical-align: middle;
+                  }
+                  .remove, .edit {
+                    padding: 10px;
+                    transition-duration: 0.2s;
+                  }
+                ";
                 include_once($dirs['inc'] . 'top-nav.php');
                 include_once($dirs['inc'] . 'aulas.php');
               } else {

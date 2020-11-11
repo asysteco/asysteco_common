@@ -49,6 +49,9 @@ html {
     opacity: 1;
     z-index: 999;
 }
+.loading {
+    z-index: 99;
+}
 
 #btn-import {
     cursor: pointer;
