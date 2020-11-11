@@ -257,7 +257,7 @@ if (isset($_GET['ACTION'])) {
                 }
               ";
               include_once($dirs['inc'] . 'top-nav.php');
-              include_once($dirs['inc'] . 'Horarios/horario-template.php');
+              include_once($dirs['inc'] . 'Horarios/gest-horario.php');
               break;
 
             case 'crear':
