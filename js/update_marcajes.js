@@ -74,16 +74,6 @@ function RefreshEvent() {
                 $("#err").html(e).fadeIn();
             }
         });
-    
-        // if($('#marcaje-response').load('index.php?ACTION=marcajes&OPT=update&Profesor='+Profesor+'&Fecha='+Fecha+'&Hora='+Hora+'&act='+act+'&Valor='+Valor))
-        // {
-        //     $('#table-container').hide(),
-        //     setTimeout(function(){location.reload()}, 200)
-        // }
-        // else
-        // {
-        //     $('#marcaje-response').html('Error')
-        // }
     });
 }
 
