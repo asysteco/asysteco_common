@@ -15,7 +15,9 @@ $('.remove').hover(function(){
 
 $('body').on('click', '.act', function () {
     action = $(this).attr('action');
-    urlPath = 'index.php?ACTION=horarios&OPT=edit-horario';
+    urlPath = 'index.php?ACTION=horarios&OPT=edit-t_horario';
+    date = $('#program-date').attr('data');
+    realDate = $('#program-date').attr('data-real');
 
     if (action === 'add') {
         dia = $('#add-dia').val();
@@ -24,7 +26,7 @@ $('body').on('click', '.act', function () {
         curso = $('#add-curso').val();
         profesor = $('#profesor').attr('data');
         if (dia == '' || hora == ''  || aula == ''  || curso == '') {
-            toastr["warning"]("Debe seleccionar todos los campos.", "Aviso!");
+            toastr["warning"]("Debe seleccionar todos los campos.", "Error!");
             return;
         }
 
@@ -34,32 +36,16 @@ $('body').on('click', '.act', function () {
             'hora': hora,
             'aula': aula,
             'curso': curso,
-            'profesor': profesor
+            'profesor': profesor,
+            'date': date
         };
-    } else if (action === 'program') {
-        profesor = $('#profesor').attr('data');
-        programDate = $('#fecha-programar-horario').val();
-
-        if (programDate !== '' && programDate !== undefined && /^(0[1-9]|1[0-9]|2[0-9]|3[01])\/(0[1-9]|1[0-2])\/(19[0-9]{2}|20[0-9]{2})$/i.test(programDate)) {
-            location.href = location.href+'&programDate='+programDate;
-            return;
-        } else if (programDate === '') {
-            toastr["warning"]("Debe seleccionar una fecha", "Aviso!");
-            $('#fecha-programar-horario').focus();
-            return;
-        } else {
-            toastr["warning"]("Formato de fecho incorrecto. Formato aceptado: DD/MM/AAAA", "Aviso!");
-            $('#fecha-programar-horario').focus();
-            return;
-        }
-
     } else if (action === 'update') {
         profesor = $('#profesor').attr('data');
         data = {
             'action': action,
             'datos': registrosUpdate,
             'profesor': profesor
-        }
+        };
     } else if (action === 'remove') {
         rowId = $(this).attr('data');
         profesor = $('#profesor').attr('data');
@@ -80,6 +66,27 @@ $('body').on('click', '.act', function () {
         }
         
         location.reload();
+        return;
+    } else if (action === 'cancel-program') {
+        profesor = $('#profesor').attr('data');
+        confirmAnswer = confirm('¿Desea cancelar los cambios programados?');
+        if (!confirmAnswer) {
+            return;
+        }
+        
+        data = {
+            'action': action,
+            'date': date,
+            'profesor': profesor
+        };
+    } else if (action === 'apply-program') {
+        confirmAnswer = confirm('¿Desea programar este horario para el día '+realDate+'?');
+        if (!confirmAnswer) {
+            return;
+        }
+        
+        toastr["success"]("Horario programado.", "Correcto!"),
+        setTimeout(function () { location.href = 'index.php?ACTION=profesores' }, 700);
         return;
     } else {
         toastr["error"]("Acción no válida.", "Error!");
@@ -102,11 +109,15 @@ $('body').on('click', '.act', function () {
                 toastr["success"]("Horas actualizadas correctamente.", "Correcto!");
                 $('.update').removeAttr('disabled');
                 registrosUpdate = [];
+                $('#apply-program, #cancel-program').fadeIn();
                 $('#update-btn, #cancel-btn').fadeOut();
-                // setTimeout(function () { location.reload() }, 700);
+                $('#apply-program, #cancel-program').fadeIn();
             } else if (data.match('Ok-remove')) {
                 toastr["success"]("Hora eliminada correctamente.", "Correcto!"),
                 $('#fila_'+rowId).remove()
+            } else if (data.match('Ok-cancel')) {
+                toastr["success"]("Programación cancelada.", "Correcto!"),
+                setTimeout(function () { location.href = 'index.php?ACTION=profesores' }, 700);
             } else if (data.match('Error-add')) {
                 toastr["error"]("Error al añadir hora.", "Error!")
             } else if (data.match('Error-duplicate')) {
@@ -131,6 +142,7 @@ $('body').on('click', '.act', function () {
 
 $('.update').on('change', function() {
     $(this).attr('disabled', 'disabled');
+    $('#apply-program, #cancel-program').fadeOut();
     $('#update-btn, #cancel-btn').fadeIn();
     registerId = $(this).attr('data-info');
     field = $(this).attr('data-field');

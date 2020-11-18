@@ -7,6 +7,9 @@ date_default_timezone_set('Europe/Madrid');
 // Requerimos fichero de configuración esencial de directorios y constantes
 require_once("./config.php");
 
+// Requerimos seteado de variables para que no estén vacías y salte warning
+require_once("./initial_vars.php");
+
 // Requerimos el fichero de configuración de variables de conexión
 require_once($dirs['bdConfig']);
 
@@ -36,8 +39,6 @@ if (!$class->horarioTemporalAHorarioReal()) {
 }
 
 // Comprobamos si está seteada la variable ACTION en la URL (Método GET)
-// Si no es así, procedemos a validar el login, si este es correcto cargamos el fichero home.php
-// En su defecto cargaremos el formulario de login
 
 if (isset($_GET['ACTION'])) {
   switch ($_GET['ACTION']) {
@@ -218,8 +219,16 @@ if (isset($_GET['ACTION'])) {
             case 'edit-horario':
                 include_once($dirs['inc'] . 'Horarios/edit-horario.php');
               break;
+            case 'edit-t_horario':
+              include_once($dirs['inc'] . 'Horarios/edit-t_horario.php');
+            break;
 
             case 'gest-horario':
+              $extras = "
+                  $(function (){
+                      $('#fecha-programar-horario').datepicker({minDate: 1});
+                  });
+                ";
               $style = "
                 #profesor, .add-fields {
                   text-align: center;
@@ -237,27 +246,39 @@ if (isset($_GET['ACTION'])) {
                   padding: 10px;
                   transition-duration: 0.2s;
                 }
-                #update-btn {
+                #programar-horario {
+                  text-align: center;
+                }
+                #program-date {
+                  text-align: center;
+                  color: grey;
+                  margin-bottom: 25px;                  
+                }
+                #update-btn, #apply-program {
                   position: fixed;
                   top: 75px;
                   right: 25px;
                   background-color: #5cb85ccf;
                 }
-                #update-btn:hover {
+                #update-btn:hover, #apply-program:hover {
                   background-color: #449d44;
                 }
-                #cancel-btn {
+                #cancel-btn, #cancel-program {
                   position: fixed;
                   top: 75px;
                   left: 25px;
                   background-color: #d9534fc4;
                 }
-                #cancel-btn:hover {
+                #cancel-btn:hover, #cancel-program:hover {
                   background-color: #d9534f;
                 }
               ";
               include_once($dirs['inc'] . 'top-nav.php');
-              include_once($dirs['inc'] . 'Horarios/gest-horario.php');
+              if (isset($_GET['programDate']) && $class->validFormDate($_GET['programDate'])) {
+                include_once($dirs['inc'] . 'Horarios/gest-horario-programado.php');
+              } else {
+                include_once($dirs['inc'] . 'Horarios/gest-horario.php');
+              }
               break;
 
             case 'crear':
@@ -583,6 +604,9 @@ if (isset($_GET['ACTION'])) {
       if ($class->isLogged($Titulo) && $_SESSION['Perfil'] === 'Admin') {
         if ($class->compruebaCambioPass()) {
           $act_profesores = 'active';
+          if (!isset($_GET['OPT'])) {
+            $_GET['OPT'] = '';
+          }
           switch ($_GET['OPT']) {
             case 'import-form':
               $style = "
@@ -789,7 +813,7 @@ if (isset($_GET['ACTION'])) {
           <script>
             var userAgent = navigator.userAgent.toLowerCase();
             var isSupportedBrowser = (/armv.* raspbian chromium/i).test(userAgent);
-            if(! isSupportedBrowser)
+            if( isSupportedBrowser)
             {
               location.href = "index.php";
             }
@@ -913,6 +937,9 @@ if (isset($_GET['ACTION'])) {
               display: inline-block;
             }
             ";
+          if (!isset($_GET['OPT'])) {
+            $_GET['OPT'] = '';
+          }
           switch ($_GET['OPT']) {
             case 'select':
               if (isset($_GET['export']) && $_GET['export'] == 'marcajes') {
