@@ -61,6 +61,10 @@ $(document).ready(function (e) {
           toastr["error"]("Error al importar fichero.", "Error!")
         } else if (data.match('No-profesor')) {
           toastr["error"]("El fichero CSV contiene iniciales que no hacen referencia a ningún profesor existente.", "Error!")
+        } else if (data.match('Error-unexpected')) {
+          toastr["error"]("Error inesperado, contacte con los administradores.", "Error!")
+        } else if (data.match('empty-import')) {
+          toastr["success"]("No hay nada nuevo para importar.", "Correcto!");
         } else {
           toastr["success"]("¡Datos importados con éxito!", "Correcto!");
           setTimeout(function () { location.reload() }, 700);
