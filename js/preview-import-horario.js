@@ -24,6 +24,8 @@ $(document).ready(function (e) {
           toastr["error"]("Error de cabecera, comprueba el formato del fichero.", "Error!")
         } else if (data.match('error-file')) {
           toastr["error"]("Error de fichero, puede que esté dañado", "Error!")
+        } else if (data.match('error-edificio')) {
+          toastr["error"]("El edificio especificado en el fichero CSV no es numérico", "Error!")
         } else {
           $('#file-content-modal').modal('show'),
           $('#file-content-preview').html(data)
@@ -65,6 +67,8 @@ $(document).ready(function (e) {
           toastr["error"]("Error inesperado, contacte con los administradores.", "Error!")
         } else if (data.match('empty-import')) {
           toastr["success"]("No hay nada nuevo para importar.", "Correcto!");
+        } else if (data.match('error-edificio')) {
+          toastr["error"]("El edificio especificado en el fichero CSV no es numérico", "Error!")
         } else {
           toastr["success"]("¡Datos importados con éxito!", "Correcto!");
           setTimeout(function () { location.reload() }, 700);
