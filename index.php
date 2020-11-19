@@ -848,7 +848,7 @@ if (isset($_GET['ACTION'])) {
           <script>
             var userAgent = navigator.userAgent.toLowerCase();
             var isSupportedBrowser = (/armv.* raspbian chromium/i).test(userAgent);
-            if( isSupportedBrowser)
+            if(! isSupportedBrowser)
             {
               location.href = "index.php";
             }
