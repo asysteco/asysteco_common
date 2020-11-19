@@ -1094,25 +1094,6 @@ if (isset($_GET['ACTION'])) {
       }
       break;
 
-      case 'backup':
-        if ($class->isLogged($Titulo) && $_SESSION['Perfil'] == 'Admin') {
-          if ($class->compruebaCambioPass()) {
-            $scripts = '<link rel="stylesheet" href="css/estilos.css">';
-            include_once($dirs['inc'] . 'backup.php');
-            include_once($dirs['inc'] . 'header.php');
-            include_once($dirs['inc'] . 'top-nav.php');
-            include_once($dirs['inc'] . 'errors.php');
-            include_once($dirs['inc'] . 'footer.php');
-          } else {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
-        } else {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['inc'] . 'msg_modal.php');
-        }
-      break;
-
       case 'backup-centro':
         if ($class->isLogged($Titulo) && $_SESSION['Perfil'] == 'Admin') {
           if ($class->compruebaCambioPass()) {
