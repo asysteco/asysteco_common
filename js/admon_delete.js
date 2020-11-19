@@ -7,6 +7,9 @@ $('.eliminar').on('click', function() {
     } else if (elemento === 'horarios') {
         warning = "Esta acción eliminará todos y cada uno de los horarios del sistema. Estos cambios serán irreversibles.\n"+
         "¿Está seguro de continuar?";
+    } else if (elemento === 't-horarios') {
+        warning = "Esta acción eliminará todos los horarios PROGRAMADOS EN UN FUTURO en el sistema. Estos cambios serán irreversibles.\n"+
+        "¿Está seguro de continuar?";
     } else {
         return;
     }

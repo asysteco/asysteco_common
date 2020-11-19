@@ -54,14 +54,12 @@ if (isset($_GET['ACTION'])) {
             if (isset($_POST['boton']) && $class->validRegisterProf()) {
               header('Location: index.php?ACTION=profesores');
             }
-            include_once($dirs['inc'] . 'header.php');
             include_once($dirs['inc'] . 'top-nav.php');
             include_once($dirs['inc'] . 'profesores.php');
             include($dirs['inc'] . 'errors.php');
             include($dirs['inc'] . 'footer.php');
           } elseif ($_SESSION['Perfil'] === 'Profesor') {
             $act_qr = 'active';
-            include_once($dirs['inc'] . 'header.php');
             include_once($dirs['inc'] . 'top-nav.php');
             include_once($dirs['inc'] . 'generate_code.php');
             include($dirs['inc'] . 'errors.php');
@@ -87,7 +85,6 @@ if (isset($_GET['ACTION'])) {
 
     case 'pruebas':
       $scripts = '<link rel="stylesheet" href="css/estilos.css">';
-      include_once($dirs['inc'] . 'header.php');
       include_once($dirs['inc'] . 'top-nav.php');
       include_once($dirs['inc'] . 'pruebas.php');
       include_once($dirs['inc'] . 'errors.php');
@@ -100,7 +97,6 @@ if (isset($_GET['ACTION'])) {
           $act_usuario = 'active';
           $scripts = '<link rel="stylesheet" href="css/login-style.css">';
           include_once($dirs['inc'] . 'valida_new_pass.php');
-          include_once($dirs['inc'] . 'header.php');
           include_once($dirs['inc'] . 'top-nav.php');
           include_once($dirs['inc'] . 'new_pass.php');
           include_once($dirs['inc'] . 'errors.php');
@@ -118,7 +114,6 @@ if (isset($_GET['ACTION'])) {
     case 'primer_cambio':
       $scripts = '<link rel="stylesheet" href="css/login-style.css">';
       include_once($dirs['inc'] . 'valida_primer_cambio.php');
-      include_once($dirs['inc'] . 'header.php');
       include_once($dirs['inc'] . 'top-nav.php');
       include_once($dirs['inc'] . 'primer_cambio.php');
       include_once($dirs['inc'] . 'errors.php');
@@ -133,7 +128,6 @@ if (isset($_GET['ACTION'])) {
             $marcajes = $response->fetch_assoc();
             if ($marcajes['num'] > 0) {
               $scripts = '<link rel="stylesheet" href="css/form.css">';
-              include_once($dirs['inc'] . 'header.php');
               include_once($dirs['inc'] . 'top-nav.php');
               echo '<div class="container" style="margin-top: 50px;">';
               echo "<div class='row'>";
@@ -161,7 +155,6 @@ if (isset($_GET['ACTION'])) {
                   });
                 ";
               include_once($dirs['inc'] . 'valida-lectivos.php');
-              include_once($dirs['inc'] . 'header.php');
               include_once($dirs['inc'] . 'top-nav.php');
               include_once($dirs['inc'] . 'lectivos.php');
               include_once($dirs['public'] . 'js/lectivos.js');
@@ -185,7 +178,6 @@ if (isset($_GET['ACTION'])) {
       if ($class->isLogged($Titulo)) {
         if ($class->compruebaCambioPass()) {
           $act_qr = 'active';
-          include_once($dirs['inc'] . 'header.php');
           include_once($dirs['inc'] . 'top-nav.php');
           include_once($dirs['inc'] . 'generate_code.php');
           include_once($dirs['inc'] . 'errors.php');
@@ -281,8 +273,7 @@ if (isset($_GET['ACTION'])) {
                   background-color: #d9534f;
                 }
               ";
-                include_once($dirs['inc'] . 'header.php');
-                include_once($dirs['inc'] . 'top-nav.php');
+              include_once($dirs['inc'] . 'top-nav.php');
               if (isset($_GET['programDate']) && $class->validFormDate($_GET['programDate'])) {
                 include_once($dirs['inc'] . 'Horarios/gest-horario-programado.php');
               } else {
@@ -293,7 +284,6 @@ if (isset($_GET['ACTION'])) {
             case 'crear':
               if ($_SESSION['Perfil'] == 'Admin') {
                 $scripts = '<link rel="stylesheet" href="css/horarios-crear.css">';
-                include_once($dirs['inc'] . 'header.php');
                 include_once($dirs['inc'] . 'top-nav.php');
                 include_once($dirs['inc'] . 'crear-horario.php');
               } else {
@@ -328,7 +318,6 @@ if (isset($_GET['ACTION'])) {
                     transition-duration: 0.2s;
                   }
                 ";
-                include_once($dirs['inc'] . 'header.php');
                 include_once($dirs['inc'] . 'top-nav.php');
                 include_once($dirs['inc'] . 'cursos.php');
               } else {
@@ -365,7 +354,6 @@ if (isset($_GET['ACTION'])) {
                     transition-duration: 0.2s;
                   }
                 ";
-                include_once($dirs['inc'] . 'header.php');
                 include_once($dirs['inc'] . 'top-nav.php');
                 include_once($dirs['inc'] . 'aulas.php');
               } else {
@@ -415,7 +403,6 @@ if (isset($_GET['ACTION'])) {
                       margin-left: 25px;
                     }
                   ";
-                include_once($dirs['inc'] . 'header.php');
                 include_once($dirs['inc'] . 'top-nav.php');
                 include_once($dirs['inc'] . 'import-horario.php');
               } else {
@@ -448,7 +435,6 @@ if (isset($_GET['ACTION'])) {
             case 'edit-horario-profesor':
               if ($_SESSION['Perfil'] == 'Admin') {
                 $scripts = '<link rel="stylesheet" href="css/horarios-edit.css">';
-                include_once($dirs['inc'] . 'header.php');
                 include_once($dirs['inc'] . 'top-nav.php');
                 include_once($dirs['inc'] . 'edit-horario-profesor.php');
               } else {
@@ -504,7 +490,6 @@ if (isset($_GET['ACTION'])) {
                     include_once($dirs['inc'] . 'update-guardias.php');
                 } else {
                   $scripts = '<link rel="stylesheet" href="css/horarios-edit-guardias.css">';
-                  include_once($dirs['inc'] . 'header.php');
                   include_once($dirs['inc'] . 'top-nav.php');
                   include_once($dirs['inc'] . 'edit-guardias.php');
                 }
@@ -550,8 +535,17 @@ if (isset($_GET['ACTION'])) {
               }
               break;
 
+              case 'delete-all-t':
+                if ($_SESSION['Perfil'] == 'Admin') {
+                  include_once($dirs['inc'] . 'delete_all_t_horarios.php');
+                } else {
+                  $MSG = "Acceso denegado.";
+                  header("Refresh:2; url=index.php");
+                  include_once($dirs['inc'] . 'msg_modal.php');
+                }
+                break;
+
             default:
-              include_once($dirs['inc'] . 'header.php');
               include_once($dirs['inc'] . 'top-nav.php');
               include_once($dirs['inc'] . 'horarios.php');
               break;
@@ -579,7 +573,6 @@ if (isset($_GET['ACTION'])) {
                   $('#busca_asiste').datepicker();
               });
             ";
-          include_once($dirs['inc'] . 'header.php');
           include_once($dirs['inc'] . 'top-nav.php');
 
           switch ($_GET['OPT']) {
@@ -632,7 +625,6 @@ if (isset($_GET['ACTION'])) {
                     padding: 6px 12px 6px 0;
                   }
                 ";
-              include_once($dirs['inc'] . 'header.php');
               include_once($dirs['inc'] . 'top-nav.php');
               include_once($dirs['inc'] . 'import-profesorado.php');
               break;
@@ -654,14 +646,12 @@ if (isset($_GET['ACTION'])) {
               $scripts = '<link rel="stylesheet" href="css/login-style.css">';
               $scripts .= '<link rel="stylesheet" href="css/profesores-edit.css">';
               include_once($dirs['inc'] . 'valida_edit_profesor.php');
-              include_once($dirs['inc'] . 'header.php');
               include_once($dirs['inc'] . 'top-nav.php');
               include_once($dirs['inc'] . 'editar_profesor.php');
               break;
 
             case 'sustituir':
               $scripts = '<link rel="stylesheet" href="css/profesores-sustituir.css">';
-              include_once($dirs['inc'] . 'header.php');
               include_once($dirs['inc'] . 'top-nav.php');
               include_once($dirs['inc'] . 'form_sustituto.php');
               break;
@@ -671,15 +661,12 @@ if (isset($_GET['ACTION'])) {
                 if ($class->validRegisterProf()) {
                   $MSG = "Profesor: $_POST[Nombre] con iniciales: $_POST[Iniciales] añadido correctamente";
                   header('Refresh: 2; index.php?ACTION=profesores');
-                  include_once($dirs['inc'] . 'header.php');
                   include_once($dirs['inc'] . 'top-nav.php');
                 } else {
-                  include_once($dirs['inc'] . 'header.php');
                   include_once($dirs['inc'] . 'top-nav.php');
                   include_once($dirs['inc'] . 'form-add-profesor.php');
                 }
               } else {
-                include_once($dirs['inc'] . 'header.php');
                 include_once($dirs['inc'] . 'top-nav.php');
                 include_once($dirs['inc'] . 'form-add-profesor.php');
               }
@@ -733,7 +720,6 @@ if (isset($_GET['ACTION'])) {
 
             default:
               $scripts = '<link rel="stylesheet" href="css/profesores.css">';
-              include_once($dirs['inc'] . 'header.php');
               include_once($dirs['inc'] . 'top-nav.php');
               include_once($dirs['inc'] . 'profesores.php');
               break;
@@ -801,7 +787,6 @@ if (isset($_GET['ACTION'])) {
               ';
           }
 
-          include_once($dirs['inc'] . 'header.php');
           include_once($dirs['inc'] . 'top-nav.php');
           include($dirs['inc'] . 'home.php');
           include($dirs['inc'] . 'errors.php');
@@ -910,7 +895,6 @@ if (isset($_GET['ACTION'])) {
               break;
 
             default:
-              include_once($dirs['inc'] . 'header.php');
               include_once($dirs['inc'] . 'top-nav.php');
               include_once($dirs['inc'] . 'form_mensajes.php');
               include_once($dirs['inc'] . 'listar_mensajes.php');
@@ -934,7 +918,6 @@ if (isset($_GET['ACTION'])) {
       if ($class->isLogged($Titulo) && $_SESSION['Perfil'] == 'Admin') {
         if ($class->compruebaCambioPass()) {
           $act_usuario = 'active';
-          include_once($dirs['inc'] . 'header.php');
           include_once($dirs['inc'] . 'top-nav.php');
           include_once($dirs['inc'] . 'notificaciones.php');
           include_once($dirs['inc'] . 'errors.php');
@@ -999,7 +982,6 @@ if (isset($_GET['ACTION'])) {
               break;
 
             default:
-              include_once($dirs['inc'] . 'header.php');
               include_once($dirs['inc'] . 'top-nav.php');
               include_once($dirs['inc'] . 'menu_admon.php');
               include_once($dirs['public'] . 'js/admon_filtrado_fecha.js');
@@ -1041,7 +1023,6 @@ if (isset($_GET['ACTION'])) {
             });
           ";
           $scripts = '<link rel="stylesheet" href="css/profesores-sustituir.css">';
-          include_once($dirs['inc'] . 'header.php');
           include_once($dirs['inc'] . 'top-nav.php');
           include_once($dirs['inc'] . 'fichar-manual.php');
           include_once($dirs['inc'] . 'errors.php');
@@ -1089,7 +1070,6 @@ if (isset($_GET['ACTION'])) {
           if ($class->compruebaCambioPass()) {
             $scripts = '<link rel="stylesheet" href="css/estilos.css">';
             include_once($dirs['inc'] . 'backup.php');
-            include_once($dirs['inc'] . 'header.php');
             include_once($dirs['inc'] . 'top-nav.php');
             include_once($dirs['inc'] . 'errors.php');
             include_once($dirs['inc'] . 'footer.php');
@@ -1185,14 +1165,12 @@ if (isset($_GET['ACTION'])) {
         if (isset($_POST['boton']) && $class->validRegisterProf()) {
           header('Location: index.php?ACTION=profesores');
         }
-        include_once($dirs['inc'] . 'header.php');
         include_once($dirs['inc'] . 'top-nav.php');
         include_once($dirs['inc'] . 'profesores.php');
         include($dirs['inc'] . 'errors.php');
         include($dirs['inc'] . 'footer.php');
       } elseif ($_SESSION['Perfil'] === 'Profesor') {
         $act_qr = 'active';
-        include_once($dirs['inc'] . 'header.php');
         include_once($dirs['inc'] . 'top-nav.php');
         include_once($dirs['inc'] . 'generate_code.php');
         include($dirs['inc'] . 'errors.php');
