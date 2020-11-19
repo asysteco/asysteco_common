@@ -19,6 +19,7 @@ $('body').on('click', '.act', function () {
 
     if (action === 'add') {
         dia = $('#add-dia').val();
+        edificio = $('#add-edificio').val();
         hora = $('#add-hora').val();
         aula = $('#add-aula').val();
         curso = $('#add-curso').val();
@@ -31,6 +32,7 @@ $('body').on('click', '.act', function () {
         data = {
             'action': action,
             'dia': dia,
+            'edificio': edificio,
             'hora': hora,
             'aula': aula,
             'curso': curso,
