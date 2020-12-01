@@ -543,7 +543,7 @@ if (isset($_GET['ACTION'])) {
 
               case 'delete-all-t':
                 if ($_SESSION['Perfil'] == 'Admin') {
-                  include_once($dirs['inc'] . 'delete_all_t_horarios.php');
+                  include_once($dirs['inc'] . 'Horarios/delete_all_t_horarios.php');
                 } else {
                   $MSG = "Acceso denegado.";
                   header("Refresh:2; url=index.php");
@@ -583,7 +583,7 @@ if (isset($_GET['ACTION'])) {
           include_once($dirs['inc'] . 'Interfaces/header.php');
           include_once($dirs['inc'] . 'Interfaces/top-nav.php');
 
-          switch ($_GET['OPT']) {
+          switch ($_GET['OPT'] ?? '') {
             case 'all':
               if ($_SESSION['Perfil'] === 'Admin') {
                 include_once($dirs['inc'] . 'Fichaje/contenido-asistencias-all.php');
