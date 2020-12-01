@@ -85,15 +85,6 @@ if (isset($_GET['ACTION'])) {
       include_once($dirs['inc'] . 'Login/logout.php');
       break;
 
-    case 'pruebas':
-      $scripts = '<link rel="stylesheet" href="css/estilos.css">';
-      include_once($dirs['inc'] . 'Interfaces/header.php');
-      include_once($dirs['inc'] . 'Interfaces/top-nav.php');
-      include_once($dirs['inc'] . 'pruebas.php');
-      include_once($dirs['inc'] . 'Interfaces/errors.php');
-      include_once($dirs['inc'] . 'Interfaces/footer.php');
-      break;
-
     case 'cambio_pass':
       if ($class->isLogged($Titulo)) {
         if ($class->compruebaCambioPass()) {
