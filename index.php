@@ -89,6 +89,8 @@ if (isset($_GET['ACTION'])) {
       if ($class->isLogged($Titulo)) {
         if ($class->compruebaCambioPass()) {
           $act_usuario = 'active';
+          $act_changePass = 'active';
+
           $scripts = '<link rel="stylesheet" href="css/login-style.css">';
           include_once($dirs['Valida'] . 'valida_new_pass.php');
           include_once($dirs['Interfaces'] . 'header.php');
@@ -304,6 +306,8 @@ if (isset($_GET['ACTION'])) {
 
             case 'cursos':
               if ($_SESSION['Perfil'] == 'Admin') {
+                $act_gestCursos = 'active';
+
                 $style = "
                   table {
                     text-align: center;
@@ -341,6 +345,8 @@ if (isset($_GET['ACTION'])) {
 
             case 'aulas':
               if ($_SESSION['Perfil'] == 'Admin') {
+                $act_gestAulas = 'active';
+
                 $style = "
                   table {
                     text-align: center;
@@ -392,6 +398,8 @@ if (isset($_GET['ACTION'])) {
 
             case 'import-form':
               if ($_SESSION['Perfil'] == 'Admin') {
+                $act_importHorarios = 'active';
+                
                 $extras = "
                     $(function (){
                         $('#fecha_incorpora').datepicker({minDate: 0});
@@ -627,6 +635,7 @@ if (isset($_GET['ACTION'])) {
           }
           switch ($_GET['OPT']) {
             case 'import-form':
+              $act_importProf = 'active';
               $style = "
                   input[type=file] {
                     display: inline-block;
@@ -735,6 +744,7 @@ if (isset($_GET['ACTION'])) {
               break;
 
             default:
+              $act_showProf = 'active';
               $scripts = '<link rel="stylesheet" href="css/profesores.css">';
               include_once($dirs['Interfaces'] . 'header.php');
               include_once($dirs['Interfaces'] . 'top-nav.php');
@@ -895,6 +905,8 @@ if (isset($_GET['ACTION'])) {
       if ($class->isLogged($Titulo) && $_SESSION['Perfil'] == 'Admin') {
         if ($class->compruebaCambioPass()) {
           $act_usuario = 'active';
+          $act_notification = 'active';
+
           include_once($dirs['Interfaces'] . 'header.php');
           include_once($dirs['Interfaces'] . 'top-nav.php');
           include_once($dirs['Interfaces'] . 'notificaciones.php');
@@ -914,6 +926,8 @@ if (isset($_GET['ACTION'])) {
       if ($class->isLogged($Titulo) && $_SESSION['Perfil'] == 'Admin') {
         if ($class->compruebaCambioPass()) {
           $act_usuario = 'active';
+          $act_admon  = 'active';
+          
           $extras = "        
               $(function (){
                   $('#fechainicio').datepicker();
