@@ -652,7 +652,6 @@ if (isset($_GET['ACTION'])) {
               break;
 
             case 'import-csv':
-              //require_once($dirs['inc'] . 'import-mysql-profesorado.php');
               require_once($dirs['Importar'] . 'import-mysql-profesorado-ajax.php');
               break;
 
@@ -671,7 +670,6 @@ if (isset($_GET['ACTION'])) {
 
             case 'sustituir':
               $scripts = '<link rel="stylesheet" href="css/login-style.css">';
-              /*$scripts .= '<link rel="stylesheet" href="css/profesores-edit.css">';*/
               $scripts = '<link rel="stylesheet" href="css/profesores-sustituir.css">';
               include_once($dirs['Interfaces'] . 'header.php');
               include_once($dirs['Interfaces'] . 'top-nav.php');
