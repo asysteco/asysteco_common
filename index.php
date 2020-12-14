@@ -436,7 +436,7 @@ if (isset($_GET['ACTION'])) {
               });
             ";
           $style = "
-            input[type=text], #select_admon {
+            input[type=text], #select_profesor {
               width: 25%;
               display: inline-block;
             }
@@ -446,32 +446,41 @@ if (isset($_GET['ACTION'])) {
           }
           switch ($_GET['OPT']) {
             case 'select':
-              if (isset($_GET['export']) && $_GET['export'] == 'marcajes') {
-                include_once($dirs['Exportar'] . 'export_marcajes.php');
-              } elseif (isset($_GET['export']) && $_GET['export'] == 'asistencias') {
-                include_once($dirs['Exportar'] . 'export_asistencias.php');
-              } elseif (isset($_GET['export']) && $_GET['export'] == 'faltas') {
-                include_once($dirs['Exportar'] . 'export_faltas.php');
-              } elseif (isset($_GET['export']) && $_GET['export'] == 'horarios') {
-                include_once($dirs['Exportar'] . 'export_horarios.php');
-              } elseif (isset($_GET['export']) && $_GET['export'] == 'profesores') {
-                include_once($dirs['Exportar'] . 'export_profesores.php');
-              } elseif (isset($_GET['export']) && $_GET['export'] == 'fichajes') {
-                include_once($dirs['Exportar'] . 'export_fichajes.php');
-              } elseif (isset($_GET['select']) && $_GET['select'] == 'marcajes') {
-                include_once($dirs['Listar'] . 'list_marcajes.php');
-              } elseif (isset($_GET['select']) && $_GET['select'] == 'asistencias') {
-                include_once($dirs['Listar'] . 'list_asistencias.php');
-              } elseif (isset($_GET['select']) && $_GET['select'] == 'faltas') {
-                include_once($dirs['Listar'] . 'list_faltas.php');
-              } elseif (isset($_GET['select']) && $_GET['select'] == 'horarios') {
-                include_once($dirs['Listar'] . 'list_horarios.php');
-              } elseif (isset($_GET['select']) && $_GET['select'] == 'fichadi') {
-                include_once($dirs['Listar'] . 'list_fichaje_diario.php');
-              } elseif (isset($_GET['select']) && $_GET['select'] == 'fichafe') {
-                include_once($dirs['Listar'] . 'list_fichaje_fecha.php');
-              } else {
-                header('Location: index.php');
+              $action = $_GET['action'];
+              $element = $_GET['element'];
+
+              if (isset($action) && $action === 'export') {
+                if ($element === 'marcajes') {
+                  include_once($dirs['Exportar'] . 'export_marcajes.php');
+                } elseif ($element === 'asistencias') {
+                  include_once($dirs['Exportar'] . 'export_asistencias.php');
+                } elseif ($element === 'faltas') {
+                  include_once($dirs['Exportar'] . 'export_faltas.php');
+                } elseif ($element === 'horarios') {
+                  include_once($dirs['Exportar'] . 'export_horarios.php');
+                } elseif ($element === 'profesores') {
+                  include_once($dirs['Exportar'] . 'export_profesores.php');
+                } elseif ($element === 'fichajes') {
+                  include_once($dirs['Exportar'] . 'export_fichajes.php');
+                } else {
+                  $MSG = 'error-export';
+                }
+              } elseif (isset($action) && $action === 'select') {
+                if ($element === 'marcajes') {
+                  include_once($dirs['Listar'] . 'list_marcajes.php');
+                } elseif ($element === 'asistencias') {
+                  include_once($dirs['Listar'] . 'list_asistencias.php');
+                } elseif ($element === 'faltas') {
+                  include_once($dirs['Listar'] . 'list_faltas.php');
+                } elseif ($element === 'horarios') {
+                  include_once($dirs['Listar'] . 'list_horarios.php');
+                } elseif ($element === 'fichajeDiario') {
+                  include_once($dirs['Listar'] . 'list_fichaje_diario.php');
+                } elseif ($element === 'fichajeFechaFilter') {
+                  include_once($dirs['Listar'] . 'list_fichaje_fecha.php');
+                } else {
+                  $MSG = 'error-export';
+                }
               }
               break;
 
@@ -479,8 +488,6 @@ if (isset($_GET['ACTION'])) {
               include_once($dirs['Interfaces'] . 'header.php');
               include_once($dirs['Interfaces'] . 'top-nav.php');
               include_once($dirs['Interfaces'] . 'menu_admon.php');
-              include_once($dirs['public'] . 'js/admon_filtrado_fecha.js');
-              include_once($dirs['public'] . 'js/admon.js');
               include_once($dirs['Interfaces'] . 'errors.php');
               include_once($dirs['Interfaces'] . 'footer.php');
               break;
