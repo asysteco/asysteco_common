@@ -91,7 +91,7 @@ if (isset($_GET['ACTION'])) {
           $act_usuario = 'active';
           $act_changePass = 'active';
 
-          $scripts = '<link rel="stylesheet" href="css/login-style.css">';
+          $scripts = '<link rel="stylesheet" href="css/change-pass-style.css">';
           include_once($dirs['Valida'] . 'valida_new_pass.php');
           include_once($dirs['Interfaces'] . 'header.php');
           include_once($dirs['Interfaces'] . 'top-nav.php');
@@ -128,12 +128,13 @@ if (isset($_GET['ACTION'])) {
               $scripts = '<link rel="stylesheet" href="css/form.css">';
               include_once($dirs['Interfaces'] . 'header.php');
               include_once($dirs['Interfaces'] . 'top-nav.php');
-              echo '<div class="container" style="margin-top: 50px;">';
-              echo "<div class='row'>";
-              echo "<div class='col-xs-12'>";
-              include_once($dirs['Horarios'] . 'calendario.php');
-              echo "</div>";
-              echo "</div>";
+              echo '<div class="container" style="margin-top: 75px;">';
+                echo "<div class='row'>";
+                  echo "<div class='col-xs-12'>";
+                    echo '<h1>Calendario escolar</h1>';
+                    include_once($dirs['Horarios'] . 'calendario.php');
+                  echo "</div>";
+                echo "</div>";
               echo "</div>";
               include_once($dirs['Interfaces'] . 'errors.php');
               include_once($dirs['Interfaces'] . 'footer.php');
@@ -524,7 +525,9 @@ if (isset($_GET['ACTION'])) {
               $('#add-fecha').datepicker({minDate: -5, maxDate: 0});
             });
           ";
-          $scripts = '<link rel="stylesheet" href="css/profesores-sustituir.css">';
+          $scripts = '<link rel="stylesheet" href="css/profesores-edit.css">';
+          $scripts .= '<link rel="stylesheet" href="css/login-style.css">';
+          //$scripts = '<link rel="stylesheet" href="css/profesores-sustituir.css">';
           include_once($dirs['Interfaces'] . 'header.php');
           include_once($dirs['Interfaces'] . 'top-nav.php');
           include_once($dirs['Fichaje'] . 'fichar-manual.php');

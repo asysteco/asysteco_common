@@ -151,8 +151,8 @@ $('.remove').on('click', function () {
             if (data.match('Ok-action')) {
                 toastr["success"]("Aula eliminada correctamente.", "Correcto!"),
                 $('#fila_'+fieldId).remove()
-            } else if (data.match('Error-remove')) {
-                toastr["error"]("Error al eliminar el aula.", "Error!")
+            } else if (data.match('Error-delete')) {
+                toastr["error"]("Error al eliminar el aula. Asegúrese de que no esté en uso en ningún horario.", "Error!")
             } else {
                 toastr["error"]("Error inesperado...", "Error!")
             }

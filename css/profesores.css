@@ -3,6 +3,7 @@ transition-duration: 0.4s;
 }
 .reset_icon:hover {
 transform: rotate(360deg) scale(1.4);
+color: #007bff !important;
 }
 
 .edit_icon, .list_icon {
@@ -10,6 +11,7 @@ transition-duration: 0.2s;
 }
 .edit_icon:hover, .list_icon:hover {
 transform: scale(1.4);
+color: #007bff !important;
 }
 
 .remove_icon {
