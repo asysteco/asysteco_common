@@ -525,7 +525,9 @@ if (isset($_GET['ACTION'])) {
               $('#add-fecha').datepicker({minDate: -5, maxDate: 0});
             });
           ";
-          $scripts = '<link rel="stylesheet" href="css/profesores-sustituir.css">';
+          $scripts = '<link rel="stylesheet" href="css/profesores-edit.css">';
+          $scripts .= '<link rel="stylesheet" href="css/login-style.css">';
+          //$scripts = '<link rel="stylesheet" href="css/profesores-sustituir.css">';
           include_once($dirs['Interfaces'] . 'header.php');
           include_once($dirs['Interfaces'] . 'top-nav.php');
           include_once($dirs['Fichaje'] . 'fichar-manual.php');
