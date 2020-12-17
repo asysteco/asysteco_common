@@ -9,6 +9,7 @@ $act_horario = '';
 
 $act_profesores = '';
     $act_showProf = '';
+    $act_regProf = '';
     $act_importProf = '';
 
 $act_asistencia = '';
