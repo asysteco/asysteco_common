@@ -9,10 +9,10 @@ $("#message").hover(
 );
 $("#admon").hover(
     function () {
-      $("#admon-icon").addClass('glyphicon-folder-open')
+      $("#admon-icon").addClass('fa-folder-open-o')
     }, 
     function () {
-      $("#admon-icon").removeClass('glyphicon-folder-open')
+      $("#admon-icon").removeClass('fa-folder-open-o')
     }
 );
 $("#notif").hover(
