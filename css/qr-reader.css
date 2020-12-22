@@ -8,6 +8,13 @@ canvas {box-shadow: 4px 6px 15px grey; padding: 2px; border-radius: 10px;}
     text-align: center;
 }
 
+#fila_cabecera {
+    display: table;
+    width: 100%;
+    vertical-align: middle;
+    text-align: center;
+}
+
 #listado-guardias {
     margin-top: 21px;
 }
