@@ -324,7 +324,6 @@ if (isset($_GET['ACTION'])) {
           }
 
           include_once($dirs['Interfaces'] . 'header.php');
-          include_once($dirs['Interfaces'] . 'top-nav.php');
           include($dirs['Interfaces'] . 'home.php');
           include($dirs['Interfaces'] . 'errors.php');
           include($dirs['Interfaces'] . 'footer.php');
@@ -343,7 +342,7 @@ if (isset($_GET['ACTION'])) {
         <!DOCTYPE html>
         <html lang="es">
         <head>
-          <title>Inicio</title>
+          <title>Activar Lector</title>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
           <link rel="stylesheet" href="css/bootstrap-3.4.1/css/bootstrap.min.css">
