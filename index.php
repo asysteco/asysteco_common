@@ -20,12 +20,18 @@ require_once($dirs['class'] . 'Asysteco.php');
 $class = new Asysteco;
 
 // Iniciamos la conexión a la base de datos
-$class->bdConex($insti_host, $insti_user, $insti_pass, $insti_db);
+try {
+  if (!$class->bdConex($insti_host, $insti_user, $insti_pass, $insti_db)) {
+    throw new Exception($class->ERR_ASYSTECO);
+  }
 
-// Establecemos UTF8 como cotejamiento de caracteres
-if (!$class->conex->set_charset("utf8")) {
-  printf("Error cargando el conjunto de caracteres utf8: %s\n", $class->conex->error);
-  exit();
+  // Establecemos UTF8 como cotejamiento de caracteres
+  if (!$class->conex->set_charset("utf8")) {
+    throw new Exception('Error al conectar con el servicio, inténtelo más tarde o contacte con los administradores.');
+  }
+} catch (Exception $e) {
+  echo $e->getMessage();
+  exit;
 }
 
 // Comprobamos si existen horarios para actualizar
