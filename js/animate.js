@@ -31,4 +31,12 @@ $("#cambio-pass").hover(
       $("#cambio-pass-icon").removeClass('rotate-pass')
     }
 );
+$("#info-horario").hover(
+    function () {
+      $("#info-horario-icon").addClass('fa-calendar-check-o')
+    }, 
+    function () {
+      $("#info-horario-icon").removeClass('fa-calendar-check-o')
+    }
+);
 </script>
