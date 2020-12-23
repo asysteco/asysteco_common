@@ -1,5 +1,4 @@
 $('.hide-it').hide();
-$('#loading').hide();
 
 $('.edit').hover(function(){
     $(this).css('color', 'green');
@@ -58,7 +57,6 @@ $('.update').on('click', function () {
             $('#file-content-modal').modal('hide'),
             $('#loading-msg').html('Cargando...');
             $('#loading').show();
-            $('#loading').css('z-index', 99);
         },
         success: function (data) {
             if (data.match('Ok-action')) {
@@ -103,7 +101,6 @@ $('#add-btn-aula').on('click', function () {
             $('#file-content-modal').modal('hide'),
             $('#loading-msg').html('Cargando...');
             $('#loading').show();
-            $('#loading').css('z-index', 99);
         },
         success: function (data) {
             if (data.match('Ok-action')) {
@@ -145,14 +142,13 @@ $('.remove').on('click', function () {
             $('#file-content-modal').modal('hide'),
             $('#loading-msg').html('Cargando...');
             $('#loading').show();
-            $('#loading').css('z-index', 99);
         },
         success: function (data) {
             if (data.match('Ok-action')) {
                 toastr["success"]("Aula eliminada correctamente.", "Correcto!"),
                 $('#fila_'+fieldId).remove()
-            } else if (data.match('Error-remove')) {
-                toastr["error"]("Error al eliminar el aula.", "Error!")
+            } else if (data.match('Error-delete')) {
+                toastr["error"]("Error al eliminar el aula. Asegúrese de que no esté en uso en ningún horario.", "Error!")
             } else {
                 toastr["error"]("Error inesperado...", "Error!")
             }

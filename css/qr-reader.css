@@ -7,12 +7,37 @@ canvas {box-shadow: 4px 6px 15px grey; padding: 2px; border-radius: 10px;}
 #qreader {
     text-align: center;
 }
-.scroller::-webkit-scrollbar {
+
+#fila_cabecera {
+    display: table;
+    width: 100%;
+    vertical-align: middle;
+    text-align: center;
+}
+
+#listado-guardias {
+    margin-top: 21px;
+}
+
+#listado-guardias .scroller::-webkit-scrollbar {
     display: none;
 }
-.scroller {
-    max-height: 85vh;
+#listado-guardias .scroller {
+    display: block;
+    max-height: 90vh;
     overflow-y: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
+}
+
+.scroller tr {
+    display: table;
+    width: 100%;
+    box-sizing: border-box;  
+}
+
+.scroller td {
+    width: fit-content;
+    vertical-align: middle;
+    text-align: center;
 }

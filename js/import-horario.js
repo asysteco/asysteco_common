@@ -30,15 +30,11 @@ $(document).ready(function() {
 });
 </script>
 <script>
-$(document).ready(function () {
-    $('#loading').delay().fadeOut()
-});
 $('#btn-todos-registros').on('click', function() {
     $("#todos-registros").html(""),
     $("#loading-msg").html("Cargando..."),
     $("#loading").show(),
-    $('#todos-registros').load('index.php?ACTION=horarios&OPT=registros'),
-    $("#loading").delay().fadeOut()
+    $('#todos-registros').load('index.php?ACTION=horarios&OPT=registros')
 });
 $('#fecha_incorpora').keypress(function(e) {
     e.preventDefault();

@@ -9,10 +9,10 @@ $("#message").hover(
 );
 $("#admon").hover(
     function () {
-      $("#admon-icon").addClass('glyphicon-folder-open')
+      $("#admon-icon").addClass('fa-folder-open-o')
     }, 
     function () {
-      $("#admon-icon").removeClass('glyphicon-folder-open')
+      $("#admon-icon").removeClass('fa-folder-open-o')
     }
 );
 $("#notif").hover(
@@ -29,6 +29,14 @@ $("#cambio-pass").hover(
     }, 
     function () {
       $("#cambio-pass-icon").removeClass('rotate-pass')
+    }
+);
+$("#info-horario").hover(
+    function () {
+      $("#info-horario-icon").addClass('fa-calendar-check-o')
+    }, 
+    function () {
+      $("#info-horario-icon").removeClass('fa-calendar-check-o')
     }
 );
 </script>

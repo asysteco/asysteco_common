@@ -4,3 +4,5 @@ resources/img/logo-centro.jpg
 resources/img/logo-centro.svg
 resources/img/default-logo.png
 tmp/*
+templates/Plantilla_*
+.vscode/

@@ -1,29 +1,20 @@
 <script>
-var timeout = 1000;
-var scrollTime = 10000;
-var wait = 12000;
-var again = 22000;
+var scrollTime = 1000; // Tiempo de scroll
+var wait = 9000; // Tiempo que tarda entre cada scroll
 
-var top = 'fila_0';
-var bottom = 'fila_15';
-
-var action = function() {
-  scrollDown();
-  setTimeout(scrollUp, wait);
-  setTimeout(action, again);
-};
-
-function scrollUp() {
-  $(".scroller").animate({
-    scrollTop: $("#"+top).offset().top
-  }, scrollTime)
-};
+var whiteSpaceHeight = 21; // Altura del espaciado superior en px
+var topRow = 'fila_0'; // Fila Inicial
+var bottomRow = 'fila_16'; // Fila Final
 
 function scrollDown() {
   $(".scroller").animate({
-    scrollTop: $("#"+bottom).offset().top
+    scrollTop: $("#"+bottomRow).offset().topRow-whiteSpaceHeight
   }, scrollTime)
 };
 
-action();
+setInterval(() => {
+  if ($('#'+topRow).length && $('#'+bottomRow).length) {
+    scrollDown();
+  }
+}, wait);
 </script>

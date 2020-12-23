@@ -1,80 +1,65 @@
-<script>
-$('#fechainicio, #fechafin').keypress(function(e) {
+$('#fechainicio, #fechafin').keypress(function (e) {
     e.preventDefault()
 });
-var hrefmarcajes = $('#filtromarcaje').attr('enlace');
-var hrefexmarcajes = $('#exportmarcajes').attr('enlace');
-var hrefasistencias = $('#filtroasistencias').attr('enlace');
-var hrefexasistencias = $('#exportasistencias').attr('enlace');
-var hreffaltas = $('#filtrofaltas').attr('enlace');
-var hrefexfaltas = $('#exportfaltas').attr('enlace');
-var hreffichajes = $('#filtrofichajes').attr('enlace');
-var hrefhorarios = $('#filtrohorarios').attr('enlace');
-var hrefexhorarios = $('#exporthorarios').attr('enlace');
-var hrefexfichajes = $('#exportfichajes').attr('enlace');
-var fecha = $('#fechainicio').attr('enlace');
-var fecha2 = $('#fechafin').attr('enlace');
-var profesor = $('#select_admon').val();
-$('#fechainicio').on('change', function() {
-    fecha = $(this).val(),
-    $(function (){
-        $('#fechafin').datepicker().focus();
+
+var fechaInicio = $('#fechainicio').val();
+var fechaFin = $('#fechafin').val();
+var profesor = $('#select_profesor').val();
+var action = '';
+
+$('#fechainicio').on('change', function () {
+    fechaInicio = $(this).val(),
+        $(function () {
+            $('#fechafin').datepicker().focus();
+        });
+});
+
+$('#fechafin').on('change', function () {
+    fechaFin = $(this).val();
+});
+
+$('#select_profesor').on('change', function () {
+    profesor = $(this).val();
+});
+
+$('.act').on('click', function () {
+    element = $(this).attr('data-item');
+    action = $(this).attr('action');
+    urlPath = 'index.php?ACTION=admon&OPT=select';
+    data = {
+        'action': action,
+        'element': element,
+        'fechainicio': fechaInicio,
+        'fechafin': fechaFin,
+        'profesor': profesor,
+        'pag': 0
+    };
+
+    if (action === '') {
+        toastr['error']("No se puede realizar dicha acción.", "Error!");
+        return;
+    }
+
+    $.ajax({
+        url: urlPath,
+        type: 'GET',
+        data: data,
+        beforeSend: function () {
+            $("#loading-msg").html("Cargando...");
+            $("#loading").show();
+        },
+        success: function (data) {
+            if (action === 'select') {
+                $('#btn-response').html(data);
+                $("#loading").fadeOut();
+            } else if (action === 'export') {
+                window.open(data, "_blank");
+                setTimeout(() => { CheckBackupFile(element) }, 500);
+            }
+        },
+        error: function (e) {
+            $('#error-modal').modal('show');
+            $('#error-content-modal').html(e);
+        }
     });
 });
-$('#fechafin').on('change', function() {
-    fecha2 = $(this).val();
-    if(profesor == null || profesor == '')
-    {
-        $('#filtromarcaje').attr('enlace', hrefmarcajes+'&fechainicio='+fecha+'&fechafin='+fecha2),
-        $('#exportmarcajes').attr('enlace', hrefexmarcajes+'&fechainicio='+fecha+'&fechafin='+fecha2),
-        $('#filtroasistencias').attr('enlace', hrefasistencias+'&fechainicio='+fecha+'&fechafin='+fecha2),
-        $('#exportasistencias').attr('enlace', hrefexasistencias+'&fechainicio='+fecha+'&fechafin='+fecha2),
-        $('#filtrofaltas').attr('enlace', hreffaltas+'&fechainicio='+fecha+'&fechafin='+fecha2),
-        $('#exportfaltas').attr('enlace', hrefexfaltas+'&fechainicio='+fecha+'&fechafin='+fecha2),
-        $('#filtrofichajes').attr('enlace', hreffichajes+'&fechainicio='+fecha+'&fechafin='+fecha2),
-        $('#exportfichajes').attr('enlace', hrefexfichajes+'&fechainicio='+fecha+'&fechafin='+fecha2)
-    }
-    else
-    {
-        $('#filtromarcaje').attr('enlace', hrefmarcajes+'&fechainicio='+fecha+'&fechafin='+fecha2+'&profesor='+profesor),
-        $('#exportmarcajes').attr('enlace', hrefexmarcajes+'&fechainicio='+fecha+'&fechafin='+fecha2+'&profesor='+profesor),
-        $('#filtroasistencias').attr('enlace', hrefasistencias+'&fechainicio='+fecha+'&fechafin='+fecha2+'&profesor='+profesor),
-        $('#exportasistencias').attr('enlace', hrefexasistencias+'&fechainicio='+fecha+'&fechafin='+fecha2+'&profesor='+profesor),
-        $('#filtrofaltas').attr('enlace', hreffaltas+'&fechainicio='+fecha+'&fechafin='+fecha2+'&profesor='+profesor),
-        $('#exportfaltas').attr('enlace', hrefexfaltas+'&fechainicio='+fecha+'&fechafin='+fecha2+'&profesor='+profesor),
-        $('#filtrofichajes').attr('enlace', hreffichajes+'&fechainicio='+fecha+'&fechafin='+fecha2+'&profesor='+profesor),
-        $('#exportfichajes').attr('enlace', hrefexfichajes+'&fechainicio='+fecha+'&fechafin='+fecha2+'&profesor='+profesor),
-        $('#filtrohorarios').attr('enlace', hrefhorarios+'&profesor='+profesor),
-        $('#exporthorarios').attr('enlace', hrefexhorarios+'&profesor='+profesor)
-    }
-});
-$('#select_admon').on('change', function() {
-    profesor = $(this).val();
-    if(fecha == null || fecha2 == null)
-    {
-        $('#filtromarcaje').attr('enlace', hrefmarcajes+'&profesor='+profesor),
-        $('#exportmarcajes').attr('enlace', hrefexmarcajes+'&profesor='+profesor),
-        $('#filtroasistencias').attr('enlace', hrefasistencias+'&profesor='+profesor),
-        $('#exportasistencias').attr('enlace', hrefexasistencias+'&profesor='+profesor),
-        $('#filtrofaltas').attr('enlace', hreffaltas+'&profesor='+profesor),
-        $('#exportfaltas').attr('enlace', hrefexfaltas+'&profesor='+profesor),
-        $('#filtrohorarios').attr('enlace', hrefhorarios+'&profesor='+profesor),
-        $('#exporthorarios').attr('enlace', hrefexhorarios+'&profesor='+profesor),
-        $('#filtrofichajes').attr('enlace', hreffichajes+'&profesor='+profesor),
-        $('#exportfichajes').attr('enlace', hrefexfichajes+'&profesor='+profesor)
-    }
-    else
-    {
-        $('#filtromarcaje').attr('enlace', hrefmarcajes+'&fechainicio='+fecha+'&fechafin='+fecha2+'&profesor='+profesor),
-        $('#exportmarcajes').attr('enlace', hrefexmarcajes+'&fechainicio='+fecha+'&fechafin='+fecha2+'&profesor='+profesor),
-        $('#filtroasistencias').attr('enlace', hrefasistencias+'&fechainicio='+fecha+'&fechafin='+fecha2+'&profesor='+profesor),
-        $('#exportasistencias').attr('enlace', hrefexasistencias+'&fechainicio='+fecha+'&fechafin='+fecha2+'&profesor='+profesor),
-        $('#filtrofaltas').attr('enlace', hreffaltas+'&fechainicio='+fecha+'&fechafin='+fecha2+'&profesor='+profesor),
-        $('#exportfaltas').attr('enlace', hrefexfaltas+'&fechainicio='+fecha+'&fechafin='+fecha2+'&profesor='+profesor),
-        $('#filtrofichajes').attr('enlace', hreffichajes+'&fechainicio='+fecha+'&fechafin='+fecha2+'&profesor='+profesor),
-        $('#exportfichajes').attr('enlace', hrefexfichajes+'&fechainicio='+fecha+'&fechafin='+fecha2+'&profesor='+profesor),
-        $('#filtrohorarios').attr('enlace', hrefhorarios+'&profesor='+profesor),
-        $('#exporthorarios').attr('enlace', hrefexhorarios+'&profesor='+profesor)
-    }
-});
-</script>

@@ -8,7 +8,7 @@ $('.eliminar').on('click', function() {
         warning = "Esta acción eliminará todos y cada uno de los horarios del sistema. Estos cambios serán irreversibles.\n"+
         "¿Está seguro de continuar?";
     } else if (elemento === 't-horarios') {
-        warning = "Esta acción eliminará todos los horarios PROGRAMADOS EN UN FUTURO en el sistema. Estos cambios serán irreversibles.\n"+
+        warning = "Esta acción eliminará los horarios PROGRAMADOS EN UN FUTURO en el sistema. Estos cambios serán irreversibles.\n"+
         "¿Está seguro de continuar?";
     } else {
         return;
@@ -30,7 +30,6 @@ $('.eliminar').on('click', function() {
         $('#file-content-modal').modal('hide'),
         $("#loading-msg").html("Eliminando datos...");
         $("#loading").show();
-        $("#loading").css('z-index', 99);
     },
     success: function(data) {
         if (data.match('Error-horarios')) {

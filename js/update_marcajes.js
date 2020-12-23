@@ -1,6 +1,4 @@
-$('#loading').hide();
-
-$('.actualiza').on('click', function () {
+$(document).on('click', '.actualiza', function () {
     botonpulsado = $(this);
     datos = $(this).attr('asiste').split(',');
     Profesor = datos[0];
@@ -24,7 +22,6 @@ $('.actualiza').on('click', function () {
         beforeSend: function () {
             $("#loading-msg").html("Realizando petición...");
             $("#loading").show();
-            $("#loading").css('z-index', 99);
         },
         success: function (response) {
             if (response.match('Ok-asiste')){
@@ -47,16 +44,6 @@ $('.actualiza').on('click', function () {
             $("#err").html(e).fadeIn();
         }
     });
-
-    // if($('#marcaje-response').load('index.php?ACTION=marcajes&OPT=update&Profesor='+Profesor+'&Fecha='+Fecha+'&Hora='+Hora+'&act='+act+'&Valor='+Valor))
-    // {
-    //     $('#table-container').hide(),
-    //     setTimeout(function(){location.reload()}, 200)
-    // }
-    // else
-    // {
-    //     $('#marcaje-response').html('Error')
-    // }
 });
 
 function getRow (Profesor, Fecha, Hora){

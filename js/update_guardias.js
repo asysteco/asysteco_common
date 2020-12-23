@@ -25,7 +25,6 @@ $('.act').on('click', function () {
             $('#file-content-modal').modal('hide'),
             $('#loading-msg').html('Cargando guardias...');
             $('#loading').show();
-            $('#loading').css('z-index', 99);
         },
         success: function (data) {
             if (data.match('Error-add')) {
@@ -61,7 +60,6 @@ $('.remove-guardia').on('click', function () {
             $('#file-content-modal').modal('hide'),
             $('#loading-msg').html('Cargando guardias...');
             $('#loading').show();
-            $('#loading').css('z-index', 99);
         },
         success: function (data) {
             if (data.match('Error-remove')) {
@@ -110,7 +108,6 @@ function loadGuardias(profesor) {
         beforeSend: function () {
             $('#loading-msg').html('Cargando guardias...');
             $('#loading').show();
-            $('#loading').css('z-index', 99);
         },
         success: function (data) {
             $('#guardias-response').html(data);
