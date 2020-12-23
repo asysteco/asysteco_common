@@ -1,5 +1,4 @@
 $(document).ready(function (e) {
-  $("#loading").hide();
   $("#frmCSVImport").on('submit',(function(e) {
     e.preventDefault();
     url = $(this).attr('action');
@@ -17,7 +16,6 @@ $(document).ready(function (e) {
     {
       $("#loading-msg").html("Cargando horarios CSV...");
       $("#loading").show();
-      $("#loading").css('z-index', 99);
       $("#err").fadeOut();
     },
     success: function(data) {
@@ -54,7 +52,6 @@ $(document).ready(function (e) {
         $('#file-content-modal').modal('hide'),
         $("#loading-msg").html("Importando Profesores...");
         $("#loading").show();
-        $("#loading").css('z-index', 99);
         $("#err").fadeOut();
         },
         success: function(data) {

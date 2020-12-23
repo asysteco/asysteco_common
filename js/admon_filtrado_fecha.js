@@ -1,4 +1,4 @@
-$('#fechainicio, #fechafin').keypress(function(e) {
+$('#fechainicio, #fechafin').keypress(function (e) {
     e.preventDefault()
 });
 
@@ -7,22 +7,22 @@ var fechaFin = $('#fechafin').val();
 var profesor = $('#select_profesor').val();
 var action = '';
 
-$('#fechainicio').on('change', function() {
+$('#fechainicio').on('change', function () {
     fechaInicio = $(this).val(),
-    $(function (){
-        $('#fechafin').datepicker().focus();
-    });
+        $(function () {
+            $('#fechafin').datepicker().focus();
+        });
 });
 
-$('#fechafin').on('change', function() {
+$('#fechafin').on('change', function () {
     fechaFin = $(this).val();
 });
 
-$('#select_profesor').on('change', function() {
+$('#select_profesor').on('change', function () {
     profesor = $(this).val();
 });
 
-$('.act').on('click', function() {
+$('.act').on('click', function () {
     element = $(this).attr('data-item');
     action = $(this).attr('action');
     urlPath = 'index.php?ACTION=admon&OPT=select';
@@ -39,27 +39,27 @@ $('.act').on('click', function() {
         toastr['error']("No se puede realizar dicha acción.", "Error!");
         return;
     }
-    
+
     $.ajax({
         url: urlPath,
         type: 'GET',
-        data:  data,
-        beforeSend : function() {
+        data: data,
+        beforeSend: function () {
             $("#loading-msg").html("Cargando...");
             $("#loading").show();
         },
-        success: function(data) {
+        success: function (data) {
             if (action === 'select') {
                 $('#btn-response').html(data);
                 $("#loading").fadeOut();
             } else if (action === 'export') {
                 window.open(data, "_blank");
-                setTimeout(() => {CheckBackupFile(element)}, 500);
+                setTimeout(() => { CheckBackupFile(element) }, 500);
             }
         },
-        error: function(e) {
-            $('#error-modal').modal('show'),
+        error: function (e) {
+            $('#error-modal').modal('show');
             $('#error-content-modal').html(e);
-        }          
-        });
+        }
+    });
 });

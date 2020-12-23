@@ -2,10 +2,6 @@
 <script>
 $('.entrada').hide();
 
-$(document).ready(function () {
-	$('#loading').hide(),
-	$("#loading-msg").hide()
-});
 $(window).click(function() {
 	$('.entrada').hide(),
 	$('.txt').show()

@@ -1,0 +1,14 @@
+
+table {
+    text-align: center;
+    width: 80%;
+    margin: 5px;
+}
+table th, table td {
+    text-align:center;
+    vertical-align: middle;
+}
+.remove, .edit {
+    padding: 10px;
+    transition-duration: 0.2s;
+}

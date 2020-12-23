@@ -42,39 +42,38 @@ $('.entrada').on('change', function () {
         sp = '#sp2_' + id + '_' + columna
     }
     $(sp).html(texto),
-    $(sp).show(),
-    enlace = "index.php?ACTION=horarios&OPT=update&SUBOPT=t-horario&id=" + id + "&columna=" + columna + "&texto=" + texto,
-    $.ajax({
-        url: enlace,
-        type: 'GET',
-        data: {},
-        contentType: false,
-        cache: false,
-        processData: false,
-        beforeSend: function () {
-            $('#file-content-modal').modal('hide'),
+        $(sp).show(),
+        enlace = "index.php?ACTION=horarios&OPT=update&SUBOPT=t-horario&id=" + id + "&columna=" + columna + "&texto=" + texto,
+        $.ajax({
+            url: enlace,
+            type: 'GET',
+            data: {},
+            contentType: false,
+            cache: false,
+            processData: false,
+            beforeSend: function () {
+                $('#file-content-modal').modal('hide');
                 $('#loading-msg').html('Cargando Horario...');
-            $('#loading').show();
-            $('#loading').css('z-index', 99);
-        },
-        success: function (data) {
-            if (data.match('Error-add')) {
-                toastr["error"]("Error al añadir hora.", "Error!")
-            } else if (data.match('Error-remove')) {
-                toastr["error"]("Error al eliminar hora.", "Error!")
-            } else if (data.match('Error-params')) {
-                toastr["error"]("Error, parámetros no válidos.", "Error!")
-            } else {
-                toastr["success"]("Acción realizada correctamente.", "Correcto!"),
-                setTimeout(function () { location.reload() }, 700)
-            }
-            $('#loading').fadeOut();
-        },
-        error: function (e) {
-            $('#error-modal').modal('show'),
+                $('#loading').show();
+            },
+            success: function (data) {
+                if (data.match('Error-add')) {
+                    toastr["error"]("Error al añadir hora.", "Error!")
+                } else if (data.match('Error-remove')) {
+                    toastr["error"]("Error al eliminar hora.", "Error!")
+                } else if (data.match('Error-params')) {
+                    toastr["error"]("Error, parámetros no válidos.", "Error!")
+                } else {
+                    toastr["success"]("Acción realizada correctamente.", "Correcto!");
+                    setTimeout(function () { location.reload() }, 700)
+                }
+                $('#loading').fadeOut();
+            },
+            error: function (e) {
+                $('#error-modal').modal('show');
                 $('#error-content-modal').html(e);
-        }
-    });
+            }
+        });
 });
 
 $('.act').on('click', function () {
@@ -87,10 +86,9 @@ $('.act').on('click', function () {
         cache: false,
         processData: false,
         beforeSend: function () {
-            $('#file-content-modal').modal('hide'),
-                $('#loading-msg').html('Cargando Horario...');
+            $('#file-content-modal').modal('hide');
+            $('#loading-msg').html('Cargando Horario...');
             $('#loading').show();
-            $('#loading').css('z-index', 99);
         },
         success: function (data) {
             if (data.match('Error-add')) {
@@ -101,13 +99,13 @@ $('.act').on('click', function () {
                 toastr["error"]("Error, parámetros no válidos.", "Error!")
             } else {
                 toastr["success"]("Acción realizada correctamente.", "Correcto!"),
-                setTimeout(function () { location.reload() }, 700)
+                    setTimeout(function () { location.reload() }, 700)
             }
             $('#loading').fadeOut();
         },
         error: function (e) {
-            $('#error-modal').modal('show'),
-                $('#error-content-modal').html(e);
+            $('#error-modal').modal('show');
+            $('#error-content-modal').html(e);
         }
     });
 });
@@ -124,10 +122,9 @@ $('.remove-guardia').on('click', function () {
         cache: false,
         processData: false,
         beforeSend: function () {
-            $('#file-content-modal').modal('hide'),
+            $('#file-content-modal').modal('hide');
             $('#loading-msg').html('Cargando guardias...');
             $('#loading').show();
-            $('#loading').css('z-index', 99);
         },
         success: function (data) {
             if (data.match('Error-remove')) {
@@ -135,7 +132,7 @@ $('.remove-guardia').on('click', function () {
             } else if (data.match('Error-params')) {
                 toastr["error"]("Error, parámetros no válidos.", "Error!")
             } else if (data.match('Ok-remove')) {
-                toastr["success"]("Guardia eliminada correctamente.", "Correcto!"),
+                toastr["success"]("Guardia eliminada correctamente.", "Correcto!");
                 setTimeout(function () { location.reload() }, 700)
             } else {
                 toastr["error"]("Error inesperado...", "Error!")
@@ -143,8 +140,8 @@ $('.remove-guardia').on('click', function () {
             $('#loading').fadeOut();
         },
         error: function (e) {
-            $('#error-modal').modal('show'),
-                $('#error-content-modal').html(e);
+            $('#error-modal').modal('show');
+            $('#error-content-modal').html(e);
         }
     });
 });

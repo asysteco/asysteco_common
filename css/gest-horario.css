@@ -1,0 +1,42 @@
+#profesor, .add-fields {
+    text-align: center;
+    margin-bottom: 25px;
+}
+table {
+    text-align: center;
+    width: 80%;
+    margin: 5px;
+}
+table th {
+    text-align:center;
+}
+.remove {
+    padding: 10px;
+    transition-duration: 0.2s;
+}
+#programar-horario {
+    text-align: center;
+}
+#program-date {
+    text-align: center;
+    color: grey;
+    margin-bottom: 25px;                  
+}
+#update-btn, #apply-program {
+    position: fixed;
+    top: 75px;
+    right: 25px;
+    background-color: #5cb85ccf;
+}
+#update-btn:hover, #apply-program:hover {
+    background-color: #449d44;
+}
+#cancel-btn, #cancel-program {
+    position: fixed;
+    top: 75px;
+    left: 25px;
+    background-color: #d9534fc4;
+}
+#cancel-btn:hover, #cancel-program:hover {
+    background-color: #d9534f;
+}

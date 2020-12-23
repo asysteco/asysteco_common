@@ -1,5 +1,3 @@
-$('#loading').hide();
-
 $(document).on('click', '.actualiza', function () {
     botonpulsado = $(this);
     datos = $(this).attr('asiste').split(',');
@@ -24,7 +22,6 @@ $(document).on('click', '.actualiza', function () {
         beforeSend: function () {
             $("#loading-msg").html("Realizando petición...");
             $("#loading").show();
-            $("#loading").css('z-index', 99);
         },
         success: function (response) {
             if (response.match('Ok-asiste')){

@@ -1,4 +1,3 @@
-$('#loading').hide();
 
 $('#add-manual').on('click', function (event) {
     event.preventDefault();
@@ -31,7 +30,6 @@ $('#add-manual').on('click', function (event) {
             $('#file-content-modal').modal('hide'),
             $('#loading-msg').html('Cargando...');
             $('#loading').show();
-            $('#loading').css('z-index', 99);
         },
         success: function (data) {
             if (data.match('Ok-action')) {
