@@ -487,67 +487,43 @@ if (isset($_GET['ACTION'])) {
         include_once($dirs['Interfaces'] . 'msg_modal.php');
       }
       break;
-
-    case 'plantilla-horarios':
-      if ($class->isLogged($Titulo) && $_SESSION['Perfil'] === 'Admin') {
-        if ($class->compruebaCambioPass()) {
-          require_once($dirs['Exportar'] . 'export-plantilla-horarios.php');
-        } else {
-          header('Location: index.php?ACTION=primer_cambio');
-        }
-      } else {
-        $MSG = "Debes iniciar sesión para realizar esta acción.";
-        header("Refresh:2; url=index.php");
-        include_once($dirs['Interfaces'] . 'msg_modal.php');
-      }
-      break;
-
-      case 'backup-centro':
-        if ($class->isLogged($Titulo) && $_SESSION['Perfil'] == 'Admin') {
-          if ($class->compruebaCambioPass()) {
-            include_once($dirs['Exportar'] . 'backup-centro.php');
-          } else {
-            header('Location: index.php?ACTION=primer_cambio');
-          }
-        } else {
-          $MSG = "Debes iniciar sesión para realizar esta acción.";
-          header("Refresh:2; url=index.php");
-          include_once($dirs['Interfaces'] . 'msg_modal.php');
-        }
-      break;
-
-    case 'plantilla-profesores':
-      if ($class->isLogged($Titulo) && $_SESSION['Perfil'] === 'Admin') {
-        if ($class->compruebaCambioPass()) {
-          require_once($dirs['Exportar'] . 'export-plantilla-profesores.php');
-        } else {
-          header('Location: index.php?ACTION=primer_cambio');
-        }
-      } else {
-        $MSG = "Debes iniciar sesión para realizar esta acción.";
-        header("Refresh:2; url=index.php");
-        include_once($dirs['Interfaces'] . 'msg_modal.php');
-      }
-      break;
-
-    case 'download_admin_guide':
-      if ($class->isLogged($Titulo) && $_SESSION['Perfil'] === 'Admin') {
-        if ($class->compruebaCambioPass()) {
-          require_once($dirs['Exportar'] . 'export-guide-admin.php');
-        } else {
-          header('Location: index.php?ACTION=primer_cambio');
-        }
-      } else {
-        $MSG = "Debes iniciar sesión para realizar esta acción.";
-        header("Refresh:2; url=index.php");
-        include_once($dirs['Interfaces'] . 'msg_modal.php');
-      }
-      break;
-
-    case 'download_profesor_guide':
+    
+    case 'download':
       if ($class->isLogged($Titulo)) {
         if ($class->compruebaCambioPass()) {
-          require_once($dirs['Exportar'] . 'export-guide-profesor.php');
+          if (!isset($_GET['OPT'])) {
+              $_GET['OPT'] = '';
+          }
+          
+          switch ($_GET['OPT']) {
+            case 'plantilla-horarios':
+              if ($_SESSION['Perfil'] === 'Admin') {
+                require_once($dirs['Downloads'] . 'plantilla-horarios.php');
+              }
+            break;
+
+            case 'plantilla-profesores':
+              if ($_SESSION['Perfil'] === 'Admin') {
+                require_once($dirs['Downloads'] . 'plantilla-profesores.php');
+              }
+            break;
+
+            case 'admin-guide':
+              if ($_SESSION['Perfil'] === 'Admin') {
+                require_once($dirs['Downloads'] . 'guide-admin.php');
+              }
+            break;
+
+            case 'profesor-guide':
+                require_once($dirs['Downloads'] . 'guide-profesor.php');
+            break;
+
+            default:    
+              $MSG = "Acción errónea.";
+              header("Refresh:2; url=index.php");
+              include_once($dirs['Interfaces'] . 'msg_modal.php');
+            break;
+          }
         } else {
           header('Location: index.php?ACTION=primer_cambio');
         }
@@ -556,7 +532,7 @@ if (isset($_GET['ACTION'])) {
         header("Refresh:2; url=index.php");
         include_once($dirs['Interfaces'] . 'msg_modal.php');
       }
-      break;
+    break;
 
     case 'clean_tmp':
       if ($class->isLogged($Titulo)) {
