@@ -338,76 +338,8 @@ if (isset($_GET['ACTION'])) {
       break;
 
     case 'cp':
-      echo '
-        <!DOCTYPE html>
-        <html lang="es">
-        <head>
-          <title>Activar Lector</title>
-          <meta charset="utf-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-          <link rel="stylesheet" href="css/bootstrap-3.4.1/css/bootstrap.min.css">
-          <link rel="stylesheet" href="css/asysteco.css">
-          <link rel="stylesheet" href="js/jquery-ui/jquery-ui.min.css">
-          <link rel="shortcut icon" href="resources/img/asysteco.ico" type="image/x-icon">
-          <script src="js/jquery.min.js"></script>
-          <script src="js/bootstrap.min.js"></script>
-          <script src="js/jquery-ui/jquery-ui.min.js"></script>
-          <script src="js/datepicker_common.js"></script>
-          <script src="js/flecha.js"></script>
-          <link rel="stylesheet" href="css/qr-reader.css">
-          
-          <script>
-            var userAgent = navigator.userAgent.toLowerCase();
-            var isSupportedBrowser = (/armv.* raspbian chromium/i).test(userAgent);
-            if(! isSupportedBrowser)
-            {
-              location.href = "index.php";
-            }
-          </script>';
-
-      if (!$options['QR-reader']) {
-        echo '
-              <script type="text/javascript" src="js/jsqrcode/grid.js"></script>
-              <script type="text/javascript" src="js/jsqrcode/version.js"></script>
-              <script type="text/javascript" src="js/jsqrcode/detector.js"></script>
-              <script type="text/javascript" src="js/jsqrcode/formatinf.js"></script>
-              <script type="text/javascript" src="js/jsqrcode/errorlevel.js"></script>
-              <script type="text/javascript" src="js/jsqrcode/bitmat.js"></script>
-              <script type="text/javascript" src="js/jsqrcode/datablock.js"></script>
-              <script type="text/javascript" src="js/jsqrcode/bmparser.js"></script>
-              <script type="text/javascript" src="js/jsqrcode/datamask.js"></script>
-              <script type="text/javascript" src="js/jsqrcode/rsdecoder.js"></script>
-              <script type="text/javascript" src="js/jsqrcode/gf256poly.js"></script>
-              <script type="text/javascript" src="js/jsqrcode/gf256.js"></script>
-              <script type="text/javascript" src="js/jsqrcode/decoder.js"></script>
-              <script type="text/javascript" src="js/jsqrcode/qrcode.js"></script>
-              <script type="text/javascript" src="js/jsqrcode/findpat.js"></script>
-              <script type="text/javascript" src="js/jsqrcode/alignpat.js"></script>
-              <script type="text/javascript" src="js/jsqrcode/databr.js"></script>';
-        echo '</head>
-            <body>';
-
-        echo '<div class="container-fluid" style="margin-top:50px">';
-        echo "<div class='row'>";
-        echo "<div id='qreader' class='col-xs-12'>";
-        include($dirs['Qr'] . 'qr-webcam-admin-login.php');
-        echo "</div>";
-        echo "</div>";
-        echo "</div>";
-        include_once($dirs['public'] . 'js/qr-webcam-admin-login.js');
-      } else {
-        echo '<div class="container-fluid" style="margin-top:50px">';
-        echo "<div class='row'>";
-        echo "<div id='qreader' class='col-xs-12' style='margin-top: 20vh;'>";
-        include($dirs['Qr'] . 'qr-reader-admin-login.php');
-        echo "</div>";
-        echo "</div>";
-        echo "</div>";
-        include_once($dirs['public'] . 'js/qr-reader-admin-login.js');
-      }
-      include($dirs['Interfaces'] . 'errors.php');
-      include($dirs['Interfaces'] . 'footer.php');
-      break;
+      require_once($dirs['CP'] . 'IndexCase.php');
+    break;
 
     case 'notificaciones':
       if ($class->isLogged($Titulo) && $_SESSION['Perfil'] == 'Admin') {
@@ -489,49 +421,7 @@ if (isset($_GET['ACTION'])) {
       break;
     
     case 'download':
-      if ($class->isLogged($Titulo)) {
-        if ($class->compruebaCambioPass()) {
-          if (!isset($_GET['OPT'])) {
-              $_GET['OPT'] = '';
-          }
-          
-          switch ($_GET['OPT']) {
-            case 'plantilla-horarios':
-              if ($_SESSION['Perfil'] === 'Admin') {
-                require_once($dirs['Downloads'] . 'plantilla-horarios.php');
-              }
-            break;
-
-            case 'plantilla-profesores':
-              if ($_SESSION['Perfil'] === 'Admin') {
-                require_once($dirs['Downloads'] . 'plantilla-profesores.php');
-              }
-            break;
-
-            case 'admin-guide':
-              if ($_SESSION['Perfil'] === 'Admin') {
-                require_once($dirs['Downloads'] . 'guide-admin.php');
-              }
-            break;
-
-            case 'profesor-guide':
-                require_once($dirs['Downloads'] . 'guide-profesor.php');
-            break;
-
-            default:    
-              $MSG = "Acción errónea.";
-              header("Refresh:2; url=index.php");
-              include_once($dirs['Interfaces'] . 'msg_modal.php');
-            break;
-          }
-        } else {
-          header('Location: index.php?ACTION=primer_cambio');
-        }
-      } else {
-        $MSG = "Debes iniciar sesión para realizar esta acción.";
-        header("Refresh:2; url=index.php");
-        include_once($dirs['Interfaces'] . 'msg_modal.php');
-      }
+      require_once($dirs['Downloads'] . 'IndexCase.php');
     break;
 
     case 'clean_tmp':
