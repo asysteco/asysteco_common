@@ -1,4 +1,3 @@
-$('#loading').hide();
 $('#update-btn').hide();
 $('#cancel-btn').hide();
 var registrosUpdate = [];

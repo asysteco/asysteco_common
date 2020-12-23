@@ -30,7 +30,6 @@ $('.eliminar').on('click', function() {
         $('#file-content-modal').modal('hide'),
         $("#loading-msg").html("Eliminando datos...");
         $("#loading").show();
-        $("#loading").css('z-index', 99);
     },
     success: function(data) {
         if (data.match('Error-horarios')) {

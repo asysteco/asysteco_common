@@ -1,6 +1,3 @@
-$(document).ready(function () {
-    $('#loading').delay().fadeOut()
-});
 $('#backup').click(function () {
     $("#loading-msg").html("Preparando copia de seguridad..."),
     $('#loading').fadeIn(),
