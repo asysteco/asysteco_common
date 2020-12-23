@@ -1,0 +1,9 @@
+input[type=text], #select_profesor {
+    width: 25%;
+    display: inline-block;
+}
+
+#btn-response th, #btn-response td {
+    vertical-align: middle;
+    text-align: center;
+}
