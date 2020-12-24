@@ -1,5 +1,11 @@
 $('.hide-it').hide();
+var clickedButton = '';
+var clickedId = '';
 
+function hideShow() {
+    $('.hide-it').hide();
+    $('.show-it').show()
+}
 $('.edit').hover(function(){
     $(this).css('color', 'green');
     $(this).css('transform', 'scale(1.3)');
@@ -18,8 +24,7 @@ $('.remove').hover(function(){
 });
 
 $(window).click(function() {
-    $('.hide-it').hide(),
-    $('.show-it').show()
+    hideShow();
 });
 
 $('.edit, .hide-it, show-it').click(function(event){
@@ -29,6 +34,11 @@ $('.edit, .hide-it, show-it').click(function(event){
 $('.edit').on('click', function () {
     fieldSplit = $(this).attr('fields').split('_');
     fieldData = fieldSplit[1];
+    if (clickedId !== fieldData) {
+        hideShow();
+    }
+    clickedButton = $(this).attr('fields');
+    clickedId = fieldData;
 
     txt = $('#txt_'+fieldData).html();
 
@@ -38,6 +48,16 @@ $('.edit').on('click', function () {
     $('#btn_'+fieldData).toggle();
 });
 
+$(".hide-it").keyup(function(event) {
+    console.log(event);
+    if (event.keyCode === 13) {
+        data = $(this).attr('id').split('_');
+        elementId = data[1];
+        $('#btn_'+elementId).click();
+    } else if(event.keyCode === 27) {
+        hideShow();
+    }
+});
 
 $('.update').on('click', function () {
     fieldId = $(this).attr('data');
@@ -81,6 +101,14 @@ $('.update').on('click', function () {
             $('#error-content-modal').html(e);
         }
     });
+});
+
+$("#add-curso").keyup(function(event) {
+    if (event.keyCode === 13) {
+        data = $(this).attr('id').split('_');
+        elementId = data[1];
+        $('#add-btn').click();
+    }
 });
 
 $('#add-btn').on('click', function () {

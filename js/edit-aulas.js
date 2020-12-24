@@ -1,5 +1,11 @@
 $('.hide-it').hide();
+var clickedButton = '';
+var clickedId = '';
 
+function hideShow() {
+    $('.hide-it').hide();
+    $('.show-it').show()
+}
 $('.edit').hover(function(){
     $(this).css('color', 'green');
     $(this).css('transform', 'scale(1.3)');
@@ -18,8 +24,7 @@ $('.remove').hover(function(){
 });
 
 $(window).click(function() {
-    $('.hide-it').hide(),
-    $('.show-it').show()
+    hideShow();
 });
 
 $('.edit, .hide-it, show-it').click(function(event){
@@ -29,14 +34,29 @@ $('.edit, .hide-it, show-it').click(function(event){
 $('.edit').on('click', function () {
     fieldSplit = $(this).attr('fields').split('_');
     fieldData = fieldSplit[1];
+    if (clickedId !== fieldData) {
+        hideShow();
+    }
+    clickedButton = $(this).attr('fields');
+    clickedId = fieldData;
 
     txt = $('#txt_'+fieldData).html();
 
     $('#input_'+fieldData).val(txt).toggle();
+    $('#input_'+fieldData).focus();
     $('#txt_'+fieldData).toggle();
     $('#btn_'+fieldData).toggle();
 });
 
+$(".hide-it").keyup(function(event) {
+    if (event.keyCode === 13) {
+        data = $(this).attr('id').split('_');
+        elementId = data[1];
+        $('#btn_'+elementId).click();
+    } else if(event.keyCode === 27) {
+        hideShow();
+    }
+});
 
 $('.update').on('click', function () {
     fieldId = $(this).attr('data');
@@ -81,6 +101,14 @@ $('.update').on('click', function () {
             $('#error-content-modal').html(e);
         }
     });
+});
+
+$("#add-aula").keyup(function(event) {
+    if (event.keyCode === 13) {
+        data = $(this).attr('id').split('_');
+        elementId = data[1];
+        $('#add-btn-aula').click();
+    }
 });
 
 $('#add-btn-aula').on('click', function () {
