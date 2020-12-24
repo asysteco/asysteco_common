@@ -1,47 +1,34 @@
-<script type="text/javascript">
-$(document).ready(function() {
-    $("#frmCSVImport").on("submit", function (e) {
-        e.preventDefault();
-	    $("#response").attr("class", "");
-        $("#response").html("");
-        $("#userTable").remove("");
-        $("#loading-msg").html("Importando horarios...");
-        $("#loading").show();
-        var formData = $(this).serialize();
-        var url = $(this).attr('action');
-        var fileType = ".csv";
-        var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + fileType + ")$");
-        if (!regex.test($("#file").val().toLowerCase())) {
-        	    $("#response").addClass("error");
-        	    $("#response").addClass("display-block");
-            $("#response").html("Tipo de fichero no válido. Documento válido: <b>" + fileType + "</b>.");
-            return false;
-        }
-        $.ajax({
-            type:"POST",
-            url: url,
-            data: formData,
-            success:function(datos){
-                $('#file-content').html(datos);
-             }
-        })
-        return true;
-    });
+var modal = '<div id="info-horario-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">';
+    modal += '<div class="modal-dialog modal-lg">';
+        modal += '<div class="modal-content">';
+            modal += '<div class="modal-body">';
+                modal += '<div class="container-fluid">';
+                    modal += '<div class="row">';
+                        modal += '<div class="col-12">';
+                            modal += '<div id="info-horario-body"></div>';
+                        modal += '</div>';
+                    modal += '</div>';
+                modal += '</div>';
+            modal += '</div>';
+            modal += '<div class="modal-footer">';
+                modal += '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>';
+            modal += '</div>';
+        modal += '</div>';
+    modal += '</div>';
+modal += '</div>';
+
+$('#file').on('change',function(e){
+    if (e.target.files.length > 0) {
+        var fileName = e.target.files[0].name;
+        $('#fileName').html(fileName);
+        $('#submit').prop("disabled", false);
+    } else {
+        $('#fileName').html('Subir CSV');
+        $('#submit').prop("disabled", true);
+    }
 });
-</script>
-<script>
-$('#btn-todos-registros').on('click', function() {
-    $("#todos-registros").html(""),
-    $("#loading-msg").html("Cargando..."),
-    $("#loading").show(),
-    $('#todos-registros').load('index.php?ACTION=horarios&OPT=registros')
+$('#toggleInfo').on('click', function() {
+    $('body').append(modal);
+    $('#info-horario-body').html($('#ayuda-formato').html());
+    $('#info-horario-modal').modal('show');
 });
-$('#fecha_incorpora').keypress(function(e) {
-    e.preventDefault();
-});
-</script>
-<script type="text/javascript">
-$(window).on('beforeunload', function(){
-    return ;
-});
-</script>
