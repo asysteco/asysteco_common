@@ -134,9 +134,9 @@ if (isset($_GET['ACTION'])) {
               $scripts = '<link rel="stylesheet" href="css/form.css">';
               include_once($dirs['Interfaces'] . 'header.php');
               include_once($dirs['Interfaces'] . 'top-nav.php');
-              echo '<div class="container" style="margin-top: 75px;">';
+              echo '<div class="container">';
                 echo "<div class='row'>";
-                  echo "<div class='col-xs-12'>";
+                  echo "<div class='col-12'>";
                     echo '<h1>Calendario escolar</h1>';
                     include_once($dirs['Horarios'] . 'calendario.php');
                   echo "</div>";
