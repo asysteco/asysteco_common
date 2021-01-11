@@ -93,6 +93,7 @@ html {
     transition: all 0.5s ease-in-out;
     -webkit-border-radius: 5px 5px 5px 5px;
     border-radius: 5px 5px 5px 5px;
+    width: 85%;
 }
 
 @keyframes bell_rings {
@@ -101,4 +102,20 @@ html {
     50% {transform: rotate(-25deg);}
     75% {transform: rotate(35deg);}
     100% {transform: rotate(0deg);}
+}
+@media screen and (max-width: 600px) {
+    table.responsiveTable thead {
+        display: none;
+    }
+    table.responsiveTable td {
+        display: flex;
+        text-align: left !important;
+    }
+
+    table.responsiveTable td::before {
+        content: attr(data-th);
+        font-weight: bold;
+        width: 120px;
+        min-width: 120px;
+    }
 }
