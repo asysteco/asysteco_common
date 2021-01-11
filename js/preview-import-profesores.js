@@ -14,6 +14,7 @@ $(document).ready(function (e) {
     processData:false,
     beforeSend : function()
     {
+      overlayOn();
       $("#loading-msg").html("Cargando horarios CSV...");
       $("#loading").show();
       $("#err").fadeOut();
@@ -27,12 +28,13 @@ $(document).ready(function (e) {
         $('#file-content-modal').modal('show'),
         $('#file-content-preview').html(data)
       }
-        $("#loading").fadeOut();
-        },
-      error: function(e) {
-          $("#err").html(e).fadeIn();
-        }          
-      });
+      overlayOff();
+      $("#loading").fadeOut();
+    },
+    error: function(e) {
+        $("#err").html(e).fadeIn();
+      }          
+    });
   }));
 
   $('.import-data').on('click', function() {
@@ -49,25 +51,27 @@ $(document).ready(function (e) {
         cache: false,
         processData:false,
         beforeSend : function() {
-        $('#file-content-modal').modal('hide'),
-        $("#loading-msg").html("Importando Profesores...");
-        $("#loading").show();
-        $("#err").fadeOut();
+          overlayOn();
+          $('#file-content-modal').modal('hide');
+          $("#loading-msg").html("Importando Profesores...");
+          $("#loading").show();
+          $("#err").fadeOut();
         },
         success: function(data) {
-        if (data.match('Error-importar')) {
-          toastr["error"]("Error al importar fichero.", "Error!")
-        } else if (data.match('Error-csv')) {
-          toastr["error"]("El fichero CSV contiene datos erróneos.", "Error!")
-        } else {
-          toastr["success"]("¡Datos importados con éxito!", "Correcto!");
-          setTimeout(function(){location.reload()}, 700);
-        }
-        $("#loading").fadeOut();
-          },
-          error: function(e) {
-              $("#err").html(e).fadeIn();
-          }          
+          if (data.match('Error-importar')) {
+            toastr["error"]("Error al importar fichero.", "Error!")
+          } else if (data.match('Error-csv')) {
+            toastr["error"]("El fichero CSV contiene datos erróneos.", "Error!")
+          } else {
+            toastr["success"]("¡Datos importados con éxito!", "Correcto!");
+            setTimeout(function(){location.reload()}, 700);
+          }
+          overlayOff();
+          $("#loading").fadeOut();
+        },
+        error: function(e) {
+          $("#err").html(e).fadeIn();
+        }          
         });
   });
 });

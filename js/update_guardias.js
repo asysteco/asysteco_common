@@ -22,6 +22,7 @@ $('.act').on('click', function () {
         cache: false,
         processData: false,
         beforeSend: function () {
+            overlayOn();
             $('#file-content-modal').modal('hide'),
             $('#loading-msg').html('Cargando guardias...');
             $('#loading').show();
@@ -37,6 +38,7 @@ $('.act').on('click', function () {
             } else {
                 toastr["error"]("Error inesperado...", "Error!")
             }
+            overlayOff();
             $('#loading').fadeOut();
         },
         error: function (e) {
@@ -57,6 +59,7 @@ $('.remove-guardia').on('click', function () {
         cache: false,
         processData: false,
         beforeSend: function () {
+            overlayOn();
             $('#file-content-modal').modal('hide'),
             $('#loading-msg').html('Cargando guardias...');
             $('#loading').show();
@@ -72,6 +75,7 @@ $('.remove-guardia').on('click', function () {
             } else {
                 toastr["error"]("Error inesperado...", "Error!")
             }
+            overlayOff();
             $('#loading').fadeOut();
         },
         error: function (e) {
@@ -106,11 +110,13 @@ function loadGuardias(profesor) {
         cache: false,
         processData: false,
         beforeSend: function () {
+            overlayOn();
             $('#loading-msg').html('Cargando guardias...');
             $('#loading').show();
         },
         success: function (data) {
             $('#guardias-response').html(data);
+            overlayOff();
             $('#loading').fadeOut();
         },
         error: function (e) {

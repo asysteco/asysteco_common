@@ -27,6 +27,7 @@ $('.eliminar').on('click', function() {
     cache: false,
     processData:false,
     beforeSend : function() {
+        overlayOn();
         $('#file-content-modal').modal('hide'),
         $("#loading-msg").html("Eliminando datos...");
         $("#loading").show();
@@ -44,6 +45,7 @@ $('.eliminar').on('click', function() {
             toastr["success"]("¡Datos eliminados con éxito!", "Correcto!")
         }
         $("#loading").fadeOut();
+        overlayOff();
     },
         error: function(e) {
             $('#error-modal').modal('show'),

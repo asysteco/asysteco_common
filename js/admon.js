@@ -1,4 +1,5 @@
 $('#backup').click(function () {
+    overlayOn();
     $("#loading-msg").html("Preparando copia de seguridad..."),
     $('#loading').fadeIn(),
     setTimeout(() => {CheckBackupFile()}, 500);
@@ -23,6 +24,7 @@ function CheckBackupFile(element = '') {
         success: function (data) {
             if (data.match('deleted')) {
                 $("#loading").fadeOut();
+                overlayOff();
             }
         },
         error: function (e) {

@@ -52,6 +52,7 @@ $('.entrada').on('change', function () {
             cache: false,
             processData: false,
             beforeSend: function () {
+                overlayOn();
                 $('#file-content-modal').modal('hide');
                 $('#loading-msg').html('Cargando Horario...');
                 $('#loading').show();
@@ -67,6 +68,7 @@ $('.entrada').on('change', function () {
                     toastr["success"]("Acción realizada correctamente.", "Correcto!");
                     setTimeout(function () { location.reload() }, 700)
                 }
+                overlayOff();
                 $('#loading').fadeOut();
             },
             error: function (e) {
@@ -86,6 +88,7 @@ $('.act').on('click', function () {
         cache: false,
         processData: false,
         beforeSend: function () {
+            overlayOn();
             $('#file-content-modal').modal('hide');
             $('#loading-msg').html('Cargando Horario...');
             $('#loading').show();
@@ -101,6 +104,7 @@ $('.act').on('click', function () {
                 toastr["success"]("Acción realizada correctamente.", "Correcto!"),
                     setTimeout(function () { location.reload() }, 700)
             }
+            overlayOff();
             $('#loading').fadeOut();
         },
         error: function (e) {
@@ -122,6 +126,7 @@ $('.remove-guardia').on('click', function () {
         cache: false,
         processData: false,
         beforeSend: function () {
+            overlayOn();
             $('#file-content-modal').modal('hide');
             $('#loading-msg').html('Cargando guardias...');
             $('#loading').show();
@@ -137,6 +142,7 @@ $('.remove-guardia').on('click', function () {
             } else {
                 toastr["error"]("Error inesperado...", "Error!")
             }
+            overlayOff();
             $('#loading').fadeOut();
         },
         error: function (e) {

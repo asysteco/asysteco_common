@@ -34,6 +34,7 @@ $('#info-horario').on('click', function() {
         type: 'GET',
         data: {},
         beforeSend: function () {
+            overlayOn();
             $("#loading-msg").html("Cargando...");
             $("#loading").show();
         },
@@ -41,6 +42,7 @@ $('#info-horario').on('click', function() {
             $('body').append(modal);
             $('#info-horario-body').html(data);
             $('#info-horario-modal').modal('show');
+            overlayOff();
             $("#loading").fadeOut();
         },
         error: function (e) {

@@ -75,6 +75,7 @@ $('.update').on('click', function () {
         type: "POST",
         data: data,
         beforeSend: function () {
+            overlayOn();
             $('#loading-msg').html('Cargando...');
             $('#loading').show();
         },
@@ -94,6 +95,7 @@ $('.update').on('click', function () {
             } else {
                 toastr["error"]("Error inesperado...", "Error!")
             }
+            overlayOff();
             $('#loading').fadeOut();
         },
         error: function (e) {
@@ -125,6 +127,7 @@ $('#add-btn').on('click', function () {
         type: "POST",
         data: data,
         beforeSend: function () {
+            overlayOn();
             $('#loading-msg').html('Cargando...');
             $('#loading').show();
         },
@@ -144,6 +147,7 @@ $('#add-btn').on('click', function () {
             $('#loading').fadeOut();
         },
         error: function (e) {
+            overlayOff();
             $('#error-modal').modal('show'),
             $('#error-content-modal').html(e);
         }
@@ -168,6 +172,7 @@ $('.remove').on('click', function () {
         type: "POST",
         data: data,
         beforeSend: function () {
+            overlayOn();
             $('#loading-msg').html('Cargando...');
             $('#loading').show();
         },
@@ -180,6 +185,7 @@ $('.remove').on('click', function () {
             } else {
                 toastr["error"]("Error inesperado...", "Error!")
             }
+            overlayOff();
             $('#loading').fadeOut();
         },
         error: function (e) {

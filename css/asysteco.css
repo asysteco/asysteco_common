@@ -1,6 +1,19 @@
 html {
     scroll-behavior: smooth;
 }
+#overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.3);
+    z-index: 1021;
+    cursor: pointer;
+}
 .flecha_div {
     position: fixed;
     visibility: visible;
@@ -11,7 +24,7 @@ html {
     border-radius: 25px;
     transition-duration: 0.8s;
     opacity: 0;
-    z-index: 998;
+    z-index: 1018;
     box-shadow: 8px 6px 5px  rgba(66, 66, 66, 0.7);
 }
 .flecha_div_visible {
@@ -23,7 +36,7 @@ html {
     height: 50px;
     border-radius: 25px;
     transition-duration: 0.4s;
-    z-index: 998;
+    z-index: 1018;
     opacity: 1;
     box-shadow: 4px 4px 12px  rgba(66, 66, 66, 0.7);
 }
@@ -35,22 +48,28 @@ html {
     opacity: 0;
     visibility: visible;
     transition-duration: 0.8s;
-    z-index: 999;
+    z-index: 1019;
 }
 .jsflecha {
     opacity: 0.6;
     visibility: visible;
     bottom: 20px;
     transition-duration: 0.4s;
-    z-index: 999;
+    z-index: 1019;
 }
 .jsflecha:hover {
     transform: rotate(360deg);
     opacity: 1;
-    z-index: 999;
+    z-index: 1019;
 }
-.loading {
-    z-index: 99;
+#loading {
+    display: none;
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    z-index: 1022;
 }
 
 #btn-import {

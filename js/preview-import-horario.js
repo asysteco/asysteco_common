@@ -13,6 +13,7 @@ $(document).ready(function (e) {
       cache: false,
       processData: false,
       beforeSend: function () {
+        overlayOn();
         $("#loading-msg").html("Cargando horarios CSV...");
         $("#loading").show();
         $("#err").fadeOut();
@@ -28,6 +29,7 @@ $(document).ready(function (e) {
           $('#file-content-modal').modal('show'),
           $('#file-content-preview').html(data)
         }
+        overlayOff();
         $("#loading").fadeOut();
       },
       error: function (e) {
@@ -50,6 +52,7 @@ $(document).ready(function (e) {
       cache: false,
       processData: false,
       beforeSend: function () {
+        overlayOn();
         $('#file-content-modal').modal('hide'),
           $("#loading-msg").html("Importando horarios...");
         $("#loading").show();
@@ -70,6 +73,7 @@ $(document).ready(function (e) {
           toastr["success"]("¡Datos importados con éxito!", "Correcto!");
           setTimeout(function () { location.reload() }, 700);
         }
+        overlayOff();
         $("#loading").fadeOut();
       },
       error: function (e) {

@@ -99,6 +99,7 @@ $('body').on('click', '.act', function () {
         type: "POST",
         data: data,
         beforeSend: function () {
+            overlayOn();
             $('#loading-msg').html('Cargando...');
             $('#loading').show();
         },
@@ -132,6 +133,7 @@ $('body').on('click', '.act', function () {
             } else {
                 toastr["error"]("Error inesperado...", "Error!")
             }
+            overlayOff();
             $('#loading').fadeOut();
         },
         error: function (e) {

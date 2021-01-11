@@ -45,6 +45,7 @@ $('.act').on('click', function () {
         type: 'GET',
         data: data,
         beforeSend: function () {
+            overlayOn();
             $("#loading-msg").html("Cargando...");
             $("#loading").show();
         },
@@ -52,6 +53,7 @@ $('.act').on('click', function () {
             if (action === 'select') {
                 $('#btn-response').html(data);
                 $("#loading").fadeOut();
+                overlayOff();
             } else if (action === 'export') {
                 window.open(data, "_blank");
                 setTimeout(() => { CheckBackupFile(element) }, 500);

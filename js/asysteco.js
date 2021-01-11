@@ -8,3 +8,11 @@ window.setMobileTable = function(selector) {
         );
     });
 }
+
+function overlayOn() {
+    $('#overlay').show();
+}
+
+function overlayOff() {
+    $('#overlay').fadeOut();
+}
