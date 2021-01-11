@@ -104,15 +104,15 @@ html {
     100% {transform: rotate(0deg);}
 }
 @media screen and (max-width: 600px) {
-    table#responsiveTable thead {
+    table.responsiveTable thead {
         display: none;
     }
-    table#responsiveTable td {
+    table.responsiveTable td {
         display: flex;
-        text-align: left;
+        text-align: left !important;
     }
 
-    table#responsiveTable td::before {
+    table.responsiveTable td::before {
         content: attr(data-th);
         font-weight: bold;
         width: 120px;
