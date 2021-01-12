@@ -45,13 +45,12 @@ $('.act').on('click', function () {
         type: 'GET',
         data: data,
         beforeSend: function () {
-            $("#loading-msg").html("Cargando...");
-            $("#loading").show();
+            loadingOn();
         },
         success: function (data) {
             if (action === 'select') {
                 $('#btn-response').html(data);
-                $("#loading").fadeOut();
+                loadingOff();
             } else if (action === 'export') {
                 window.open(data, "_blank");
                 setTimeout(() => { CheckBackupFile(element) }, 500);

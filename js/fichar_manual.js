@@ -27,9 +27,7 @@ $('#add-manual').on('click', function (event) {
         type: "POST",
         data: data,
         beforeSend: function () {
-            $('#file-content-modal').modal('hide'),
-            $('#loading-msg').html('Cargando...');
-            $('#loading').show();
+            loadingOn();
         },
         success: function (data) {
             if (data.match('Ok-action')) {
@@ -49,7 +47,7 @@ $('#add-manual').on('click', function (event) {
             }else {
                 toastr["error"]("Error inesperado...", "Error!")
             }
-            $('#loading').fadeOut();
+            loadingOff();
         },
         error: function (e) {
             $('#error-modal').modal('show'),

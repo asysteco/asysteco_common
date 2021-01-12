@@ -13,9 +13,7 @@ $(document).ready(function (e) {
       cache: false,
       processData: false,
       beforeSend: function () {
-        $("#loading-msg").html("Cargando horarios CSV...");
-        $("#loading").show();
-        $("#err").fadeOut();
+        loadingOn("Cargando horarios CSV...");
       },
       success: function (data) {
         if (data.match('error-cabecera')) {
@@ -28,7 +26,7 @@ $(document).ready(function (e) {
           $('#file-content-modal').modal('show'),
           $('#file-content-preview').html(data)
         }
-        $("#loading").fadeOut();
+        loadingOff();
       },
       error: function (e) {
         $("#err").html(e).fadeIn();
@@ -50,10 +48,8 @@ $(document).ready(function (e) {
       cache: false,
       processData: false,
       beforeSend: function () {
-        $('#file-content-modal').modal('hide'),
-          $("#loading-msg").html("Importando horarios...");
-        $("#loading").show();
-        $("#err").fadeOut();
+        loadingOn("Importando horarios...");
+        $('#file-content-modal').modal('hide');
       },
       success: function (data) {
         if (data.match('Error-importar')) {
@@ -70,7 +66,7 @@ $(document).ready(function (e) {
           toastr["success"]("¡Datos importados con éxito!", "Correcto!");
           setTimeout(function () { location.reload() }, 700);
         }
-        $("#loading").fadeOut();
+        loadingOff();
       },
       error: function (e) {
         $("#err").html(e).fadeIn();

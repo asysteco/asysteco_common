@@ -1,9 +1,15 @@
 input[type=text], #select_profesor {
     width: 25%;
     display: inline-block;
+    min-width: 150px;
+    margin: 5px;
 }
 
 #btn-response th, #btn-response td {
     vertical-align: middle;
     text-align: center;
+}
+
+.btn {
+    margin: 5px;
 }
