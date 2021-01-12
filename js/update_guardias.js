@@ -22,10 +22,8 @@ $('.act').on('click', function () {
         cache: false,
         processData: false,
         beforeSend: function () {
-            overlayOn();
-            $('#file-content-modal').modal('hide'),
-            $('#loading-msg').html('Cargando guardias...');
-            $('#loading').show();
+            loadingOn('Cargando guardias...');
+            $('#file-content-modal').modal('hide');
         },
         success: function (data) {
             if (data.match('Error-add')) {
@@ -38,8 +36,7 @@ $('.act').on('click', function () {
             } else {
                 toastr["error"]("Error inesperado...", "Error!")
             }
-            overlayOff();
-            $('#loading').fadeOut();
+            loadingOff();
         },
         error: function (e) {
             $('#error-modal').modal('show'),
@@ -59,10 +56,8 @@ $('.remove-guardia').on('click', function () {
         cache: false,
         processData: false,
         beforeSend: function () {
-            overlayOn();
-            $('#file-content-modal').modal('hide'),
-            $('#loading-msg').html('Cargando guardias...');
-            $('#loading').show();
+            loadingOn('Cargando guardias...');
+            $('#file-content-modal').modal('hide');
         },
         success: function (data) {
             if (data.match('Error-remove')) {
@@ -75,8 +70,7 @@ $('.remove-guardia').on('click', function () {
             } else {
                 toastr["error"]("Error inesperado...", "Error!")
             }
-            overlayOff();
-            $('#loading').fadeOut();
+            loadingOff();
         },
         error: function (e) {
             $('#error-modal').modal('show'),
@@ -110,14 +104,11 @@ function loadGuardias(profesor) {
         cache: false,
         processData: false,
         beforeSend: function () {
-            overlayOn();
-            $('#loading-msg').html('Cargando guardias...');
-            $('#loading').show();
+            loadingOn('Cargando guardias...');
         },
         success: function (data) {
             $('#guardias-response').html(data);
-            overlayOff();
-            $('#loading').fadeOut();
+            loadingOff();
         },
         error: function (e) {
             $('#error-modal').modal('show'),

@@ -52,10 +52,8 @@ $('.entrada').on('change', function () {
             cache: false,
             processData: false,
             beforeSend: function () {
-                overlayOn();
+                loadingOn();
                 $('#file-content-modal').modal('hide');
-                $('#loading-msg').html('Cargando Horario...');
-                $('#loading').show();
             },
             success: function (data) {
                 if (data.match('Error-add')) {
@@ -68,8 +66,7 @@ $('.entrada').on('change', function () {
                     toastr["success"]("Acción realizada correctamente.", "Correcto!");
                     setTimeout(function () { location.reload() }, 700)
                 }
-                overlayOff();
-                $('#loading').fadeOut();
+                loadingOff();
             },
             error: function (e) {
                 $('#error-modal').modal('show');
@@ -88,10 +85,8 @@ $('.act').on('click', function () {
         cache: false,
         processData: false,
         beforeSend: function () {
-            overlayOn();
+            loadingOn();
             $('#file-content-modal').modal('hide');
-            $('#loading-msg').html('Cargando Horario...');
-            $('#loading').show();
         },
         success: function (data) {
             if (data.match('Error-add')) {
@@ -104,8 +99,7 @@ $('.act').on('click', function () {
                 toastr["success"]("Acción realizada correctamente.", "Correcto!"),
                     setTimeout(function () { location.reload() }, 700)
             }
-            overlayOff();
-            $('#loading').fadeOut();
+            loadingOff();
         },
         error: function (e) {
             $('#error-modal').modal('show');
@@ -126,10 +120,8 @@ $('.remove-guardia').on('click', function () {
         cache: false,
         processData: false,
         beforeSend: function () {
-            overlayOn();
+            loadingOn();
             $('#file-content-modal').modal('hide');
-            $('#loading-msg').html('Cargando guardias...');
-            $('#loading').show();
         },
         success: function (data) {
             if (data.match('Error-remove')) {
@@ -142,8 +134,7 @@ $('.remove-guardia').on('click', function () {
             } else {
                 toastr["error"]("Error inesperado...", "Error!")
             }
-            overlayOff();
-            $('#loading').fadeOut();
+            loadingOff();
         },
         error: function (e) {
             $('#error-modal').modal('show');

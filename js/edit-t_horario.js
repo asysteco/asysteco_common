@@ -99,9 +99,7 @@ $('body').on('click', '.act', function () {
         type: "POST",
         data: data,
         beforeSend: function () {
-            overlayOn();
-            $('#loading-msg').html('Cargando...');
-            $('#loading').show();
+            loadingOn();
         },
         success: function (data) {
             if (data.match('Ok-add')) {
@@ -133,8 +131,7 @@ $('body').on('click', '.act', function () {
             } else {
                 toastr["error"]("Error inesperado...", "Error!")
             }
-            overlayOff();
-            $('#loading').fadeOut();
+            loadingOff();
         },
         error: function (e) {
             $('#error-modal').modal('show'),
