@@ -17,14 +17,14 @@ $(document).ready(function (e) {
       },
       success: function (data) {
         if (data.match('error-cabecera')) {
-          toastr["error"]("Error de cabecera, comprueba el formato del fichero.", "Error!")
+          toastr["error"]("Error de cabecera, comprueba el formato del fichero.", "Error!");
         } else if (data.match('error-file')) {
-          toastr["error"]("Error de fichero, puede que esté dañado", "Error!")
+          toastr["error"]("Error de fichero, puede que esté dañado", "Error!");
         } else if (data.match('error-edificio')) {
-          toastr["error"]("El edificio especificado en el fichero CSV no es numérico", "Error!")
+          toastr["error"]("El edificio especificado en el fichero CSV no es numérico", "Error!");
         } else {
-          $('#file-content-modal').modal('show'),
-          $('#file-content-preview').html(data)
+          $('#file-content-modal').modal('show');
+          $('#file-content-preview').html(data);
         }
         loadingOff();
       },
@@ -53,15 +53,15 @@ $(document).ready(function (e) {
       },
       success: function (data) {
         if (data.match('Error-importar')) {
-          toastr["error"]("Error al importar fichero.", "Error!")
+          toastr["error"]("Error al importar fichero.", "Error!");
         } else if (data.match('No-profesor')) {
-          toastr["error"]("El fichero CSV contiene iniciales que no hacen referencia a ningún profesor existente.", "Error!")
+          toastr["error"]("El fichero CSV contiene iniciales que no hacen referencia a ningún profesor existente.", "Error!");
         } else if (data.match('Error-unexpected')) {
-          toastr["error"]("Error inesperado, contacte con los administradores.", "Error!")
+          toastr["error"]("Error inesperado, contacte con los administradores.", "Error!");
         } else if (data.match('empty-import')) {
           toastr["success"]("No hay nada nuevo para importar.", "Correcto!");
         } else if (data.match('error-edificio')) {
-          toastr["error"]("El edificio especificado en el fichero CSV no es numérico", "Error!")
+          toastr["error"]("El edificio especificado en el fichero CSV no es numérico", "Error!");
         } else {
           toastr["success"]("¡Datos importados con éxito!", "Correcto!");
           setTimeout(function () { location.reload() }, 700);
