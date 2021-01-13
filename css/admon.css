@@ -13,3 +13,29 @@ input[type=text], #select_profesor {
 .btn {
     margin: 5px;
 }
+
+#select_pag {
+    display: inline-block;
+    background-color: #f6f6f6;
+    border: none;
+    color: #0d0d0d;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18pt;
+    margin: 5px;
+    border: 1px solid #c2c2c2;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    -webkit-border-radius: 3px 3px 3px 3px;
+    border-radius: 3px 3px 3px 3px;
+    width: fit-content;
+}
+
+#select_pag:hover {
+    cursor: pointer;
+    box-shadow: 4px 4px 8px 0 rgb(92, 92, 92);
+}

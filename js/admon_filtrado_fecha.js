@@ -62,3 +62,44 @@ $('.act').on('click', function () {
         }
     });
 });
+
+// Paginación:
+
+$(document).ready(function () {
+    loadingOff();
+});
+
+$(document).on('change', '#select_pag', function() {
+    element = $(this).children().attr('element');
+    action = $(this).children().attr('action');
+    page = $(this).val();
+    profesor = $(this).children().attr('profesor');
+    start = $(this).children().attr('start');
+    end = $(this).children().attr('end');
+    urlPath = 'index.php?ACTION=admon&OPT=select';
+    data = {
+        'action': action,
+        'element': element,
+        'profesor': profesor,
+        'fechainicio': start,
+        'fechafin': end,
+        'pag': page
+    };
+    
+    $.ajax({
+        url: urlPath,
+        type: 'GET',
+        data:  data,
+        beforeSend : function() {
+            loadingOn();
+        },
+        success: function(data) {
+            $('#btn-response').html(data);
+            loadingOff();
+        },
+        error: function(e) {
+            $('#error-modal').modal('show'),
+            $('#error-content-modal').html(e);
+        }          
+    });
+});
