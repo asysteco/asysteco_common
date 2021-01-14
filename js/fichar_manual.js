@@ -21,7 +21,6 @@ $('#add-manual').on('click', function (event) {
     };
 
     urlPath = 'index.php?ACTION=fichar-mysql-manual';
-    console.log(urlPath);
     $.ajax({
         url: urlPath,
         type: "POST",
