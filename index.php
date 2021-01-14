@@ -63,14 +63,12 @@ if (isset($_GET['ACTION'])) {
             include_once($dirs['Interfaces'] . 'header.php');
             include_once($dirs['Interfaces'] . 'top-nav.php');
             include_once($dirs['Profesores'] . 'profesores.php');
-            include($dirs['Interfaces'] . 'errors.php');
             include($dirs['Interfaces'] . 'footer.php');
           } elseif ($_SESSION['Perfil'] === 'Profesor') {
             $act_qr = 'active';
             include_once($dirs['Interfaces'] . 'header.php');
             include_once($dirs['Interfaces'] . 'top-nav.php');
             include_once($dirs['Qr'] . 'generate_code.php');
-            include($dirs['Interfaces'] . 'errors.php');
             include($dirs['Interfaces'] . 'footer.php');
           } else {
             die('<h1 style="color:red;">Error de proceso...</h1>');
@@ -79,7 +77,7 @@ if (isset($_GET['ACTION'])) {
           header('Location: index.php?ACTION=primer_cambio');
         }
       } else {
-        include_once($dirs['inc'] . 'login_form.php');
+        include_once($dirs['Login'] . 'login_form.php');
       }
       break;
 
@@ -102,7 +100,7 @@ if (isset($_GET['ACTION'])) {
           include_once($dirs['Interfaces'] . 'header.php');
           include_once($dirs['Interfaces'] . 'top-nav.php');
           include_once($dirs['Login'] . 'new_pass.php');
-          include_once($dirs['Interfaces'] . 'errors.php');
+          include_once($dirs['Interfaces'] . 'change_pass_modal.php');
           include_once($dirs['Interfaces'] . 'footer.php');
         } else {
           header('Location: index.php?ACTION=primer_cambio');
@@ -115,13 +113,19 @@ if (isset($_GET['ACTION'])) {
       break;
 
     case 'primer_cambio':
-      $scripts = '<link rel="stylesheet" href="css/login-style.css">';
-      include_once($dirs['Valida'] . 'valida_primer_cambio.php');
-      include_once($dirs['Interfaces'] . 'header.php');
-      include_once($dirs['Interfaces'] . 'top-nav.php');
-      include_once($dirs['Login'] . 'primer_cambio.php');
-      include_once($dirs['Interfaces'] . 'errors.php');
-      include_once($dirs['Interfaces'] . 'footer.php');
+      if ($class->isLogged($Titulo)) {
+        $scripts = '<link rel="stylesheet" href="css/login-style.css">';
+        include_once($dirs['Valida'] . 'valida_primer_cambio.php');
+        include_once($dirs['Interfaces'] . 'header.php');
+        include_once($dirs['Interfaces'] . 'top-nav.php');
+        include_once($dirs['Login'] . 'primer_cambio.php');
+        include_once($dirs['Interfaces'] . 'change_pass_modal.php');
+        include_once($dirs['Interfaces'] . 'footer.php');
+      } else {
+        $MSG = "Debes iniciar sesión para realizar esta acción.";
+        header("Refresh:2; url=index.php");
+        include_once($dirs['Interfaces'] . 'msg_modal.php');
+      }
       break;
 
     case 'lectivos':
@@ -142,7 +146,6 @@ if (isset($_GET['ACTION'])) {
                   echo "</div>";
                 echo "</div>";
               echo "</div>";
-              include_once($dirs['Interfaces'] . 'errors.php');
               include_once($dirs['Interfaces'] . 'footer.php');
             } else {
               $scripts = '<link rel="stylesheet" href="css/form.css">';
@@ -165,7 +168,6 @@ if (isset($_GET['ACTION'])) {
               include_once($dirs['Interfaces'] . 'top-nav.php');
               include_once($dirs['Horarios'] . 'lectivos.php');
               include_once($dirs['public'] . 'js/lectivos.js');
-              include_once($dirs['Interfaces'] . 'errors.php');
               include_once($dirs['Interfaces'] . 'footer.php');
             }
           } else {
@@ -188,7 +190,6 @@ if (isset($_GET['ACTION'])) {
           include_once($dirs['Interfaces'] . 'header.php');
           include_once($dirs['Interfaces'] . 'top-nav.php');
           include_once($dirs['Qr'] . 'generate_code.php');
-          include_once($dirs['Interfaces'] . 'errors.php');
           include_once($dirs['Interfaces'] . 'footer.php');
         } else {
           header('Location: index.php?ACTION=primer_cambio');
@@ -257,7 +258,6 @@ if (isset($_GET['ACTION'])) {
           }
 
           include_once('js/filtro_asistencias.js');
-          include_once($dirs['Interfaces'] . 'errors.php');
           include_once($dirs['Interfaces'] . 'footer.php');
         } else {
           header('Location: index.php?ACTION=primer_cambio');
@@ -325,7 +325,6 @@ if (isset($_GET['ACTION'])) {
 
           include_once($dirs['Interfaces'] . 'header.php');
           include($dirs['Interfaces'] . 'home.php');
-          include($dirs['Interfaces'] . 'errors.php');
           include($dirs['Interfaces'] . 'footer.php');
         } else {
           header('Location: index.php?ACTION=primer_cambio');
@@ -350,7 +349,6 @@ if (isset($_GET['ACTION'])) {
           include_once($dirs['Interfaces'] . 'header.php');
           include_once($dirs['Interfaces'] . 'top-nav.php');
           include_once($dirs['Interfaces'] . 'notificaciones.php');
-          include_once($dirs['Interfaces'] . 'errors.php');
           include_once($dirs['Interfaces'] . 'footer.php');
         } else {
           header('Location: index.php');
@@ -394,7 +392,6 @@ if (isset($_GET['ACTION'])) {
           include_once($dirs['Interfaces'] . 'header.php');
           include_once($dirs['Interfaces'] . 'top-nav.php');
           include_once($dirs['Fichaje'] . 'fichar-manual.php');
-          include_once($dirs['Interfaces'] . 'errors.php');
           include_once($dirs['Interfaces'] . 'footer.php');
         } else {
           header('Location: index.php?ACTION=primer_cambio');
@@ -453,14 +450,12 @@ if (isset($_GET['ACTION'])) {
         include_once($dirs['Interfaces'] . 'header.php');
         include_once($dirs['Interfaces'] . 'top-nav.php');
         include_once($dirs['Profesores'] . 'profesores.php');
-        include($dirs['Interfaces'] . 'errors.php');
         include($dirs['Interfaces'] . 'footer.php');
       } elseif ($_SESSION['Perfil'] === 'Profesor') {
         $act_qr = 'active';
         include_once($dirs['Interfaces'] . 'header.php');
         include_once($dirs['Interfaces'] . 'top-nav.php');
         include_once($dirs['Qr'] . 'generate_code.php');
-        include($dirs['Interfaces'] . 'errors.php');
         include($dirs['Interfaces'] . 'footer.php');
       } else {
         die('<h1 style="color:red;">Error de proceso...</h1>');
