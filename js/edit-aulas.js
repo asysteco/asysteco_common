@@ -74,10 +74,7 @@ $('.update').on('click', function () {
         type: "POST",
         data: data,
         beforeSend: function () {
-            overlayOn();
-            $('#file-content-modal').modal('hide'),
-            $('#loading-msg').html('Cargando...');
-            $('#loading').show();
+            loadingOn();
         },
         success: function (data) {
             if (data.match('Ok-action')) {
@@ -95,8 +92,7 @@ $('.update').on('click', function () {
             } else {
                 toastr["error"]("Error inesperado...", "Error!")
             }
-            overlayOff();
-            $('#loading').fadeOut();
+            loadingOff();
         },
         error: function (e) {
             $('#error-modal').modal('show'),
@@ -128,10 +124,7 @@ $('#add-btn-aula').on('click', function () {
         type: "POST",
         data: data,
         beforeSend: function () {
-            overlayOn();
-            $('#file-content-modal').modal('hide'),
-            $('#loading-msg').html('Cargando...');
-            $('#loading').show();
+            loadingOn();
         },
         success: function (data) {
             if (data.match('Ok-action')) {
@@ -146,8 +139,7 @@ $('#add-btn-aula').on('click', function () {
             } else {
                 toastr["error"]("Error inesperado...", "Error!")
             }
-            overlayOff();
-            $('#loading').fadeOut();
+            loadingOff();
         },
         error: function (e) {
             $('#error-modal').modal('show'),
@@ -171,10 +163,7 @@ $('.remove').on('click', function () {
         type: "POST",
         data: data,
         beforeSend: function () {
-            overlayOn();
-            $('#file-content-modal').modal('hide'),
-            $('#loading-msg').html('Cargando...');
-            $('#loading').show();
+            loadingOn();
         },
         success: function (data) {
             if (data.match('Ok-action')) {
@@ -185,8 +174,7 @@ $('.remove').on('click', function () {
             } else {
                 toastr["error"]("Error inesperado...", "Error!")
             }
-            overlayOff();
-            $('#loading').fadeOut();
+            loadingOff();
         },
         error: function (e) {
             $('#error-modal').modal('show'),

@@ -14,10 +14,7 @@ $(document).ready(function (e) {
     processData:false,
     beforeSend : function()
     {
-      overlayOn();
-      $("#loading-msg").html("Cargando horarios CSV...");
-      $("#loading").show();
-      $("#err").fadeOut();
+      loadingOn("Cargando horarios CSV...");
     },
     success: function(data) {
       if (data.match('error-cabecera')) {
@@ -28,8 +25,7 @@ $(document).ready(function (e) {
         $('#file-content-modal').modal('show'),
         $('#file-content-preview').html(data)
       }
-      overlayOff();
-      $("#loading").fadeOut();
+      loadingOff();
     },
     error: function(e) {
         $("#err").html(e).fadeIn();
@@ -51,11 +47,8 @@ $(document).ready(function (e) {
         cache: false,
         processData:false,
         beforeSend : function() {
-          overlayOn();
+          loadingOn("Importando Profesores...");
           $('#file-content-modal').modal('hide');
-          $("#loading-msg").html("Importando Profesores...");
-          $("#loading").show();
-          $("#err").fadeOut();
         },
         success: function(data) {
           if (data.match('Error-importar')) {
@@ -66,8 +59,7 @@ $(document).ready(function (e) {
             toastr["success"]("¡Datos importados con éxito!", "Correcto!");
             setTimeout(function(){location.reload()}, 700);
           }
-          overlayOff();
-          $("#loading").fadeOut();
+          loadingOff();
         },
         error: function(e) {
           $("#err").html(e).fadeIn();

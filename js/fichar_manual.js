@@ -21,16 +21,12 @@ $('#add-manual').on('click', function (event) {
     };
 
     urlPath = 'index.php?ACTION=fichar-mysql-manual';
-    console.log(urlPath);
     $.ajax({
         url: urlPath,
         type: "POST",
         data: data,
         beforeSend: function () {
-            overlayOn();
-            $('#file-content-modal').modal('hide'),
-            $('#loading-msg').html('Cargando...');
-            $('#loading').show();
+            loadingOn();
         },
         success: function (data) {
             if (data.match('Ok-action')) {
@@ -50,8 +46,7 @@ $('#add-manual').on('click', function (event) {
             }else {
                 toastr["error"]("Error inesperado...", "Error!")
             }
-            overlayOff();
-            $('#loading').fadeOut();
+            loadingOff();
         },
         error: function (e) {
             $('#error-modal').modal('show'),
