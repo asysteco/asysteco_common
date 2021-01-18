@@ -1,3 +1,7 @@
+$(function () {
+    $('.fichajeEntrada').timepicker();
+    $('.fichajeSalida').timepicker();
+});
 
 $('#add-manual').on('click', function (event) {
     event.preventDefault();
