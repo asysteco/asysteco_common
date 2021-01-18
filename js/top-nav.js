@@ -34,14 +34,13 @@ $('#info-horario').on('click', function() {
         type: 'GET',
         data: {},
         beforeSend: function () {
-            $("#loading-msg").html("Cargando...");
-            $("#loading").show();
+            loadingOn();
         },
         success: function (data) {
             $('body').append(modal);
             $('#info-horario-body').html(data);
             $('#info-horario-modal').modal('show');
-            $("#loading").fadeOut();
+            loadingOff();
         },
         error: function (e) {
             $('#error-modal').modal('show');

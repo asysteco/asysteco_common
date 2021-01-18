@@ -15,6 +15,7 @@ $act_profesores = '';
 $act_asistencia = '';
 
 $act_cal_escolar = '';
+$act_guardias = '';
 
 $act_usuario = '';
     $act_qr = '';

@@ -1,4 +1,3 @@
-<script>
 $(function(){
   $('#busca_prof').keyup(function(){
     var val = $(this).val().toLowerCase();
@@ -16,4 +15,3 @@ $(function(){
     });
   });
 });
-</script>
