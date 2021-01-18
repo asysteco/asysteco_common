@@ -1,6 +1,8 @@
 $(function () {
     $('.fichajeEntrada').timepicker();
-    $('.fichajeSalida').timepicker();
+    if ($(".fichajeSalida")[0]) {
+        $('.fichajeSalida').timepicker();
+    }
 });
 
 $('#add-manual').on('click', function (event) {
