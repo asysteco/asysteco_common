@@ -20,9 +20,7 @@ $(document).on('click', '.actualiza', function () {
         type: 'GET',
         data: data,
         beforeSend: function () {
-            overlayOn();
-            $("#loading-msg").html("Realizando petición...");
-            $("#loading").show();
+            loadingOn();
         },
         success: function (response) {
             if (response.match('Ok-asiste')){
@@ -39,8 +37,7 @@ $(document).on('click', '.actualiza', function () {
                 toastr["error"]("Error inesperado...", "Error!")
             } 
             getRow(Profesor, Fecha, Hora);
-            overlayOff();
-            $("#loading").fadeOut();
+            loadingOff();
         },
         error: function (e) {
             $("#err").html(e).fadeIn();

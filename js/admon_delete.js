@@ -27,10 +27,7 @@ $('.eliminar').on('click', function() {
     cache: false,
     processData:false,
     beforeSend : function() {
-        overlayOn();
-        $('#file-content-modal').modal('hide'),
-        $("#loading-msg").html("Eliminando datos...");
-        $("#loading").show();
+        loadingOn("Eliminando datos...");
     },
     success: function(data) {
         if (data.match('Error-horarios')) {
@@ -44,8 +41,7 @@ $('.eliminar').on('click', function() {
         } else {
             toastr["success"]("¡Datos eliminados con éxito!", "Correcto!")
         }
-        $("#loading").fadeOut();
-        overlayOff();
+        loadingOff();
     },
         error: function(e) {
             $('#error-modal').modal('show'),

@@ -16,3 +16,14 @@ function overlayOn() {
 function overlayOff() {
     $('#overlay').fadeOut();
 }
+
+function loadingOn(msg = 'Cargando...') {
+    overlayOn();
+    $("#loading-msg").html(msg);
+    $("#loading").show();
+}
+
+function loadingOff() {
+    overlayOff();
+    $("#loading").fadeOut();
+}
