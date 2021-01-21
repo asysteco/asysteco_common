@@ -23,7 +23,6 @@ $(document).on('click', '.act', function(e) {
         id = id[1],
         enlace = 'index.php?ACTION=horarios&OPT=profesor&profesor=' + id;
         data = {};
-        $('#modal-profesores').modal('show')
     } else if (action === 'modal-desactivar') {
         e.preventDefault();
         cabecera = "<h5 class='modal-title'>Desactivar Profesor</h5>";
@@ -71,6 +70,7 @@ $(document).on('click', '.act', function(e) {
                 $('#modal-size').addClass('modal-lg');
                 $('#modal-contenido').html(data);
                 $('#modal-class-footer').html('<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>');
+                $('#modal-profesores').modal('show')
                 loadingOff();
                 return;
             }
