@@ -250,6 +250,7 @@ if (isset($_GET['ACTION'])) {
 
             case 'sesion':
               $_GET['ID'] = $_SESSION['ID'];
+              include_once($dirs['Interfaces'] . 'top-nav.php');
               include_once($dirs['Fichaje'] . 'contenido-asistencias.php');
               break;
 
