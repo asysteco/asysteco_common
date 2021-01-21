@@ -49,7 +49,6 @@ $('.edit').on('click', function () {
 });
 
 $(".hide-it").keyup(function(event) {
-    console.log(event);
     if (event.keyCode === 13) {
         data = $(this).attr('id').split('_');
         elementId = data[1];
