@@ -141,8 +141,9 @@ if (isset($_GET['ACTION'])) {
               echo '<div class="container">';
                 echo "<div class='row'>";
                   echo "<div class='col-12'>";
-                    echo '<h1>Calendario escolar</h1>';
-                    include_once($dirs['Horarios'] . 'calendario.php');
+                  $date = date('Y');
+                  echo '<h1>Calendario escolar</h1>';
+                  include_once($dirs['Horarios'] . 'calendario.php');
                   echo "</div>";
                 echo "</div>";
               echo "</div>";
