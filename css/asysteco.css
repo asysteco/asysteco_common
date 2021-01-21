@@ -192,3 +192,18 @@ html {
         min-width: 120px;
     }
 }
+
+.modal-fs {
+    padding: 0 !important; // override inline padding-right added from js
+  }
+  .modal-fs .modal-dialog {
+    width: 95%;
+    max-width: none;
+    height: 95%;
+  }
+  .modal-fs .modal-content {
+    height: 100%;
+  }
+  .modal-fs .modal-body {
+    overflow-y: auto;
+  }
