@@ -1,8 +1,8 @@
 var enlace;
 
-$(document).on('click', '.act', function(e) {    
+$(document).on('click', '.act', function(e) { 
+    $('#modal-profesores').removeClass('modal-fs');   
     action = $(this).attr('action');
-    console.log(action);
     if (action === 'activar') {
         data = {
             action: action
@@ -22,6 +22,10 @@ $(document).on('click', '.act', function(e) {
         id = $(this).parent().attr('id').split('_'),
         id = id[1],
         enlace = 'index.php?ACTION=horarios&OPT=profesor&profesor=' + id;
+        data = {};
+    } else if (action === 'modal-asistencias') {
+        id = $(this).attr('profesor');
+        enlace = 'index.php?ACTION=asistencias&ID=' + id;
         data = {};
     } else if (action === 'modal-desactivar') {
         e.preventDefault();
@@ -69,7 +73,14 @@ $(document).on('click', '.act', function(e) {
             if (action === 'horario') {
                 $('#modal-size').addClass('modal-lg');
                 $('#modal-contenido').html(data);
-                $('#modal-class-footer').html('<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>');
+                $('#modal-pie').html('<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>');
+                $('#modal-profesores').modal('show')
+                loadingOff();
+                return;
+            } else if (action === 'modal-asistencias') {
+                $('#modal-profesores').addClass('modal-fs');
+                $('#modal-contenido').html(data);
+                $('#modal-pie').html('<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>');
                 $('#modal-profesores').modal('show')
                 loadingOff();
                 return;
