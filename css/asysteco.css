@@ -11,7 +11,7 @@ html {
     right: 0;
     bottom: 0;
     background-color: rgba(0,0,0,0.7);
-    z-index: 1021;
+    z-index: 1060;
     cursor: pointer;
 }
 .flecha_div {
@@ -75,12 +75,12 @@ html {
     max-width: 100%;
     height: 100vh;
     max-height: 100%;
-    z-index: 1022;
+    z-index: 1070;
 }
 #loading-msg {
     color: beige;
     margin-top: 150px;
-    z-index: 1022;
+    z-index: 1070;
 }
 #loading {
     display: none;
@@ -98,13 +98,13 @@ html {
     max-width: 100%;
     height: 100vh;
     max-height: 100%;
-    z-index: 1022;
+    z-index: 1070;
 }
 .lds-dual-ring {
     display: block;
     width: 80px;
     height: 80px;
-    z-index: 1022;
+    z-index: 1070;
 }
 .lds-dual-ring:after {
     content: " ";
@@ -193,17 +193,21 @@ html {
     }
 }
 
+#modal-profesores {
+    overflow: hidden;
+}
+
 .modal-fs {
-    padding: 0 !important; // override inline padding-right added from js
-  }
-  .modal-fs .modal-dialog {
+    padding: 0 !important;
+}
+.modal-fs .modal-dialog {
     width: 95%;
     max-width: none;
     height: 95%;
-  }
-  .modal-fs .modal-content {
+}
+.modal-fs .modal-content {
     height: 100%;
-  }
-  .modal-fs .modal-body {
+}
+.modal-fs .modal-body {
     overflow-y: auto;
-  }
+}

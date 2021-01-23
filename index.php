@@ -229,16 +229,12 @@ if (isset($_GET['ACTION'])) {
         if ($class->compruebaCambioPass()) {
           $act_asistencia = 'active';
           $scripts = '<link rel="stylesheet" href="css/asistencias.css">';
-          $extras = "
-              $(function (){
-                  $('#busca_asiste').datepicker();
-              });
-            ";
-          include_once($dirs['Interfaces'] . 'header.php');
 
           switch ($_GET['OPT'] ?? '') {
             case 'all':
               if ($_SESSION['Perfil'] === 'Admin') {
+                $extras = "$(function (){ $('#busca_asiste').datepicker(); });";
+                include_once($dirs['Interfaces'] . 'header.php');
                 include_once($dirs['Interfaces'] . 'top-nav.php');
                 include_once($dirs['Fichaje'] . 'contenido-asistencias-all.php');
               } else {
@@ -250,6 +246,8 @@ if (isset($_GET['ACTION'])) {
 
             case 'sesion':
               $_GET['ID'] = $_SESSION['ID'];
+              $extras = "$(function (){ $('#busca_asiste').datepicker(); });";
+              include_once($dirs['Interfaces'] . 'header.php');
               include_once($dirs['Interfaces'] . 'top-nav.php');
               include_once($dirs['Fichaje'] . 'contenido-asistencias.php');
               break;

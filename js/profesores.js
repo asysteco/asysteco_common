@@ -1,7 +1,11 @@
 var enlace;
 
 $(document).on('click', '.act', function(e) { 
-    $('#modal-profesores').removeClass('modal-fs');   
+    $('#modal-profesores').removeClass('modal-fs');
+    $('#modal-size').removeClass('modal-fs');
+    $('#modal-cabecera').html('');
+    $('#modal-pie').attr('class', 'modal-footer');
+
     action = $(this).attr('action');
     if (action === 'activar') {
         data = {
@@ -71,7 +75,7 @@ $(document).on('click', '.act', function(e) {
         },
         success: function (data) {
             if (action === 'horario') {
-                $('#modal-size').addClass('modal-lg');
+                $('#modal-profesores').addClass('modal-fs');
                 $('#modal-contenido').html(data);
                 $('#modal-pie').html('<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>');
                 $('#modal-profesores').modal('show')
@@ -81,6 +85,7 @@ $(document).on('click', '.act', function(e) {
                 $('#modal-profesores').addClass('modal-fs');
                 $('#modal-contenido').html(data);
                 $('#modal-pie').html('<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>');
+                $('#busca_asiste').datepicker();
                 $('#modal-profesores').modal('show')
                 loadingOff();
                 return;
