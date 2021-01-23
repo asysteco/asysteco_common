@@ -169,6 +169,10 @@ html {
     width: 85%;
 }
 
+.marcaje {
+    cursor: pointer;
+}
+
 @keyframes bell_rings {
     0% {transform: rotate(0deg);}
     25% {transform: rotate(25deg);}
