@@ -211,3 +211,28 @@ html {
 .modal-fs .modal-body {
     overflow-y: auto;
 }
+
+.tp {
+    position: relative;
+}
+  
+.tp .tpt {
+    visibility: hidden;
+    width: fit-content;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}  
+.tp:hover .tpt {
+    visibility: visible;
+    opacity: 1;
+}
