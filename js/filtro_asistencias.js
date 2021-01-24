@@ -1,4 +1,3 @@
-<script>
 $(function(){
   $('#busca_asiste').on('keyup change', function(){
     var val = $(this).val().toLowerCase();
@@ -16,4 +15,3 @@ $(function(){
     });
   });
 });
-</script>

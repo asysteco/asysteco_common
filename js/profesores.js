@@ -46,7 +46,10 @@ $(document).on('click', '.act', function(e) {
         $('#modal-cabecera').html(cabecera);
         $('#modal-contenido').html(contenido);
         $('#modal-contenido').append(input);
-        $('#fecha-desactivar').datepicker({minDate: -5, maxDate: 0});
+        $('#fecha-desactivar').datepicker({
+            minDate: -5,
+            maxDate: 0
+        });
         $('#modal-pie').html(btn1);
         $('#modal-pie').append(btn2);
         $('#modal-pie').attr('class', 'modal-buttons-footer');
@@ -108,7 +111,9 @@ $(document).on('click', '.act', function(e) {
                 $('#modal-profesores').addClass('modal-fs');
                 $('#modal-contenido').html(data);
                 $('#modal-pie').html('<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>');
-                $('#busca_asiste').datepicker();
+                $('#busca_asiste').datepicker({
+                    beforeShowDay: $.datepicker.noWeekends
+                });
                 $('#modal-profesores').modal('show')
                 loadingOff();
                 return;
