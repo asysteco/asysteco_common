@@ -241,6 +241,7 @@ if (isset($_GET['ACTION'])) {
           switch ($_GET['OPT'] ?? '') {
             case 'all':
               if ($_SESSION['Perfil'] === 'Admin') {
+                $scripts .= '<script src="js/filtro_asistencias.js"></script>';
                 $extras = "$(function (){ $('#busca_asiste').datepicker({
                     beforeShowDay: $.datepicker.noWeekends
                   });
@@ -257,6 +258,7 @@ if (isset($_GET['ACTION'])) {
 
             case 'sesion':
               $_GET['ID'] = $_SESSION['ID'];
+              $scripts .= '<script src="js/filtro_asistencias.js"></script>';
               $extras = "$(function (){ $('#busca_asiste').datepicker({
                   beforeShowDay: $.datepicker.noWeekends
                 });

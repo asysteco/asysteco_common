@@ -3,7 +3,7 @@ var enlace;
 $(document).on('click', '.act', function(e) { 
     $('#modal-profesores').removeClass('modal-fs');
     $('#modal-size').removeClass('modal-fs');
-    $('#modal-cabecera').html('');
+    $('#modal-cabecera').html('<button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i></button>');
     $('#modal-pie').attr('class', 'modal-footer');
 
     action = $(this).attr('action');
