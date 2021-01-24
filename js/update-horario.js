@@ -69,8 +69,7 @@ $('.entrada').on('change', function () {
                 loadingOff();
             },
             error: function (e) {
-                $('#error-modal').modal('show');
-                $('#error-content-modal').html(e);
+                toastr["error"]("Error inesperado...", "Error!")
             }
         });
 });
@@ -102,8 +101,7 @@ $('.act').on('click', function () {
             loadingOff();
         },
         error: function (e) {
-            $('#error-modal').modal('show');
-            $('#error-content-modal').html(e);
+            toastr["error"]("Error inesperado...", "Error!")
         }
     });
 });
@@ -137,8 +135,7 @@ $('.remove-guardia').on('click', function () {
             loadingOff();
         },
         error: function (e) {
-            $('#error-modal').modal('show');
-            $('#error-content-modal').html(e);
+            toastr["error"]("Error inesperado...", "Error!")
         }
     });
 });
