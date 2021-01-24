@@ -1,5 +1,6 @@
 .reset_icon {
 transition-duration: 0.4s;
+cursor: pointer;
 }
 .reset_icon:hover {
 transform: rotate(360deg) scale(1.4);
@@ -26,6 +27,7 @@ color: red;
 
 .add_icon {
 transition-duration: 0.2s;
+cursor: pointer;
 }
 .add_icon:hover {
 transform: scale(1.4);
