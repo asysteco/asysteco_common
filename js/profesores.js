@@ -46,10 +46,7 @@ $(document).on('click', '.act', function(e) {
         $('#modal-cabecera').html(cabecera);
         $('#modal-contenido').html(contenido);
         $('#modal-contenido').append(input);
-        $('#fecha-desactivar').datepicker({
-            minDate: -5,
-            maxDate: 0
-        });
+        $('#fecha-desactivar').datepicker({minDate: -5, maxDate: 0});
         $('#modal-pie').html(btn1);
         $('#modal-pie').append(btn2);
         $('#modal-pie').attr('class', 'modal-buttons-footer');
@@ -101,7 +98,9 @@ $(document).on('click', '.act', function(e) {
         },
         success: function (data) {
             if (action === 'horario') {
-                $('#modal-profesores').addClass('modal-fs');
+                if (!data.match('no tiene horario')) {
+                    $('#modal-profesores').addClass('modal-fs');
+                }
                 $('#modal-contenido').html(data);
                 $('#modal-pie').html('<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>');
                 $('#modal-profesores').modal('show')
