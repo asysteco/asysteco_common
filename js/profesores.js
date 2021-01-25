@@ -185,6 +185,7 @@ $(document).on('click', '.act', function(e) {
             }  else if (data.match('^actualizado$')) {
                 toastr["success"]("Datos actualizados correctamente.", "Correcto!");
                 setTimeout(function () { location.reload() }, 700);
+                return;
             }  else if (data.match('^error-actualizar$')) {
                 toastr["success"]("Ha ocurrido un problema. No se ha podido actualizar.", "Error!");
             } else if (data.match('^error-admin$')) {
@@ -196,11 +197,13 @@ $(document).on('click', '.act', function(e) {
             } else if (data.match('^sustituido$')) {
                 toastr["success"]("Sustitución realizada correctamente.", "Correcto!");
                 setTimeout(function () { location.reload() }, 700);
+                return;
             } else if (data.match('^error-sustitucion$')) {
                 toastr["error"]("Ha ocurrido un problema. Los cambios no se han realizado.", "Error!");
             } else if (data.match('^fin-sustitucion$')) {
                 toastr["success"]("Datos actualizados correctamente.", "Correcto!");
                 setTimeout(function () { location.reload() }, 700);
+                return;
             } else if (data.match('^error-fin-sustitucion$')) {
                 toastr["error"]("Ha ocurrido un problema. Los cambios no se han realizado.", "Error!");
             } else {
