@@ -70,6 +70,12 @@ if (isset($_GET['ACTION'])) {
             include_once($dirs['Interfaces'] . 'top-nav.php');
             include_once($dirs['Qr'] . 'generate_code.php');
             include($dirs['Interfaces'] . 'footer.php');
+          } elseif ($_SESSION['Perfil'] === 'Personal') {
+            $act_qr = 'active';
+            include_once($dirs['Interfaces'] . 'header.php');
+            include_once($dirs['Interfaces'] . 'top-nav.php');
+            include_once($dirs['Qr'] . 'generate_code.php');
+            include($dirs['Interfaces'] . 'footer.php');
           } else {
             die('<h1 style="color:red;">Error de proceso...</h1>');
           }
@@ -259,6 +265,7 @@ if (isset($_GET['ACTION'])) {
             case 'sesion':
               $_GET['ID'] = $_SESSION['ID'];
               $scripts .= '<script src="js/filtro_asistencias.js"></script>';
+              $scripts .= '<script src="js/update_marcajes.js"></script>';
               $extras = "$(function (){ $('#busca_asiste').datepicker({
                   beforeShowDay: $.datepicker.noWeekends
                 });
@@ -470,6 +477,12 @@ if (isset($_GET['ACTION'])) {
         include_once($dirs['Profesores'] . 'profesores.php');
         include($dirs['Interfaces'] . 'footer.php');
       } elseif ($_SESSION['Perfil'] === 'Profesor') {
+        $act_qr = 'active';
+        include_once($dirs['Interfaces'] . 'header.php');
+        include_once($dirs['Interfaces'] . 'top-nav.php');
+        include_once($dirs['Qr'] . 'generate_code.php');
+        include($dirs['Interfaces'] . 'footer.php');
+      } elseif ($_SESSION['Perfil'] === 'Personal') {
         $act_qr = 'active';
         include_once($dirs['Interfaces'] . 'header.php');
         include_once($dirs['Interfaces'] . 'top-nav.php');
