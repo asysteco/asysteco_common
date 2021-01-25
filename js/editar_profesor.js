@@ -1,5 +1,3 @@
-
-<script>
 $('.entrada').hide();
 
 $(window).click(function() {
@@ -25,5 +23,3 @@ $('.entrada').on('change', function(){
 	$('#grupo-tutor').val(texto),
 	$('#grupo-tutor').show()
 });
-
-</script>
