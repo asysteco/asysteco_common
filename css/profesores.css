@@ -80,7 +80,7 @@ vertical-align: middle;
     text-align: center;
 }
 
-input[type=text], input[type=password] {
+#formContent input[type=text], #grupo-tutor-select {
 background-color: #f6f6f6;
 border: none;
 color: #0d0d0d;
@@ -101,10 +101,10 @@ transition: all 0.5s ease-in-out;
 border-radius: 5px 5px 5px 5px;
 }
 
-h4 {
+#formContent h4 {
     text-align: center;
 }
 
-input[type=text]:focus {
+#formContent input[type=text]:focus {
 background-color: #fff;
 border-bottom: 2px solid #5fbae9;
