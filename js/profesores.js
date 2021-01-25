@@ -32,17 +32,31 @@ $(document).on('click', '.act', function(e) {
     } else if (action === 'reset') {
         id = $(this).attr('profesor');
         data = {};
-    } else if (action === 'modal-editar') {
+    } else if (action === 'modal-asistencias') {
         id = $(this).attr('profesor');
-        enlace = 'index.php?ACTION=profesores&OPT=edit&ID=' + id;
+        enlace = 'index.php?ACTION=asistencias&ID=' + id;
         data = {};
     } else if (action === 'actualizar-profesor') {
         enlace = 'index.php?ACTION=profesores&OPT=actualizar';
         data = $('#formulario-edit').serialize();
-        console.log(data);
-    } else if (action === 'modal-asistencias') {
+    } else if (action === 'modal-editar') {
         id = $(this).attr('profesor');
-        enlace = 'index.php?ACTION=asistencias&ID=' + id;
+        enlace = 'index.php?ACTION=profesores&OPT=edit&ID=' + id;
+        data = {};
+    } else if (action === 'modal-form-sustituir') {
+        id = $(this).attr('profesor');
+        enlace = 'index.php?ACTION=profesores&OPT=sustituir&ID=' + id;
+        data = {};
+    } else if (action === 'realizar-sustitucion') {
+        idSustituto = $('#select_sustituto').val();
+        enlace = 'index.php?ACTION=profesores&OPT=add-sustituto';
+        data = {
+            'ID_PROFESOR': id,
+            'ID_SUSTITUTO': idSustituto
+        };
+    } else if (action === 'modal-fin-sustitucion') {
+        id = $(this).attr('profesor');
+        enlace = 'index.php?ACTION=profesores&OPT=remove-sustituto&ID=' + id;
         data = {};
     } else if (action === 'modal-desactivar') {
         e.preventDefault();
@@ -102,7 +116,9 @@ $(document).on('click', '.act', function(e) {
         type: "POST",
         data: data,
         beforeSend: function () {
-            $('#modal-profesores').modal('hide');
+            if (action !== 'modal-form-sustituir') {
+                $('#modal-profesores').modal('hide');
+            }
             loadingOn();
         },
         success: function (data) {
@@ -130,6 +146,14 @@ $(document).on('click', '.act', function(e) {
                 $('#modal-contenido').html(data);
                 $('#modal-pie').html('<button type="button" class="btn btn-danger float-left" data-dismiss="modal">Cancelar</button>');
                 $('#modal-pie').append('<button class="btn btn-success act float-right" action="actualizar-profesor" name="ACTION" value="editar_profesor">Actualizar Profesor</button></br></br>');
+                $('#modal-pie').attr('class', 'modal-buttons-footer');
+                $('#modal-profesores').modal('show')
+                loadingOff();
+                return;
+            } else if (action === 'modal-form-sustituir') {
+                $('#modal-contenido').html(data);
+                $('#modal-pie').html('<button type="button" class="btn btn-danger float-left" data-dismiss="modal">Cancelar</button>');
+                $('#modal-pie').append('<button class="btn btn-success float-right act" value="profesores" name="ACTION" action="realizar-sustitucion">Agregar</button>');
                 $('#modal-pie').attr('class', 'modal-buttons-footer');
                 $('#modal-profesores').modal('show')
                 loadingOff();
@@ -163,9 +187,27 @@ $(document).on('click', '.act', function(e) {
                 setTimeout(function () { location.reload() }, 700);
             }  else if (data.match('^error-actualizar$')) {
                 toastr["success"]("Ha ocurrido un problema. No se ha podido actualizar.", "Error!");
+            } else if (data.match('^error-admin$')) {
+                toastr["error"]("No se puede sustituir a un administrador.", "Error!");
+            } else if (data.match('^error-sustituido$')) {
+                toastr["error"]("Eror al seleccionar al profesor a sustituir.", "Error!");
+            } else if (data.match('^error-sustituto$')) {
+                toastr["error"]("Error al seleccionar al profesor sustituto.", "Error!");
+            } else if (data.match('^sustituido$')) {
+                toastr["success"]("Sustitución realizada correctamente.", "Correcto!");
+                setTimeout(function () { location.reload() }, 700);
+            } else if (data.match('^error-sustitucion$')) {
+                toastr["error"]("Ha ocurrido un problema. Los cambios no se han realizado.", "Error!");
+            } else if (data.match('^fin-sustitucion$')) {
+                toastr["success"]("Datos actualizados correctamente.", "Correcto!");
+                setTimeout(function () { location.reload() }, 700);
+            } else if (data.match('^error-fin-sustitucion$')) {
+                toastr["error"]("Ha ocurrido un problema. Los cambios no se han realizado.", "Error!");
             } else {
                 toastr["error"]("Error inesperado...", "Error!")
             }
+            console.log(enlace);
+            console.log(id);
             loadingOff();
         },
         error: function (e) {
