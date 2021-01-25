@@ -70,6 +70,12 @@ if (isset($_GET['ACTION'])) {
             include_once($dirs['Interfaces'] . 'top-nav.php');
             include_once($dirs['Qr'] . 'generate_code.php');
             include($dirs['Interfaces'] . 'footer.php');
+          } elseif ($_SESSION['Perfil'] === 'Personal') {
+            $act_qr = 'active';
+            include_once($dirs['Interfaces'] . 'header.php');
+            include_once($dirs['Interfaces'] . 'top-nav.php');
+            include_once($dirs['Qr'] . 'generate_code.php');
+            include($dirs['Interfaces'] . 'footer.php');
           } else {
             die('<h1 style="color:red;">Error de proceso...</h1>');
           }
@@ -152,16 +158,24 @@ if (isset($_GET['ACTION'])) {
               $scripts = '<link rel="stylesheet" href="css/form.css">';
               $extras = "
                   $(function (){
-                      $('#datepicker_ini').datepicker();
+                      $('#datepicker_ini').datepicker({
+                        beforeShowDay: $.datepicker.noWeekends
+                    });
                   });
                   $(function (){
-                      $('#datepicker_fin').datepicker();
+                      $('#datepicker_fin').datepicker({
+                        beforeShowDay: $.datepicker.noWeekends
+                    });
                   });
                   $(function (){
-                      $('#datepicker_ini_fest').datepicker();
+                      $('#datepicker_ini_fest').datepicker({
+                        beforeShowDay: $.datepicker.noWeekends
+                    });
                   });
                   $(function (){
-                      $('#datepicker_fin_fest').datepicker();
+                      $('#datepicker_fin_fest').datepicker({
+                        beforeShowDay: $.datepicker.noWeekends
+                    });
                   });
                 ";
               include_once($dirs['Valida'] . 'valida-lectivos.php');
@@ -229,17 +243,17 @@ if (isset($_GET['ACTION'])) {
         if ($class->compruebaCambioPass()) {
           $act_asistencia = 'active';
           $scripts = '<link rel="stylesheet" href="css/asistencias.css">';
-          $extras = "
-              $(function (){
-                  $('#busca_asiste').datepicker();
-              });
-            ";
-          include_once($dirs['Interfaces'] . 'header.php');
-          include_once($dirs['Interfaces'] . 'top-nav.php');
 
           switch ($_GET['OPT'] ?? '') {
             case 'all':
               if ($_SESSION['Perfil'] === 'Admin') {
+                $scripts .= '<script src="js/filtro_asistencias.js"></script>';
+                $extras = "$(function (){ $('#busca_asiste').datepicker({
+                    beforeShowDay: $.datepicker.noWeekends
+                  });
+                });";
+                include_once($dirs['Interfaces'] . 'header.php');
+                include_once($dirs['Interfaces'] . 'top-nav.php');
                 include_once($dirs['Fichaje'] . 'contenido-asistencias-all.php');
               } else {
                 $MSG = "Acceso denegado.";
@@ -250,6 +264,14 @@ if (isset($_GET['ACTION'])) {
 
             case 'sesion':
               $_GET['ID'] = $_SESSION['ID'];
+              $scripts .= '<script src="js/filtro_asistencias.js"></script>';
+              $scripts .= '<script src="js/update_marcajes.js"></script>';
+              $extras = "$(function (){ $('#busca_asiste').datepicker({
+                  beforeShowDay: $.datepicker.noWeekends
+                });
+              });";
+              include_once($dirs['Interfaces'] . 'header.php');
+              include_once($dirs['Interfaces'] . 'top-nav.php');
               include_once($dirs['Fichaje'] . 'contenido-asistencias.php');
               break;
 
@@ -257,8 +279,6 @@ if (isset($_GET['ACTION'])) {
               include_once($dirs['Fichaje'] . 'contenido-asistencias.php');
               break;
           }
-
-          include_once('js/filtro_asistencias.js');
           include_once($dirs['Interfaces'] . 'footer.php');
         } else {
           header('Location: index.php?ACTION=primer_cambio');
@@ -384,7 +404,11 @@ if (isset($_GET['ACTION'])) {
         if ($class->compruebaCambioPass()) {
           $extras = "
             $(function (){
-              $('#add-fecha').datepicker({minDate: -5, maxDate: 0});
+              $('#add-fecha').datepicker({
+                minDate: -7,
+                maxDate: 0,
+                beforeShowDay: $.datepicker.noWeekends
+              });
             });
           ";
           $scripts = '<link rel="stylesheet" href="css/profesores-edit.css">';
@@ -453,6 +477,12 @@ if (isset($_GET['ACTION'])) {
         include_once($dirs['Profesores'] . 'profesores.php');
         include($dirs['Interfaces'] . 'footer.php');
       } elseif ($_SESSION['Perfil'] === 'Profesor') {
+        $act_qr = 'active';
+        include_once($dirs['Interfaces'] . 'header.php');
+        include_once($dirs['Interfaces'] . 'top-nav.php');
+        include_once($dirs['Qr'] . 'generate_code.php');
+        include($dirs['Interfaces'] . 'footer.php');
+      } elseif ($_SESSION['Perfil'] === 'Personal') {
         $act_qr = 'active';
         include_once($dirs['Interfaces'] . 'header.php');
         include_once($dirs['Interfaces'] . 'top-nav.php');

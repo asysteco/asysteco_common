@@ -49,7 +49,6 @@ $('.edit').on('click', function () {
 });
 
 $(".hide-it").keyup(function(event) {
-    console.log(event);
     if (event.keyCode === 13) {
         data = $(this).attr('id').split('_');
         elementId = data[1];
@@ -96,8 +95,7 @@ $('.update').on('click', function () {
             loadingOff();
         },
         error: function (e) {
-            $('#error-modal').modal('show'),
-            $('#error-content-modal').html(e);
+            toastr["error"]("Error inesperado...", "Error!")
         }
     });
 });
@@ -142,8 +140,7 @@ $('#add-btn').on('click', function () {
             loadingOff();
         },
         error: function (e) {
-            $('#error-modal').modal('show'),
-            $('#error-content-modal').html(e);
+            toastr["error"]("Error inesperado...", "Error!")
         }
     });
 });
@@ -180,8 +177,7 @@ $('.remove').on('click', function () {
             loadingOff();
         },
         error: function (e) {
-            $('#error-modal').modal('show'),
-            $('#error-content-modal').html(e);
+            toastr["error"]("Error inesperado...", "Error!");
         }
     });
 });

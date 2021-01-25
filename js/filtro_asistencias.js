@@ -1,11 +1,10 @@
-<script>
 $(function(){
-  $('#busca_asiste').on('keyup change', function(){
+  $(document).on('keyup change', '#busca_asiste', function(){
     var val = $(this).val().toLowerCase();
 
-    $("tbody tr").hide();
+    $("#table-asistencias tbody tr, #table-fichajes tbody tr").hide();
 
-    $("tbody tr").each(function(){
+    $("#table-asistencias tbody tr, #table-fichajes tbody tr").each(function(){
 
       var text = $(this).text().toLowerCase();
 
@@ -16,4 +15,3 @@ $(function(){
     });
   });
 });
-</script>

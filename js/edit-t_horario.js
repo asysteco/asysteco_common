@@ -134,8 +134,7 @@ $('body').on('click', '.act', function () {
             loadingOff();
         },
         error: function (e) {
-            $('#error-modal').modal('show'),
-            $('#error-content-modal').html(e);
+            toastr["error"]("Error inesperado...", "Error!")
         }
     });
 });
