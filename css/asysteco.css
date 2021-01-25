@@ -250,3 +250,8 @@ html {
     visibility: visible;
     opacity: 1;
   }
+
+  /* Color Icono Personal No Docente en Listados Admon */
+  #azul {
+    color:blue;
+  }
