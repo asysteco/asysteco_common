@@ -1,4 +1,5 @@
 var enlace;
+var id;
 
 $(document).on('click', '.act', function(e) { 
     $('#modal-profesores').removeClass('modal-fs');
@@ -7,6 +8,7 @@ $(document).on('click', '.act', function(e) {
     $('#modal-pie').attr('class', 'modal-footer');
 
     action = $(this).attr('action');
+    console.log(action);
     if (action === 'activar') {
         data = {
             action: action
@@ -34,6 +36,10 @@ $(document).on('click', '.act', function(e) {
         id = $(this).attr('profesor');
         enlace = 'index.php?ACTION=profesores&OPT=edit&ID=' + id;
         data = {};
+    } else if (action === 'actualizar-profesor') {
+        enlace = 'index.php?ACTION=profesores&OPT=actualizar';
+        data = $('#formulario-edit').serialize();
+        console.log(data);
     } else if (action === 'modal-asistencias') {
         id = $(this).attr('profesor');
         enlace = 'index.php?ACTION=asistencias&ID=' + id;
@@ -80,7 +86,6 @@ $(document).on('click', '.act', function(e) {
         contenido = "<i>Va a restablecer la contraseña de <b>" + nombre + "</b> ¿Desea continuar?</i>";
         btn1 = "<button type='button' class='btn btn-danger float-left' data-dismiss='modal'>Cancelar</button>"; 
         btn2 = "<button type='button' class='btn btn-success act float-right' action='reset'>Confirmar</button>";
-        console.log(enlace);
         $('#modal-cabecera').html(cabecera);
         $('#modal-contenido').html(contenido);
         $('#modal-pie').html(btn1);
@@ -123,7 +128,9 @@ $(document).on('click', '.act', function(e) {
             } else if (action === 'modal-editar') {
                 $('#modal-size').addClass('modal-lg');
                 $('#modal-contenido').html(data);
-                $('#modal-pie').html('<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>');
+                $('#modal-pie').html('<button type="button" class="btn btn-danger float-left" data-dismiss="modal">Cancelar</button>');
+                $('#modal-pie').append('<button class="btn btn-success act float-right" action="actualizar-profesor" name="ACTION" value="editar_profesor">Actualizar Profesor</button></br></br>');
+                $('#modal-pie').attr('class', 'modal-buttons-footer');
                 $('#modal-profesores').modal('show')
                 loadingOff();
                 return;
@@ -145,6 +152,17 @@ $(document).on('click', '.act', function(e) {
                 toastr["error"]("No se ha podido restablecer la contraseña.", "Error!");
             } else if (data.match('^ok-reset$')) {
                 toastr["success"]("Se ha restablecido la contraseña correctamente.", "Correcto!");
+            }  else if (data.match('^warning-nombre$')) {
+                toastr["warning"]("Nombre duplicado.", "Advertencia!");
+            }  else if (data.match('^warning-iniciales$')) {
+                toastr["warning"]("Iniciales duplicadas.", "Advertencia!");
+            }  else if (data.match('^error-query$')) {
+                toastr["error"]("Error inesperado...", "Error!");
+            }  else if (data.match('^actualizado$')) {
+                toastr["success"]("Datos actualizados correctamente.", "Correcto!");
+                setTimeout(function () { location.reload() }, 700);
+            }  else if (data.match('^error-actualizar$')) {
+                toastr["success"]("Ha ocurrido un problema. No se ha podido actualizar.", "Error!");
             } else {
                 toastr["error"]("Error inesperado...", "Error!")
             }
