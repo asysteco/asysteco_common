@@ -57,8 +57,7 @@ $('.act').on('click', function () {
             }
         },
         error: function (e) {
-            $('#error-modal').modal('show');
-            $('#error-content-modal').html(e);
+            toastr["error"]("Error inesperado...", "Error!")
         }
     });
 });

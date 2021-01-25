@@ -55,8 +55,7 @@ $('#add-manual').on('click', function (event) {
             loadingOff();
         },
         error: function (e) {
-            $('#error-modal').modal('show'),
-            $('#error-content-modal').html(e);
+            toastr["error"]("Error inesperado...", "Error!")
         }
     });
 });

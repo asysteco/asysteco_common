@@ -95,8 +95,7 @@ $('.update').on('click', function () {
             loadingOff();
         },
         error: function (e) {
-            $('#error-modal').modal('show'),
-            $('#error-content-modal').html(e);
+            toastr["error"]("Error inesperado...", "Error!")
         }
     });
 });
@@ -118,7 +117,6 @@ $('#add-btn-aula').on('click', function () {
     };
 
     urlPath = 'index.php?ACTION=horarios&OPT=edit-aulas';
-    console.log(urlPath);
     $.ajax({
         url: urlPath,
         type: "POST",
@@ -142,8 +140,7 @@ $('#add-btn-aula').on('click', function () {
             loadingOff();
         },
         error: function (e) {
-            $('#error-modal').modal('show'),
-            $('#error-content-modal').html(e);
+            toastr["error"]("Error inesperado...", "Error!")
         }
     });
 });
@@ -157,7 +154,6 @@ $('.remove').on('click', function () {
         'data': fieldId
     };
     urlPath = 'index.php?ACTION=horarios&OPT=edit-aulas';
-    console.log(urlPath);
     $.ajax({
         url: urlPath,
         type: "POST",
@@ -177,8 +173,7 @@ $('.remove').on('click', function () {
             loadingOff();
         },
         error: function (e) {
-            $('#error-modal').modal('show'),
-            $('#error-content-modal').html(e);
+            toastr["error"]("Error inesperado...", "Error!")
         }
     });
 });
