@@ -23,7 +23,11 @@ $(document).on('click', '.act', function(e) {
         id = id[1],
         enlace = 'index.php?ACTION=horarios&OPT=profesor&profesor=' + id;
         data = {};
-    } else if (action === 'modal-asistencias') {
+    } else if (action === 'modal-editar') {
+        id = $(this).attr('profesor');
+        enlace = 'index.php?ACTION=profesores&OPT=edit&ID=' + id;
+        data = {};
+    }else if (action === 'modal-asistencias') {
         id = $(this).attr('profesor');
         enlace = 'index.php?ACTION=asistencias&ID=' + id;
         data = {};
@@ -79,6 +83,13 @@ $(document).on('click', '.act', function(e) {
                 return;
             } else if (action === 'modal-asistencias') {
                 $('#modal-profesores').addClass('modal-fs');
+                $('#modal-contenido').html(data);
+                $('#modal-pie').html('<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>');
+                $('#modal-profesores').modal('show')
+                loadingOff();
+                return;
+            } else if (action === 'modal-editar') {
+                $('#modal-size').addClass('modal-lg');
                 $('#modal-contenido').html(data);
                 $('#modal-pie').html('<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>');
                 $('#modal-profesores').modal('show')
