@@ -1,4 +1,3 @@
-<script>
 $("#message").hover(
     function () {
       $("#message-icon").addClass('message-jump')
@@ -39,4 +38,3 @@ $("#info-horario").hover(
       $("#info-horario-icon").removeClass('fa-calendar-check-o')
     }
 );
-</script>

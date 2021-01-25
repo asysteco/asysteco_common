@@ -29,7 +29,7 @@ $(document).ready(function (e) {
         loadingOff();
       },
       error: function (e) {
-        $("#err").html(e).fadeIn();
+        toastr["error"]("Error inesperado...", "Error!")
       }
     });
   }));
@@ -69,7 +69,7 @@ $(document).ready(function (e) {
         loadingOff();
       },
       error: function (e) {
-        $("#err").html(e).fadeIn();
+        toastr["error"]("Error inesperado...", "Error!")
       }
     });
   });

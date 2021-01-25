@@ -40,7 +40,7 @@ $(document).on('click', '.actualiza', function () {
             loadingOff();
         },
         error: function (e) {
-            $("#err").html(e).fadeIn();
+            toastr["error"]("Error inesperado...", "Error!")
         }
     });
 });
@@ -56,11 +56,10 @@ function getRow (Profesor, Fecha, Hora){
             'act': 'getrow',
         },
         success: function (response) {
-            console.log(response),
             $('#fila_'+Profesor+'_'+Fecha+'_'+Hora).replaceWith($('#fila_'+Profesor+'_'+Fecha+'_'+Hora,response))
         },
         error: function (e) {
-            $("#err").html(e).fadeIn();
+            toastr["error"]("Error inesperado...", "Error!")
         }
     });
 }

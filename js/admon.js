@@ -25,7 +25,7 @@ function CheckBackupFile(element = '') {
             }
         },
         error: function (e) {
-            $("#err").html(e).fadeIn();
+            toastr["error"]("Error inesperado...", "Error!")
         }
     });
 }
