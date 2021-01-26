@@ -8,7 +8,6 @@ $(document).on('click', '.act', function(e) {
     $('#modal-pie').attr('class', 'modal-footer');
 
     action = $(this).attr('action');
-    console.log(action);
     if (action === 'activar') {
         data = {
             action: action
@@ -34,6 +33,7 @@ $(document).on('click', '.act', function(e) {
         data = {};
     } else if (action === 'modal-asistencias') {
         id = $(this).attr('profesor');
+        nombre = $(this).attr('nombre');
         enlace = 'index.php?ACTION=asistencias&ID=' + id;
         data = {};
     } else if (action === 'actualizar-profesor') {
@@ -133,6 +133,8 @@ $(document).on('click', '.act', function(e) {
                 return;
             } else if (action === 'modal-asistencias') {
                 $('#modal-profesores').addClass('modal-fs');
+                $('#modal-cabecera').html('<h5>Faltas y Asistencias de ' + nombre + ' </h5>');
+                $('#modal-cabecera').append('<button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i></button>');
                 $('#modal-contenido').html(data);
                 $('#modal-pie').html('<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>');
                 $('#busca_asiste').datepicker({
@@ -209,8 +211,6 @@ $(document).on('click', '.act', function(e) {
             } else {
                 toastr["error"]("Error inesperado...", "Error!")
             }
-            console.log(enlace);
-            console.log(id);
             loadingOff();
         },
         error: function (e) {
