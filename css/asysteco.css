@@ -255,3 +255,42 @@ html {
   #azul {
     color:#17a2b8;
   }
+#notifications {
+    width: 100%;
+    position: fixed;
+}
+
+#notification-pagos {
+    display: none;
+    background-color: #ffbf00c4!important;
+    text-align: center;
+}
+
+#notification-pagos:hover {
+    background-color: #ffbf00!important;
+}
+#notification-function {
+    width: 100%;
+    display: none;
+    position: fixed;
+    background-color: #ff4800c4!important;
+    text-align: center;
+}
+
+#notification-function:hover {
+    background-color: #ff4800!important;
+}
+
+.notification-message {
+    max-width: 90%;
+    vertical-align: middle;
+    padding: 10px;
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.btn-accept-notification {
+    vertical-align: middle;
+    padding: 5px;
+    display: inline-block;
+}
