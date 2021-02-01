@@ -252,6 +252,8 @@ html {
   }
 
   /* Color Icono Personal No Docente en Listados Admon */
-  #azul {
+  .personal-icon-azul {
     color:#17a2b8;
+    padding: 0 5px 0 4px;
   }
+
