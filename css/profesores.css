@@ -80,7 +80,7 @@ vertical-align: middle;
     text-align: center;
 }
 
-#formContent input[type=text], #grupo-tutor-select {
+#formContent input[type=text], #grupo-tutor-select, #select_sustituto {
 background-color: #f6f6f6;
 border: none;
 color: #0d0d0d;

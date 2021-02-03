@@ -8,7 +8,6 @@ $(document).on('click', '.act', function(e) {
     $('#modal-pie').attr('class', 'modal-footer');
 
     action = $(this).attr('action');
-    console.log(action);
     if (action === 'activar') {
         data = {
             action: action
@@ -34,6 +33,7 @@ $(document).on('click', '.act', function(e) {
         data = {};
     } else if (action === 'modal-asistencias') {
         id = $(this).attr('profesor');
+        nombre = $(this).attr('nombre');
         enlace = 'index.php?ACTION=asistencias&ID=' + id;
         data = {};
     } else if (action === 'actualizar-profesor') {
@@ -133,6 +133,8 @@ $(document).on('click', '.act', function(e) {
                 return;
             } else if (action === 'modal-asistencias') {
                 $('#modal-profesores').addClass('modal-fs');
+                $('#modal-cabecera').html('<h5>Faltas y Asistencias de ' + nombre + ' </h5>');
+                $('#modal-cabecera').append('<button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i></button>');
                 $('#modal-contenido').html(data);
                 $('#modal-pie').html('<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>');
                 $('#busca_asiste').datepicker({
@@ -145,7 +147,7 @@ $(document).on('click', '.act', function(e) {
                 $('#modal-size').addClass('modal-lg');
                 $('#modal-contenido').html(data);
                 $('#modal-pie').html('<button type="button" class="btn btn-danger float-left" data-dismiss="modal">Cancelar</button>');
-                $('#modal-pie').append('<button class="btn btn-success act float-right" action="actualizar-profesor" name="ACTION" value="editar_profesor">Actualizar Profesor</button></br></br>');
+                $('#modal-pie').append('<button class="btn btn-success act float-right" action="actualizar-profesor" name="ACTION" value="editar_profesor">Actualizar</button></br></br>');
                 $('#modal-pie').attr('class', 'modal-buttons-footer');
                 $('#modal-profesores').modal('show')
                 loadingOff();
@@ -185,6 +187,7 @@ $(document).on('click', '.act', function(e) {
             }  else if (data.match('^actualizado$')) {
                 toastr["success"]("Datos actualizados correctamente.", "Correcto!");
                 setTimeout(function () { location.reload() }, 700);
+                return;
             }  else if (data.match('^error-actualizar$')) {
                 toastr["success"]("Ha ocurrido un problema. No se ha podido actualizar.", "Error!");
             } else if (data.match('^error-admin$')) {
@@ -196,18 +199,18 @@ $(document).on('click', '.act', function(e) {
             } else if (data.match('^sustituido$')) {
                 toastr["success"]("Sustitución realizada correctamente.", "Correcto!");
                 setTimeout(function () { location.reload() }, 700);
+                return;
             } else if (data.match('^error-sustitucion$')) {
                 toastr["error"]("Ha ocurrido un problema. Los cambios no se han realizado.", "Error!");
             } else if (data.match('^fin-sustitucion$')) {
                 toastr["success"]("Datos actualizados correctamente.", "Correcto!");
                 setTimeout(function () { location.reload() }, 700);
+                return;
             } else if (data.match('^error-fin-sustitucion$')) {
                 toastr["error"]("Ha ocurrido un problema. Los cambios no se han realizado.", "Error!");
             } else {
                 toastr["error"]("Error inesperado...", "Error!")
             }
-            console.log(enlace);
-            console.log(id);
             loadingOff();
         },
         error: function (e) {
