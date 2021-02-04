@@ -20,7 +20,8 @@ $('#register-form').on('submit', function(e){
         success: function (data) {
             if (data.match('^Registrado$')) {
                 toastr["success"]("Personal Añadido");
-                setTimeout(function () { location.reload() }, 700);
+                $('#iniciales').val('');
+                $('#nombre').val('');
             } else if(data.match('^Nombre-Incorrecto$')) {
                 toastr["error"]("Formato de Nombre incorrecto.", "Error!");
             } else if (data.match('^Iniciales-Incorrecto$')) {
