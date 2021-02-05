@@ -1,3 +1,9 @@
+$(function () {
+    $('.fichajeEntrada').timepicker();
+    if ($(".fichajeSalida")[0]) {
+        $('.fichajeSalida').timepicker();
+    }
+});
 
 $('#add-manual').on('click', function (event) {
     event.preventDefault();
@@ -49,8 +55,7 @@ $('#add-manual').on('click', function (event) {
             loadingOff();
         },
         error: function (e) {
-            $('#error-modal').modal('show'),
-            $('#error-content-modal').html(e);
+            toastr["error"]("Error inesperado...", "Error!")
         }
     });
 });

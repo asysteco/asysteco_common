@@ -1,7 +1,10 @@
 
 <script>
 $(function (){
-    $('#fecha-edit').datepicker({ minDate: 0})
+    $('#fecha-edit').datepicker({
+        minDate: 0,
+        beforeShowDay: $.datepicker.noWeekends
+    })
 });
 $('#fecha-edit').keypress(function(e) {
     e.preventDefault()

@@ -6,6 +6,7 @@ var fechaInicio = $('#fechainicio').val();
 var fechaFin = $('#fechafin').val();
 var profesor = $('#select_profesor').val();
 var action = '';
+var titulo;
 
 $('#fechainicio').on('change', function () {
     fechaInicio = $(this).val(),
@@ -22,7 +23,8 @@ $('#select_profesor').on('change', function () {
     profesor = $(this).val();
 });
 
-$('.act').on('click', function () {
+$(document).on('click', '.act', function () {
+    titulo = $(this).attr('data-name');
     element = $(this).attr('data-item');
     action = $(this).attr('action');
     urlPath = 'index.php?ACTION=admon&OPT=select';
@@ -49,7 +51,9 @@ $('.act').on('click', function () {
         },
         success: function (data) {
             if (action === 'select') {
+                $('#modal-titulo').html('Listado de ' + titulo);
                 $('#btn-response').html(data);
+                $('#modal-admon').modal('show');
                 loadingOff();
             } else if (action === 'export') {
                 window.open(data, "_blank");
@@ -57,8 +61,7 @@ $('.act').on('click', function () {
             }
         },
         error: function (e) {
-            $('#error-modal').modal('show');
-            $('#error-content-modal').html(e);
+            toastr["error"]("Error inesperado...", "Error!")
         }
     });
 });

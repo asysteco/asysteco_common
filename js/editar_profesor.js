@@ -1,17 +1,13 @@
-
-<script>
-$('.entrada').hide();
-
 $(window).click(function() {
 	$('.entrada').hide(),
 	$('#grupo-tutor').show()
 });
 
-$('.entrada').click(function(event){
+$(document).on('click', '.entrada', function(event){
     event.stopPropagation()
 });
 
-$('#grupo-tutor').on('click', function(event){
+$(document).on('click', '#grupo-tutor', function(event){
     event.stopPropagation(),
     texto=$(this).val(),
 	$(this).hide(),
@@ -19,11 +15,9 @@ $('#grupo-tutor').on('click', function(event){
 	$('#grupo-tutor-select').show().focus()
 });
 
-$('.entrada').on('change', function(){
+$(document).on('change', '.entrada', function(){
 	texto=$(this).val(),
 	$(this).hide(),
 	$('#grupo-tutor').val(texto),
 	$('#grupo-tutor').show()
 });
-
-</script>
