@@ -4,10 +4,11 @@
 @session_start();
 
 date_default_timezone_set('Europe/Madrid');
-// Requerimos fichero de configuración esencial de directorios y constantes
-require_once("./config.php");
 
-// Requerimos seteado de variables para que no estén vacías y salte warning
+// Requerimos fichero de configuración esencial de directorios y constantes
+require_once("./horario.php");
+require_once("./config.php");
+require_once("./dirs.php");
 require_once("./initial_vars.php");
 
 // Requerimos el fichero de configuración de variables de conexión
