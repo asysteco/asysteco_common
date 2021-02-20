@@ -25,11 +25,19 @@ $dirs = [
     'Login' => $inc . 'Login/',
     'phpqrcode' => $inc . 'phpqrcode/',
     'Profesores' => $inc . 'Profesores/',
-    'Qr' => $inc . 'Qr/',
     'Valida' => $inc . 'Valida/',
+
+    'Notificaciones' => $inc . 'Notificaciones/',
     'Admon' => $inc . 'Admon/',
     'Downloads' => $inc . 'Downloads/',
     'CP' => $inc . 'CP/',
     'ChangePass' => $inc . 'ChangePass/',
-    'FirstPassChange' => $inc . 'FirstPassChange/'
+    'FirstPassChange' => $inc . 'FirstPassChange/',
+    'Lectivos' => $inc . 'Lectivos/',
+    'Qr' => $inc . 'Qr/',
+    'Asistencias' => $inc . 'Asistencias/',
+    'Marcajes' => $inc . 'Marcajes/',
+    'FicharQr' => $inc . 'FicharQr/',
+    'FicharManual' => $inc . 'FicharManual/',
+    'CleanTmp' => $inc . 'CleanTmp/'
 ];
