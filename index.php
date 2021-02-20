@@ -129,7 +129,7 @@ if (isset($_GET['ACTION'])) {
       break;
 
     case 'guardias':
-      require_once($dirs['Marcajes'] . 'IndexCase.php');
+      require_once($dirs['Guardias'] . 'IndexCase.php');
       break;
 
     case 'cp':
