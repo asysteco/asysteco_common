@@ -147,7 +147,7 @@ $(document).on('click', '.act', function(e) {
                 $('#modal-size').addClass('modal-lg');
                 $('#modal-contenido').html(data);
                 $('#modal-pie').html('<button type="button" class="btn btn-danger float-left" data-dismiss="modal">Cancelar</button>');
-                $('#modal-pie').append('<button class="btn btn-success act float-right" action="actualizar-profesor" name="ACTION" value="editar_profesor">Actualizar Profesor</button></br></br>');
+                $('#modal-pie').append('<button class="btn btn-success act float-right" action="actualizar-profesor" name="ACTION" value="editar_profesor">Actualizar</button></br></br>');
                 $('#modal-pie').attr('class', 'modal-buttons-footer');
                 $('#modal-profesores').modal('show')
                 loadingOff();
