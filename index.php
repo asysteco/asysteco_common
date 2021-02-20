@@ -4,10 +4,11 @@
 @session_start();
 
 date_default_timezone_set('Europe/Madrid');
-// Requerimos fichero de configuración esencial de directorios y constantes
-require_once("./config.php");
 
-// Requerimos seteado de variables para que no estén vacías y salte warning
+// Requerimos fichero de configuración esencial de directorios y constantes
+require_once("./horario.php");
+require_once("./config.php");
+require_once("./dirs.php");
 require_once("./initial_vars.php");
 
 // Requerimos el fichero de configuración de variables de conexión
@@ -96,142 +97,19 @@ if (isset($_GET['ACTION'])) {
       break;
 
     case 'cambio_pass':
-      if ($class->isLogged($Titulo)) {
-        if ($class->compruebaCambioPass()) {
-          $act_usuario = 'active';
-          $act_changePass = 'active';
-
-          $scripts = '<link rel="stylesheet" href="css/change-pass-style.css">';
-          include_once($dirs['Valida'] . 'valida_new_pass.php');
-          include_once($dirs['Interfaces'] . 'header.php');
-          include_once($dirs['Interfaces'] . 'top-nav.php');
-          include_once($dirs['Login'] . 'new_pass.php');
-          include_once($dirs['Interfaces'] . 'change_pass_modal.php');
-          include_once($dirs['Interfaces'] . 'footer.php');
-        } else {
-          header('Location: index.php?ACTION=primer_cambio');
-        }
-      } else {
-        $MSG = "Debes iniciar sesión para realizar esta acción.";
-        header("Refresh:2; url=index.php");
-        include_once($dirs['Interfaces'] . 'msg_modal.php');
-      }
+      require_once($dirs['ChangePass'] . 'IndexCase.php');
       break;
 
     case 'primer_cambio':
-      if ($class->isLogged($Titulo)) {
-        $scripts = '<link rel="stylesheet" href="css/login-style.css">';
-        include_once($dirs['Valida'] . 'valida_primer_cambio.php');
-        include_once($dirs['Interfaces'] . 'header.php');
-        include_once($dirs['Interfaces'] . 'top-nav.php');
-        include_once($dirs['Login'] . 'primer_cambio.php');
-        include_once($dirs['Interfaces'] . 'change_pass_modal.php');
-        include_once($dirs['Interfaces'] . 'footer.php');
-      } else {
-        $MSG = "Debes iniciar sesión para realizar esta acción.";
-        header("Refresh:2; url=index.php");
-        include_once($dirs['Interfaces'] . 'msg_modal.php');
-      }
+      require_once($dirs['FirstPassChange'] . 'IndexCase.php');
       break;
 
     case 'lectivos':
-      if ($class->isLogged($Titulo)) {
-        if ($class->compruebaCambioPass()) {
-          if ($response = $class->query("SELECT COUNT(*) as num FROM $class->marcajes")) {
-            $act_cal_escolar = 'active';
-            $marcajes = $response->fetch_assoc();
-            if ($marcajes['num'] > 0) {
-              $scripts = '<link rel="stylesheet" href="css/form.css">';
-              include_once($dirs['Interfaces'] . 'header.php');
-              include_once($dirs['Interfaces'] . 'top-nav.php');
-              echo '<div class="container">';
-                echo "<div class='row'>";
-                  echo "<div class='col-12'>";
-                  $date = date('Y');
-                  echo '<h1>Calendario escolar</h1>';
-                  include_once($dirs['Horarios'] . 'calendario.php');
-                  echo "</div>";
-                echo "</div>";
-              echo "</div>";
-              include_once($dirs['Interfaces'] . 'footer.php');
-            } else {
-              $scripts = '<link rel="stylesheet" href="css/form.css">';
-              $extras = "
-                  $(function (){
-                      $('#datepicker_ini').datepicker({
-                        beforeShowDay: $.datepicker.noWeekends
-                    });
-                  });
-                  $(function (){
-                      $('#datepicker_fin').datepicker({
-                        beforeShowDay: $.datepicker.noWeekends
-                    });
-                  });
-                  $(function (){
-                      $('#datepicker_ini_fest').datepicker({
-                        beforeShowDay: $.datepicker.noWeekends
-                    });
-                  });
-                  $(function (){
-                      $('#datepicker_fin_fest').datepicker({
-                        beforeShowDay: $.datepicker.noWeekends
-                    });
-                  });
-                ";
-              include_once($dirs['Valida'] . 'valida-lectivos.php');
-              include_once($dirs['Interfaces'] . 'header.php');
-              include_once($dirs['Interfaces'] . 'top-nav.php');
-              include_once($dirs['Horarios'] . 'lectivos.php');
-              include_once($dirs['public'] . 'js/lectivos.js');
-              include_once($dirs['Interfaces'] . 'footer.php');
-            }
-          } else {
-            $ERR_MSG = $class->ERR_ASYSTECO;
-          }
-        } else {
-          header('Location: index.php?ACTION=primer_cambio');
-        }
-      } else {
-        $MSG = "Debes iniciar sesión para realizar esta acción.";
-        header("Refresh:2; url=index.php");
-        include_once($dirs['Interfaces'] . 'msg_modal.php');
-      }
+      require_once($dirs['Lectivos'] . 'IndexCase.php');
       break;
 
     case 'qrcoder':
-      if ($class->isLogged($Titulo)) {
-        if ($class->compruebaCambioPass()) {
-          $act_qr = 'active';
-          include_once($dirs['Interfaces'] . 'header.php');
-          include_once($dirs['Interfaces'] . 'top-nav.php');
-          include_once($dirs['Qr'] . 'generate_code.php');
-          include_once($dirs['Interfaces'] . 'footer.php');
-        } else {
-          header('Location: index.php?ACTION=primer_cambio');
-        }
-      } else {
-        $MSG = "Debes iniciar sesión para realizar esta acción.";
-        header("Refresh:2; url=index.php");
-        include_once($dirs['Interfaces'] . 'msg_modal.php');
-      }
-      break;
-
-    case 'registrarse':
-      if ($class->isLogged($Titulo)) {
-        if ($class->compruebaCambioPass()) {
-          if (isset($_POST['Nombre']) || isset($_POST['Iniciales']) || isset($_POST['pass1']) || isset($_POST['pass2'])) {
-            include_once($dirs['Valida'] . 'register_valida.php');
-          } else {
-            include_once($dirs['Form'] . 'register_form.php');
-          }
-        } else {
-          header('Location: index.php?ACTION=primer_cambio');
-        }
-      } else {
-        $MSG = "Debes iniciar sesión para realizar esta acción.";
-        header("Refresh:2; url=index.php");
-        include_once($dirs['Interfaces'] . 'msg_modal.php');
-      }
+      require_once($dirs['Qr'] . 'IndexCase.php');
       break;
 
     case 'horarios':
@@ -239,55 +117,7 @@ if (isset($_GET['ACTION'])) {
     break;
 
     case 'asistencias':
-      if ($class->isLogged($Titulo)) {
-        if ($class->compruebaCambioPass()) {
-          $act_asistencia = 'active';
-          $scripts = '<link rel="stylesheet" href="css/asistencias.css">';
-
-          switch ($_GET['OPT'] ?? '') {
-            case 'all':
-              if ($_SESSION['Perfil'] === 'Admin') {
-                $scripts .= '<script src="js/filtro_asistencias.js"></script>';
-                $extras = "$(function (){ $('#busca_asiste').datepicker({
-                    beforeShowDay: $.datepicker.noWeekends
-                  });
-                });";
-                include_once($dirs['Interfaces'] . 'header.php');
-                include_once($dirs['Interfaces'] . 'top-nav.php');
-                include_once($dirs['Fichaje'] . 'contenido-asistencias-all.php');
-              } else {
-                $MSG = "Acceso denegado.";
-                header("Refresh:2; url=index.php");
-                include_once($dirs['Interfaces'] . 'msg_modal.php');
-              }
-              break;
-
-            case 'sesion':
-              $_GET['ID'] = $_SESSION['ID'];
-              $scripts .= '<script src="js/filtro_asistencias.js"></script>';
-              $scripts .= '<script src="js/update_marcajes.js"></script>';
-              $extras = "$(function (){ $('#busca_asiste').datepicker({
-                  beforeShowDay: $.datepicker.noWeekends
-                });
-              });";
-              include_once($dirs['Interfaces'] . 'header.php');
-              include_once($dirs['Interfaces'] . 'top-nav.php');
-              include_once($dirs['Fichaje'] . 'contenido-asistencias.php');
-              break;
-
-            default:
-              include_once($dirs['Fichaje'] . 'contenido-asistencias.php');
-              break;
-          }
-          include_once($dirs['Interfaces'] . 'footer.php');
-        } else {
-          header('Location: index.php?ACTION=primer_cambio');
-        }
-      } else {
-        $MSG = "Debes iniciar sesión para realizar esta acción.";
-        header("Refresh:2; url=index.php");
-        include_once($dirs['Interfaces'] . 'msg_modal.php');
-      }
+      require_once($dirs['Asistencias'] . 'IndexCase.php');
       break;
 
     case 'profesores':
@@ -295,66 +125,11 @@ if (isset($_GET['ACTION'])) {
       break;
 
     case 'marcajes':
-      if ($class->isLogged($Titulo)) {
-        if ($class->compruebaCambioPass()) {
-          switch ($_GET['OPT']) {
-            case 'update':
-              include_once($dirs['Horarios'] . 'update-marcajes.php');
-              break;
-
-            default:
-              header('Location: index.php');
-              break;
-          }
-        } else {
-          header('Location: index.php?ACTION=primer_cambio');
-        }
-      } else {
-        $MSG = "Debes iniciar sesión para realizar esta acción.";
-        header("Refresh:2; url=index.php");
-        include_once($dirs['Interfaces'] . 'msg_modal.php');
-      }
+      require_once($dirs['Marcajes'] . 'IndexCase.php');
       break;
 
     case 'guardias':
-      if ($class->isLogged($Titulo)) {
-        if ($class->compruebaCambioPass()) {
-          $act_guardias = 'active';
-          $scripts = '<link rel="stylesheet" href="css/qr-reader.css">';
-
-          if (!$options['QR-reader']) {
-            $scripts .= '
-              <script type="text/javascript" src="js/jsqrcode/grid.js"></script>
-              <script type="text/javascript" src="js/jsqrcode/version.js"></script>
-              <script type="text/javascript" src="js/jsqrcode/detector.js"></script>
-              <script type="text/javascript" src="js/jsqrcode/formatinf.js"></script>
-              <script type="text/javascript" src="js/jsqrcode/errorlevel.js"></script>
-              <script type="text/javascript" src="js/jsqrcode/bitmat.js"></script>
-              <script type="text/javascript" src="js/jsqrcode/datablock.js"></script>
-              <script type="text/javascript" src="js/jsqrcode/bmparser.js"></script>
-              <script type="text/javascript" src="js/jsqrcode/datamask.js"></script>
-              <script type="text/javascript" src="js/jsqrcode/rsdecoder.js"></script>
-              <script type="text/javascript" src="js/jsqrcode/gf256poly.js"></script>
-              <script type="text/javascript" src="js/jsqrcode/gf256.js"></script>
-              <script type="text/javascript" src="js/jsqrcode/decoder.js"></script>
-              <script type="text/javascript" src="js/jsqrcode/qrcode.js"></script>
-              <script type="text/javascript" src="js/jsqrcode/findpat.js"></script>
-              <script type="text/javascript" src="js/jsqrcode/alignpat.js"></script>
-              <script type="text/javascript" src="js/jsqrcode/databr.js"></script>
-              ';
-          }
-
-          include_once($dirs['Interfaces'] . 'header.php');
-          include($dirs['Interfaces'] . 'home.php');
-          include($dirs['Interfaces'] . 'footer.php');
-        } else {
-          header('Location: index.php?ACTION=primer_cambio');
-        }
-      } else {
-        $MSG = "Debes iniciar sesión para realizar esta acción.";
-        header("Refresh:2; url=index.php");
-        include_once($dirs['Interfaces'] . 'msg_modal.php');
-      }
+      require_once($dirs['Marcajes'] . 'IndexCase.php');
       break;
 
     case 'cp':
@@ -362,23 +137,7 @@ if (isset($_GET['ACTION'])) {
     break;
 
     case 'notificaciones':
-      if ($class->isLogged($Titulo) && $_SESSION['Perfil'] == 'Admin') {
-        if ($class->compruebaCambioPass()) {
-          $act_usuario = 'active';
-          $act_notification = 'active';
-
-          include_once($dirs['Interfaces'] . 'header.php');
-          include_once($dirs['Interfaces'] . 'top-nav.php');
-          include_once($dirs['Interfaces'] . 'notificaciones.php');
-          include_once($dirs['Interfaces'] . 'footer.php');
-        } else {
-          header('Location: index.php');
-        }
-      } else {
-        $MSG = "Debes iniciar sesión para realizar esta acción.";
-        header("Refresh:2; url=index.php");
-        include_once($dirs['Interfaces'] . 'msg_modal.php');
-      }
+      require_once($dirs['Notificaciones'] . 'IndexCase.php');
       break;
 
     case 'admon':
@@ -386,60 +145,11 @@ if (isset($_GET['ACTION'])) {
       break;
 
     case 'fichar-asist':
-      if ($class->isLogged($Titulo) && $_SESSION['Perfil'] == 'Admin') {
-        if ($class->compruebaCambioPass()) {
-          include_once($dirs['Fichaje'] . 'fichar-asistencia.php');
-        } else {
-          header('Location: index.php?ACTION=primer_cambio');
-        }
-      } else {
-        $MSG = "Debes iniciar sesión para realizar esta acción.";
-        header("Refresh:2; url=index.php");
-        include_once($dirs['Interfaces'] . 'msg_modal.php');
-      }
+      require_once($dirs['FicharQr'] . 'IndexCase.php');
       break;
 
     case 'fichar-manual':
-      if ($class->isLogged($Titulo) && $_SESSION['Perfil'] === 'Admin') {
-        if ($class->compruebaCambioPass()) {
-          $extras = "
-            $(function (){
-              $('#add-fecha').datepicker({
-                minDate: -7,
-                maxDate: 0,
-                beforeShowDay: $.datepicker.noWeekends
-              });
-            });
-          ";
-          $scripts = '<link rel="stylesheet" href="css/profesores-edit.css">';
-          $scripts .= '<link rel="stylesheet" href="css/login-style.css">';
-          //$scripts = '<link rel="stylesheet" href="css/profesores-sustituir.css">';
-          include_once($dirs['Interfaces'] . 'header.php');
-          include_once($dirs['Interfaces'] . 'top-nav.php');
-          include_once($dirs['Fichaje'] . 'fichar-manual.php');
-          include_once($dirs['Interfaces'] . 'footer.php');
-        } else {
-          header('Location: index.php?ACTION=primer_cambio');
-        }
-      } else {
-        $MSG = "Debes iniciar sesión para realizar esta acción.";
-        header("Refresh:2; url=index.php");
-        include_once($dirs['Interfaces'] . 'msg_modal.php');
-      }
-      break;
-
-    case 'fichar-mysql-manual':
-      if ($class->isLogged($Titulo) && $_SESSION['Perfil'] === 'Admin') {
-        if ($class->compruebaCambioPass()) {
-          include_once($dirs['Fichaje'] . 'fichar-mysql-manual.php');
-        } else {
-          header('Location: index.php?ACTION=primer_cambio');
-        }
-      } else {
-        $MSG = "Debes iniciar sesión para realizar esta acción.";
-        header("Refresh:2; url=index.php");
-        include_once($dirs['Interfaces'] . 'msg_modal.php');
-      }
+      require_once($dirs['FicharManual'] . 'IndexCase.php');
       break;
     
     case 'download':
@@ -447,17 +157,7 @@ if (isset($_GET['ACTION'])) {
     break;
 
     case 'clean_tmp':
-      if ($class->isLogged($Titulo)) {
-        if ($class->compruebaCambioPass()) {
-          include_once($dirs['Helper'] . 'clean_tmp.php');
-        } else {
-          header('Location: index.php?ACTION=primer_cambio');
-        }
-      } else {
-        $MSG = "Debes iniciar sesión para realizar esta acción.";
-        header("Refresh:2; url=index.php");
-        include_once($dirs['Interfaces'] . 'msg_modal.php');
-      }
+      require_once($dirs['CleanTmp'] . 'IndexCase.php');
       break;
   }
 } else {

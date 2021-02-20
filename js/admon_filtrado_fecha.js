@@ -50,13 +50,23 @@ $(document).on('click', '.act', function () {
             loadingOn();
         },
         success: function (data) {
+            if (data.match('^Error-mkdir$')) {
+                toastr["error"]("Error al exportar...", "Error!");
+                loadingOff();
+                return;
+            } else if (data.match('^No-data$')) {
+                toastr["error"]("No existen datos para exportar.", "Error!");
+                loadingOff();
+                return;
+            }
+
             if (action === 'select') {
                 $('#modal-titulo').html('Listado de ' + titulo);
                 $('#btn-response').html(data);
                 $('#modal-admon').modal('show');
                 loadingOff();
             } else if (action === 'export') {
-                window.open(data, "_blank");
+                window.open(data);
                 setTimeout(() => { CheckBackupFile(element) }, 500);
             }
         },
