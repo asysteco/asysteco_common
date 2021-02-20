@@ -30,10 +30,8 @@ $dirs = [
     'FicharQr' => $inc . 'FicharQr/',
     'FicharManual' => $inc . 'FicharManual/',
     'Downloads' => $inc . 'Downloads/',
-    'CleanTmp' => $inc . 'CleanTmp/',
+    'CleanTmp' => $inc . 'CleanTmp/',   
 
-    'Editar' => $inc . 'Editar/',
-    'Fichaje' => $inc . 'Fichaje/',
     'Form' => $inc . 'Form/',
     'Helper' => $inc . 'Helper/',
     'Importar' => $inc . 'Importar/',
