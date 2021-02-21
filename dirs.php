@@ -14,7 +14,7 @@ $dirs = [
     'inc' => $inc . '/inc/',
     'bdConfig' => $includes . '/config_instituto.php',
     'ChangePass' => $inc . 'ChangePass/',
-    'FirstPassChange' => $inc . 'FirstPassChange/',
+    'FirstChangePass' => $inc . 'FirstChangePass/',
     'Lectivos' => $inc . 'Lectivos/',
     'Qr' => $inc . 'Qr/',
     'Horarios' => $inc . 'Horarios/',
@@ -30,13 +30,8 @@ $dirs = [
     'FicharQr' => $inc . 'FicharQr/',
     'FicharManual' => $inc . 'FicharManual/',
     'Downloads' => $inc . 'Downloads/',
-    'CleanTmp' => $inc . 'CleanTmp/',   
-
-    'Form' => $inc . 'Form/',
     'Helper' => $inc . 'Helper/',
-    'Importar' => $inc . 'Importar/',
     'Interfaces' => $inc . 'Interfaces/',
     'Login' => $inc . 'Login/',
-    'phpqrcode' => $inc . 'phpqrcode/',
-    'Valida' => $inc . 'Valida/'
+    'phpqrcode' => $inc . 'phpqrcode/'
 ];
