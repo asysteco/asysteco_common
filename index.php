@@ -48,60 +48,37 @@ if (!$class->horarioTemporalAHorarioReal()) {
 // Comprobamos si está seteada la variable ACTION en la URL (Método GET)
 
 if (isset($_GET['ACTION'])) {
+  if ($_GET['ACTION'] === 'logout') {
+    require_once($dirs['Login'] . 'logout.php');
+  }
+
+  if ($_GET['ACTION'] === 'cp') {
+    require_once($dirs['CP'] . 'IndexCase.php');
+  }
+
+  if (!$class->isLogged($Titulo)) {
+    $MSG = "Debes iniciar sesión para realizar esta acción.";
+    header("Refresh:2; url=index.php");
+    include_once($dirs['Interfaces'] . 'msg_modal.php');
+    return;
+  }
+
+  if (!$class->compruebaCambioPass()) {
+    require_once($dirs['FirstChangePass'] . 'IndexCase.php');
+    return;
+  }
+
   switch ($_GET['ACTION']) {
     default:
-      if (isset($_POST['Iniciales']) || isset($_POST['pass'])) {
-        require_once($dirs['inc'] . 'login_valida.php');
-      }
-      if ($class->isLogged($Titulo)) {
-        if ($class->compruebaCambioPass()) {
-          if ($_SESSION['Perfil'] === 'Admin') {
-            $act_home = 'active';
-            $scripts = '<link rel="stylesheet" href="css/profesores.css">';
-            if (isset($_POST['boton']) && $class->validRegisterProf()) {
-              header('Location: index.php?ACTION=profesores');
-            }
-            include_once($dirs['Interfaces'] . 'header.php');
-            include_once($dirs['Interfaces'] . 'top-nav.php');
-            include_once($dirs['Profesores'] . 'profesores.php');
-            include($dirs['Interfaces'] . 'footer.php');
-          } elseif ($_SESSION['Perfil'] === 'Profesor') {
-            $act_qr = 'active';
-            include_once($dirs['Interfaces'] . 'header.php');
-            include_once($dirs['Interfaces'] . 'top-nav.php');
-            include_once($dirs['Qr'] . 'generate_code.php');
-            include($dirs['Interfaces'] . 'footer.php');
-          } elseif ($_SESSION['Perfil'] === 'Personal') {
-            $act_qr = 'active';
-            include_once($dirs['Interfaces'] . 'header.php');
-            include_once($dirs['Interfaces'] . 'top-nav.php');
-            include_once($dirs['Qr'] . 'generate_code.php');
-            include($dirs['Interfaces'] . 'footer.php');
-          } else {
-            die('<h1 style="color:red;">Error de proceso...</h1>');
-          }
-        } else {
-          header('Location: index.php?ACTION=primer_cambio');
-        }
-      } else {
-        include_once($dirs['Login'] . 'login_form.php');
-      }
+      require_once($dirs['Login'] . 'IndexCase.php');
       break;
 
     case 'admin-login':
       require_once($dirs['Login'] . 'admin-login.php');
       break;
 
-    case 'logout':
-      require_once($dirs['Login'] . 'logout.php');
-      break;
-
     case 'cambio_pass':
       require_once($dirs['ChangePass'] . 'IndexCase.php');
-      break;
-
-    case 'primer_cambio':
-      require_once($dirs['FirstPassChange'] . 'IndexCase.php');
       break;
 
     case 'lectivos':
@@ -132,10 +109,6 @@ if (isset($_GET['ACTION'])) {
       require_once($dirs['Guardias'] . 'IndexCase.php');
       break;
 
-    case 'cp':
-      require_once($dirs['CP'] . 'IndexCase.php');
-    break;
-
     case 'notificaciones':
       require_once($dirs['Notificaciones'] . 'IndexCase.php');
       break;
@@ -157,44 +130,9 @@ if (isset($_GET['ACTION'])) {
     break;
 
     case 'clean_tmp':
-      require_once($dirs['CleanTmp'] . 'IndexCase.php');
+      include_once($dirs['Helper'] . 'clean_tmp.php');
       break;
   }
 } else {
-  if (isset($_POST['Iniciales']) || isset($_POST['pass'])) {
-    require_once($dirs['Login'] . 'login_valida.php');
-  }
-  if ($class->isLogged($Titulo)) {
-    if ($class->compruebaCambioPass()) {
-      if ($_SESSION['Perfil'] === 'Admin') {
-        $act_home = 'active';
-        $scripts = '<link rel="stylesheet" href="css/profesores.css">';
-        if (isset($_POST['boton']) && $class->validRegisterProf()) {
-          header('Location: index.php?ACTION=profesores');
-        }
-        include_once($dirs['Interfaces'] . 'header.php');
-        include_once($dirs['Interfaces'] . 'top-nav.php');
-        include_once($dirs['Profesores'] . 'profesores.php');
-        include($dirs['Interfaces'] . 'footer.php');
-      } elseif ($_SESSION['Perfil'] === 'Profesor') {
-        $act_qr = 'active';
-        include_once($dirs['Interfaces'] . 'header.php');
-        include_once($dirs['Interfaces'] . 'top-nav.php');
-        include_once($dirs['Qr'] . 'generate_code.php');
-        include($dirs['Interfaces'] . 'footer.php');
-      } elseif ($_SESSION['Perfil'] === 'Personal') {
-        $act_qr = 'active';
-        include_once($dirs['Interfaces'] . 'header.php');
-        include_once($dirs['Interfaces'] . 'top-nav.php');
-        include_once($dirs['Qr'] . 'generate_code.php');
-        include($dirs['Interfaces'] . 'footer.php');
-      } else {
-        die('<h1 style="color:red;">Error de proceso...</h1>');
-      }
-    } else {
-      header('Location: index.php?ACTION=primer_cambio');
-    }
-  } else {
-    include_once($dirs['Login'] . 'login_form.php');
-  }
+  require_once($dirs['Login'] . 'IndexCase.php');
 }
