@@ -165,9 +165,11 @@ $(document).on('click', '.act', function(e) {
             if (data.match('^activado$')) {
                 toastr["success"]("Profesor activado correctamente.", "Correcto!");
                 setTimeout(function () { location.reload() }, 700);
+                return;
             } else if (data.match('^desactivado$')) {
                 toastr["success"]("Profesor desactivado correctamente.", "Correcto!");
                 setTimeout(function () { location.reload() }, 700);
+                return;
             } else if (data.match('^error-activar$')) {
                 toastr["error"]("Error al activar profesor.", "Error!");
             } else if (data.match('^error-desactivar$')) {

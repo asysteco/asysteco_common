@@ -89,11 +89,11 @@ if (isset($_GET['ACTION'])) {
       break;
 
     case 'admin-login':
-      include_once($dirs['Login'] . 'admin-login.php');
+      require_once($dirs['Login'] . 'admin-login.php');
       break;
 
     case 'logout':
-      include_once($dirs['Login'] . 'logout.php');
+      require_once($dirs['Login'] . 'logout.php');
       break;
 
     case 'cambio_pass':
