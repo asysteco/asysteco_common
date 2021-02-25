@@ -1,46 +1,52 @@
 .reset_icon {
-transition-duration: 0.4s;
-cursor: pointer;
+    transition-duration: 0.4s;
+    cursor: pointer;
 }
+
 .reset_icon:hover {
-transform: rotate(360deg) scale(1.4);
-color: #007bff !important;
+    transform: rotate(360deg) scale(1.4);
+    color: #007bff !important;
 }
 
 .edit_icon, .list_icon {
-transition-duration: 0.2s;
-cursor: pointer;
+    transition-duration: 0.2s;
+    cursor: pointer;
 }
+
 .edit_icon:hover, .list_icon:hover {
-transform: scale(1.4);
-color: #007bff !important;
+    transform: scale(1.4);
+    color: #007bff !important;
 }
 
 .remove_icon {
-transition-duration: 0.2s;
-cursor: pointer;
+    transition-duration: 0.2s;
+    cursor: pointer;
 }
+
 .remove_icon:hover {
-transform: scale(1.4);
-color: red;
+    transform: scale(1.4);
+    color: red;
 }
 
 .add_icon {
-transition-duration: 0.2s;
-cursor: pointer;
+    transition-duration: 0.2s;
+    cursor: pointer;
 }
+
 .add_icon:hover {
-transform: scale(1.4);
-color: green;
+    transform: scale(1.4);
+    color: green;
 }
 
 .row_show:hover {
-cursor: pointer;
+    cursor: pointer;
 }
-#tabla_profesores td, #tabla_profesores th{
-text-align: center;
-vertical-align: middle;
+
+#tabla_profesores td, #tabla_profesores th {
+    text-align: center;
+    vertical-align: middle;
 }
+
 #busca_asiste {
     background-color: #f6f6f6;
     border: none;
@@ -61,12 +67,12 @@ vertical-align: middle;
     -webkit-border-radius: 5px 5px 5px 5px;
     border-radius: 5px 5px 5px 5px;
 }
-    
+
 #busca_asiste:focus {
     background-color: #fff;
     border-bottom: 2px solid #5fbae9;
 }
-    
+
 #busca_asiste:placeholder {
     color: #cccccc;
 }
@@ -75,30 +81,29 @@ vertical-align: middle;
     -webkit-border-radius: 10px 10px 10px 10px;
     border-radius: 10px 10px 10px 10px;
     background: #fff;
-    padding: 30px;
     width: 100%;
     text-align: center;
 }
 
 #formContent input[type=text], #grupo-tutor-select, #select_sustituto {
-background-color: #f6f6f6;
-border: none;
-color: #0d0d0d;
-padding: 15px 32px;
-text-align: center;
-text-decoration: none;
-display: inline-block;
-font-size: 16px;
-margin: 5px;
-width: 85%;
-border: 2px solid #f6f6f6;
--webkit-transition: all 0.5s ease-in-out;
--moz-transition: all 0.5s ease-in-out;
--ms-transition: all 0.5s ease-in-out;
--o-transition: all 0.5s ease-in-out;
-transition: all 0.5s ease-in-out;
--webkit-border-radius: 5px 5px 5px 5px;
-border-radius: 5px 5px 5px 5px;
+    background-color: #f6f6f6;
+    border: none;
+    color: #0d0d0d;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px;
+    width: 85%;
+    border: 2px solid #f6f6f6;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
 }
 
 #formContent h4 {
@@ -106,5 +111,6 @@ border-radius: 5px 5px 5px 5px;
 }
 
 #formContent input[type=text]:focus {
-background-color: #fff;
-border-bottom: 2px solid #5fbae9;
+    background-color: #fff;
+    border-bottom: 2px solid #5fbae9;
+}

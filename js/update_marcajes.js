@@ -31,7 +31,7 @@ $(document).on('click', '.actualiza', function () {
                 toastr["success"]("Petición realizada correctamente.", "Correcto!")
             } else if (response.match('Ok-justificada')){
                 toastr["success"]("Petición realizada correctamente.", "Correcto!")
-            } else if (response.match('Ok-injustificado')){
+            } else if (response.match('Ok-injustificada')){
                 toastr["success"]("Petición realizada correctamente.", "Correcto!")
             } else {
                 toastr["error"]("Error inesperado...", "Error!")

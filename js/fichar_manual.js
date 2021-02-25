@@ -26,7 +26,7 @@ $('#add-manual').on('click', function (event) {
         'horaSalida': horaSalida
     };
 
-    urlPath = 'index.php?ACTION=fichar-mysql-manual';
+    urlPath = 'index.php?ACTION=fichar-manual&OPT=ajax';
     $.ajax({
         url: urlPath,
         type: "POST",

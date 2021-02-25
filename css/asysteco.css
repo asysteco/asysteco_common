@@ -1,6 +1,7 @@
 html {
     scroll-behavior: smooth;
 }
+
 #overlay {
     position: fixed;
     display: none;
@@ -10,10 +11,11 @@ html {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0, 0, 0, 0.7);
     z-index: 1060;
     cursor: pointer;
 }
+
 .flecha_div {
     position: fixed;
     visibility: visible;
@@ -25,8 +27,9 @@ html {
     transition-duration: 0.8s;
     opacity: 0;
     z-index: 1018;
-    box-shadow: 8px 6px 5px  rgba(66, 66, 66, 0.7);
+    box-shadow: 8px 6px 5px rgba(66, 66, 66, 0.7);
 }
+
 .flecha_div_visible {
     position: fixed;
     visibility: visible;
@@ -38,8 +41,9 @@ html {
     transition-duration: 0.4s;
     z-index: 1018;
     opacity: 1;
-    box-shadow: 4px 4px 12px  rgba(66, 66, 66, 0.7);
+    box-shadow: 4px 4px 12px rgba(66, 66, 66, 0.7);
 }
+
 .flecha {
     position: fixed;
     bottom: -50px;
@@ -50,6 +54,7 @@ html {
     transition-duration: 0.8s;
     z-index: 1019;
 }
+
 .jsflecha {
     opacity: 0.6;
     visibility: visible;
@@ -57,6 +62,7 @@ html {
     transition-duration: 0.4s;
     z-index: 1019;
 }
+
 .jsflecha:hover {
     transform: rotate(360deg);
     opacity: 1;
@@ -77,15 +83,18 @@ html {
     max-height: 100%;
     z-index: 1070;
 }
+
 #loading-msg {
     color: beige;
     margin-top: 150px;
     z-index: 1070;
 }
+
 #loading {
     display: none;
     overflow: hidden;
 }
+
 #spinnerWrapper {
     overflow: hidden;
     display: flex;
@@ -100,12 +109,14 @@ html {
     max-height: 100%;
     z-index: 1070;
 }
+
 .lds-dual-ring {
     display: block;
     width: 80px;
     height: 80px;
     z-index: 1070;
 }
+
 .lds-dual-ring:after {
     content: " ";
     display: block;
@@ -117,14 +128,15 @@ html {
     border-color: #17a2b8 transparent #17a2b8 transparent;
     animation: lds-dual-ring 0.8s linear infinite;
 }
-  @keyframes lds-dual-ring {
+
+@keyframes lds-dual-ring {
     0% {
-      transform: rotate(0deg);
+        transform: rotate(0deg);
     }
     100% {
-      transform: rotate(360deg);
+        transform: rotate(360deg);
     }
-  }
+}
 
 #btn-import {
     cursor: pointer;
@@ -138,17 +150,20 @@ html {
     transform: rotate(360deg);
     transition-duration: 0.6s;
 }
+
 #message {
     transition-duration: 0.4s;
 }
+
 .message-jump {
     transform: rotate(-15deg);
     transition-duration: 0.4s;
 }
 
 .bell_rings {
-  animation: bell_rings 1s ease infinite;
+    animation: bell_rings 1s ease infinite;
 }
+
 .select_profesor {
     background-color: #f6f6f6;
     border: none;
@@ -174,12 +189,23 @@ html {
 }
 
 @keyframes bell_rings {
-    0% {transform: rotate(0deg);}
-    25% {transform: rotate(25deg);}
-    50% {transform: rotate(-25deg);}
-    75% {transform: rotate(35deg);}
-    100% {transform: rotate(0deg);}
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(25deg);
+    }
+    50% {
+        transform: rotate(-25deg);
+    }
+    75% {
+        transform: rotate(35deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
 }
+
 @media screen and (max-width: 600px) {
     table.responsiveTable thead {
         display: none;
@@ -188,7 +214,6 @@ html {
         display: flex;
         text-align: left !important;
     }
-
     table.responsiveTable td::before {
         content: attr(data-th);
         font-weight: bold;
@@ -204,21 +229,24 @@ html {
 .modal-fs {
     padding: 0 !important;
 }
+
 .modal-fs .modal-dialog {
     width: 95%;
     max-width: none;
     height: 95%;
 }
+
 .modal-fs .modal-content {
     height: 100%;
 }
+
 .modal-fs .modal-body {
     overflow-y: auto;
 }
 
 .tp {
-    text-decoration:none;
-    position:relative;
+    text-decoration: none;
+    position: relative;
 }
 
 .tp .tpt {
@@ -233,9 +261,9 @@ html {
     bottom: 125%;
     opacity: 0;
     transition: opacity 0.3s;
-  }
-  
-  .tp .tpt::after {
+}
+
+.tp .tpt::after {
     content: "";
     position: absolute;
     top: 100%;
@@ -244,53 +272,32 @@ html {
     border-width: 5px;
     border-style: solid;
     border-color: #555 transparent transparent transparent;
-  }
-  
-  .tp:hover .tpt {
+}
+
+.tp:hover .tpt {
     visibility: visible;
     opacity: 1;
-  }
-
-  /* Color Icono Personal No Docente en Listados Admon */
-  #azul {
-    color:#17a2b8;
-  }
-#notifications {
-    width: 100%;
-    position: fixed;
 }
 
-#notification-pagos {
-    display: none;
-    background-color: #ffbf00c4!important;
+/* Color Icono Personal No Docente en Listados Admon */
+
+.personal-icon-azul {
+    color: #17a2b8;
+    padding: 0 5px 0 4px;
+}
+
+.no-horario {
+    height: calc(100vh - 65px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.asistencias-row {
     text-align: center;
+    overflow-y: scroll;
+    max-height: 65vh;
 }
-
-#notification-pagos:hover {
-    background-color: #ffbf00!important;
-}
-#notification-function {
-    width: 100%;
-    display: none;
-    position: fixed;
-    background-color: #ff4800c4!important;
-    text-align: center;
-}
-
-#notification-function:hover {
-    background-color: #ff4800!important;
-}
-
-.notification-message {
-    max-width: 90%;
-    vertical-align: middle;
-    padding: 10px;
-    display: inline-block;
-    margin-right: 15px;
-}
-
-.btn-accept-notification {
-    vertical-align: middle;
-    padding: 5px;
-    display: inline-block;
-}
+    .asistencias-row::-webkit-scrollbar {
+        display: none;
+    }
