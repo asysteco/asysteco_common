@@ -298,6 +298,48 @@ html {
     overflow-y: scroll;
     max-height: 65vh;
 }
-    .asistencias-row::-webkit-scrollbar {
-        display: none;
-    }
+
+.asistencias-row::-webkit-scrollbar {
+    display: none;
+}
+
+#notifications {
+    width: 100%;
+    position: fixed;
+}
+
+#notification-pagos {
+    display: none;
+    background-color: #ffbf00c4!important;
+    text-align: center;
+}
+
+#notification-pagos:hover {
+    background-color: #ffbf00!important;
+}
+
+#notification-function {
+    width: 100%;
+    display: none;
+    position: fixed;
+    background-color: #ff4800c4!important;
+    text-align: center;
+}
+
+#notification-function:hover {
+    background-color: #ff4800!important;
+}
+
+.notification-message {
+    max-width: 90%;
+    vertical-align: middle;
+    padding: 10px;
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.btn-accept-notification {
+    vertical-align: middle;
+    padding: 5px;
+    display: inline-block;
+}
