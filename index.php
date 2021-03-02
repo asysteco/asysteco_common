@@ -57,9 +57,7 @@ if (isset($_GET['ACTION'])) {
   }
 
   if (!$class->isLogged($Titulo)) {
-    $MSG = "Debes iniciar sesión para realizar esta acción.";
-    header("Refresh:2; url=index.php");
-    include_once($dirs['Interfaces'] . 'msg_modal.php');
+    require_once($dirs['Login'] . 'IndexCase.php');
     return;
   }
 
