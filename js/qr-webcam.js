@@ -91,7 +91,7 @@ function updateOutputValue(val) {
 
         }
         else {
-            $('#output').load('index.php?ACTION=fichar-asist&criptedval=' + encodeURI(val)),
+            $('#output').load('index.php?ACTION=fichar-qr&criptedval=' + encodeURI(val)),
                 $('.table').load(location.href + ' .table > *')
         }
     }
