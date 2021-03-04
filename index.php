@@ -115,7 +115,7 @@ if (isset($_GET['ACTION'])) {
       require_once($dirs['Admon'] . 'IndexCase.php');
       break;
 
-    case 'fichar-asist':
+    case 'fichar-qr':
       require_once($dirs['FicharQr'] . 'IndexCase.php');
       break;
 
