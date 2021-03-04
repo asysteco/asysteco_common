@@ -132,5 +132,9 @@ if (isset($_GET['ACTION'])) {
       break;
   }
 } else {
+  if (isset($_SESSION['logged']) && $_SESSION['logged'] === true && !$class->compruebaCambioPass()) {
+    require_once($dirs['FirstChangePass'] . 'IndexCase.php');
+    return;
+  }
   require_once($dirs['Login'] . 'IndexCase.php');
 }
