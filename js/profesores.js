@@ -24,8 +24,7 @@ $(document).on('click', '.act', function(e) {
             fecha: fecha
         };
     } else if (action === 'horario') {
-        id = $(this).parent().attr('id').split('_');
-        id = id[1];
+        id = $(this).attr('profesor');
         enlace = 'index.php?ACTION=horarios&OPT=profesor&profesor=' + id;
         data = {};
     } else if (action === 'reset') {
