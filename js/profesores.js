@@ -28,6 +28,10 @@ $(document).on('click', '.act', function(e) {
         id = id[1];
         enlace = 'index.php?ACTION=horarios&OPT=profesor&profesor=' + id;
         data = {};
+    } else if (action === 'remove-horario') {
+        id = $(this).attr('profesor');
+        enlace = 'index.php?ACTION=horarios&OPT=remove';
+        data = {profesor: id};
     } else if (action === 'reset') {
         id = $(this).attr('profesor');
         data = {};
@@ -161,22 +165,19 @@ $(document).on('click', '.act', function(e) {
                 loadingOff();
                 return;
             }
-
-            if (data.match('^activado$')) {
-                toastr["success"]("Profesor activado correctamente.", "Correcto!");
-                setTimeout(function () { location.reload() }, 700);
-                return;
-            } else if (data.match('^desactivado$')) {
-                toastr["success"]("Profesor desactivado correctamente.", "Correcto!");
-                setTimeout(function () { location.reload() }, 700);
-                return;
-            } else if (data.match('^error-activar$')) {
-                toastr["error"]("Error al activar profesor.", "Error!");
-            } else if (data.match('^error-desactivar$')) {
-                toastr["error"]("Error al desactivar profesor.", "Error!");
-            } else if (data.match('^error-fecha$')) {
-                toastr["error"]("Error en el formato de fecha.", "Error!");
-            } else if (data.match('^error-reset$')) {
+            response = JSON.parse(data);
+            
+            if (response.success) {
+                toastr["success"](response.msg, "Correcto!");
+                if (response.reload) {
+                    setTimeout(() => { location.reload() }, 700);
+                    return;
+                }
+            } else {
+                toastr["error"](response.msg, "Error!");
+            }
+            loadingOff();
+            if (data.match('^error-reset$')) {
                 toastr["error"]("No se ha podido restablecer la contraseña.", "Error!");
             } else if (data.match('^ok-reset$')) {
                 toastr["success"]("Se ha restablecido la contraseña correctamente.", "Correcto!");
