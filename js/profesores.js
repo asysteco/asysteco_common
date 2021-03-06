@@ -28,6 +28,11 @@ $(document).on('click', '.act', function(e) {
         enlace = 'index.php?ACTION=horarios&OPT=profesor&profesor=' + id;
         data = {};
     } else if (action === 'remove-horario') {
+        confirmed = confirm('¿Seguro que desea eliminar el horario de este profesor?');
+        if (!confirmed) {
+            $('#modal-profesores').addClass('modal-fs');
+            return;
+        }
         id = $(this).attr('profesor');
         enlace = 'index.php?ACTION=horarios&OPT=remove';
         data = {profesor: id};
@@ -174,44 +179,6 @@ $(document).on('click', '.act', function(e) {
                 }
             } else {
                 toastr["error"](response.msg, "Error!");
-            }
-            loadingOff();
-            if (data.match('^error-reset$')) {
-                toastr["error"]("No se ha podido restablecer la contraseña.", "Error!");
-            } else if (data.match('^ok-reset$')) {
-                toastr["success"]("Se ha restablecido la contraseña correctamente.", "Correcto!");
-            }  else if (data.match('^warning-nombre$')) {
-                toastr["warning"]("Nombre duplicado.", "Advertencia!");
-            }  else if (data.match('^warning-iniciales$')) {
-                toastr["warning"]("Iniciales duplicadas.", "Advertencia!");
-            }  else if (data.match('^error-query$')) {
-                toastr["error"]("Error inesperado...", "Error!");
-            }  else if (data.match('^actualizado$')) {
-                toastr["success"]("Datos actualizados correctamente.", "Correcto!");
-                setTimeout(function () { location.reload() }, 700);
-                return;
-            }  else if (data.match('^error-actualizar$')) {
-                toastr["success"]("Ha ocurrido un problema. No se ha podido actualizar.", "Error!");
-            } else if (data.match('^error-admin$')) {
-                toastr["error"]("No se puede sustituir a un administrador.", "Error!");
-            } else if (data.match('^error-sustituido$')) {
-                toastr["error"]("Eror al seleccionar al profesor a sustituir.", "Error!");
-            } else if (data.match('^error-sustituto$')) {
-                toastr["error"]("Error al seleccionar al profesor sustituto.", "Error!");
-            } else if (data.match('^sustituido$')) {
-                toastr["success"]("Sustitución realizada correctamente.", "Correcto!");
-                setTimeout(function () { location.reload() }, 700);
-                return;
-            } else if (data.match('^error-sustitucion$')) {
-                toastr["error"]("Ha ocurrido un problema. Los cambios no se han realizado.", "Error!");
-            } else if (data.match('^fin-sustitucion$')) {
-                toastr["success"]("Datos actualizados correctamente.", "Correcto!");
-                setTimeout(function () { location.reload() }, 700);
-                return;
-            } else if (data.match('^error-fin-sustitucion$')) {
-                toastr["error"]("Ha ocurrido un problema. Los cambios no se han realizado.", "Error!");
-            } else {
-                toastr["error"]("Error inesperado...", "Error!")
             }
             loadingOff();
         },
