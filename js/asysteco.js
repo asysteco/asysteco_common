@@ -27,5 +27,3 @@ function loadingOff() {
     overlayOff();
     $("#loading").fadeOut();
 }
-
-console.log("WebHook Ok");
