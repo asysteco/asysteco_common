@@ -8,12 +8,12 @@
     color: #007bff !important;
 }
 
-.edit_icon, .list_icon {
+.edit_icon, .list_icon, .calendar_icon {
     transition-duration: 0.2s;
     cursor: pointer;
 }
 
-.edit_icon:hover, .list_icon:hover {
+.edit_icon:hover, .list_icon:hover, .calendar_icon:hover {
     transform: scale(1.4);
     color: #007bff !important;
 }
