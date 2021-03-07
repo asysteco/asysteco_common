@@ -25,8 +25,8 @@ $(document).on('click', '.act', function(e) {
         };
     } else if (action === 'horario') {
         id = $(this).attr('profesor');
-        enlace = 'index.php?ACTION=horarios&OPT=profesor&profesor=' + id;
-        data = {};
+        enlace = 'index.php?ACTION=horarios&OPT=profesor';
+        data = {profesor: id};
     } else if (action === 'remove-horario') {
         confirmed = confirm('¿Seguro que desea eliminar el horario de este profesor?');
         if (!confirmed) {
