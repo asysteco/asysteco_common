@@ -93,7 +93,7 @@ $('body').on('click', '.act', function () {
         toastr["error"]("Acción no válida.", "Error!");
         return;
     }
-    
+
     $.ajax({
         url: urlPath,
         type: "POST",
@@ -130,7 +130,6 @@ $('body').on('click', '.act', function () {
                     registrosUpdate = [];
                     $('#apply-program, #cancel-program').fadeIn();
                     $('#update-btn, #cancel-btn').fadeOut();
-                    $('#apply-program, #cancel-program').fadeIn();
                 }
             }
             loadingOff();
@@ -158,8 +157,6 @@ $('.update').on('change', function() {
 
 $(document).on('change', '#add-tipo', function() {
     tipo = $(this).val();
-    console.log(tipo);
-    console.log('#add-hora-' + tipo);
     $('.select-hora').hide();
     $('#add-hora-' + tipo).css('display', 'inline-block');
 });
