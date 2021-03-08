@@ -1,5 +1,3 @@
-$('#update-btn').hide();
-$('#cancel-btn').hide();
 var registrosUpdate = [];
 
 $('.remove').hover(function(){
@@ -19,9 +17,10 @@ $('body').on('click', '.act', function () {
     realDate = $('#program-date').attr('data-real');
 
     if (action === 'add') {
+        tipo = $('#add-tipo').val();
         dia = $('#add-dia').val();
         edificio = $('#add-edificio').val();
-        hora = $('#add-hora').val();
+        hora = $('#add-hora-' + tipo).val();
         aula = $('#add-aula').val();
         curso = $('#add-curso').val();
         profesor = $('#profesor').attr('data');
@@ -31,14 +30,15 @@ $('body').on('click', '.act', function () {
         }
 
         data = {
-            'action': action,
-            'dia': dia,
-            'edificio': edificio,
-            'hora': hora,
-            'aula': aula,
-            'curso': curso,
-            'profesor': profesor,
-            'date': date
+            action: action,
+            tipo: tipo,
+            dia: dia,
+            edificio: edificio,
+            hora: hora,
+            aula: aula,
+            curso: curso,
+            profesor: profesor,
+            date: date
         };
     } else if (action === 'update') {
         profesor = $('#profesor').attr('data');
@@ -93,7 +93,7 @@ $('body').on('click', '.act', function () {
         toastr["error"]("Acción no válida.", "Error!");
         return;
     }
-    
+
     $.ajax({
         url: urlPath,
         type: "POST",
@@ -102,34 +102,35 @@ $('body').on('click', '.act', function () {
             loadingOn();
         },
         success: function (data) {
-            if (data.match('Ok-add')) {
-                toastr["success"]("Hora añadida correctamente.", "Correcto!");
-                setTimeout(function () { location.reload() }, 700);
-            } else if (data.match('Ok-update')) {
-                toastr["success"]("Horas actualizadas correctamente.", "Correcto!");
-                $('.update').removeAttr('disabled');
-                registrosUpdate = [];
-                $('#apply-program, #cancel-program').fadeIn();
-                $('#update-btn, #cancel-btn').fadeOut();
-                $('#apply-program, #cancel-program').fadeIn();
-            } else if (data.match('Ok-remove')) {
-                toastr["success"]("Hora eliminada correctamente.", "Correcto!"),
-                $('#fila_'+rowId).remove()
-            } else if (data.match('Ok-cancel')) {
-                toastr["success"]("Programación cancelada.", "Correcto!"),
-                setTimeout(function () { location.href = 'index.php?ACTION=profesores' }, 700);
-            } else if (data.match('Error-add')) {
-                toastr["error"]("Error al añadir hora.", "Error!")
-            } else if (data.match('Error-duplicate')) {
-                toastr["error"]("Error al añadir hora, no puedes duplicar horas con el mismo Aula y Curso.", "Error!")
-            } else if (data.match('Error-update')) {
-                toastr["error"]("Error al actualizar horas.", "Error!")
-            } else if (data.match('Error-empty')) {
-                toastr["error"]("Debe seleccionar todos los campos.", "Error!")
-            } else if (data.match('Error-valid')) {
-                toastr["error"]("Nombre de curso no válido.", "Error!")
+            response = JSON.parse(data);
+
+            if (response.success) {
+                toastr["success"](response.msg, "Correcto!");
             } else {
-                toastr["error"]("Error inesperado...", "Error!")
+                toastr["error"](response.msg, "Error!");
+            }
+
+            if (response.reload) {
+                setTimeout(() => { location.reload() }, 700);
+                return;
+            }
+
+            if (response.trigger) {
+                if (response.trigger === 'remove-hora') {
+                    $('#fila_'+rowId).remove()
+                }
+
+                if (response.trigger === 'go-to') {
+                    setTimeout(function () { location.href = 'index.php?ACTION=profesores' }, 700);
+                    return;
+                }
+
+                if (response.trigger === 'updated') {
+                    $('.update').removeAttr('disabled');
+                    registrosUpdate = [];
+                    $('#apply-program, #cancel-program').fadeIn();
+                    $('#update-btn, #cancel-btn').fadeOut();
+                }
             }
             loadingOff();
         },
@@ -152,4 +153,10 @@ $('.update').on('change', function() {
         value
     ];
     registrosUpdate.push(data);
+});
+
+$(document).on('change', '#add-tipo', function() {
+    tipo = $(this).val();
+    $('.select-hora').hide();
+    $('#add-hora-' + tipo).css('display', 'inline-block');
 });
