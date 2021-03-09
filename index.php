@@ -50,6 +50,7 @@ if (!$class->horarioTemporalAHorarioReal()) {
 if (isset($_GET['ACTION'])) {
   if ($_GET['ACTION'] === 'logout') {
     require_once($dirs['Login'] . 'logout.php');
+    return;
   }
 
   if ($_GET['ACTION'] === 'cp') {
