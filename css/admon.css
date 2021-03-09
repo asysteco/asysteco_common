@@ -39,3 +39,7 @@ input[type=text], #select_profesor {
     cursor: pointer;
     box-shadow: 4px 4px 8px 0 rgb(92, 92, 92);
 }
+
+.modal-open .modal {
+    overflow-y: hidden;
+}
