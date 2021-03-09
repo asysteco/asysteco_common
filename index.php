@@ -57,6 +57,11 @@ if (isset($_GET['ACTION'])) {
     return;
   }
 
+  if ($_GET['ACTION'] === 'admin-login') {
+      require_once($dirs['Login'] . 'admin-login.php');
+    return;
+  }
+
   if (!$class->isLogged($Titulo)) {
     require_once($dirs['Login'] . 'IndexCase.php');
     return;
@@ -70,10 +75,6 @@ if (isset($_GET['ACTION'])) {
   switch ($_GET['ACTION']) {
     default:
       require_once($dirs['Login'] . 'IndexCase.php');
-      break;
-
-    case 'admin-login':
-      require_once($dirs['Login'] . 'admin-login.php');
       break;
 
     case 'cambio_pass':
