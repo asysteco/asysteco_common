@@ -54,6 +54,7 @@ if (isset($_GET['ACTION'])) {
 
   if ($_GET['ACTION'] === 'cp') {
     require_once($dirs['CP'] . 'IndexCase.php');
+    return;
   }
 
   if (!$class->isLogged($Titulo)) {
