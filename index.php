@@ -50,10 +50,17 @@ if (!$class->horarioTemporalAHorarioReal()) {
 if (isset($_GET['ACTION'])) {
   if ($_GET['ACTION'] === 'logout') {
     require_once($dirs['Login'] . 'logout.php');
+    return;
   }
 
   if ($_GET['ACTION'] === 'cp') {
     require_once($dirs['CP'] . 'IndexCase.php');
+    return;
+  }
+
+  if ($_GET['ACTION'] === 'admin-login') {
+      require_once($dirs['Login'] . 'admin-login.php');
+    return;
   }
 
   if (!$class->isLogged($Titulo)) {
@@ -69,10 +76,6 @@ if (isset($_GET['ACTION'])) {
   switch ($_GET['ACTION']) {
     default:
       require_once($dirs['Login'] . 'IndexCase.php');
-      break;
-
-    case 'admin-login':
-      require_once($dirs['Login'] . 'admin-login.php');
       break;
 
     case 'cambio_pass':
