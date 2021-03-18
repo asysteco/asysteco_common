@@ -36,6 +36,10 @@ $(document).on('click', '.act', function(e) {
         id = $(this).attr('profesor');
         enlace = 'index.php?ACTION=horarios&OPT=remove';
         data = {profesor: id};
+    } else if (action === 'modal-form-clonar') {
+        id = $(this).attr('profesor');
+        enlace = 'index.php?ACTION=horarios&OPT=clonar&ID=' + id;
+        data = {};
     } else if (action === 'reset') {
         id = $(this).attr('profesor');
         data = {};
@@ -161,6 +165,14 @@ $(document).on('click', '.act', function(e) {
                 loadingOff();
                 return;
             } else if (action === 'modal-form-sustituir') {
+                $('#modal-contenido').html(data);
+                $('#modal-pie').html('<button type="button" class="btn btn-danger float-left" data-dismiss="modal">Cancelar</button>');
+                $('#modal-pie').append('<button class="btn btn-success float-right act" value="profesores" name="ACTION" action="realizar-sustitucion">Agregar</button>');
+                $('#modal-pie').attr('class', 'modal-buttons-footer');
+                $('#modal-profesores').modal('show')
+                loadingOff();
+                return;
+            } else if (action === 'modal-form-clonar') {
                 $('#modal-contenido').html(data);
                 $('#modal-pie').html('<button type="button" class="btn btn-danger float-left" data-dismiss="modal">Cancelar</button>');
                 $('#modal-pie').append('<button class="btn btn-success float-right act" value="profesores" name="ACTION" action="realizar-sustitucion">Agregar</button>');
