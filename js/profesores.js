@@ -1,5 +1,6 @@
 var enlace;
 var id;
+var nombre;
 
 $(document).on('click', '.act', function(e) { 
     $('#modal-profesores').removeClass('modal-fs');
@@ -25,6 +26,7 @@ $(document).on('click', '.act', function(e) {
         };
     } else if (action === 'horario') {
         id = $(this).attr('profesor');
+        nombre = $(this).attr('nombre');
         enlace = 'index.php?ACTION=horarios&OPT=profesor';
         data = {profesor: id};
     } else if (action === 'remove-horario') {
@@ -36,6 +38,24 @@ $(document).on('click', '.act', function(e) {
         id = $(this).attr('profesor');
         enlace = 'index.php?ACTION=horarios&OPT=remove';
         data = {profesor: id};
+    } else if (action === 'modal-form-clonar') {
+        id = $(this).attr('profesor');
+        enlace = 'index.php?ACTION=horarios&OPT=clonar';
+        data = {profesor: id};
+    } else if (action === 'clonar-horario') {
+        idClonado = $('#select_clonado').val();
+        nombreClonado = $( "#select_clonado option:selected" ).text();
+        confirmed = confirm('¿Seguro que desea clonar el horario de ' + nombre + ' a ' + nombreClonado + '?');
+        $('#modal-pie').attr('class', 'modal-buttons-footer');
+        if (!confirmed) {
+            return;
+        }
+        enlace = 'index.php?ACTION=horarios&OPT=clonar';
+        data = {
+            subOpt: 'Ajax',
+            'ID_PROFESOR': id,
+            'ID_CLONADO': idClonado
+        }
     } else if (action === 'reset') {
         id = $(this).attr('profesor');
         data = {};
@@ -124,9 +144,6 @@ $(document).on('click', '.act', function(e) {
         type: "POST",
         data: data,
         beforeSend: function () {
-            if (action !== 'modal-form-sustituir') {
-                $('#modal-profesores').modal('hide');
-            }
             loadingOn();
         },
         success: function (data) {
@@ -168,6 +185,14 @@ $(document).on('click', '.act', function(e) {
                 $('#modal-profesores').modal('show')
                 loadingOff();
                 return;
+            } else if (action === 'modal-form-clonar') {
+                $('#modal-contenido').html(data);
+                $('#modal-pie').html('<button type="button" class="btn btn-danger float-left" data-dismiss="modal">Cancelar</button>');
+                $('#modal-pie').append('<button class="btn btn-success float-right act" value="profesores" name="ACTION" action="clonar-horario">Confirmar</button>');
+                $('#modal-pie').attr('class', 'modal-buttons-footer');
+                $('#modal-profesores').modal('show')
+                loadingOff();
+                return;
             }
             response = JSON.parse(data);
             
@@ -179,6 +204,10 @@ $(document).on('click', '.act', function(e) {
                 }
             } else {
                 toastr["error"](response.msg, "Error!");
+            } 
+            
+            if (response.trigger === 'close-modal') {
+                $('#modal-profesores').modal('hide');
             }
             loadingOff();
         },

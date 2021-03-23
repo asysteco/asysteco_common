@@ -6,7 +6,6 @@
 date_default_timezone_set('Europe/Madrid');
 
 // Requerimos fichero de configuración esencial de directorios y constantes
-require_once("./horario.php");
 require_once("./config.php");
 require_once("./dirs.php");
 require_once("./initial_vars.php");
@@ -34,6 +33,7 @@ try {
   echo $e->getMessage();
   exit;
 }
+require_once("./horario.php");
 
 // Comprobamos si existen horarios para actualizar
 if (!$class->horarioTemporalAHorarioReal()) {

@@ -1,4 +1,3 @@
-<script>
 var scrollTime = 1000; // Tiempo de scroll
 var wait = 9000; // Tiempo que tarda entre cada scroll
 
@@ -17,4 +16,3 @@ setInterval(() => {
     scrollDown();
   }
 }, wait);
-</script>
