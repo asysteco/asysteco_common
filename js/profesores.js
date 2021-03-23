@@ -204,6 +204,10 @@ $(document).on('click', '.act', function(e) {
                 }
             } else {
                 toastr["error"](response.msg, "Error!");
+            } 
+            
+            if (response.trigger === 'close-modal') {
+                $('#modal-profesores').modal('hide');
             }
             loadingOff();
         },
