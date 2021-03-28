@@ -1,65 +1,71 @@
 $(document).on('click', '.actualiza', function () {
-    botonpulsado = $(this);
-    datos = $(this).attr('asiste').split(',');
-    Profesor = datos[0];
-    Fecha = datos[1];
-    Hora = datos[2];
-    act = datos[3];
-    Valor = datos[4];
+    let profesor = $(this).attr('data-id');
+    let date =$(this).attr('data-date');
+    let hour = $(this).attr('data-hour');
+    let inicio = $(this).attr('data-startHour');
+    let fin = $(this).attr('data-endHour');
+    let type = $(this).attr('data-type');
+    let action = $(this).attr('data-action');
+    let value = $(this).attr('data-value');
     data = {
-        'Profesor': Profesor,
-        'Fecha': Fecha,
-        'Hora': Hora,
-        'act': act,
-        'Valor': Valor
+        profesor: profesor,
+        date: date,
+        hour: hour,
+        inicio: inicio,
+        fin: fin,
+        type: type,
+        action: action,
+        value: value
     };
     urlPath = 'index.php?ACTION=marcajes&OPT=update';
 
     $.ajax({
         url: urlPath,
-        type: 'GET',
+        type: 'POST',
         data: data,
         beforeSend: function () {
             loadingOn();
         },
         success: function (response) {
-            if (response.match('Ok-asiste')){
-                toastr["success"]("Petición realizada correctamente.", "Correcto!")
-            } else if (response.match('Ok-falta')){
-                toastr["success"]("Petición realizada correctamente.", "Correcto!")
-            } else if (response.match('Ok-extraescolar')){
-                toastr["success"]("Petición realizada correctamente.", "Correcto!")
-            } else if (response.match('Ok-justificada')){
-                toastr["success"]("Petición realizada correctamente.", "Correcto!")
-            } else if (response.match('Ok-injustificada')){
-                toastr["success"]("Petición realizada correctamente.", "Correcto!")
+            rData = JSON.parse(response);
+
+            if (rData.success) {
+                toastr["success"](rData.msg, "Correcto!");
+                getRow(profesor, date, hour);
             } else {
-                toastr["error"]("Error inesperado...", "Error!")
-            } 
-            getRow(Profesor, Fecha, Hora);
-            loadingOff();
+                toastr["error"](rData.msg, "Error!");
+                loadingOff();
+            }
         },
         error: function (e) {
-            toastr["error"]("Error inesperado...", "Error!")
+            toastr["error"]("Error inesperado...", "Error!");
+            loadingOff();
         }
     });
 });
 
-function getRow (Profesor, Fecha, Hora){
+function getRow (profesor, date, hour){
     $.ajax({
-        url: 'index.php?ACTION=asistencias',
+        url: 'index.php?ACTION=marcajes&OPT=getRow',
         type: 'GET',
         data: {
-            'ID': Profesor,
-            'Fecha': Fecha,
-            'Hora': Hora,
-            'act': 'getrow',
+            profesor: profesor,
+            date: date,
+            hour: hour,
         },
         success: function (response) {
-            $('#fila_'+Profesor+'_'+Fecha+'_'+Hora).replaceWith($('#fila_'+Profesor+'_'+Fecha+'_'+Hora,response))
+            let rData = JSON.parse(response);
+
+            if (rData.success) {
+                $('#fila_'+profesor+'_'+date+'_'+hour).replaceWith(rData.data);
+            } else {
+                toastr["error"](rData.msg, "Error!");
+            }
+            loadingOff();
         },
         error: function (e) {
-            toastr["error"]("Error inesperado...", "Error!")
+            toastr["error"]("Error inesperado...", "Error!");
+            loadingOff();
         }
     });
 }

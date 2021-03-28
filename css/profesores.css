@@ -114,3 +114,19 @@
     background-color: #fff;
     border-bottom: 2px solid #5fbae9;
 }
+
+.asistido {
+    background-color: #E2F0CB;
+}
+
+.extraescolar {
+    background-color: #B5EAD7;
+}
+
+.faltado-justificado {
+    background-color: #f5d3d3;
+}
+
+.faltado {
+    background-color: #fd7a84;
+}
