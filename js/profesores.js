@@ -31,20 +31,21 @@ $(document).on('click', '.act', function(e) {
         data = {profesor: id};
     } else if (action === 'remove-horario') {
         confirmed = confirm('¿Seguro que desea eliminar el horario de este profesor?');
+        $('#modal-profesores').addClass('modal-fs');
         if (!confirmed) {
-            $('#modal-profesores').addClass('modal-fs');
             return;
         }
         id = $(this).attr('profesor');
         enlace = 'index.php?ACTION=horarios&OPT=remove';
         data = {profesor: id};
+
     } else if (action === 'modal-form-clonar') {
         id = $(this).attr('profesor');
         enlace = 'index.php?ACTION=horarios&OPT=clonar';
         data = {profesor: id};
     } else if (action === 'clonar-horario') {
-        idClonado = $('#select_clonado').val();
-        nombreClonado = $( "#select_clonado option:selected" ).text();
+        idClonado = $('#select_sustituto').val();
+        nombreClonado = $( "#select_sustituto option:selected" ).text();
         confirmed = confirm('¿Seguro que desea clonar el horario de ' + nombre + ' a ' + nombreClonado + '?');
         $('#modal-pie').attr('class', 'modal-buttons-footer');
         if (!confirmed) {
